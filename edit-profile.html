@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>แก้ไขโปรไฟล์</title>
+
+    <!-- Prompt Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+*{
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:"Prompt",sans-serif;
+
+}
+
+body{
+
+    background:#f5f5f5;
+
+}
+
+/* ===========================
+        Navbar
+=========================== */
+
+.top-nav{
+
+    width:100%;
+
+    background:white;
+
+    padding:18px 40px;
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+}
+
+.home-btn{
+
+    text-decoration:none;
+
+    background:#8a6847;
+
+    color:white;
+
+    padding:12px 28px;
+
+    border-radius:14px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.home-btn:hover{
+
+    background:#73553a;
+
+}
+
+/* ===========================
+        Header
+=========================== */
+
+.profile-header{
+
+    width:100%;
+
+    height:220px;
+
+    background:linear-gradient(135deg,#8a6847,#b08a61);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.profile-box{
+
+    width:90%;
+
+    max-width:1100px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    margin-top:220px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.profile-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+/* รูป */
+
+.photo-box{
+
+    position:relative;
+
+}
+
+.photo-box img{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:6px solid white;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+/* ปุ่มเปลี่ยนรูป */
+
+.change-photo{
+
+    margin-top:15px;
+
+    width:180px;
+
+    background:#8a6847;
+
+    color:white;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.change-photo:hover{
+
+    background:#73553a;
+
+}
+
+.profile-info{
+
+    flex:1;
+
+}
+
+.profile-info h1{
+
+    color:#444;
+
+    font-size:36px;
+
+    margin-bottom:10px;
+
+}
+
+.profile-info p{
+
+    color:#777;
+
+    font-size:18px;
+
+}
+/* ===========================
+        Edit Form
+=========================== */
+
+.edit-section{
+
+    width:100%;
+
+    margin-top:180px;
+
+    margin-bottom:60px;
+
+}
+
+.edit-container{
+
+    width:90%;
+
+    max-width:1100px;
+
+    margin:auto;
+
+}
+
+.edit-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* ===========================
+        Title
+=========================== */
+
+.card-title{
+
+    font-size:28px;
+
+    color:#8a6847;
+
+    font-weight:700;
+
+    margin-bottom:35px;
+
+}
+
+/* ===========================
+        Form
+=========================== */
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:28px;
+
+}
+
+.form-group label{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    color:#555;
+
+    margin-bottom:10px;
+
+}
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    height:58px;
+
+    border:2px solid #e3e3e3;
+
+    border-radius:15px;
+
+    padding:0 20px;
+
+    font-size:17px;
+
+    outline:none;
+
+    transition:.3s;
+
+    background:#fff;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#8a6847;
+
+    box-shadow:0 0 10px rgba(138,104,71,.15);
+
+}   
+
+.form-group input[readonly],
+.form-group select[disabled]{
+
+    background:#f5f5f5;
+
+    color:#777;
+
+}
+
+/* ===========================
+        Grid
+=========================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px;
+
+}
+
+.full-width{
+
+    grid-column:1/3;
+
+}
+/* ===========================
+        Upload Photo
+=========================== */
+
+.photo-box{
+
+    position:relative;
+
+    width:180px;
+
+}
+
+.photo-box input{
+
+    display:none;
+
+}
+
+.change-photo{
+
+    display:block;
+
+    margin-top:15px;
+
+    width:100%;
+
+    text-align:center;
+
+    background:#8a6847;
+
+    color:white;
+
+    padding:12px 0;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.change-photo:hover{
+
+    background:#73553a;
+
+    transform:translateY(-2px);
+
+}
+
+/* ===========================
+        Buttons
+=========================== */
+
+.button-group{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:18px;
+
+    margin-top:40px;
+
+}
+
+.save-btn{
+
+    border:none;
+
+    background:#8a6847;
+
+    color:white;
+
+    padding:15px 40px;
+
+    border-radius:15px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.save-btn:hover{
+
+    background:#73553a;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+}
+
+.cancel-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    background:#e7e7e7;
+
+    color:#555;
+
+    padding:15px 40px;
+
+    border-radius:15px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.cancel-btn:hover{
+
+    background:#d7d7d7;
+
+    transform:translateY(-3px);
+
+}
+
+/* ===========================
+        Card Animation
+=========================== */
+
+.edit-card{
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+        Scrollbar
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#b08a61;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f2f2f2;
+
+}
+/* ===========================
+        Responsive
+=========================== */
+
+@media (max-width:1024px){
+
+    .profile-box{
+
+        width:95%;
+
+        padding:35px;
+
+    }
+
+    .profile-top{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        text-align:center;
+
+    }
+
+    .photo-box{
+
+        width:170px;
+
+    }
+
+    .photo-box img{
+
+        width:170px;
+
+        height:170px;
+
+    }
+
+    .profile-info h1{
+
+        font-size:30px;
+
+    }
+
+    .profile-info p{
+
+        font-size:17px;
+
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .full-width{
+
+        grid-column:1;
+
+    }
+
+}
+
+/* ===========================
+        Mobile
+=========================== */
+
+@media (max-width:768px){
+
+    .top-nav{
+
+        padding:15px 20px;
+
+    }
+
+    .home-btn{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+    .profile-header{
+
+        height:180px;
+
+    }
+
+    .profile-box{
+
+        margin-top:160px;
+
+        padding:25px;
+
+    }
+
+    .photo-box{
+
+        width:150px;
+
+    }
+
+    .photo-box img{
+
+        width:150px;
+
+        height:150px;
+
+    }
+
+    .change-photo{
+
+        font-size:15px;
+
+    }
+
+    .profile-info h1{
+
+        font-size:26px;
+
+    }
+
+    .profile-info p{
+
+        font-size:16px;
+
+    }
+
+    .card-title{
+
+        font-size:24px;
+
+    }
+
+    .form-group label{
+
+        font-size:16px;
+
+    }
+
+    .form-group input,
+.form-group select{
+
+    width:100%;
+
+    height:58px;
+
+    border:2px solid #e3e3e3;
+
+    border-radius:15px;
+
+    padding:0 20px;
+
+    font-size:17px;
+
+    outline:none;
+
+    transition:.3s;
+
+    background:#fff;
+
+}
+
+    .button-group{
+
+        flex-direction:column;
+
+    }
+
+    .save-btn,
+
+    .cancel-btn{
+
+        width:100%;
+
+    }
+
+}
+
+/* ===========================
+        End CSS
+=========================== */
+
+    </style>
+
+</head>
+
+<body>
+    <!-- ===========================
+        Navbar
+=========================== -->
+
+<nav class="top-nav">
+
+    <a href="index.html" class="home-btn">
+
+        HOME
+
+    </a>
+
+</nav>
+
+<!-- ===========================
+        Header
+=========================== -->
+
+<header class="profile-header">
+
+    <div class="profile-box">
+
+        <div class="profile-top">
+
+            <!-- รูปโปรไฟล์ -->
+
+            <div class="photo-box">
+
+                <img
+                    id="profileImage"
+                    src="img/default-profile.png"
+                    alt="Profile">
+
+                <label
+                    for="imageInput"
+                    class="change-photo">
+
+                    เปลี่ยนรูปโปรไฟล์
+
+                </label>
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*">
+
+            </div>
+
+            <!-- ข้อมูล -->
+
+            <div class="profile-info">
+
+                <h1>
+
+                    แก้ไขโปรไฟล์
+
+                </h1>
+
+                <p>
+
+                    แก้ไขข้อมูลบัญชีผู้ใช้
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ===========================
+        Form
+=========================== -->
+
+<section class="edit-section">
+
+    <div class="edit-container">
+
+        <div class="edit-card">
+
+            <div class="card-title">
+
+                ข้อมูลส่วนตัว
+
+            </div>
+
+            <div class="form-grid">
+
+                <!-- Username -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        Username
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username">
+
+                </div>
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        Email
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        readonly>
+
+                </div>
+
+                <!-- Phone -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        เบอร์โทร
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone">
+
+                </div>
+
+                <!-- Province -->
+
+                <div class="form-group">
+
+    <label>จังหวัด</label>
+
+    <select id="province">
+
+        <option value="พัทลุง">พัทลุง</option>
+
+    </select>
+
+</div>
+                <div class="form-group">
+
+    <label>อำเภอ</label>
+
+    <select id="district">
+
+        <option value="">-- เลือกอำเภอ --</option>
+
+        <option value="เมืองพัทลุง">เมืองพัทลุง</option>
+
+        <option value="กงหรา">กงหรา</option>
+
+        <option value="เขาชัยสน">เขาชัยสน</option>
+
+        <option value="ตะโหมด">ตะโหมด</option>
+
+        <option value="ควนขนุน">ควนขนุน</option>
+
+        <option value="ปากพะยูน">ปากพะยูน</option>
+
+        <option value="ป่าบอน">ป่าบอน</option>
+
+        <option value="ศรีบรรพต">ศรีบรรพต</option>
+
+        <option value="ศรีนครินทร์">ศรีนครินทร์</option>
+
+        <option value="บางแก้ว">บางแก้ว</option>
+
+        <option value="ป่าพะยอม">ป่าพะยอม</option>
+
+    </select>
+
+</div>
+
+                <!-- Address -->
+
+                <div class="form-group full-width">
+
+                    <label>
+
+                        ที่อยู่
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="address">
+
+                </div>
+                <!-- Facebook -->
+<div class="form-group">
+
+    <label>Facebook</label>
+
+    <input
+        type="text"
+        id="facebook"
+        placeholder="https://facebook.com/yourname">
+
+</div>
+
+<!-- Line -->
+<div class="form-group">
+
+    <label>Line ID</label>
+
+    <input
+        type="text"
+        id="line"
+        placeholder="line123">
+
+</div>
+
+<!-- Instagram -->
+<div class="form-group">
+
+    <label>Instagram</label>
+
+    <input
+        type="text"
+        id="instagram"
+        placeholder="@username">
+
+</div>
+
+<!-- About -->
+<div class="form-group">
+
+    <label>เกี่ยวกับฉัน</label>
+
+    <textarea
+        id="about"
+        rows="5"
+        placeholder="แนะนำตัว หรือบอกเหตุผลที่รักสัตว์"></textarea>
+
+</div>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="button-group">
+
+                <button
+                    class="save-btn"
+                    id="saveBtn">
+
+                    บันทึกข้อมูล
+
+                </button>
+
+                <a
+                    href="profile.html"
+                    class="cancel-btn">
+
+                    ยกเลิก
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script type="module">
+
+import { auth, db } from "./firebase.js";
+
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+    doc,
+    getDoc,
+    updateDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+
+// ============================
+// ตัวแปร
+// ============================
+
+const profileImage = document.getElementById("profileImage");
+
+const imageInput = document.getElementById("imageInput");
+
+const username = document.getElementById("username");
+
+const email = document.getElementById("email");
+
+const phone = document.getElementById("phone");
+
+const province = document.getElementById("province");
+
+const district = document.getElementById("district");
+
+const address = document.getElementById("address");
+
+const facebook = document.getElementById("facebook");
+
+const line = document.getElementById("line");
+
+const instagram = document.getElementById("instagram");
+
+const about = document.getElementById("about");
+
+const saveBtn = document.getElementById("saveBtn");
+
+let currentUser = null;
+
+let selectedFile = null;
+
+// เก็บรูปเดิมจาก Firestore
+let currentPhoto = "";
+
+
+// ============================
+// โหลดข้อมูลผู้ใช้
+// ============================
+
+onAuthStateChanged(auth, async (user)=>{
+
+    if(!user){
+
+        alert("กรุณาเข้าสู่ระบบ");
+
+        location.href="login.html";
+
+        return;
+
+    }
+
+    currentUser = user;
+
+    const userRef = doc(db,"users",user.uid);
+
+    const snap = await getDoc(userRef);
+
+    if(snap.exists()){
+
+        const data = snap.data();
+
+        username.value = data.username || "";
+
+        email.value = data.email || user.email;
+
+        phone.value = data.phone || "";
+
+        province.value = data.province || "";
+
+        district.value = data.district || "";
+
+        address.value = data.address || "";
+
+        facebook.value = data.facebook || "";
+
+        line.value = data.line || "";
+
+        instagram.value = data.instagram || "";
+
+        about.value = data.about || "";
+
+        currentPhoto =
+        data.profile || "img/default-profile.png";
+
+        profileImage.src = currentPhoto;
+
+    }
+
+});
+// ============================
+// Preview รูปที่เลือก
+// ============================
+
+imageInput.addEventListener("change", (e) => {
+
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    selectedFile = file;
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        profileImage.src = event.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+// ============================
+// แปลงรูปเป็น Base64
+// ============================
+
+function imageToBase64(file) {
+
+    return new Promise((resolve, reject) => {
+
+        // ถ้าไม่ได้เลือกรูปใหม่
+        if (!file) {
+
+            resolve(currentPhoto);
+
+            return;
+
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function () {
+
+            resolve(reader.result);
+
+        };
+
+        reader.onerror = function () {
+
+            reject("อ่านรูปไม่สำเร็จ");
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+// ============================
+// บันทึกข้อมูล
+// ============================
+
+saveBtn.addEventListener("click", async () => {
+
+    try {
+
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = "กำลังบันทึก...";
+
+        const photoURL = await imageToBase64(selectedFile);
+        await updateDoc(doc(db, "users", currentUser.uid), {
+
+
+            district: district.value.trim(),
+    username: username.value.trim(),
+
+    phone: phone.value.trim(),
+
+    province: province.value.trim(),
+
+    address: address.value.trim(),
+
+    facebook: facebook.value.trim(),
+
+    line: line.value.trim(),
+
+    instagram: instagram.value.trim(),
+
+    about: about.value.trim(),
+
+    profile: photoURL
+
+});
+
+        alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+
+        location.href = "profile.html";
+
+    } catch (error) {
+
+    console.error(error);
+
+    alert(
+        "Code: " + error.code +
+        "\n\nMessage: " + error.message
+    );
+
+    saveBtn.disabled = false;
+
+    saveBtn.innerHTML = "บันทึกข้อมูล";
+
+}
+
+});
+
+</script>
+</body>
+
+</html>

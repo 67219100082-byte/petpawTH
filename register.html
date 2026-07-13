@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffffff;
+}
+
+.register-box{
+    position:relative;
+    width:400px;
+    padding:40px;
+    border-radius:25px;
+    background:white;
+    border:1px solid #eee;
+    box-shadow:0 5px 25px rgba(0,0,0,0.12);
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    text-decoration:none;
+    color:#999;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.close-btn:hover{
+    color:#c8a77c;
+    transform:rotate(90deg);
+}
+
+.register-box h1{
+    text-align:center;
+    color:#444;
+    margin-bottom:25px;
+    font-size:35px;
+}
+
+.profile-preview{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:0 auto 20px;
+    border:3px solid #ddd;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+.input-box input{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:16px;
+    background:#f7f7f7;
+}
+
+.input-box input:focus{
+    border:1px solid #c8a77c;
+    background:white;
+}
+
+.register-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#c8a77c;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.register-btn:hover{
+    transform:translateY(-4px);
+    background:#b89268;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+}
+
+.login-link a{
+    color:#c8a77c;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+@media(max-width:768px){
+
+    .register-box{
+        width:90%;
+        padding:30px 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="register-box">
+
+<a href="index.html" class="close-btn">×</a>
+
+<h1>ลงทะเบียน</h1>
+
+<img
+    id="preview"
+    class="profile-preview"
+    src="img/default-profile.png">
+	
+<form id="registerForm">
+
+    <div class="input-box">
+        <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            required>
+    </div>
+
+    <div class="input-box">
+        <input
+    type="email"
+    id="email"
+    placeholder="Email"
+    required>
+    </div>
+
+    <div class="input-box">
+        <input
+    type="password"
+    id="password"
+    minlength="6"
+    placeholder="Password อย่างน้อย 6 ตัว"
+    required>
+    </div>
+
+    <div class="input-box">
+        <input
+            type="file"
+            id="profile"
+            accept="image/*">
+    </div>
+
+    <button type="submit" class="register-btn">
+        ลงทะเบียน
+    </button>
+
+</form>
+
+<div class="login-link">
+    มีบัญชีแล้ว?
+    <a href="login.html">เข้าสู่ระบบ</a>
+</div>
+</div>
+
+<script type="module">
+import { auth, db } from "./firebase.js";
+
+import {
+    createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+    doc,
+    setDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+/* รูปโปรไฟล์ */
+const profileInput = document.getElementById("profile");
+const preview = document.getElementById("preview");
+
+let profileImage = "img/default-profile.png";
+
+profileInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            profileImage = e.target.result;
+            preview.src = profileImage;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+/* สมัคร */
+document.getElementById("registerForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    await setDoc(doc(db, "users", user.uid), {
+        username: username,
+        email: email,
+        profile: profileImage,
+        role: "user",
+        createdAt: new Date()
+    });
+
+    alert("สมัครสำเร็จ");
+    window.location.href = "index.html";
+
+} catch (error) {
+
+    if (error.code === "auth/email-already-in-use") {
+        alert("อีเมลนี้ถูกใช้งานแล้ว");
+    }
+    else if (error.code === "auth/weak-password") {
+        alert("รหัสผ่านต้องมีอย่างน้อย 6 ตัว");
+    }
+    else if (error.code === "auth/invalid-email") {
+        alert("รูปแบบอีเมลไม่ถูกต้อง");
+    }
+    else {
+        alert(error.message);
+    }
+
+    console.log(error);
+}
+});
+	
+</script>
+</body>
+</html>

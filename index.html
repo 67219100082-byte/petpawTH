@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+a{
+	text-decoration:none;
+	color:inherit;
+}   
+
+*{
+	*
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Prompt", sans-serif;
+}
+
+
+body{
+    background:#f3f3f3;
+    min-height:2000px;
+}
+
+/* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
+body.no-scroll{
+    overflow: hidden;
+}
+.user-dropdown{
+    position:relative;
+}
+
+.user-profile{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    cursor:pointer;
+
+    padding:8px 15px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
+
+}
+
+.user-profile img{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+.user-profile span{
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+.dropdown-menu{
+
+    position:absolute;
+
+    top:65px;
+    right:0;
+
+    width:220px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    display:none;
+
+    overflow:hidden;
+
+}
+
+.dropdown-menu.show{
+
+    display:block;
+
+}
+
+.dropdown-menu a{
+
+    display:block;
+
+    padding:15px 20px;
+
+    color:#444;
+
+    text-decoration:none;
+
+}
+
+.dropdown-menu a:hover{
+
+    background:#f3f3f3;
+
+}
+/* =========================
+   เพิ่มโปรไฟล์เมื่อล็อกอิน
+========================= */
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+.user-profile span{
+    color:#796247 !important;
+    font-weight:600;
+    font-size:16px;
+}
+
+.user-profile img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid white;
+}
+
+/* =========================
+   Banner
+========================= */
+
+.banner{
+    position: relative;
+
+    width: 100%;
+    height: 45vw;
+    min-height: 220px;
+    max-height: 420px;
+
+    margin: 0 auto;
+
+    background-image: url("img/banner1.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+
+    border-radius: 0 0 30px 30px;
+
+    box-shadow: 0 5px 25px rgba(0,0,0,.15);
+}
+	/* =========================
+   NOTIFY
+========================= */
+
+.notify-box{
+
+	position:fixed;
+
+	top:30px;
+	right:30px;
+
+	background:#c8a77c;
+
+	color:white;
+
+	padding:18px 25px;
+
+	border-radius:18px;
+
+	font-weight:bold;
+
+	box-shadow:0 5px 20px rgba(0,0,0,0.2);
+
+	z-index:99999;
+
+	opacity:0;
+
+	transform:translateY(-20px);
+
+	transition:0.4s;
+}
+.info-item{
+
+    display:flex;
+
+    gap:8px;
+
+    color:#555;
+
+}
+
+.notify-box.show{
+
+	opacity:1;
+
+	transform:translateY(0);
+}
+/* =========================
+   MAP
+========================= */
+
+.map-section{
+
+	max-width:1400px;
+
+	margin:50px auto;
+
+	padding:0 20px;
+}
+
+.map-title{
+
+	font-size:28px;
+
+	font-weight:bold;
+
+	color:#8a6847;
+
+	margin-bottom:25px;
+
+	position:relative;
+
+	display:inline-block;
+
+	letter-spacing:0.5px;
+
+	padding-bottom:8px;
+}
+
+/* เส้นใต้ */
+
+.map-title::after{
+
+	content:"";
+
+	position:absolute;
+
+	left:0;
+	bottom:0;
+
+	width:100%;
+
+	height:4px;
+
+	border-radius:10px;
+
+	background:#d8b58d;
+}
+
+#map{
+
+	width:100%;
+
+	height:600px;
+
+	border-radius:30px;
+
+	box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Overlay */
+
+.banner::before{
+	content:"";
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.08);
+	border-radius:30px;
+	z-index:1;
+	pointer-events:none;
+}
+
+/* =========================
+   Navbar
+========================= */
+
+.navbar{
+	position:absolute;
+	top:25px;
+	left:35px;
+	right:35px;
+
+	display:flex;
+	justify-content:space-between;
+	align-items:flex-start;
+
+	z-index:9999;
+}
+
+/* =========================
+   เมนูซ้าย
+========================= */
+
+.left-menu{
+	display:flex;
+	gap:15px;
+	flex-wrap:wrap;
+}
+
+/* กล่องเมนู */
+
+.menu-item{
+	position:relative;
+}
+
+/* ปุ่มเมนู */
+
+.menu-btn{
+	padding:14px 25px;
+
+	border:none;
+	border-radius:15px;
+
+	font-size:16px;
+	font-weight:bold;
+
+	cursor:pointer;
+
+	color:#796247;
+
+	background:rgba(255,255,255,0.18);
+
+	backdrop-filter:blur(10px);
+
+	border:1px solid rgba(255,255,255,0.25);
+
+	transition:0.3s;
+
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+/* Hover */
+
+.menu-btn:hover{
+	transform:translateY(-5px);
+
+	background:rgba(255,255,255,0.3);
+
+	box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   Dropdown
+========================= */
+
+.dropdown{
+	position:absolute;
+
+	top:70px;
+	left:0;
+
+	background:white;
+
+	border-radius:18px;
+
+	min-width:220px;
+
+	padding:10px 0;
+
+	box-shadow:0 5px 20px rgba(0,0,0,0.15);
+
+	opacity:0;
+	visibility:hidden;
+
+	transform:translateY(10px);
+
+	transition:0.25s;
+
+	z-index:99999;
+}
+
+/* ทำพื้นที่กัน dropdown หาย */
+
+.menu-item::after{
+	content:"";
+	position:absolute;
+	left:0;
+	top:55px;
+	width:100%;
+	height:25px;
+}
+
+/* ลิงก์ */
+
+.dropdown a{
+	display:block;
+
+	padding:18px 22px;
+
+	color:#444;
+
+	font-weight:bold;
+
+	transition:0.3s;
+}
+
+/* Hover */
+
+.dropdown a:hover{
+	background:#f2e4d3;
+}
+
+/* แสดง dropdown */
+
+.menu-item:hover .dropdown{
+	opacity:1;
+	visibility:visible;
+	transform:translateY(0);
+}
+
+/* =========================
+   ปุ่มขวา
+========================= */
+
+.right-menu{
+	display:flex;
+	gap:15px;
+}
+
+/* =========================
+   Navbar ตอน Scroll
+========================= */
+
+.navbar.scrolled{
+	position:fixed;
+
+	top:0;
+	left:0;
+
+	width:100%;
+
+	padding:15px 40px;
+
+	background:rgba(255,255,255,0.95);
+
+	backdrop-filter:blur(10px);
+
+	box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* ปุ่มตอน scroll */
+
+.navbar.scrolled .menu-btn{
+	background:#c8a77c;
+	color:white;
+	border:none;
+}
+
+/* =========================
+   Floating Plus Button
+========================= */
+
+
+.floating-btn{
+	position:fixed;
+
+	right:30px;
+	bottom:30px;
+
+	width:70px;
+	height:70px;
+
+	border:none;
+	border-radius:50%;
+
+	background:#8a6847;
+
+	color:white;
+
+	font-size:42px;
+
+	cursor:pointer;
+
+	box-shadow:0 5px 20px rgba(0,0,0,0.25);
+
+	z-index:9999;
+
+	transition:0.3s;
+
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+/* Hover */
+
+.floating-btn:hover{
+	transform:translateY(-5px) rotate(90deg);
+
+	background:#8a6847;
+
+	box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+/* ==========================
+   Sidebar Mobile
+========================== */
+/* ตอน Navbar เลื่อน */
+.navbar.scrolled .menu-toggle{
+    background:#d8c5ad;
+    border:1px solid #b08a61;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+
+/* ปุ่ม ☰ */
+.menu-toggle{
+    display:none;
+    font-size:28px;
+    color:#6b4f33;
+    cursor:pointer;
+    padding:8px 14px;
+    border-radius:12px;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(10px);
+    z-index:1002;
+}
+
+/* Sidebar */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-300px;
+
+    width:280px;
+    height:100vh;
+
+    padding:25px;
+
+    background:#796247;
+
+    transition:.35s;
+    z-index:1001;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+/* ปุ่มบนสุด */
+.sidebar-buttons{
+    display:flex;
+    gap:10px;
+    margin-bottom:30px;
+}
+
+.sidebar-buttons a{
+    flex:1;
+    text-align:center;
+    padding:15px;
+    border-radius:12px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.register-btn,
+.login-btn{
+    background:#6A513A;
+}
+
+/* เมนูหลัก */
+.sidebar ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.sidebar li{
+    margin:0;
+}
+
+.sidebar li a,
+.dropdown-btn{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    width:100%;
+
+    padding:14px 0;
+
+    background:none;
+    border:none;
+
+    color:#fff;
+    font-size:18px;
+    font-weight:500;
+
+    text-decoration:none;
+    cursor:pointer;
+}
+
+/* เมนูย่อย */
+.submenu{
+    display:none;
+    list-style:none;
+    padding-left:20px;
+}
+
+.submenu.show{
+    display:block;
+}
+
+.submenu li a{
+    padding:10px 0;
+    font-size:17px;
+}
+
+/* ลูกศร */
+.arrow{
+    transition:.3s;
+}
+
+.arrow.rotate{
+    transform:rotate(90deg);
+}
+
+/* Overlay */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.5);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+    z-index:1000;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+.sidebar-user{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.sidebar-user img{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #fff;
+}
+
+
+.sidebar-user a{
+    color:#fff;
+    font-size:14px;
+    text-decoration:none;
+    opacity:.8;
+}
+
+@media (max-width:1024px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .left-menu,
+    .right-menu{
+        display:none;
+    }
+
+    .banner{
+        width:100%;
+        height:55vw;
+        min-height:230px;
+        max-height:320px;
+
+        background-size:cover;
+        background-position:center center;
+        background-repeat:no-repeat;
+    }
+
+}
+.sidebar-user{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.sidebar-info{
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar-name{
+    color:#fff;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.sidebar-link{
+    color:#eee;
+    text-decoration:none;
+    margin-top:6px;
+    font-size:15px;
+}
+
+.sidebar-link.logout{
+    color:#ffd6d6;
+}
+/* ==========================
+   Mobile Navbar
+========================== */
+@media (max-width:1024px){
+
+    .navbar{
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+
+        padding:15px 20px;
+
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+
+        z-index:9999;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    body{
+        padding-top:70px;
+    }
+
+}
+
+
+.user-profile{
+
+	display:flex;
+	align-items:center;
+	gap:12px;
+
+	padding:8px 15px;
+
+	border-radius:15px;
+
+	background:rgba(255,255,255,0.18);
+
+	backdrop-filter:blur(10px);
+
+	border:1px solid rgba(255,255,255,0.25);
+}
+
+.user-profile img{
+
+	width:45px;
+	height:45px;
+
+	border-radius:50%;
+
+	object-fit:cover;
+
+	border:2px solid white;
+}
+
+.user-profile span{
+
+	color:white;
+
+	font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+ <!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+
+    <div id="sidebarUserMenu" class="sidebar-buttons">
+
+        <a href="register.html" class="register-btn">
+            ลงทะเบียน
+        </a>
+
+        <a href="login.html" class="login-btn">
+            เข้าสู่ระบบ
+        </a>
+
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="index.html">HOME</a>
+        </li>
+
+        <li>
+
+            <button class="dropdown-btn" id="typeMenu">
+                ชนิด
+                <span class="arrow" id="arrow">▶</span>
+            </button>
+
+            <ul class="submenu" id="submenu">
+                <li><a href="dog.html">สุนัข</a></li>
+                <li><a href="cat.html">แมว</a></li>
+            </ul>
+
+        </li>
+
+        <li><a href="Reportmissing.html">สัตว์เลี้ยงหาย</a></li>
+        <li><a href="clinic.html">Clinic</a></li>
+        <li><a href="public relations.html">ประชาสัมพันธ์</a></li>
+        <li><a href="#">ติดต่อเรา</a></li>
+
+    </ul>
+
+</div>
+
+<!-- Banner -->
+
+<header class="banner">
+
+	<!-- Navbar -->
+
+<nav class="navbar" id="navbar">
+
+		<!-- เมนูซ้าย -->
+         <div class="menu-toggle" id="menuToggle">
+             ☰
+        </div>
+
+		<div class="left-menu">
+
+			<a href="index.html" class="menu-btn">
+				HOME
+			</a>
+
+			<!-- เมนูชนิด -->
+
+			<div class="menu-item">
+
+				<button class="menu-btn">
+					ชนิด ▼
+				</button>
+
+				<div class="dropdown">
+
+					<a href="dog.html">หมา</a>
+
+					<a href="cat.html">แมว</a>
+
+				</div>
+
+			</div>
+
+			<a href="Reportmissing.html" class="menu-btn">
+				สัตว์เลี้ยงหาย
+			</a>
+            <a href="clinic.html" class="menu-btn">
+				Clinic
+			</a>
+
+			<a href="public relations.html" class="menu-btn">
+				ประชาสัมพันธ์
+			</a>
+
+			<a href="#" class="menu-btn">
+				ติดต่อเรา
+			</a>
+
+			
+
+		</div>
+
+		<!-- ปุ่มขวา -->
+
+		<div class="right-menu" id="userMenu">
+
+    <a href="register.html" class="menu-btn">
+        ลงทะเบียน
+    </a>
+
+    <a href="login.html" class="menu-btn">
+        เข้าสู่ระบบ
+    </a>
+	</div>
+</nav>
+</header>
+
+<!-- MAP -->
+
+<section class="map-section">
+
+	<h2 class="map-title">
+		ตำแหน่งสัตว์เลี้ยง
+	</h2>
+
+	<div id="map"></div>
+
+</section>
+
+<!-- ปุ่มบวก -->
+
+<a href="Add a pet.html" class="floating-btn">
+	+
+</a>
+
+<script>
+
+
+window.addEventListener("scroll", function(){
+
+	let navbar = document.getElementById("navbar");
+
+	if(window.scrollY > 50){
+
+		navbar.classList.add("scrolled");
+
+	}else{
+
+		navbar.classList.remove("scrolled");
+
+	}
+
+});
+
+</script>
+<script>
+// ================= NOTIFY =================
+function showNotify(){
+  let box = document.getElementById("notifyBox");
+  if(!box) return;
+
+  box.classList.add("show");
+
+  setTimeout(() => {
+    box.classList.remove("show");
+  }, 3000);
+}
+
+// ================= MAP =================
+let map = L.map('map').setView([7.6167, 100.0833], 10);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+
+</script>
+
+<script>
+const navbar = document.getElementById("navbar");
+const menu = document.getElementById("menuToggle");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+
+
+// ================= Sidebar =================
+menu.onclick = () => {
+    sidebar.classList.add("active");
+    overlay.classList.add("active");
+    document.body.classList.add("no-scroll");
+    navbar.style.display = "none";
+};
+
+overlay.onclick = closeMenu;
+
+function closeMenu() {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+    navbar.style.display = "flex";
+}
+
+
+</script>
+<script>
+
+const typeMenu = document.getElementById("typeMenu");
+const submenu = document.getElementById("submenu");
+const arrow = document.getElementById("arrow");
+
+if (typeMenu) {
+    typeMenu.addEventListener("click", () => {
+        submenu.classList.toggle("show");
+        arrow.classList.toggle("rotate");
+    });
+}
+
+</script>
+<script type="module">
+
+import { auth, db } from "./firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+    doc,
+    getDoc,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+async function loadPets(){
+
+    const pets=[];
+
+    const dogSnap = await getDocs(collection(db,"dogs"));
+
+dogSnap.forEach(doc=>{
+
+    pets.push({
+
+        id: doc.id,
+
+        type: "dog",
+
+        ...doc.data()
+
+    });
+
+});
+
+    const catSnap = await getDocs(collection(db,"cats"));
+
+catSnap.forEach(doc=>{
+
+    pets.push({
+
+        id: doc.id,
+
+        type: "cat",
+
+        ...doc.data()
+
+    });
+
+});
+
+    console.log(pets);
+
+    pets.forEach(pet=>{
+
+    // ไม่แสดงสัตว์ที่ได้บ้านแล้ว
+    if(pet.adoptionStatus === "ได้บ้านแล้ว") return;
+
+    // ไม่มีพิกัดก็ไม่แสดง
+    if(!pet.latitude || !pet.longitude) return;
+
+    // เลือกหน้าที่จะเปิด
+    const page = pet.type === "dog"
+        ? "dog.html"
+        : "cat.html";
+
+    // สร้าง Marker
+    L.marker([pet.latitude, pet.longitude])
+
+    .addTo(map)
+
+    .bindPopup(`
+
+    <div style="width:220px">
+
+        <img src="${pet.image}"
+        style="width:100%;height:150px;object-fit:cover;border-radius:15px;">
+
+        <h3 style="margin:10px 0 5px;">
+            ${pet.name}
+        </h3>
+
+        <div class="info-item">
+        📍อำเภอ : ${pet.district}
+        </div>
+        <div class="info-item">
+        เพศ : ${pet.gender}
+        </div>
+        <div class="info-item">
+        อายุ : ${pet.age}
+        </div>
+
+        <a href="${page}?id=${pet.id}"
+
+        style="
+        display:block;
+        margin-top:15px;
+        background:#8a6847;
+        color:white;
+        text-align:center;
+        padding:10px;
+        border-radius:10px;
+        text-decoration:none;
+        font-weight:bold;">
+
+        ดูข้อมูลเพิ่มเติม
+
+        </a>
+
+    </div>
+
+    `);
+
+});
+
+}
+
+const userMenu = document.getElementById("userMenu");
+const sidebarUserMenu = document.getElementById("sidebarUserMenu");
+
+onAuthStateChanged(auth, async (user) => {
+console.log("Auth =", user);
+    if (user) {
+
+        const snap = await getDoc(doc(db, "users", user.uid));
+
+        let username = "User";
+        let photo = "img/default-profile.png";
+
+        if (snap.exists()) {
+            username = snap.data().username || "User";
+            photo = snap.data().profile || "img/default-profile.png";
+        }
+
+        // ---------- Desktop ----------
+        userMenu.innerHTML = `
+            <div class="user-dropdown">
+
+                <div class="user-profile" id="profileBtn">
+
+                    <img src="${photo}">
+                    <span>${username}</span>
+
+                </div>
+
+                <div class="dropdown-menu" id="dropdownMenu">
+
+                    <a href="profile.html">โปรไฟล์</a>
+
+                    <a href="#" id="logoutBtn">ออกจากระบบ</a>
+
+                </div>
+
+            </div>
+        `;
+
+        // ---------- Mobile Sidebar ---------- 
+sidebarUserMenu.className = "";
+sidebarUserMenu.innerHTML = `
+<div class="sidebar-user">
+
+    <img src="${photo}" class="sidebar-photo">
+
+    <div>
+
+        <div class="sidebar-name">
+            ${username}
+        </div>
+
+        <a href="profile.html">
+            โปรไฟล์
+        </a>
+
+        <br>
+
+        <a href="#" id="sidebarLogout">
+            ออกจากระบบ
+        </a>
+
+    </div>
+
+</div>
+`;
+
+
+        // Desktop Dropdown
+        document.getElementById("profileBtn").onclick = () => {
+
+            document
+                .getElementById("dropdownMenu")
+                .classList.toggle("show");
+
+        };
+
+        // Desktop Logout
+        document.getElementById("logoutBtn").onclick = async () => {
+
+            await signOut(auth);
+            location.reload();
+
+        };
+
+        // Mobile Logout
+        document.getElementById("sidebarLogout").onclick = async () => {
+
+    await signOut(auth);
+    location.reload();
+
+};
+
+    }
+
+    else {
+
+        userMenu.innerHTML = `
+
+        <a href="register.html" class="menu-btn">
+            ลงทะเบียน
+        </a>
+
+        <a href="login.html" class="menu-btn">
+            เข้าสู่ระบบ
+        </a>
+
+        `;
+
+        sidebarUserMenu.className = "sidebar-buttons";
+
+sidebarUserMenu.innerHTML = `
+<a href="register.html" class="register-btn">
+    ลงทะเบียน
+</a>
+
+<a href="login.html" class="login-btn">
+    เข้าสู่ระบบ
+</a>
+`;
+
+    }
+
+    await loadPets();
+
+});
+
+</script>
+</body>
+
+</html>

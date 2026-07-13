@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffffff;
+}
+
+.register-box{
+    position:relative;
+    width:400px;
+    padding:40px;
+    border-radius:25px;
+    background:white;
+    border:1px solid #eee;
+    box-shadow:0 5px 25px rgba(0,0,0,0.12);
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    text-decoration:none;
+    color:#999;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.close-btn:hover{
+    color:#c8a77c;
+    transform:rotate(90deg);
+}
+
+.register-box h1{
+    text-align:center;
+    color:#444;
+    margin-bottom:25px;
+    font-size:35px;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+.input-box input{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:16px;
+    background:#f7f7f7;
+}
+
+.input-box input:focus{
+    border:1px solid #c8a77c;
+    background:white;
+}
+
+.register-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#c8a77c;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.register-btn:hover{
+    transform:translateY(-4px);
+    background:#b89268;
+}
+
+.login-link{
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+}
+
+.login-link a{
+    color:#c8a77c;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+@media(max-width:768px){
+    .register-box{
+        width:90%;
+        padding:30px 20px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="register-box">
+
+<a href="index.html" class="close-btn">×</a>
+
+<h1>เข้าสู่ระบบ</h1>
+
+<form id="loginForm">
+
+<div class="input-box">
+    <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        required>
+</div>
+
+<div class="input-box">
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        required>
+</div>
+
+<button type="submit" class="register-btn">
+    เข้าสู่ระบบ
+</button>
+
+</form>
+
+<div class="login-link">
+    ยังไม่มีบัญชี?
+    <a href="register.html">สมัครสมาชิก</a>
+</div>
+
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { auth } from "./firebase.js";
+
+import {
+    signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+/* LOGIN */
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+        const user = userCredential.user;
+
+        alert("เข้าสู่ระบบสำเร็จ");
+
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("uid", user.uid);
+
+        window.location.href = "index.html";
+
+    } catch (error) {
+        alert("Email หรือ Password ไม่ถูกต้อง");
+        console.log(error.message);
+    }
+});
+</script>
+
+</body>
+</html>

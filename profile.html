@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>โปรไฟล์ผู้ใช้</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Prompt",sans-serif;
+}
+
+body{
+    background:#f3f3f3;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+body.no-scroll{
+    overflow:hidden;
+}
+
+/* =====================
+Banner
+===================== */
+
+.banner{
+
+    position:relative;
+
+    width:100%;
+
+    height:320px;
+
+    background-image:url("img/banner1.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    border-radius:0 0 30px 30px;
+
+    overflow:hidden;
+
+}
+
+.banner::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.08);
+
+}
+
+/* =====================
+Banner Title
+===================== */
+
+.banner-title{
+
+    position:absolute;
+
+    left:50%;
+
+    top:58%;
+
+    transform:translate(-50%,-50%);
+
+    text-align:center;
+
+    color:white;
+
+    z-index:5;
+
+}
+
+.banner-title h1{
+
+    font-size:42px;
+
+    margin-bottom:10px;
+
+}
+
+.banner-title p{
+
+    font-size:18px;
+
+    opacity:.95;
+
+}
+
+/* =====================
+Navbar
+===================== */
+
+.navbar{
+
+    position:absolute;
+
+    top:25px;
+
+    left:35px;
+
+    right:35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    z-index:999;
+
+}
+
+/* =====================
+Navbar Scroll
+===================== */
+
+.navbar.scrolled{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    width:100%;
+
+    padding:15px 40px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 2px 15px rgba(0,0,0,.1);
+
+}
+
+/* =====================
+Left Menu
+===================== */
+
+.left-menu{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.right-menu{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+/* =====================
+Menu Button
+===================== */
+
+.menu-btn{
+
+    padding:14px 25px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    color:#796247;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.menu-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:rgba(255,255,255,.3);
+
+}
+
+.navbar.scrolled .menu-btn{
+
+    background:#c8a77c;
+
+    color:white;
+
+    border:none;
+
+}
+
+/* =====================
+Dropdown Desktop
+===================== */
+
+.menu-item{
+
+    position:relative;
+
+}
+
+.dropdown{
+
+    position:absolute;
+
+    top:65px;
+
+    left:0;
+
+    width:210px;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.25s;
+
+}
+
+.menu-item:hover .dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.dropdown a{
+
+    display:block;
+
+    padding:16px 20px;
+
+    color:#444;
+
+    font-weight:500;
+
+}
+
+.dropdown a:hover{
+
+    background:#f2e4d3;
+
+}
+
+/* =====================
+Desktop User
+===================== */
+
+.user-dropdown{
+
+    position:relative;
+
+}
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    padding:8px 15px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+}
+
+.user-profile img{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+.user-profile span{
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.dropdown-menu{
+
+    position:absolute;
+
+    top:65px;
+
+    right:0;
+
+    width:220px;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+    display:none;
+
+}
+
+.dropdown-menu.show{
+
+    display:block;
+
+}
+
+.dropdown-menu a{
+
+    display:block;
+
+    padding:16px 20px;
+
+    color:#555;
+
+}
+
+.dropdown-menu a:hover{
+
+    background:#f3f3f3;
+
+}
+/* ==========================================
+   MOBILE MENU
+========================================== */
+
+/* ปุ่ม ☰ */
+
+.menu-toggle{
+
+    display:none;
+
+    font-size:28px;
+
+    color:#6b4f33;
+
+    cursor:pointer;
+
+    padding:8px 14px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.85);
+
+    backdrop-filter:blur(10px);
+
+    z-index:1002;
+
+}
+
+/* ตอน Scroll */
+
+.navbar.scrolled .menu-toggle{
+
+    background:#d8c5ad;
+
+    border:1px solid #b08a61;
+
+}
+
+/* ==========================================
+   Sidebar
+========================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    left:-300px;
+
+    width:280px;
+
+    height:100vh;
+
+    background:#796247;
+
+    padding:25px;
+
+    transition:.35s;
+
+    z-index:1001;
+
+    overflow-y:auto;
+
+}
+
+.sidebar.active{
+
+    left:0;
+
+}
+
+/* ==========================================
+   ปุ่ม Login Register
+========================================== */
+
+.sidebar-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:30px;
+
+}
+
+.sidebar-buttons a{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:600;
+
+}
+
+.register-btn{
+
+    background:#8a6847;
+
+}
+
+.login-btn{
+
+    background:#5e4630;
+
+}
+
+/* ==========================================
+   Sidebar User
+========================================== */
+
+.sidebar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:30px;
+
+}
+
+.sidebar-photo{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid white;
+
+}
+
+.sidebar-name{
+
+    color:white;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.sidebar-user a{
+
+    color:white;
+
+    opacity:.9;
+
+    display:block;
+
+    margin-top:6px;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   Sidebar Menu
+========================================== */
+
+.sidebar ul{
+
+    list-style:none;
+
+}
+
+.sidebar li{
+
+    margin:0;
+
+}
+
+.sidebar li a,
+
+.dropdown-btn{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:500;
+
+    padding:15px 0;
+
+    cursor:pointer;
+
+}
+
+/* ==========================================
+   Submenu
+========================================== */
+
+.submenu{
+
+    display:none;
+
+    list-style:none;
+
+    padding-left:18px;
+
+}
+
+.submenu.show{
+
+    display:block;
+
+}
+
+.submenu li a{
+
+    padding:10px 0;
+
+    font-size:16px;
+
+}
+
+/* ==========================================
+   Arrow
+========================================== */
+
+.arrow{
+
+    transition:.3s;
+
+}
+
+.arrow.rotate{
+
+    transform:rotate(90deg);
+
+}
+
+/* ==========================================
+   Overlay
+========================================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:1000;
+
+}
+
+.overlay.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:1024px){
+
+    .menu-toggle{
+
+        display:block;
+
+    }
+
+    .left-menu{
+
+        display:none;
+
+    }
+
+    .right-menu{
+
+        display:none;
+
+    }
+
+    .navbar{
+
+        position:fixed;
+
+        top:0;
+
+        left:0;
+
+        right:0;
+
+        padding:15px 20px;
+
+        align-items:center;
+
+    }
+
+    body{
+
+        padding-top:70px;
+
+    }
+
+    .banner{
+
+        height:260px;
+
+    }
+
+    .banner-title h1{
+
+        font-size:32px;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .banner{
+
+        height:220px;
+
+    }
+
+    .banner-title h1{
+
+        font-size:26px;
+
+    }
+
+    .banner-title p{
+
+        font-size:15px;
+
+    }
+
+}
+/* ==========================================
+   PROFILE SECTION
+========================================== */
+
+.profile-section{
+
+    max-width:1200px;
+
+    margin:60px auto;
+
+    padding:0 20px;
+
+}
+
+/* ==========================================
+   Profile Card
+========================================== */
+
+.profile-card{
+
+    background:white;
+
+    border-radius:30px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    overflow:hidden;
+
+}
+
+/* ==========================================
+   Cover
+========================================== */
+
+.profile-cover{
+
+    height:180px;
+
+    background:linear-gradient(135deg,#c8a77c,#8a6847);
+
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.profile-header{
+
+    margin-top:-70px;
+
+    padding:0 40px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+/* ==========================================
+   Left
+========================================== */
+
+.profile-left{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:28px;
+
+}
+
+/* ==========================================
+   Photo
+========================================== */
+
+.profile-photo{
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:6px solid white;
+
+    background:white;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+}
+
+/* ==========================================
+   Name
+========================================== */
+
+.profile-name{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-start;
+
+    margin-top:75px;
+
+}
+
+.profile-name h2{
+
+    font-size:38px;
+
+    color:#333;
+
+    margin:0 0 10px 0;
+
+    line-height:1.2;
+
+    font-weight:700;
+
+}
+
+.profile-name p{
+
+    color:#666;
+
+    font-size:18px;
+
+    line-height:1.5;
+
+}
+
+/* ==========================================
+   Right Button
+========================================== */
+
+.edit-btn{
+
+    background:#8a6847;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border-radius:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    margin-top:70px;
+
+
+}
+
+.edit-btn:hover{
+
+    transform:translateY(-3px);
+
+    background:#6f5339;
+
+}
+
+/* ==========================================
+   Info Grid
+========================================== */
+
+.profile-info{
+    
+    padding-top: 40px;
+    padding:45px;
+
+    display:grid;
+
+    padding-top:35px;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+    flex:1;
+
+}
+
+/* ==========================================
+   Box
+========================================== */
+
+.info-box{
+
+    background:#fafafa;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    border:1px solid #eee;
+
+    transition:.3s;
+
+}
+
+.info-box:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   Label
+========================================== */
+
+.info-title{
+
+    color:#8a6847;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    text-transform:uppercase;
+
+}
+
+/* ==========================================
+   Value
+========================================== */
+
+.info-value{
+
+    color:#444;
+
+    font-size:18px;
+
+    font-weight:500;
+
+}
+
+/* ==========================================
+   Statistics
+========================================== */
+
+.profile-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    padding:0 40px 40px;
+
+}
+
+.stat-card{
+
+    background:#fff7ef;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    padding:30px;
+
+    border:1px solid #ecd4b3;
+
+}
+
+.stat-card h2{
+
+    font-size:38px;
+
+    color:#8a6847;
+
+}
+
+.stat-card p{
+
+    margin-top:8px;
+
+    color:#666;
+
+}
+.topbar{
+
+    width:100%;
+
+    padding:25px 40px;
+
+    display:flex;
+
+    align-items:center;
+
+    background:white;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+}
+
+.home-btn{
+
+    background:#8a6847;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    padding:14px 28px;
+
+    border-radius:15px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.home-btn:hover{
+
+    background:#6f5338;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+@media(max-width:1024px){
+
+.topbar{
+
+    padding:15px;
+
+}
+
+.home-btn{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+}
+@media(max-width:1024px){
+
+    .profile-header{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        text-align:center;
+
+    }
+
+    .profile-left{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .profile-info{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .profile-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:1024px){
+
+    .profile-photo{
+
+        width:110px;
+
+        height:110px;
+
+    }
+
+    .profile-name h2{
+
+        font-size:26px;
+
+    }
+
+    .profile-name p{
+
+        font-size:15px;
+
+    }
+
+    .profile-header{
+
+        padding:0 20px 30px;
+
+    }
+
+    .profile-info{
+
+        padding:20px;
+
+    }
+
+    .profile-stats{
+
+        padding:0 20px 20px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+
+<div id="sidebarUserMenu">
+
+<div class="sidebar-buttons">
+
+<a href="register.html" class="register-btn">
+ลงทะเบียน
+</a>
+
+<a href="login.html" class="login-btn">
+เข้าสู่ระบบ
+</a>
+
+</div>
+
+</div>
+
+<ul>
+
+<li>
+<a href="index.html">HOME</a>
+</li>
+
+<li>
+
+<button class="dropdown-btn" id="typeMenu">
+
+ชนิด
+
+<span id="arrow">▶</span>
+
+</button>
+
+<ul class="submenu" id="submenu">
+
+<li>
+<a href="dog.html">สุนัข</a>
+</li>
+
+<li>
+<a href="cat.html">แมว</a>
+</li>
+
+</ul>
+
+</li>
+
+<li>
+
+<a href="Reportmissing.html">
+
+สัตว์เลี้ยงหาย
+
+</a>
+
+</li>
+
+<li>
+
+<a href="clinic.html">
+
+Clinic
+
+</a>
+
+</li>
+
+<li>
+
+<a href="public relations.html">
+
+ประชาสัมพันธ์
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#">
+
+ติดต่อเรา
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<nav class="topbar">
+
+    <a href="index.html" class="home-btn">
+         HOME
+    </a>
+
+</nav>
+
+<!-- ==========================================
+     PROFILE
+========================================== -->
+
+<section class="profile-section">
+
+    <div class="profile-card">
+
+        <!-- Cover -->
+        <div class="profile-cover"></div>
+
+        <!-- Header -->
+        <div class="profile-header">
+
+            <div class="profile-left">
+
+                <img
+                    id="profileImage"
+                    src="img/default-profile.png"
+                    class="profile-photo"
+                >
+
+                <div class="profile-name">
+
+                    <h2 id="profileName">
+                        Loading...
+                    </h2>
+
+                    <p id="profileEmail">
+                        -
+                    </p>
+
+                </div>
+
+            </div>
+
+            <a
+    href="edit-profile.html"
+    class="edit-btn"
+    id="editProfileBtn"
+>
+    ✏ แก้ไขโปรไฟล์
+</a>
+
+        </div>
+
+        <!-- ข้อมูล -->
+
+        <div class="profile-info">
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    Username
+                </div>
+
+                <div
+                    class="info-value"
+                    id="username"
+                >
+                    -
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    Email
+                </div>
+
+                <div
+                    class="info-value"
+                    id="email"
+                >
+                    -
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    เบอร์โทร
+                </div>
+
+                <div
+                    class="info-value"
+                    id="phone"
+                >
+                    -
+                </div>
+
+            </div>
+            <!-- กล่องเกี่ยวกับฉัน -->
+<div class="info-box">
+
+    <div class="info-title">
+        เกี่ยวกับฉัน
+    </div>
+
+    <div
+        class="info-value"
+        id="about"
+    >
+        -
+    </div>
+
+</div>
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    จังหวัด
+                </div>
+
+                <div
+                    class="info-value"
+                    id="province"
+                >
+                    -
+                </div>
+
+            </div>
+
+            <!-- กล่องอำเภอ -->
+<div class="info-box">
+
+    <div class="info-title">
+        อำเภอ
+    </div>
+
+    <div
+        class="info-value"
+        id="district"
+    >
+        -
+    </div>
+
+</div>
+
+
+<!-- กล่อง Facebook -->
+<div class="info-box">
+
+    <div class="info-title">
+        Facebook
+    </div>
+
+    <div
+        class="info-value"
+        id="facebook"
+    >
+        -
+    </div>
+
+</div>
+
+<!-- กล่อง Line -->
+<div class="info-box">
+
+    <div class="info-title">
+        Line
+    </div>
+
+    <div
+        class="info-value"
+        id="line"
+    >
+        -
+    </div>
+
+</div>
+
+<!-- กล่อง Instagram -->
+<div class="info-box">
+
+    <div class="info-title">
+        Instagram
+    </div>
+
+    <div
+        class="info-value"
+        id="instagram"
+    >
+        -
+    </div>
+
+</div>
+
+            <div class="info-box">
+
+                <div class="info-title">
+                    วันที่สมัครสมาชิก
+                </div>
+
+                <div
+                    class="info-value"
+                    id="createdAt"
+                >
+                    -
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- สถิติ -->
+
+        <div class="profile-stats">
+
+            <div class="stat-card">
+
+                <h2 id="dogCount">
+                    0
+                </h2>
+
+                <p>
+                    สุนัขที่ลงประกาศ
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="catCount">
+                    0
+                </h2>
+
+                <p>
+                    แมวที่ลงประกาศ
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h2 id="totalCount">
+                    0
+                </h2>
+
+                <p>
+                    รวมทั้งหมด
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+</main>
+
+<script type="module">
+
+    const params = new URLSearchParams(window.location.search);
+
+const profileUid = params.get("uid");
+
+import { auth, db } from "./firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+    doc,
+    getDoc,
+    collection,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async(user)=>{
+
+    if(!user){
+
+        location.href="login.html";
+        return;
+
+    }
+
+    // ---------------------------
+    // ดึงข้อมูลผู้ใช้
+    // ---------------------------
+
+    const uid = profileUid || user.uid;
+
+    const editBtn = document.getElementById("editProfileBtn");
+
+if (uid === user.uid) {
+
+    editBtn.style.display = "inline-flex";
+
+} else {
+
+    editBtn.style.display = "none";
+
+}
+
+const userRef = doc(db,"users",uid);
+
+const userSnap = await getDoc(userRef);
+
+console.log(userSnap.exists());
+
+console.log(userSnap.data());
+    if(userSnap.exists()){
+
+        const data = userSnap.data();
+
+        document.getElementById("profileImage").src =
+        data.profile || "img/default-profile.png";
+
+       document.getElementById("profileName").textContent =
+        data.username || "User";
+
+        document.getElementById("profileEmail").textContent =
+        data.email || "-";
+
+        document.getElementById("username").textContent =
+        data.username || "-";
+
+        document.getElementById("email").textContent =
+        data.email || "-";
+
+        document.getElementById("phone").textContent =
+        data.phone || "-";
+
+        document.getElementById("province").textContent =
+        data.province || "-";
+
+        document.getElementById("district").textContent =
+        data.district || "-";
+        document.getElementById("about").textContent =
+        data.about || "-";
+        if(data.facebook){
+
+
+    document.getElementById("facebook").innerHTML =
+    `<a href="${data.facebook}" target="_blank">${data.facebook}</a>`;
+
+}else{
+
+    document.getElementById("facebook").textContent="-";
+
+}
+document.getElementById("line").textContent =
+data.line || "-";
+if(data.instagram){
+
+    const ig = data.instagram.replace("@","");
+
+    document.getElementById("instagram").innerHTML =
+
+    `<a href="https://instagram.com/${ig}" target="_blank">@${ig}</a>`;
+
+}else{
+
+    document.getElementById("instagram").textContent="-";
+
+}
+
+        // วันที่สมัคร
+
+        if(data.createdAt){
+
+            const date=data.createdAt.toDate();
+
+            document.getElementById("createdAt").textContent=
+
+            date.toLocaleDateString("th-TH");
+
+        }
+
+    }
+
+    // ---------------------------
+    // นับจำนวนสัตว์เลี้ยง
+    // ---------------------------
+
+    let dogCount=0;
+
+    let catCount=0;
+
+    // dogs
+
+    const dogs=await getDocs(collection(db,"dogs"));
+
+    dogs.forEach(doc=>{
+
+        if(doc.data().ownerUid===uid){
+
+            dogCount++;
+
+        }
+
+    });
+
+    // cats
+
+    const cats=await getDocs(collection(db,"cats"));
+
+    cats.forEach(doc=>{
+
+        if(doc.data().ownerUid===uid){
+
+            catCount++;
+
+        }
+
+    });
+
+    document.getElementById("dogCount").textContent=dogCount;
+
+    document.getElementById("catCount").textContent=catCount;
+
+    document.getElementById("totalCount").textContent=
+
+    dogCount+catCount;
+
+});
+
+
+</script>
+
+</body>
+
+</html>
