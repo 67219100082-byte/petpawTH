@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>แก้ไขโปรไฟล์</title>
+    <title>แก้ไขโปรไฟล์ | PetPaw</title>
 
     <!-- Prompt Font -->
 
@@ -1067,6 +1067,8 @@ let currentPhoto = "";
 // ============================
 // โหลดข้อมูลผู้ใช้
 // ============================
+
+import { auth, db } from "./firebase.js";
 
 onAuthStateChanged(auth, async (user)=>{
 

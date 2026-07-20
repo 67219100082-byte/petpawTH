@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>PetpawTH</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -114,6 +114,99 @@ body.no-scroll{
 
     text-decoration:none;
 
+}
+.stats-section{
+    max-width:1200px;
+    margin:30px auto 60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+    padding:0 20px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+/* ==========================
+   Clinic Recommend
+========================== */
+
+.clinic-section{
+    max-width:1200px;
+    margin:70px auto;
+    padding:0 20px;
+}
+
+.clinic-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.clinic-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.clinic-card:hover{
+    transform:translateY(-8px);
+}
+
+.clinic-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.clinic-card h3{
+    color:#6b4f33;
+    margin:18px;
+    margin-bottom:8px;
+}
+
+.clinic-card p{
+    color:#666;
+    margin:0 18px 20px;
+}
+
+.clinic-btn{
+    display:block;
+    margin:0 18px 20px;
+    padding:12px;
+    background:#8a6847;
+    color:#fff;
+    text-align:center;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.clinic-btn:hover{
+    background:#6b4f33;
+}
+
+.stat-card:hover{
+    transform:translateY(-6px);
+}
+
+.stat-number{
+    font-size:42px;
+    font-weight:bold;
+    color:#8a6847;
+}
+
+.stat-text{
+    margin-top:10px;
+    color:#666;
+    font-size:18px;
 }
 
 .dropdown-menu a:hover{
@@ -847,8 +940,8 @@ body.no-scroll{
 
         <li><a href="Reportmissing.html">สัตว์เลี้ยงหาย</a></li>
         <li><a href="clinic.html">Clinic</a></li>
-        <li><a href="public relations.html">ประชาสัมพันธ์</a></li>
-        <li><a href="#">ติดต่อเรา</a></li>
+        <li><a href="publicrelations.html">ประชาสัมพันธ์</a></li>
+        <li><a href="ContactUs.html">ติดต่อเรา</a></li>
 
     </ul>
 
@@ -898,11 +991,11 @@ body.no-scroll{
 				Clinic
 			</a>
 
-			<a href="public relations.html" class="menu-btn">
+			<a href="publicrelations.html" class="menu-btn">
 				ประชาสัมพันธ์
 			</a>
 
-			<a href="#" class="menu-btn">
+			<a href="ContactUs.html" class="menu-btn">
 				ติดต่อเรา
 			</a>
 
@@ -936,6 +1029,83 @@ body.no-scroll{
 	<div id="map"></div>
 
 </section>
+
+<section class="map-section">
+
+	<h2 class="map-title">
+        สถิติข้อมูลภายในเว็บไซต์ </h2>
+
+<section class="stats-section">
+
+    <div class="stat-card">
+        <div class="stat-number" id="dogCount">0</div>
+        <div class="stat-text">สุนัข</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="catCount">0</div>
+        <div class="stat-text">แมว</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="missingCount">0</div>
+        <div class="stat-text">สัตว์เลี้ยงหาย</div>
+    </div>
+
+</section>
+<section class="map-section">
+
+	<h2 class="map-title">
+        คลินิกแนะนำ </h2>
+
+    <div class="clinic-grid">
+
+        <div class="clinic-card">
+            <img src="img/clinic1.jpg" alt="โรงพยาบาลสัตว์สุขใจ">
+            <h3>โรงพยาบาลสัตว์สุขใจ</h3>
+            <p>📍ตำบลตำนาน อำเภอเมืองพัทลุง</p>
+
+            <a href="clinic.html" class="clinic-btn">
+                ดูรายละเอียด
+            </a>
+        </div>
+
+        <div class="clinic-card">
+            <img src="img/clinic4.png" alt="คลินิกแม่ขรีสัตวแพทย์">
+            <h3>คลินิกแม่ขรีสัตวแพทย์</h3>
+            <p>📍ตำบลแม่ขรี อำเภอตะโหมด</p>
+
+            <a href="clinic.html" class="clinic-btn">
+                ดูรายละเอียด
+            </a>
+        </div>
+
+        <div class="clinic-card">
+            <img src="img/clinic9.png" alt="โรงพยาบาลสัตว์เมตตา สาขาพัทลุง เวชรังษี">
+            <h3>โรงพยาบาลสัตว์เมตตา</h3>
+            <p>📍ตำบลคูหาสวรรค์ อำเภอเมืองพัทลุง</p>
+
+            <a href="clinic.html" class="clinic-btn">
+                ดูรายละเอียด
+            </a>
+        </div>
+
+        <div class="clinic-card">
+            <img src="img/clinic6.jpg" alt="คลินิกหมอเปิ้ลสัตวแพทย์
+">
+            <h3>คลินิกหมอเปิ้ลสัตวแพทย์
+</h3>
+            <p>📍ตำบลดอนทราย อำเภอควนขนุน</p>
+
+            <a href="clinic.html" class="clinic-btn">
+                ดูรายละเอียด
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- ปุ่มบวก -->
 
@@ -1143,6 +1313,21 @@ catSnap.forEach(doc=>{
 });
 
 }
+async function loadStatistics(){
+
+    // สุนัข
+    const dogSnap = await getDocs(collection(db,"dogs"));
+    document.getElementById("dogCount").textContent = dogSnap.size;
+
+    // แมว
+    const catSnap = await getDocs(collection(db,"cats"));
+    document.getElementById("catCount").textContent = catSnap.size;
+
+    // สัตว์ที่หาย
+    const missingSnap = await getDocs(collection(db,"missingPets"));
+    document.getElementById("missingCount").textContent = missingSnap.size;
+
+}
 
 const userMenu = document.getElementById("userMenu");
 const sidebarUserMenu = document.getElementById("sidebarUserMenu");
@@ -1268,6 +1453,7 @@ sidebarUserMenu.innerHTML = `
     }
 
     await loadPets();
+    await loadStatistics();
 
 });
 

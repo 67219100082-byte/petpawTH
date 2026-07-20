@@ -3,21 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หาบ้านแมวจรจัด | PetPaw</title>
+    <title>ประชาสัมพันธ์ | PetPaw</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <style>
 
 a{
 	text-decoration:none;
 	color:inherit;
-}   
+}  
+.mission{
+    margin-top:70px;
+    background:#fff;
+    padding:45px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.mission h2{
+    color:#6b4f33;
+    margin-bottom:20px;
+}
+
+.mission p{
+    line-height:2;
+    color:#555;
+} 
 
 *{
-	*
+	
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -30,360 +47,6 @@ body{
     min-height:2000px;
 }
 
-/* ===========================
-        Filter
-=========================== */
-
-.owner-actions{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.status-btn,
-.delete-btn{
-    flex:1;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-}
-
-.status-btn{
-    background:#2e7d32;
-}
-
-.delete-btn{
-    background:#d32f2f;
-}
-
-.status-btn:hover{
-    background:#1b5e20;
-}
-
-.delete-btn:hover{
-    background:#b71c1c;
-}
-.filter-section{
-
-    width:90%;
-
-    max-width:1300px;
-
-    margin:40px auto 20px;
-
-}
-
-.filter-box{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.filter-box label{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:#555;
-
-}
-
-.filter-box select{
-
-    width:260px;
-
-    height:50px;
-
-    border-radius:12px;
-
-    border:2px solid #ddd;
-
-    padding:0 15px;
-
-    font-size:16px;
-
-    outline:none;
-
-}
-
-/* ===========================
-        Dog Section
-=========================== */
-
-.dog-section{
-
-    width:90%;
-
-    max-width:1500px;
-
-    margin:50px auto;
-
-}
-
-.dog-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:25px;
-
-    align-items:start;
-
-}
-@media(max-width:1200px){
-
-.dog-container{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-}
-
-@media(max-width:900px){
-
-.dog-container{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:600px){
-
-.dog-container{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-.dog-card{
-
-    background:#fff;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.dog-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.dog-image{
-
-    width:100%;
-
-    height:220px;
-
-    object-fit:cover;
-
-}
-
-.dog-content{
-
-    padding:18px;
-
-}
-
-.dog-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-.header-right{
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.dog-name{
-
-    font-size:30px;
-    font-weight:700;
-
-    color:#333;
-
-}
-
-.status{
-
-    padding:8px 18px;
-
-    border-radius:36px;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:600;
-
-
-}
-
-.status.หาบ้าน{
-
-    background:#4CAF50;
-
-}
-
-.status.หาย{
-
-    background:#F44336;
-
-}
-
-.status.พบแล้ว{
-
-    background:#2196F3;
-
-}
-
-.info-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
-    margin-top:25px;
-
-}
-
-.info-item{
-
-    display:flex;
-
-    gap:8px;
-
-    color:#555;
-
-}
-
-.section-title{
-
-    margin-top:30px;
-
-    margin-bottom:10px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    color:#8a6847;
-
-}
-
-.detail{
-
-    color:#666;
-
-    line-height:1.8;
-
-}
-
-.owner-box{
-
-    margin-top:30px;
-
-    border-top:1px solid #eee;
-
-    padding-top:20px;
-
-}
-
-.owner-profile{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.owner-profile img{
-
-    width:60px;
-
-    height:60px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-}
-
-.owner-name{
-
-    font-size:18px;
-
-    font-weight:bold;
-
-}
-
-.contact{
-
-    margin-top:20px;
-
-}
-
-.contact p{
-
-    margin:8px 0;
-
-    color:#666;
-
-}
-
-.profile-btn{
-
-    display:block;
-
-    margin-top:20px;
-
-    text-align:center;
-
-    background:#8a6847;
-
-    color:white;
-
-    padding:15px;
-
-    border-radius:15px;
-
-    font-weight:bold;
-
-}
-
-.profile-btn:hover{
-
-    background:#6d5339;
-
-}
 /* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
 body.no-scroll{
     overflow: hidden;
@@ -449,26 +112,6 @@ body.no-scroll{
     overflow:hidden;
 
 }
-.adoption-status{
-    margin-top:12px;
-    display:inline-block;
-    padding:8px 16px;
-    border-radius:20px;
-    font-weight:600;
-    font-size:15px;
-}
-
-/* กำลังหาบ้าน */
-.adoption-status.available{
-    background:#e8f7ea;
-    color:#2e7d32;
-}
-
-/* ได้บ้านแล้ว */
-.adoption-status.adopted{
-    background:#dbeafe;
-    color:#1565c0;
-}
 
 .dropdown-menu.show{
 
@@ -531,7 +174,7 @@ body.no-scroll{
 
     margin: 0 auto;
 
-    background-image: url("img/banner2.png");
+    background-image: url("img/banner7.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -627,6 +270,77 @@ body.no-scroll{
 
 .menu-item{
 	position:relative;
+}
+/* ==========================
+   News
+========================== */
+
+.news-section{
+    max-width:1200px;
+    margin:50px auto;
+    padding:0 25px;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.news-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.news-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 25px rgba(0,0,0,.15);
+}
+
+.news-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.news-content{
+    padding:20px;
+}
+
+.news-date{
+    color:#999;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.news-title{
+    color:#6b4f33;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.news-detail{
+    color:#555;
+    line-height:1.8;
+    margin-bottom:18px;
+}
+
+.news-btn{
+    display:inline-block;
+    padding:10px 22px;
+    background:#8a6847;
+    color:#fff;
+    border-radius:30px;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.news-btn:hover{
+    background:#6b4f33;
 }
 
 /* ปุ่มเมนู */
@@ -744,6 +458,7 @@ body.no-scroll{
 	display:flex;
 	gap:15px;
 }
+
 
 /* =========================
    Navbar ตอน Scroll
@@ -1067,30 +782,6 @@ body.no-scroll{
     }
 
 }
-@media(max-width:768px){
-
-    .filter-box{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-    }
-
-    .filter-box select{
-
-        width:100%;
-
-    }
-
-    .dog-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
 
 .user-profile{
 
@@ -1249,61 +940,178 @@ body.no-scroll{
 </nav>
 </header>
 
-<!-- ===========================
-        Filter
-=========================== -->
+<div class="mission">
 
-<section class="filter-section">
+        <h2>ประชาสัมพันธ์</h2>
 
-    <div class="filter-box">
+        <p>
+            ประชาสัมพันธ์ข่าวสารดี ๆ สำหรับสุนัขและแมว
+        </p>
 
-        <label>เลือกอำเภอ</label>
+    </div>
 
-        <select id="districtFilter">
+    <section class="news-section">
 
-            <option value="ทั้งหมด">
-                รวมทุกอำเภอ
-            </option>
+    <div class="news-grid">
 
-            <option value="เมืองพัทลุง">เมืองพัทลุง</option>
+        <div class="news-card">
 
-            <option value="กงหรา">กงหรา</option>
+            <img src="img/new7.jpg">
 
-            <option value="เขาชัยสน">เขาชัยสน</option>
+            <div class="news-content">
 
-            <option value="ควนขนุน">ควนขนุน</option>
+                <div class="news-date">
+                    📅 16 กรกฎาคม 2569
+                </div>
 
-            <option value="ตะโหมด">ตะโหมด</option>
+                <div class="news-title">
+                    กิจกรรมผ่าตัดทำหมันสุนัขและแมวจรจัด
+                </div>
 
-            <option value="บางแก้ว">บางแก้ว</option>
+                <div class="news-detail">
+                    นายบุญเกียรติ รักเกตุ ปศุสัตว์จังหวัดพัทลุง พร้อมด้วย เจ้าหน้าที่กลุ่มพัฒนาสุขภาพสัตว์ และนายสันติ ชิตชลธาร ปศุสัตว์อำเภอตะโหมด ร่วมกับเทศบาลตำบลแม่ขรี จัดกิจกรรมผ่าตัดทำหมันและฉีดวัคซีนพิษสุนัขบ้าให้กับสุนัขและแมวจรจัด ในเขตพื้นที่เทศบาลตำบลแม่ขรี
+                </div>
 
-            <option value="ปากพะยูน">ปากพะยูน</option>
+                <a href="https://www.facebook.com/100005441622368/posts/%E0%B8%81%E0%B8%B4%E0%B8%88%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%9C%E0%B9%88%E0%B8%B2%E0%B8%95%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B3%E0%B8%AB%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B9%81%E0%B8%A1%E0%B8%A7%E0%B8%88%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-16-%E0%B8%81%E0%B8%A3%E0%B8%81%E0%B8%8E%E0%B8%B2%E0%B8%84%E0%B8%A1-2569-%E0%B9%80%E0%B8%A7%E0%B8%A5%E0%B8%B2-1330-%E0%B8%99-%E0%B8%99%E0%B8%B2%E0%B8%A2%E0%B8%9A%E0%B8%B8%E0%B8%8D%E0%B9%80%E0%B8%81%E0%B8%B5/3239281499596539/" class="news-btn">
+                    อ่านเพิ่มเติม
+                </a>
 
-            <option value="ป่าบอน">ป่าบอน</option>
+            </div>
 
-            <option value="ป่าพะยอม">ป่าพะยอม</option>
+        </div>
+        <div class="news-card">
 
-            <option value="ศรีบรรพต">ศรีบรรพต</option>
+            <img src="img/new3.jpg">
 
-            <option value="ศรีนครินทร์">ศรีนครินทร์</option>
+            <div class="news-content">
 
-        </select>
+                <div class="news-date">
+                    📅 1 พฤษภาคม 2569
+                </div>
+
+                <div class="news-title">
+                    ขึ้นทะเบียนสุนัขและแมว
+                </div>
+
+                <div class="news-detail">
+                    เจ้าหน้าที่งานสัตวแพทย์ ดำเนินการสำรวจและขึ้นทะเบียนสุนัข-แมว พร้อมฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า ตามโครงการควบคุมและป้องกันโรคพิษสุนัขบ้า  เทศบาลเมืองพัทลุง ปี 2569 
+ภายใต้โครงการสัตว์ปลอดโรค คนปลอดภัย จากโรคพิษสุนัขบ้า ตามพระปณิธาน ศาสตราจารย์ ดร.สมเด็จพระเจ้าน้องนางเธอ เจ้าฟ้าจุฬาภรณวลัยลักษณ์ อัครราชกุมารี กรมพระศรีสวางควัฒน วรขัตติยราชนารี ณ ที่ทำการชุมชนบ้านนางลาด และชุมชนบ้านนางลาดเหนือ จำนวนทั้งหมด 92 ตัว
+                </div>
+
+                <a href="https://www.facebook.com/PhatthalungMunicipality/posts/%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B9%81%E0%B8%A1%E0%B8%A7%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-1-%E0%B8%9E%E0%B8%84-2569%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%A7%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C-%E0%B8%94%E0%B8%B3%E0%B9%80%E0%B8%99%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%82/978054438483237/" class="news-btn">
+                    อ่านเพิ่มเติม
+                </a>
+
+            </div>
+
+        </div>
+        <div class="news-card">
+
+            <img src="img/new6.jpg">
+
+            <div class="news-content">
+
+                <div class="news-date">
+                    📅 9 พฤษภาคม 2569
+                </div>
+
+                <div class="news-title">
+                    โครงการป้องกันและควบคุมโรคพิษสุนัขบ้า
+                </div>
+
+                <div class="news-detail">
+                    นายบุญเกียรติ รักเกตุ ปศุสัตว์จังหวัดพัทลุง มอบหมายให้ สำนักงานปศุสัตว์อำเภอป่าบอน โดยอาสาป้องกันโรคพิษสุนัขบ้าของอำเภอป่าบอน ร่วมกับเทศบาลตำบลป่าบอน ออกฉีดวัคซีนป้องกันโรคพิษสุนัขบ้าให้กับสุนัขและแมว 
+                </div>
+
+                <a href="https://www.facebook.com/100005441622368/posts/%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A7%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%A1%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9E%E0%B8%B4%E0%B8%A9%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82%E0%B8%9A%E0%B9%89%E0%B8%B2-%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B3%E0%B8%9B%E0%B8%B5%E0%B8%87%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%A1%E0%B8%B2%E0%B8%93-2569-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-9-%E0%B8%9E%E0%B8%A4%E0%B8%A9%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%A1-2569/3170687689789254/" class="news-btn">
+                    อ่านเพิ่มเติม
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="news-card">
+
+            <img src="img/new2.jpg">
+
+            <div class="news-content">
+
+                <div class="news-date">
+                    📅 26 พฤษภาคม 2569
+                </div>
+
+                <div class="news-title">
+                    อบต.เขาปู่พัทลุงเดินหน้าฉีดวัคซีนพิษสุนัขบ้า มุ่งมั่น “สัตว์ปลอดโรค คน ปลอดภัย” ยั่งยืน
+                </div>
+
+                <div class="news-detail">
+                    การดำเนินการนี้มีวัตถุประสงค์เพื่อสร้างภูมิคุ้มกันโรคพิษสุนัขบ้าในสัตว์เลี้ยง และลดความเสี่ยงการ แพร่ระบาดของโรคในชุมชน รวมถึงสร้างความตระหนักรู้ให้ประชาชนเห็นถึงความสำคัญของการ ดูแลสัตว์เลี้ยงอย่างถูกวิธี เพื่อความปลอดภัยของทั้งคนและสัตว์ในพื้นที่ต่อไป
+                </div>
+
+                <a href="https://today.line.me/th/v3/article/vXallRQ" class="news-btn">
+                    อ่านเพิ่มเติม
+                </a>
+
+            </div>
+
+        </div>
+<div class="news-card">
+
+            <img src="img/new4.jpg">
+
+            <div class="news-content">
+
+                <div class="news-date">
+                    📅 30 มีนาคม 2569
+                </div>
+
+                <div class="news-title">
+                    ขึ้นทะเบียนสุนัข-แมว พร้อมฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า
+                </div>
+
+                <div class="news-detail">
+                    เจ้าหน้าที่งานสัตวแพทย์ ดำเนินการสำรวจและขึ้นทะเบียนสุนัข-แมว พร้อมฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า ตามโครงการควบคุมและป้องกันโรคพิษสุนัขบ้า  เทศบาลเมืองพัทลุง ปี 2569 
+ภายใต้โครงการสัตว์ปลอดโรค คนปลอดภัย จากโรคพิษสุนัขบ้า ตามพระปณิธาน ศาสตราจารย์ ดร.สมเด็จพระเจ้าน้องนางเธอ เจ้าฟ้าจุฬาภรณวลัยลักษณ์ อัครราชกุมารี กรมพระศรีสวางควัฒน วรขัตติยราชนารี ณ ที่ทำการชุมชนบ้านลำปำและชุมชนบ้านท่าน้ำหัวนอน  จำนวน 92 ตัว
+                </div>
+
+                <a href="https://www.facebook.com/PhatthalungMunicipality/posts/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-30-%E0%B8%A1%E0%B8%B5%E0%B8%842569%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%A7%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C-%E0%B8%94%E0%B8%B3%E0%B9%80%E0%B8%99%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82-%E0%B9%81%E0%B8%A1%E0%B8%A7-%E0%B8%9E/951484721140209/" class="news-btn">
+                    อ่านเพิ่มเติม
+                </a>
+
+            </div>
+
+        </div>
+        <div class="news-card">
+
+            <img src="img/new1.jpg">
+
+            <div class="news-content">
+
+                <div class="news-date">
+                    📅 19 กุมภาพันธ์ 2569
+                </div>
+
+                <div class="news-title">
+                    ส่วนสุขภาพสัตว์ ให้บริการผ่าตัดทำหมันและฉีดวัคซีนป้องกันโรคพิษสุนัขบ้าให้สุนัขและแมวของประชาชน จังหวัดพัทลุง
+                </div>
+
+                <div class="news-detail">
+                    ให้บริการผ่าตัดทำหมันและฉีดวัคซีนป้องกันโรคพิษสุนัขบ้าให้สุนัขและแมวของประชาชนผู้ร่วมงาน ในโครงการหน่วยบำบัดทุกข์ บำรุงสุข สร้างรอยยิ้มให้ประชาชน ณ โรงเรียนวัดแหลมดินสอ หมู่ที่ 2 ตำบลเกาะนางคำ อำเภอปากพะยูน จังหวัดพัทลุง โดยมีสุนัขและแมวได้รับการผ่าตัดทำหมันและฉีดวัคซีนรวม จำนวน 31 ตัว
+                </div>
+
+                <a href="https://region8.dld.go.th/index.php/th/news-head/news-activity/new180225690003" class="news-btn">
+                    อ่านเพิ่มเติม
+                </a>
+
+            </div>
+
+        </div>
+        
 
     </div>
 
 </section>
-<!-- ===========================
-        Dog List
-=========================== -->
-
-<section class="dog-section">
-
-    <div class="dog-container" id="catContainer">
-
-    </div>
-
-</section>
-
 
 <!-- ปุ่มบวก -->
 
@@ -1383,310 +1191,14 @@ import {
 
 import {
     doc,
-    getDoc,
-    collection,
-    getDocs,
-    query,
-    where,
-    updateDoc,
-    deleteDoc
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const userMenu = document.getElementById("userMenu");
 const sidebarUserMenu = document.getElementById("sidebarUserMenu");
 
-const catContainer = document.getElementById("catContainer");
-
-let allCats = [];
-
-let currentUser = null;
-
-let isAdmin = false;
-
-const params = new URLSearchParams(window.location.search);
-
-const catId = params.get("id");
-
-const districtFilter = document.getElementById("districtFilter");
-districtFilter.addEventListener("change", () => {
-
-    const district = districtFilter.value;
-
-    if (district === "ทั้งหมด") {
-
-        renderCats(allCats);
-
-    } else {
-
-        const filteredCats = allCats.filter(cat => cat.district === district);
-
-        renderCats(filteredCats);
-
-    }
-
-});
-
-
-async function loadCats(){
-
-    const snapshot = await getDocs(
-        collection(db,"cats")
-    );
-
-    allCats = [];
-
-    snapshot.forEach(doc=>{
-
-        allCats.push({
-
-            id:doc.id,
-
-            ...doc.data()
-
-        });
-
-    });
-
-   console.log(allCats);
-
-if(catId){
-
-    const cat = allCats.filter(item => item.id === catId);
-
-    renderCats(cat);
-
-}else{
-
-    renderCats(allCats);
-
-}
-
-}
-function renderCats(data){
-
-    catContainer.innerHTML = "";
-
-    if(data.length===0){
-
-        catContainer.innerHTML = `
-        <h2 style="
-        text-align:center;
-        color:#777;
-        grid-column:1/-1;">
-        ยังไม่มีข้อมูลแมว
-        </h2>`;
-
-        return;
-
-    }
-
-    data.forEach(cat=>{
-
-        catContainer.innerHTML += `
-
-<div class="dog-card">
-
-<img src="${cat.image}" class="dog-image">
-
-<div class="dog-content">
-
-<div class="dog-header">
-
-    <div class="dog-name">
-        ${cat.name}
-    </div>
-
-    <div class="header-right">
-
-        <div class="status ${cat.status}">
-            ${cat.status}
-        </div>
-
-        <div class="adoption-status ${
-            cat.adoptionStatus === "ได้บ้านแล้ว"
-        ? "adopted"
-        : "available"
-}">
-    ${cat.adoptionStatus || cat.status}
-</div>
-
-    </div>
-
-</div>
-
-<div class="info-grid">
-
-<div class="info-item">
-เพศ : ${cat.gender}
-</div>
-
-<div class="info-item">
-อายุ : ${cat.age}
-</div>
-
-<div class="info-item">
-สี : ${cat.color}
-</div>
-
-<div class="info-item">
-ขนาด : ${cat.size}
-</div>
-
-<div class="info-item">
-น้ำหนัก : ${cat.weight}
-</div>
-
-<div class="info-item">
-วัคซีน : ${cat.vaccine}
-</div>
-
-<div class="info-item">
-ทำหมัน : ${cat.sterilized}
-</div>
-
-<div class="info-item">
-อำเภอ : ${cat.district}
-</div>
-
-</div>
-
-<div class="section-title">
-รายละเอียด
-</div>
-
-<div class="detail">
-${cat.detail}
-</div>
-
-<div class="owner-box">
-
-<div class="owner-profile">
-
-<img src="${cat.ownerProfile || "img/default-profile.png"}">
-
-<div>
-
-<div class="owner-name">
-${cat.ownerName}
-</div>
-
-
-</div>
-
-</div>
-
-<div class="contact">
-
-<p>Tro. ${cat.phone || "-"}</p>
-
-<p>Line. ${cat.line || "-"}</p>
-
-<p>Facebook. ${cat.facebook || "-"}</p>
-
-<p>Instagram. ${cat.instagram || "-"}</p>
-
-</div>
-
-<a href="profile.html?uid=${cat.ownerUid}"
-class="profile-btn">
-
-ดูโปรไฟล์ผู้โพสต์
-
-</a>
-
-${currentUser && (currentUser.uid === cat.ownerUid || isAdmin) ? `
-
-
-<div class="owner-actions">
-
-    <button
-    class="status-btn"
-    onclick="changeCatStatus('${cat.id}')">
-    เปลี่ยนสถานะ
-</button>
-
-    <button
-        class="delete-btn"
-        onclick="deleteCat('${cat.id}')">
-
-        ลบโพสต์
-
-</button>
-
-</div>
-
-` : ""}
-
-</div>   
-
-</div>  
-
-</div>   
-
-
-`;
-
-    });
-
-}
-
-// =============================
-// เปลี่ยนสถานะ
-// =============================
-window.changeCatStatus = async function(id){
-
-    const status = prompt(
-`เลือกสถานะ
-
-กำลังหาบ้าน
-ได้บ้านแล้ว`
-    );
-
-    if(!status) return;
-
-    await updateDoc(
-        doc(db,"cats",id),
-        {
-            adoptionStatus: status
-        }
-    );
-
-    alert("อัปเดตสถานะเรียบร้อย");
-
-    loadCats();
-
-};
-
-// =============================
-// ลบโพสต์
-// =============================
-window.deleteCat = async function(id){
-
-    const cat = allCats.find(item => item.id === id);
-
-    if(!cat){
-        return;
-    }
-
-    if(currentUser.uid !== cat.ownerUid && !isAdmin){
-        alert("คุณไม่มีสิทธิ์ลบโพสต์นี้");
-        return;
-    }
-
-    const ok = confirm("ต้องการลบโพสต์นี้หรือไม่");
-
-    if(!ok) return;
-
-    await deleteDoc(doc(db,"cats",id));
-
-    alert("ลบโพสต์เรียบร้อย");
-
-    loadCats();
-
-};
 
 onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
 console.log("Auth =", user);
     if (user) {
 
@@ -1698,7 +1210,6 @@ console.log("Auth =", user);
         if (snap.exists()) {
             username = snap.data().username || "User";
             photo = snap.data().profile || "img/default-profile.png";
-            isAdmin = snap.data().role === "admin";
         }
 
         // ---------- Desktop ----------
@@ -1807,11 +1318,10 @@ sidebarUserMenu.innerHTML = `
 
     }
 
-   await loadCats();
-
 });
 
 </script>
+
 </body>
 
 </html>

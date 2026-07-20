@@ -3,13 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หาบ้านแมวจรจัด | PetPaw</title>
+    <title>ติดต่อเรา | PetPaw</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <style>
+        /* ปุ่มส่งอีเมล */
+
+.email-btn{
+    display:inline-block;
+    margin-top:18px;
+    padding:12px 28px;
+    background:#796247;
+    color:#fff;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:600;
+    transition:.3s;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+
+.email-btn:hover{
+    background:#5f4934;
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+
+.email-btn:active{
+    transform:scale(.97);
+}
+
+        /* ==========================
+   About
+========================== */
+
+/* ==========================
+   About Website
+========================== */
+
+.about-section{
+    max-width:1100px;
+    margin:70px auto;
+    padding:45px;
+    background:#fff;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.about-section h2{
+    text-align:center;
+    color:#6b4f33;
+    font-size:38px;
+    margin-bottom:35px;
+}
+
+.about-section p{
+    color:#555;
+    font-size:18px;
+    line-height:2;
+    text-align:justify;
+    text-indent:40px;
+    margin-bottom:20px;
+}
+
+.about-section strong{
+    color:#796247;
+}
+
+/* ==========================
+   Reference
+========================== */
+
+.reference-section{
+    max-width:1100px;
+    margin:40px auto 80px;
+    padding:35px 45px;
+    background:#fff;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.reference-section h3{
+    color:#6b4f33;
+    margin-bottom:20px;
+    text-align:center;
+    font-size:30px;
+}
+
+.reference-section ul{
+    padding-left:25px;
+}
+
+.reference-section li{
+    margin-bottom:18px;
+    line-height:1.8;
+    color:#555;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:768px){
+
+    .about-section,
+    .reference-section{
+        margin:30px 15px;
+        padding:25px;
+    }
+
+    .about-section h2{
+        font-size:30px;
+    }
+
+    .reference-section h3{
+        font-size:24px;
+    }
+
+    .about-section p{
+        font-size:16px;
+        text-indent:25px;
+    }
+
+}
+/* ==========================
+   ผู้พัฒนาเว็บไซต์
+========================== */
+
+.contact-section{
+    margin-top:70px;
+}
+
+.contact-section h2{
+    text-align:center;
+    color:#6b4f33;
+    margin-bottom:40px;
+    font-size:36px;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.contact-card{
+    background:#fff;
+    border-radius:20px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.contact-card:hover{
+    transform:translateY(-8px);
+}
+
+.contact-card img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #c8a77c;
+    margin-bottom:20px;
+}
+
+.contact-card h3{
+    color:#6b4f33;
+    margin-bottom:10px;
+}
+
+.contact-card p{
+    color:#666;
+    margin:8px 0;
+    line-height:1.8;
+}
+
+@media(max-width:768px){
+
+    .contact-card img{
+        width:120px;
+        height:120px;
+    }
+
+}
+
+/* ==========================
+   Developer
+========================== */
+
+.contact-section{
+    margin-top:70px;
+}
+
+.contact-section h2{
+    text-align:center;
+    color:#6b4f33;
+    margin-bottom:35px;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.contact-card{
+    background:#fff;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.contact-card:hover{
+    transform:translateY(-6px);
+}
+
+.contact-card h3{
+    color:#796247;
+    margin-bottom:18px;
+}
+
+.contact-card p{
+    color:#555;
+    margin:10px 0;
+    line-height:1.7;
+}
+
+.about{
+    max-width:1200px;
+    margin:70px auto;
+    padding:0 25px;
+}
+
+.about h1{
+    text-align:center;
+    font-size:42px;
+    color:#6b4f33;
+    margin-bottom:20px;
+}
+
+.about-text{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    color:#555;
+    line-height:2;
+    font-size:18px;
+}
+
+.about-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.about-card{
+    background:#fff;
+    border-radius:20px;
+    padding:35px 25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.about-card:hover{
+    transform:translateY(-8px);
+}
+
+.about-card .icon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.about-card h3{
+    color:#796247;
+    margin-bottom:15px;
+}
+
+.about-card p{
+    color:#666;
+    line-height:1.8;
+}
+
+.mission{
+    margin-top:70px;
+    background:#fff;
+    padding:45px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.mission h2{
+    color:#6b4f33;
+    margin-bottom:20px;
+}
+
+.mission p{
+    line-height:2;
+    color:#555;
+}
+
+.technology{
+    margin-top:60px;
+}
+
+.technology h2{
+    text-align:center;
+    color:#6b4f33;
+    margin-bottom:30px;
+}
+
+.tech-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+}
+
+.tech-list span{
+    background:#796247;
+    color:#fff;
+    padding:12px 25px;
+    border-radius:50px;
+    font-weight:500;
+}
+
+.contact-box{
+    margin-top:70px;
+    background:#fff;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.contact-box h2{
+    color:#6b4f33;
+    margin-bottom:20px;
+}
+
+.contact-box p{
+    margin:12px 0;
+    color:#555;
+    font-size:17px;
+}
+
+@media(max-width:768px){
+
+    .about h1{
+        font-size:32px;
+    }
+
+    .about-text{
+        font-size:16px;
+    }
+
+    .mission{
+        padding:30px;
+    }
+
+}
 
 a{
 	text-decoration:none;
@@ -17,7 +377,6 @@ a{
 }   
 
 *{
-	*
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -30,360 +389,6 @@ body{
     min-height:2000px;
 }
 
-/* ===========================
-        Filter
-=========================== */
-
-.owner-actions{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.status-btn,
-.delete-btn{
-    flex:1;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-}
-
-.status-btn{
-    background:#2e7d32;
-}
-
-.delete-btn{
-    background:#d32f2f;
-}
-
-.status-btn:hover{
-    background:#1b5e20;
-}
-
-.delete-btn:hover{
-    background:#b71c1c;
-}
-.filter-section{
-
-    width:90%;
-
-    max-width:1300px;
-
-    margin:40px auto 20px;
-
-}
-
-.filter-box{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.filter-box label{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:#555;
-
-}
-
-.filter-box select{
-
-    width:260px;
-
-    height:50px;
-
-    border-radius:12px;
-
-    border:2px solid #ddd;
-
-    padding:0 15px;
-
-    font-size:16px;
-
-    outline:none;
-
-}
-
-/* ===========================
-        Dog Section
-=========================== */
-
-.dog-section{
-
-    width:90%;
-
-    max-width:1500px;
-
-    margin:50px auto;
-
-}
-
-.dog-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:25px;
-
-    align-items:start;
-
-}
-@media(max-width:1200px){
-
-.dog-container{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-}
-
-@media(max-width:900px){
-
-.dog-container{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:600px){
-
-.dog-container{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-.dog-card{
-
-    background:#fff;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.dog-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.dog-image{
-
-    width:100%;
-
-    height:220px;
-
-    object-fit:cover;
-
-}
-
-.dog-content{
-
-    padding:18px;
-
-}
-
-.dog-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-.header-right{
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.dog-name{
-
-    font-size:30px;
-    font-weight:700;
-
-    color:#333;
-
-}
-
-.status{
-
-    padding:8px 18px;
-
-    border-radius:36px;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:600;
-
-
-}
-
-.status.หาบ้าน{
-
-    background:#4CAF50;
-
-}
-
-.status.หาย{
-
-    background:#F44336;
-
-}
-
-.status.พบแล้ว{
-
-    background:#2196F3;
-
-}
-
-.info-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
-    margin-top:25px;
-
-}
-
-.info-item{
-
-    display:flex;
-
-    gap:8px;
-
-    color:#555;
-
-}
-
-.section-title{
-
-    margin-top:30px;
-
-    margin-bottom:10px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    color:#8a6847;
-
-}
-
-.detail{
-
-    color:#666;
-
-    line-height:1.8;
-
-}
-
-.owner-box{
-
-    margin-top:30px;
-
-    border-top:1px solid #eee;
-
-    padding-top:20px;
-
-}
-
-.owner-profile{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.owner-profile img{
-
-    width:60px;
-
-    height:60px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-}
-
-.owner-name{
-
-    font-size:18px;
-
-    font-weight:bold;
-
-}
-
-.contact{
-
-    margin-top:20px;
-
-}
-
-.contact p{
-
-    margin:8px 0;
-
-    color:#666;
-
-}
-
-.profile-btn{
-
-    display:block;
-
-    margin-top:20px;
-
-    text-align:center;
-
-    background:#8a6847;
-
-    color:white;
-
-    padding:15px;
-
-    border-radius:15px;
-
-    font-weight:bold;
-
-}
-
-.profile-btn:hover{
-
-    background:#6d5339;
-
-}
 /* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
 body.no-scroll{
     overflow: hidden;
@@ -449,26 +454,6 @@ body.no-scroll{
     overflow:hidden;
 
 }
-.adoption-status{
-    margin-top:12px;
-    display:inline-block;
-    padding:8px 16px;
-    border-radius:20px;
-    font-weight:600;
-    font-size:15px;
-}
-
-/* กำลังหาบ้าน */
-.adoption-status.available{
-    background:#e8f7ea;
-    color:#2e7d32;
-}
-
-/* ได้บ้านแล้ว */
-.adoption-status.adopted{
-    background:#dbeafe;
-    color:#1565c0;
-}
 
 .dropdown-menu.show{
 
@@ -531,7 +516,7 @@ body.no-scroll{
 
     margin: 0 auto;
 
-    background-image: url("img/banner2.png");
+    background-image: url("img/banner5.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -1067,30 +1052,6 @@ body.no-scroll{
     }
 
 }
-@media(max-width:768px){
-
-    .filter-box{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-    }
-
-    .filter-box select{
-
-        width:100%;
-
-    }
-
-    .dog-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
 
 .user-profile{
 
@@ -1249,62 +1210,198 @@ body.no-scroll{
 </nav>
 </header>
 
-<!-- ===========================
-        Filter
-=========================== -->
+<!-- =========================
+     About Us
+========================= -->
+<section class="about-section">
 
-<section class="filter-section">
+    <h2>เกี่ยวกับเว็บไซต์</h2>
 
-    <div class="filter-box">
+    <p>
+        เว็บไซต์ <strong>PetPaw</strong> เป็นส่วนหนึ่งของรายวิชา
+        <strong>โครงงานด้านเทคโนโลยีธุรกิจดิจิทัล</strong>
+        ครูผู้สอน
+        <strong>นายฐานันดร์ สุทธิศักดา</strong>
+    </p>
 
-        <label>เลือกอำเภอ</label>
+    <p>
+        โครงงานนี้จัดทำขึ้นจากปัญหาสัตว์เลี้ยงจรจัดในประเทศไทย
+        โดยเฉพาะสุนัขและแมว ซึ่งมีสาเหตุจากการทอดทิ้ง
+        การขาดความรับผิดชอบของผู้เลี้ยง
+        ส่งผลให้เกิดปัญหาทั้งด้านสวัสดิภาพสัตว์
+        สุขอนามัยของชุมชน
+        และความเสี่ยงในการเกิดโรคต่าง ๆ
+    </p>
 
-        <select id="districtFilter">
+    <p>
+        สำหรับจังหวัดพัทลุง ยังคงพบปัญหาสัตว์หลงทาง
+        สัตว์บาดเจ็บ และสัตว์ถูกทอดทิ้งอยู่เป็นจำนวนมาก
+        แม้ว่าจะมีหน่วยงานและอาสาสมัครคอยช่วยเหลือ
+        แต่การแจ้งข้อมูลและการประสานงานยังไม่สะดวก
+        ทำให้การช่วยเหลือบางกรณีเกิดความล่าช้า
+    </p>
 
-            <option value="ทั้งหมด">
-                รวมทุกอำเภอ
-            </option>
-
-            <option value="เมืองพัทลุง">เมืองพัทลุง</option>
-
-            <option value="กงหรา">กงหรา</option>
-
-            <option value="เขาชัยสน">เขาชัยสน</option>
-
-            <option value="ควนขนุน">ควนขนุน</option>
-
-            <option value="ตะโหมด">ตะโหมด</option>
-
-            <option value="บางแก้ว">บางแก้ว</option>
-
-            <option value="ปากพะยูน">ปากพะยูน</option>
-
-            <option value="ป่าบอน">ป่าบอน</option>
-
-            <option value="ป่าพะยอม">ป่าพะยอม</option>
-
-            <option value="ศรีบรรพต">ศรีบรรพต</option>
-
-            <option value="ศรีนครินทร์">ศรีนครินทร์</option>
-
-        </select>
-
-    </div>
-
-</section>
-<!-- ===========================
-        Dog List
-=========================== -->
-
-<section class="dog-section">
-
-    <div class="dog-container" id="catContainer">
-
-    </div>
+    <p>
+        คณะผู้จัดทำจึงได้พัฒนาเว็บไซต์
+        <strong>"เว็บไซต์ช่วยเหลือสุนัขและแมวจรจัด
+        ในพื้นที่จังหวัดพัทลุง ด้วย AI"</strong>
+        เพื่อเป็นศูนย์กลางในการรวบรวมข้อมูลสัตว์จรจัด
+        สัตว์สูญหาย และสัตว์ที่ต้องการบ้านใหม่
+        พร้อมทั้งนำเทคโนโลยี AI มาช่วยอำนวยความสะดวกแก่ผู้ใช้งาน
+        ให้สามารถค้นหาข้อมูล แจ้งเหตุ และประสานงานการช่วยเหลือได้อย่างรวดเร็ว
+        มีประสิทธิภาพ และเข้าถึงได้ง่าย
+    </p>
 
 </section>
 
+    <div class="about-grid">
 
+        <div class="about-card">
+            <div class="icon">🐾</div>
+            <h3>ตามหาสัตว์เลี้ยง</h3>
+            <p>
+                ช่วยประกาศและติดตามสัตว์เลี้ยงที่สูญหาย
+                เพื่อเพิ่มโอกาสในการกลับคืนสู่เจ้าของ
+            </p>
+        </div>
+
+        <div class="about-card">
+            <div class="icon">🏠</div>
+            <h3>หาบ้านสัตว์จรจัด</h3>
+            <p>
+                เปิดพื้นที่สำหรับผู้ที่ต้องการหาผู้รับเลี้ยง
+                เพื่อให้ได้รับการดูแลอย่างเหมาะสม
+            </p>
+        </div>
+
+        <div class="about-card">
+            <div class="icon">🩺</div>
+            <h3>แนะนำคลินิก</h3>
+            <p>
+                รวบรวมข้อมูลคลินิกและโรงพยาบาลสัตว์
+                พร้อมแผนที่และช่องทางติดต่อ
+            </p>
+        </div>
+
+        <div class="about-card">
+            <div class="icon">📢</div>
+            <h3>ข่าวประชาสัมพันธ์</h3>
+            <p>
+                อัปเดตข่าวสาร กิจกรรม และความรู้
+                ที่เกี่ยวข้องกับสุนัขและแมว
+            </p>
+        </div>
+
+    </div>
+
+    <div class="mission">
+
+        <h2>นโยบายความเป็นส่วนตัว</h2>
+
+        <p>
+            ข้อมูลส่วนบุคคลของผู้ใช้จะถูกใช้เพื่อการติดต่อ
+            และการแสดงข้อมูลบนเว็บไซต์เท่านั้น
+            จะไม่มีการเผยแพร่ให้บุคคลภายนอกโดยไม่ได้รับอนุญาต
+        </p>
+
+    </div>
+
+    <div class="technology">
+
+        <h2>เทคโนโลยีที่ใช้</h2>
+
+        <div class="tech-list">
+
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+            <span>Firebase</span>
+            <span>Cloud Firestore</span>
+            <span>Responsive Design</span>
+
+        </div>
+
+    </div>
+
+<div class="contact-section">
+
+    <h2>ผู้พัฒนาเว็บไซต์</h2>
+
+    <div class="contact-grid">
+
+        <!-- คนที่ 1 -->
+        <div class="contact-card">
+
+            <img src="img/view.jpg" alt="Developer 1">
+
+            <h3>นางสาวนฤกันยา ชุมทอง</h3>
+
+            <p>รหัสนักศึกษา : 67219100081</p>
+
+            <p>สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล</p>
+
+            <p>📧 67219100081@ptl.ac.th</p>
+            <a href="mailto:67219100081@ptl.ac.th" class="email-btn">
+        ✉ ส่งอีเมล
+    </a>
+
+        </div>
+
+        <!-- คนที่ 2 -->
+        <div class="contact-card">
+
+            <img src="img/niyuta.jpg" alt="Developer 2">
+
+            <h3>นางสาวนิยุตา สุวรรณโชติ</h3>
+
+            <p>รหัสนักศึกษา : 67219100082</p>
+
+            <p>สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล</p>
+
+            <p>📧 67219100082@ptl.ac.th</p>
+            <a href="mailto:67219100082@ptl.ac.th" class="email-btn">
+        ✉ ส่งอีเมล
+    </a>
+            
+
+        </div>
+
+        <!-- คนที่ 3 -->
+        <div class="contact-card">
+
+            <img src="img/narawara.jpg" alt="Developer 3">
+
+            <h3>นางสาวนรวนา ปานแก้ว</h3>
+
+            <p>รหัสนักศึกษา : 67219100098</p>
+
+            <p>สาขาวิชาเทคโนโลยีธุรกิจดิจิทัล</p>
+
+            <p>📧 67219100098@ptl.ac.th</p>
+            <a href="mailto:67219100098@ptl.ac.th" class="email-btn">
+        ✉ ส่งอีเมล
+    </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mission">
+
+    <h2>รายงานปัญหาเว็บไซต์</h2>
+
+    <p>
+        หากท่านพบปัญหาในการใช้งานเว็บไซต์ เช่น
+        ระบบทำงานผิดพลาด หน้าเว็บแสดงผลไม่ถูกต้อง
+        ไม่สามารถเข้าสู่ระบบ อัปโหลดรูปภาพไม่ได้
+        หรือพบข้อผิดพลาดอื่น ๆ
+        สามารถแจ้งรายละเอียดมายังคณะผู้พัฒนาได้
+        เพื่อให้เราปรับปรุงและแก้ไขปัญหาโดยเร็วที่สุด
+    </p>
+
+</div>
 <!-- ปุ่มบวก -->
 
 <a href="Add a pet.html" class="floating-btn">
@@ -1374,8 +1471,7 @@ if (typeMenu) {
 </script>
 <script type="module">
 
-import { auth, db } from "./firebase.js";
-
+    import { auth, db } from "./firebase.js";
 import {
     onAuthStateChanged,
     signOut
@@ -1383,310 +1479,14 @@ import {
 
 import {
     doc,
-    getDoc,
-    collection,
-    getDocs,
-    query,
-    where,
-    updateDoc,
-    deleteDoc
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const userMenu = document.getElementById("userMenu");
 const sidebarUserMenu = document.getElementById("sidebarUserMenu");
 
-const catContainer = document.getElementById("catContainer");
-
-let allCats = [];
-
-let currentUser = null;
-
-let isAdmin = false;
-
-const params = new URLSearchParams(window.location.search);
-
-const catId = params.get("id");
-
-const districtFilter = document.getElementById("districtFilter");
-districtFilter.addEventListener("change", () => {
-
-    const district = districtFilter.value;
-
-    if (district === "ทั้งหมด") {
-
-        renderCats(allCats);
-
-    } else {
-
-        const filteredCats = allCats.filter(cat => cat.district === district);
-
-        renderCats(filteredCats);
-
-    }
-
-});
-
-
-async function loadCats(){
-
-    const snapshot = await getDocs(
-        collection(db,"cats")
-    );
-
-    allCats = [];
-
-    snapshot.forEach(doc=>{
-
-        allCats.push({
-
-            id:doc.id,
-
-            ...doc.data()
-
-        });
-
-    });
-
-   console.log(allCats);
-
-if(catId){
-
-    const cat = allCats.filter(item => item.id === catId);
-
-    renderCats(cat);
-
-}else{
-
-    renderCats(allCats);
-
-}
-
-}
-function renderCats(data){
-
-    catContainer.innerHTML = "";
-
-    if(data.length===0){
-
-        catContainer.innerHTML = `
-        <h2 style="
-        text-align:center;
-        color:#777;
-        grid-column:1/-1;">
-        ยังไม่มีข้อมูลแมว
-        </h2>`;
-
-        return;
-
-    }
-
-    data.forEach(cat=>{
-
-        catContainer.innerHTML += `
-
-<div class="dog-card">
-
-<img src="${cat.image}" class="dog-image">
-
-<div class="dog-content">
-
-<div class="dog-header">
-
-    <div class="dog-name">
-        ${cat.name}
-    </div>
-
-    <div class="header-right">
-
-        <div class="status ${cat.status}">
-            ${cat.status}
-        </div>
-
-        <div class="adoption-status ${
-            cat.adoptionStatus === "ได้บ้านแล้ว"
-        ? "adopted"
-        : "available"
-}">
-    ${cat.adoptionStatus || cat.status}
-</div>
-
-    </div>
-
-</div>
-
-<div class="info-grid">
-
-<div class="info-item">
-เพศ : ${cat.gender}
-</div>
-
-<div class="info-item">
-อายุ : ${cat.age}
-</div>
-
-<div class="info-item">
-สี : ${cat.color}
-</div>
-
-<div class="info-item">
-ขนาด : ${cat.size}
-</div>
-
-<div class="info-item">
-น้ำหนัก : ${cat.weight}
-</div>
-
-<div class="info-item">
-วัคซีน : ${cat.vaccine}
-</div>
-
-<div class="info-item">
-ทำหมัน : ${cat.sterilized}
-</div>
-
-<div class="info-item">
-อำเภอ : ${cat.district}
-</div>
-
-</div>
-
-<div class="section-title">
-รายละเอียด
-</div>
-
-<div class="detail">
-${cat.detail}
-</div>
-
-<div class="owner-box">
-
-<div class="owner-profile">
-
-<img src="${cat.ownerProfile || "img/default-profile.png"}">
-
-<div>
-
-<div class="owner-name">
-${cat.ownerName}
-</div>
-
-
-</div>
-
-</div>
-
-<div class="contact">
-
-<p>Tro. ${cat.phone || "-"}</p>
-
-<p>Line. ${cat.line || "-"}</p>
-
-<p>Facebook. ${cat.facebook || "-"}</p>
-
-<p>Instagram. ${cat.instagram || "-"}</p>
-
-</div>
-
-<a href="profile.html?uid=${cat.ownerUid}"
-class="profile-btn">
-
-ดูโปรไฟล์ผู้โพสต์
-
-</a>
-
-${currentUser && (currentUser.uid === cat.ownerUid || isAdmin) ? `
-
-
-<div class="owner-actions">
-
-    <button
-    class="status-btn"
-    onclick="changeCatStatus('${cat.id}')">
-    เปลี่ยนสถานะ
-</button>
-
-    <button
-        class="delete-btn"
-        onclick="deleteCat('${cat.id}')">
-
-        ลบโพสต์
-
-</button>
-
-</div>
-
-` : ""}
-
-</div>   
-
-</div>  
-
-</div>   
-
-
-`;
-
-    });
-
-}
-
-// =============================
-// เปลี่ยนสถานะ
-// =============================
-window.changeCatStatus = async function(id){
-
-    const status = prompt(
-`เลือกสถานะ
-
-กำลังหาบ้าน
-ได้บ้านแล้ว`
-    );
-
-    if(!status) return;
-
-    await updateDoc(
-        doc(db,"cats",id),
-        {
-            adoptionStatus: status
-        }
-    );
-
-    alert("อัปเดตสถานะเรียบร้อย");
-
-    loadCats();
-
-};
-
-// =============================
-// ลบโพสต์
-// =============================
-window.deleteCat = async function(id){
-
-    const cat = allCats.find(item => item.id === id);
-
-    if(!cat){
-        return;
-    }
-
-    if(currentUser.uid !== cat.ownerUid && !isAdmin){
-        alert("คุณไม่มีสิทธิ์ลบโพสต์นี้");
-        return;
-    }
-
-    const ok = confirm("ต้องการลบโพสต์นี้หรือไม่");
-
-    if(!ok) return;
-
-    await deleteDoc(doc(db,"cats",id));
-
-    alert("ลบโพสต์เรียบร้อย");
-
-    loadCats();
-
-};
 
 onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
 console.log("Auth =", user);
     if (user) {
 
@@ -1698,7 +1498,6 @@ console.log("Auth =", user);
         if (snap.exists()) {
             username = snap.data().username || "User";
             photo = snap.data().profile || "img/default-profile.png";
-            isAdmin = snap.data().role === "admin";
         }
 
         // ---------- Desktop ----------
@@ -1807,11 +1606,8 @@ sidebarUserMenu.innerHTML = `
 
     }
 
-   await loadCats();
-
 });
 
 </script>
 </body>
-
 </html>

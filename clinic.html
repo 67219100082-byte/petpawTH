@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หาบ้านแมวจรจัด | PetPaw</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>คลินิกรักษาสัตว์ในจังหวัดพัทลุง | PetPaw</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
+<style>
 
 a{
 	text-decoration:none;
@@ -17,7 +16,7 @@ a{
 }   
 
 *{
-	*
+	
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -52,21 +51,6 @@ body{
     font-weight:600;
 }
 
-.status-btn{
-    background:#2e7d32;
-}
-
-.delete-btn{
-    background:#d32f2f;
-}
-
-.status-btn:hover{
-    background:#1b5e20;
-}
-
-.delete-btn:hover{
-    background:#b71c1c;
-}
 .filter-section{
 
     width:90%;
@@ -117,149 +101,6 @@ body{
 
 }
 
-/* ===========================
-        Dog Section
-=========================== */
-
-.dog-section{
-
-    width:90%;
-
-    max-width:1500px;
-
-    margin:50px auto;
-
-}
-
-.dog-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:25px;
-
-    align-items:start;
-
-}
-@media(max-width:1200px){
-
-.dog-container{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-}
-
-@media(max-width:900px){
-
-.dog-container{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:600px){
-
-.dog-container{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-.dog-card{
-
-    background:#fff;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.dog-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.dog-image{
-
-    width:100%;
-
-    height:220px;
-
-    object-fit:cover;
-
-}
-
-.dog-content{
-
-    padding:18px;
-
-}
-
-.dog-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-.header-right{
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.dog-name{
-
-    font-size:30px;
-    font-weight:700;
-
-    color:#333;
-
-}
-
-.status{
-
-    padding:8px 18px;
-
-    border-radius:36px;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:600;
-
-
-}
-
-.status.หาบ้าน{
-
-    background:#4CAF50;
-
-}
-
-.status.หาย{
-
-    background:#F44336;
-
-}
-
-.status.พบแล้ว{
-
-    background:#2196F3;
-
-}
 
 .info-grid{
 
@@ -531,7 +372,7 @@ body.no-scroll{
 
     margin: 0 auto;
 
-    background-image: url("img/banner2.png");
+    background-image: url("img/banner4.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -989,15 +830,6 @@ body.no-scroll{
 
 @media (max-width:1024px){
 
-    .menu-toggle{
-        display:block;
-    }
-
-    .left-menu,
-    .right-menu{
-        display:none;
-    }
-
     .banner{
         width:100%;
         height:55vw;
@@ -1007,6 +839,15 @@ body.no-scroll{
         background-size:cover;
         background-position:center center;
         background-repeat:no-repeat;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .left-menu,
+    .right-menu{
+        display:none;
     }
 
 }
@@ -1127,6 +968,94 @@ body.no-scroll{
 
 	font-weight:bold;
 }
+.clinic-section{max-width:1200px;margin:40px auto;padding:0 20px}
+.clinic-container{display:flex;flex-direction:column;gap:25px}
+.clinic-card{
+    display:flex;
+    align-items:stretch;
+
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    min-height:330px;
+}
+
+.clinic-image{
+    width:420px;
+    height:330px;      /* กำหนดความสูงให้เท่ากันทุกรูป */
+    flex-shrink:0;
+
+    object-fit:cover;  /* ครอปรูปให้เต็ม */
+    object-position:center;
+
+    display:block;
+}
+.clinic-content{
+
+    flex:1;
+
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.clinic-name{font-size:30px;color:#8a6847;font-weight:700;margin-bottom:15px}
+.info{margin:8px 0;color:#555}
+.buttons{display:flex;gap:15px;margin-top:20px}
+.btn{flex:1;text-align:center;padding:14px;background:#8a6847;color:#fff;text-decoration:none;border-radius:12px}
+/* ==========================
+   Clinic Mobile
+========================== */
+@media (max-width:768px){
+
+    .clinic-section{
+        margin:20px auto;
+        padding:0 12px;
+    }
+
+    .clinic-card{
+        flex-direction:column;
+    }
+
+    .clinic-image{
+        width:100%;
+        height:220px;
+        min-height:220px;
+
+        border-radius:20px 20px 0 0;
+
+        object-fit:cover;
+        object-position:center;
+    }
+
+    .clinic-content{
+        padding:18px;
+    }
+
+    .clinic-name{
+        font-size:24px;
+    }
+
+    .info{
+        font-size:16px;
+        line-height:1.8;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+}
+
+
 </style>
 </head>
 
@@ -1177,8 +1106,6 @@ body.no-scroll{
     </ul>
 
 </div>
-
-<!-- Banner -->
 
 <header class="banner">
 
@@ -1248,63 +1175,6 @@ body.no-scroll{
 	</div>
 </nav>
 </header>
-
-<!-- ===========================
-        Filter
-=========================== -->
-
-<section class="filter-section">
-
-    <div class="filter-box">
-
-        <label>เลือกอำเภอ</label>
-
-        <select id="districtFilter">
-
-            <option value="ทั้งหมด">
-                รวมทุกอำเภอ
-            </option>
-
-            <option value="เมืองพัทลุง">เมืองพัทลุง</option>
-
-            <option value="กงหรา">กงหรา</option>
-
-            <option value="เขาชัยสน">เขาชัยสน</option>
-
-            <option value="ควนขนุน">ควนขนุน</option>
-
-            <option value="ตะโหมด">ตะโหมด</option>
-
-            <option value="บางแก้ว">บางแก้ว</option>
-
-            <option value="ปากพะยูน">ปากพะยูน</option>
-
-            <option value="ป่าบอน">ป่าบอน</option>
-
-            <option value="ป่าพะยอม">ป่าพะยอม</option>
-
-            <option value="ศรีบรรพต">ศรีบรรพต</option>
-
-            <option value="ศรีนครินทร์">ศรีนครินทร์</option>
-
-        </select>
-
-    </div>
-
-</section>
-<!-- ===========================
-        Dog List
-=========================== -->
-
-<section class="dog-section">
-
-    <div class="dog-container" id="catContainer">
-
-    </div>
-
-</section>
-
-
 <!-- ปุ่มบวก -->
 
 <a href="Add a pet.html" class="floating-btn">
@@ -1331,15 +1201,260 @@ window.addEventListener("scroll", function(){
 });
 
 </script>
+<section class="clinic-section">
+<div class="clinic-container" id="clinicContainer"></div>
+</section>
+<script>
+const clinics=[
+{
+    name:"โรงพยาบาลสัตว์สุขใจ",
+    image:"img/clinic1.jpg",
+    address:"เลขที่ 468 ตำบลตำนาน อำเภอเมืองพัทลุง พัทลุง 93000",
+    phone:"098-5624592",
+
+    open:"08:00",
+    close:"19:30",
+
+    service:"รักษาทั่วไป ฉีดวัคซีน ผ่าตัด ทำหมัน",
+
+    rating:"4.8",
+    review:"72",
+
+    googleMap:"https://maps.app.goo.gl/YuD9pqAJYTv683mDA"
+},
+
+{
+    name:"คลินิกรักษาสัตว์ยุทธชาติรักษ์สัตว์",
+    image:"img/clinic2.jpg",
+    address:"19, 26 ผดุงดอนยอ ตำบลคูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000",
+    phone:"081-6131835",
+
+    open:"8:00",
+    close:"20:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์",
+
+    rating:"4.8",
+    review:"25",
+
+    googleMap:"https://maps.app.goo.gl/hFKBN1Ghb5u1J99D6"
+},
+{
+    name:"ป่าบอนรักษาสัตว์",
+    image:"img/clinic3.png",
+    address:"1 ถ. เพชรเกษม ตำบลหนองธง อำเภอป่าบอน พัทลุง 93170",
+    phone:"086-7499527",
+
+    open:"16:30",
+    close:"19:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์",
+
+    rating:"5.0",
+    review:"23",
+
+    googleMap:"https://maps.app.goo.gl/sQHAAH8DpdFUgjmX6"
+},
+{
+    name:"คลินิกแม่ขรีสัตวแพทย์",
+    image:"img/clinic4.png",
+    address:"เลขที่ 427 5 ตำบลแม่ขรี อำเภอตะโหมด พัทลุง 93160",
+    phone:"061-1823861",
+
+    open:"08:30",
+    close:"19:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์ ทำหมัน",
+
+    rating:"4.5",
+    review:"23",
+
+    googleMap:"https://maps.app.goo.gl/ktLTyPXx6BsGnUvw7"
+},
+{
+    name:"อัญกาญจน์สัตวแพทย์",
+    image:"img/clinic5.png",
+    address:"Chaiburee Alley, ตำบลคูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000",
+    phone:"083-5506449",
+
+    open:"08:30",
+    close:"19:30",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์",
+
+    rating:"4.8",
+    review:"14",
+
+    googleMap:"https://maps.app.goo.gl/RnjGAjK8wmDp7mWU6"
+},
+{
+    name:"คลินิกหมอเปิ้ลสัตวแพทย์",
+    image:"img/clinic6.jpg",
+    address:"251 ชะมวง ตำบลดอนทราย อำเภอควนขนุน พัทลุง 93110",
+    phone:"090-2258575",
+
+    open:"08:00",
+    close:"19:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์ ทำหมัน",
+
+    rating:"4.8",
+    review:"13",
+
+    googleMap:"https://maps.app.goo.gl/AD41TEWgjqb2h2rRA"
+},
+{
+    name:"โรงพยาบาลสัตว์มายเพ็ท-พัทลุง",
+    image:"img/clinic7.png",
+    address:"125 4 ตำบลเขาเจียก อำเภอเมืองพัทลุง พัทลุง 93000",
+    phone:"081-8833821",
+
+    open:"09:00",
+    close:"20:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์ ทำหมัน",
+
+    rating:"4.8",
+    review:"12",
+
+    googleMap:"https://maps.app.goo.gl/qJ8N3YX1bJSTKPjEA"
+},
+{
+    name:"ควนขนุนสัตวแพทย์",
+    image:"img/clinic8.jpg",
+    address:"249 2 ถนน ควนขนุน - โพธิ์ทอง ตำบลควนขนุน อำเภอควนขนุน พัทลุง 93110",
+    phone:"089-8799923",
+
+    open:"08:30",
+    close:"18:30",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์ ทำหมัน",
+
+    rating:"4.5",
+    review:"12",
+
+    googleMap:"https://maps.app.goo.gl/s9bUvnnqaSZtuFYLA"
+},
+{
+    name:"โรงพยาบาลสัตว์เมตตา สาขาพัทลุง เวชรังษี",
+    image:"img/clinic9.png",
+    address:"50 ซอยเวชรังษี ตำบลคูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000",
+    phone:"094-4821311",
+
+    open:"09:00",
+    close:"19:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์ ทำหมัน",
+
+    rating:"4.8",
+    review:"10",
+
+    googleMap:"https://maps.app.goo.gl/XtaMEgttCH4AdoCV8"
+},
+{
+    name:"Kudsan Pet Care คัดสรรเพ็ทแคร์คลินิกรักษาสัตว์",
+    image:"img/clinic10.jpg",
+    address:"111 ถนนอภัยบริรักษ์ ตำบลคูหาสวรรค์ อำเภอเมืองพัทลุง พัทลุง 93000",
+    phone:"082-2019555",
+
+    open:"09:00",
+    close:"18:00",
+
+    service:"ตรวจโรค ฉีดวัคซีน เอ็กซเรย์ ทำหมัน",
+
+    rating:"5.0",
+    review:"5",
+
+    googleMap:"https://maps.app.goo.gl/oaQs4eAXVU3hV2ii9 "
+},
+];
+const c = document.getElementById("clinicContainer");
+
+clinics.forEach(x=>{
+
+    const now = new Date();
+
+    const current =
+        now.getHours()*60 +
+        now.getMinutes();
+
+    const openTime =
+        Number(x.open.split(":")[0])*60+
+        Number(x.open.split(":")[1]);
+
+    const closeTime =
+        Number(x.close.split(":")[0])*60+
+        Number(x.close.split(":")[1]);
+
+    const status =
+        current>=openTime && current<closeTime
+        ? `<span style="color:#2e7d32;font-weight:bold;">🟢 เปิดอยู่</span>`
+        : `<span style="color:#d32f2f;font-weight:bold;">🔴 ปิดแล้ว</span>`;
+
+    c.innerHTML += `
+<div class="clinic-card">
+
+<img class="clinic-image" src="${x.image}">
+
+<div class="clinic-content">
+
+<div class="clinic-name">
+
+${x.name}
+
+</div>
+
+<div class="info">
+⭐⭐⭐⭐⭐ ${x.rating} (${x.review} รีวิว)
+</div>
+
+<div class="info">
+📍 ${x.address}
+</div>
+
+<div class="info">
+📞 ${x.phone}
+</div>
+
+<div class="info">
+🕒 ${x.open} - ${x.close}
+&nbsp;&nbsp;
+${status}
+</div>
+
+<div class="info">
+🩺 ${x.service}
+</div>
+
+<div class="buttons">
+
+<a class="btn"
+href="tel:${x.phone}">
+โทรศัพท์
+</a>
+
+<a class="btn"
+target="_blank"
+href="${x.googleMap}">
+Google Maps
+</a>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+});
+</script>
 <script>
 const navbar = document.getElementById("navbar");
 const menu = document.getElementById("menuToggle");
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
-
-
-// ================= Sidebar =================
+// เปิดเมนู
 menu.onclick = () => {
     sidebar.classList.add("active");
     overlay.classList.add("active");
@@ -1347,6 +1462,7 @@ menu.onclick = () => {
     navbar.style.display = "none";
 };
 
+// ปิดเมนู
 overlay.onclick = closeMenu;
 
 function closeMenu() {
@@ -1355,11 +1471,8 @@ function closeMenu() {
     document.body.classList.remove("no-scroll");
     navbar.style.display = "flex";
 }
-
-
 </script>
 <script>
-
 const typeMenu = document.getElementById("typeMenu");
 const submenu = document.getElementById("submenu");
 const arrow = document.getElementById("arrow");
@@ -1370,7 +1483,6 @@ if (typeMenu) {
         arrow.classList.toggle("rotate");
     });
 }
-
 </script>
 <script type="module">
 
@@ -1383,431 +1495,123 @@ import {
 
 import {
     doc,
-    getDoc,
-    collection,
-    getDocs,
-    query,
-    where,
-    updateDoc,
-    deleteDoc
+    getDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const userMenu = document.getElementById("userMenu");
 const sidebarUserMenu = document.getElementById("sidebarUserMenu");
 
-const catContainer = document.getElementById("catContainer");
+onAuthStateChanged(auth, async(user)=>{
 
-let allCats = [];
+    if(user){
 
-let currentUser = null;
+        const snap = await getDoc(doc(db,"users",user.uid));
 
-let isAdmin = false;
+        let username="User";
+        let photo="img/default-profile.png";
 
-const params = new URLSearchParams(window.location.search);
+        if(snap.exists()){
+            username=snap.data().username || "User";
+            photo=snap.data().profile || "img/default-profile.png";
+        }
 
-const catId = params.get("id");
+        // Desktop
+        userMenu.innerHTML=`
+        <div class="user-dropdown">
 
-const districtFilter = document.getElementById("districtFilter");
-districtFilter.addEventListener("change", () => {
+            <div class="user-profile" id="profileBtn">
 
-    const district = districtFilter.value;
+                <img src="${photo}">
+                <span>${username}</span>
 
-    if (district === "ทั้งหมด") {
+            </div>
 
-        renderCats(allCats);
+            <div class="dropdown-menu" id="dropdownMenu">
 
-    } else {
+                <a href="profile.html">โปรไฟล์</a>
 
-        const filteredCats = allCats.filter(cat => cat.district === district);
+                <a href="#" id="logoutBtn">ออกจากระบบ</a>
 
-        renderCats(filteredCats);
+            </div>
 
-    }
-
-});
-
-
-async function loadCats(){
-
-    const snapshot = await getDocs(
-        collection(db,"cats")
-    );
-
-    allCats = [];
-
-    snapshot.forEach(doc=>{
-
-        allCats.push({
-
-            id:doc.id,
-
-            ...doc.data()
-
-        });
-
-    });
-
-   console.log(allCats);
-
-if(catId){
-
-    const cat = allCats.filter(item => item.id === catId);
-
-    renderCats(cat);
-
-}else{
-
-    renderCats(allCats);
-
-}
-
-}
-function renderCats(data){
-
-    catContainer.innerHTML = "";
-
-    if(data.length===0){
-
-        catContainer.innerHTML = `
-        <h2 style="
-        text-align:center;
-        color:#777;
-        grid-column:1/-1;">
-        ยังไม่มีข้อมูลแมว
-        </h2>`;
-
-        return;
-
-    }
-
-    data.forEach(cat=>{
-
-        catContainer.innerHTML += `
-
-<div class="dog-card">
-
-<img src="${cat.image}" class="dog-image">
-
-<div class="dog-content">
-
-<div class="dog-header">
-
-    <div class="dog-name">
-        ${cat.name}
-    </div>
-
-    <div class="header-right">
-
-        <div class="status ${cat.status}">
-            ${cat.status}
         </div>
+        `;
 
-        <div class="adoption-status ${
-            cat.adoptionStatus === "ได้บ้านแล้ว"
-        ? "adopted"
-        : "available"
-}">
-    ${cat.adoptionStatus || cat.status}
-</div>
+        // Mobile
+        sidebarUserMenu.className="";
+        sidebarUserMenu.innerHTML=`
 
-    </div>
+<div class="sidebar-user">
 
-</div>
-
-<div class="info-grid">
-
-<div class="info-item">
-เพศ : ${cat.gender}
-</div>
-
-<div class="info-item">
-อายุ : ${cat.age}
-</div>
-
-<div class="info-item">
-สี : ${cat.color}
-</div>
-
-<div class="info-item">
-ขนาด : ${cat.size}
-</div>
-
-<div class="info-item">
-น้ำหนัก : ${cat.weight}
-</div>
-
-<div class="info-item">
-วัคซีน : ${cat.vaccine}
-</div>
-
-<div class="info-item">
-ทำหมัน : ${cat.sterilized}
-</div>
-
-<div class="info-item">
-อำเภอ : ${cat.district}
-</div>
-
-</div>
-
-<div class="section-title">
-รายละเอียด
-</div>
-
-<div class="detail">
-${cat.detail}
-</div>
-
-<div class="owner-box">
-
-<div class="owner-profile">
-
-<img src="${cat.ownerProfile || "img/default-profile.png"}">
+<img src="${photo}">
 
 <div>
 
-<div class="owner-name">
-${cat.ownerName}
+<div class="sidebar-name">
+${username}
 </div>
 
-
-</div>
-
-</div>
-
-<div class="contact">
-
-<p>Tro. ${cat.phone || "-"}</p>
-
-<p>Line. ${cat.line || "-"}</p>
-
-<p>Facebook. ${cat.facebook || "-"}</p>
-
-<p>Instagram. ${cat.instagram || "-"}</p>
-
-</div>
-
-<a href="profile.html?uid=${cat.ownerUid}"
-class="profile-btn">
-
-ดูโปรไฟล์ผู้โพสต์
-
+<a href="profile.html">
+โปรไฟล์
 </a>
 
-${currentUser && (currentUser.uid === cat.ownerUid || isAdmin) ? `
+<br>
 
-
-<div class="owner-actions">
-
-    <button
-    class="status-btn"
-    onclick="changeCatStatus('${cat.id}')">
-    เปลี่ยนสถานะ
-</button>
-
-    <button
-        class="delete-btn"
-        onclick="deleteCat('${cat.id}')">
-
-        ลบโพสต์
-
-</button>
+<a href="#" id="sidebarLogout">
+ออกจากระบบ
+</a>
 
 </div>
 
-` : ""}
-
-</div>   
-
-</div>  
-
-</div>   
-
-
-`;
-
-    });
-
-}
-
-// =============================
-// เปลี่ยนสถานะ
-// =============================
-window.changeCatStatus = async function(id){
-
-    const status = prompt(
-`เลือกสถานะ
-
-กำลังหาบ้าน
-ได้บ้านแล้ว`
-    );
-
-    if(!status) return;
-
-    await updateDoc(
-        doc(db,"cats",id),
-        {
-            adoptionStatus: status
-        }
-    );
-
-    alert("อัปเดตสถานะเรียบร้อย");
-
-    loadCats();
-
-};
-
-// =============================
-// ลบโพสต์
-// =============================
-window.deleteCat = async function(id){
-
-    const cat = allCats.find(item => item.id === id);
-
-    if(!cat){
-        return;
-    }
-
-    if(currentUser.uid !== cat.ownerUid && !isAdmin){
-        alert("คุณไม่มีสิทธิ์ลบโพสต์นี้");
-        return;
-    }
-
-    const ok = confirm("ต้องการลบโพสต์นี้หรือไม่");
-
-    if(!ok) return;
-
-    await deleteDoc(doc(db,"cats",id));
-
-    alert("ลบโพสต์เรียบร้อย");
-
-    loadCats();
-
-};
-
-onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
-console.log("Auth =", user);
-    if (user) {
-
-        const snap = await getDoc(doc(db, "users", user.uid));
-
-        let username = "User";
-        let photo = "img/default-profile.png";
-
-        if (snap.exists()) {
-            username = snap.data().username || "User";
-            photo = snap.data().profile || "img/default-profile.png";
-            isAdmin = snap.data().role === "admin";
-        }
-
-        // ---------- Desktop ----------
-        userMenu.innerHTML = `
-            <div class="user-dropdown">
-
-                <div class="user-profile" id="profileBtn">
-
-                    <img src="${photo}">
-                    <span>${username}</span>
-
-                </div>
-
-                <div class="dropdown-menu" id="dropdownMenu">
-
-                    <a href="profile.html">โปรไฟล์</a>
-
-                    <a href="#" id="logoutBtn">ออกจากระบบ</a>
-
-                </div>
-
-            </div>
-        `;
-
-        // ---------- Mobile Sidebar ---------- 
-sidebarUserMenu.className = "";
-sidebarUserMenu.innerHTML = `
-<div class="sidebar-user">
-
-    <img src="${photo}" class="sidebar-photo">
-
-    <div>
-
-        <div class="sidebar-name">
-            ${username}
-        </div>
-
-        <a href="profile.html">
-            โปรไฟล์
-        </a>
-
-        <br>
-
-        <a href="#" id="sidebarLogout">
-            ออกจากระบบ
-        </a>
-
-    </div>
-
 </div>
+
 `;
 
-
-        // Desktop Dropdown
-        document.getElementById("profileBtn").onclick = () => {
-
+        document.getElementById("profileBtn").onclick=()=>{
             document
-                .getElementById("dropdownMenu")
-                .classList.toggle("show");
-
+            .getElementById("dropdownMenu")
+            .classList.toggle("show");
         };
 
-        // Desktop Logout
-        document.getElementById("logoutBtn").onclick = async () => {
-
+        document.getElementById("logoutBtn").onclick=async()=>{
             await signOut(auth);
             location.reload();
-
         };
 
-        // Mobile Logout
-        document.getElementById("sidebarLogout").onclick = async () => {
+        document.getElementById("sidebarLogout").onclick=async()=>{
+            await signOut(auth);
+            location.reload();
+        };
 
-    await signOut(auth);
-    location.reload();
+    }else{
 
-};
+        userMenu.innerHTML=`
 
-    }
+<a href="register.html" class="menu-btn">
+ลงทะเบียน
+</a>
 
-    else {
+<a href="login.html" class="menu-btn">
+เข้าสู่ระบบ
+</a>
 
-        userMenu.innerHTML = `
+`;
 
-        <a href="register.html" class="menu-btn">
-            ลงทะเบียน
-        </a>
+        sidebarUserMenu.className="sidebar-buttons";
 
-        <a href="login.html" class="menu-btn">
-            เข้าสู่ระบบ
-        </a>
+        sidebarUserMenu.innerHTML=`
 
-        `;
-
-        sidebarUserMenu.className = "sidebar-buttons";
-
-sidebarUserMenu.innerHTML = `
 <a href="register.html" class="register-btn">
-    ลงทะเบียน
+ลงทะเบียน
 </a>
 
 <a href="login.html" class="login-btn">
-    เข้าสู่ระบบ
+เข้าสู่ระบบ
 </a>
+
 `;
 
     }
-
-   await loadCats();
 
 });
 
