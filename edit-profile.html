@@ -1068,25 +1068,30 @@ let currentPhoto = "";
 // โหลดข้อมูลผู้ใช้
 // ============================
 
-import { auth, db } from "./firebase.js";
 
 onAuthStateChanged(auth, async (user)=>{
 
+    console.log("user =", user);
+
     if(!user){
-
         alert("กรุณาเข้าสู่ระบบ");
-
         location.href="login.html";
-
         return;
-
     }
+
+    console.log("UID =", user.uid);
 
     currentUser = user;
 
     const userRef = doc(db,"users",user.uid);
 
     const snap = await getDoc(userRef);
+
+    console.log("exists =", snap.exists());
+
+    if(snap.exists()){
+        console.log(snap.data());
+    }
 
     if(snap.exists()){
 
