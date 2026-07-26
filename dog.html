@@ -17,7 +17,6 @@ a{
 }   
 
 *{
-	*
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -196,7 +195,7 @@ grid-template-columns:1fr;
 
     width:100%;
 
-    height:220px;
+    height:240px;
 
     object-fit:cover;
 
@@ -204,7 +203,7 @@ grid-template-columns:1fr;
 
 .dog-content{
 
-    padding:18px;
+    padding:25px;
 
 }
 
@@ -221,12 +220,11 @@ grid-template-columns:1fr;
 }
 
 .dog-name{
-
-    font-size:30px;
+    font-size:27px;
     font-weight:700;
-
     color:#333;
-
+    line-height:1.3;
+    word-break:break-word;
 }
 
 .status{
@@ -262,25 +260,38 @@ grid-template-columns:1fr;
 }
 
 .info-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
-    margin-top:25px;
-
+    margin-top:18px;
+    background:transparent;   /* ไม่มีพื้นหลัง */
+    border:none;
+    border-radius:0;
+    overflow:visible;
 }
 
 .info-item{
-
     display:flex;
+    align-items:center;
 
-    gap:8px;
+    padding:14px 0;           /* เดิม 24px 36px */
+    font-size:18px;
+    color:#444;
 
+    line-height:1.5;
+    border-bottom:1px solid #ececec;
+}
+
+.info-item:last-child{
+    border-bottom:none;
+}
+
+.info-label{
+    width:110px;
+    font-weight:700;
+    color:#333;
+    flex-shrink:0;
+}
+
+.info-value{
     color:#555;
-
 }
 
 .section-title{
@@ -299,41 +310,96 @@ grid-template-columns:1fr;
 
 .detail{
 
+    background:#fafafa;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    line-height:1.9;
+
     color:#666;
 
-    line-height:1.8;
+    margin-top:10px;
 
 }
 
 .owner-box{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
 
-    margin-top:30px;
+    gap:18px;
 
-    border-top:1px solid #eee;
+    padding:20px;
 
-    padding-top:20px;
+    border-radius:18px;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:.25s;
+
+    cursor:pointer;
+}
+
+.owner-box:hover{
+
+    background:#f8f5ef;
+
+    transform:translateY(-2px);
 
 }
 
 .owner-profile{
 
+    width:100%;
+
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    gap:18px;
 
 }
 
 .owner-profile img{
 
-    width:60px;
+    width:70px;
 
-    height:60px;
+    height:70px;
 
     border-radius:50%;
 
     object-fit:cover;
+
+}
+.owner-profile h3{
+
+    color:#333;
+
+    font-size:22px;
+
+    margin-bottom:5px;
+
+}
+.owner-profile p{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+.owner-box:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.owner-profile img{
+
+    transition:.25s;
 
 }
 
@@ -347,35 +413,69 @@ grid-template-columns:1fr;
 
 .contact{
 
-    margin-top:20px;
+    width:100%;
+
+    display:grid;
+
+    gap:10px;
 
 }
 
 .contact p{
 
-    margin:8px 0;
+    margin:0;
 
-    color:#666;
+    padding:12px 15px;
+
+    border-radius:12px;
+
+    background:#f8f8f8;
+
+    color:#555;
+
+    word-break:break-word;
 
 }
+.owner-profile img{
 
+    flex-shrink:0;
+
+    width:70px;
+
+    height:70px;
+
+}
+.section-divider{
+    border:0;
+    border-top:1px solid #e5e5e5;
+    margin:28px 0;
+}
+.owner-name{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#333;
+
+}
 .profile-btn{
-
-    display:block;
 
     margin-top:20px;
 
+    display:block;
+
     text-align:center;
+
+    padding:14px;
+
+    border-radius:12px;
 
     background:#8a6847;
 
-    color:white;
+    color:#fff;
 
-    padding:15px;
-
-    border-radius:15px;
-
-    font-weight:bold;
+    font-weight:600;
 
 }
 
@@ -1513,43 +1613,53 @@ function renderDogs(data){
     </div>
 
 </div>
-
 <div class="info-grid">
 
-<div class="info-item">
-เพศ : ${dog.gender}
-</div>
+    <div class="info-item">
+        <span class="info-label">เพศ</span>
+        <span class="info-value">: ${dog.gender}</span>
+    </div>
 
-<div class="info-item">
-อายุ : ${dog.age}
-</div>
+    <div class="info-item">
+        <span class="info-label">อายุ</span>
+        <span class="info-value">: ${dog.age}</span>
+    </div>
 
-<div class="info-item">
-สี : ${dog.color}
-</div>
+    <div class="info-item">
+        <span class="info-label">สี</span>
+        <span class="info-value">: ${dog.color}</span>
+    </div>
 
-<div class="info-item">
-ขนาด : ${dog.size}
-</div>
+    <div class="info-item">
+        <span class="info-label">ขนาด</span>
+        <span class="info-value">: ${dog.size}</span>
+    </div>
 
-<div class="info-item">
-น้ำหนัก : ${dog.weight}
-</div>
+    <div class="info-item">
+        <span class="info-label">น้ำหนัก</span>
+        <span class="info-value">: ${dog.weight}</span>
+    </div>
 
-<div class="info-item">
-วัคซีน : ${dog.vaccine}
-</div>
+    <div class="info-item">
+        <span class="info-label">วัคซีน</span>
+        <span class="info-value">: ${dog.vaccine}</span>
+    </div>
 
-<div class="info-item">
-ทำหมัน : ${dog.sterilized}
-</div>
+    <div class="info-item">
+        <span class="info-label">ทำหมัน</span>
+        <span class="info-value">: ${dog.sterilized}</span>
+    </div>
 
-<div class="info-item">
-อำเภอ : ${dog.district}
-</div>
+    <div class="info-item">
+        <span class="info-label">อำเภอ</span>
+        <span class="info-value">: ${dog.district}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">ตำบล</span>
+        <span class="info-value">: ${dog.subdistrict}</span>
+    </div>
 
 </div>
-
 <div class="section-title">
 รายละเอียด
 </div>
@@ -1558,41 +1668,27 @@ function renderDogs(data){
 ${dog.detail}
 </div>
 
-<div class="owner-box">
+<hr class="section-divider">
 
-<div class="owner-profile">
+<a href="user-profile.html?uid=${dog.ownerUid}" class="owner-box">
 
-<img src="${dog.ownerProfile || "img/default-profile.png"}">
+    <div class="owner-profile">
 
-<div>
+        <img src="${dog.ownerProfile || 'img/default-profile.png'}">
 
-<div class="owner-name">
-${dog.ownerName}
-</div>
+        <div class="owner-name">
+            ${dog.ownerName}
+        </div>
 
+    </div>
 
-</div>
-
-</div>
-
-<div class="contact">
-
-<p>Tro. ${dog.phone || "-"}</p>
-
-<p>Line. ${dog.line || "-"}</p>
-
-<p>Facebook. ${dog.facebook || "-"}</p>
-
-<p>Instagram. ${dog.instagram || "-"}</p>
-
-</div>
-
-<a href="profile.html?uid=${dog.ownerUid}"
-class="profile-btn">
-
-ดูโปรไฟล์ผู้โพสต์
+    <div class="contact">
+        <p>📞 ${dog.phone || "-"}</p>
+        <p>Facebook : ${dog.facebook || "-"}</p>
+    </div>
 
 </a>
+
 ${currentUser && (currentUser.uid === dog.ownerUid || isAdmin) ? `
 
 <div class="owner-actions">

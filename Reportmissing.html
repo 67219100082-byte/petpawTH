@@ -196,7 +196,7 @@ grid-template-columns:1fr;
 
     width:100%;
 
-    height:220px;
+    height:240px;
 
     object-fit:cover;
 
@@ -204,7 +204,7 @@ grid-template-columns:1fr;
 
 .dog-content{
 
-    padding:18px;
+    padding:25px;
 
 }
 
@@ -221,12 +221,11 @@ grid-template-columns:1fr;
 }
 
 .dog-name{
-
-    font-size:30px;
+    font-size:27px;
     font-weight:700;
-
     color:#333;
-
+    line-height:1.3;
+    word-break:break-word;
 }
 
 .status{
@@ -262,25 +261,38 @@ grid-template-columns:1fr;
 }
 
 .info-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
-    margin-top:25px;
-
+    margin-top:18px;
+    background:transparent;   /* ไม่มีพื้นหลัง */
+    border:none;
+    border-radius:0;
+    overflow:visible;
 }
 
 .info-item{
-
     display:flex;
+    align-items:center;
 
-    gap:8px;
+    padding:14px 0;           /* เดิม 24px 36px */
+    font-size:18px;
+    color:#444;
 
+    line-height:1.5;
+    border-bottom:1px solid #ececec;
+}
+
+.info-item:last-child{
+    border-bottom:none;
+}
+
+.info-label{
+    width:110px;
+    font-weight:700;
+    color:#333;
+    flex-shrink:0;
+}
+
+.info-value{
     color:#555;
-
 }
 
 .section-title{
@@ -299,41 +311,96 @@ grid-template-columns:1fr;
 
 .detail{
 
+    background:#fafafa;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    line-height:1.9;
+
     color:#666;
 
-    line-height:1.8;
+    margin-top:10px;
 
 }
 
 .owner-box{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
 
-    margin-top:30px;
+    gap:18px;
 
-    border-top:1px solid #eee;
+    padding:20px;
 
-    padding-top:20px;
+    border-radius:18px;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:.25s;
+
+    cursor:pointer;
+}
+
+.owner-box:hover{
+
+    background:#f8f5ef;
+
+    transform:translateY(-2px);
 
 }
 
 .owner-profile{
 
+    width:100%;
+
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    gap:18px;
 
 }
 
 .owner-profile img{
 
-    width:60px;
+    width:70px;
 
-    height:60px;
+    height:70px;
 
     border-radius:50%;
 
     object-fit:cover;
+
+}
+.owner-profile h3{
+
+    color:#333;
+
+    font-size:22px;
+
+    margin-bottom:5px;
+
+}
+.owner-profile p{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+.owner-box:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.owner-profile img{
+
+    transition:.25s;
 
 }
 
@@ -347,35 +414,69 @@ grid-template-columns:1fr;
 
 .contact{
 
-    margin-top:20px;
+    width:100%;
+
+    display:grid;
+
+    gap:10px;
 
 }
 
 .contact p{
 
-    margin:8px 0;
+    margin:0;
 
-    color:#666;
+    padding:12px 15px;
+
+    border-radius:12px;
+
+    background:#f8f8f8;
+
+    color:#555;
+
+    word-break:break-word;
 
 }
+.owner-profile img{
 
+    flex-shrink:0;
+
+    width:70px;
+
+    height:70px;
+
+}
+.section-divider{
+    border:0;
+    border-top:1px solid #e5e5e5;
+    margin:28px 0;
+}
+.owner-name{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#333;
+
+}
 .profile-btn{
-
-    display:block;
 
     margin-top:20px;
 
+    display:block;
+
     text-align:center;
+
+    padding:14px;
+
+    border-radius:12px;
 
     background:#8a6847;
 
-    color:white;
+    color:#fff;
 
-    padding:15px;
-
-    border-radius:15px;
-
-    font-weight:bold;
+    font-weight:600;
 
 }
 
@@ -450,23 +551,24 @@ body.no-scroll{
 
 }
 .adoption-status{
-
     margin-top:12px;
-
-    background:#e8f7ea;
-
-    color:#2e7d32;
-
     display:inline-block;
-
     padding:8px 16px;
-
     border-radius:20px;
-
     font-weight:600;
-
     font-size:15px;
+}
 
+/* กำลังหาบ้าน */
+.adoption-status.available{
+    background:#e8f7ea;
+    color:#2e7d32;
+}
+
+/* ได้บ้านแล้ว */
+.adoption-status.adopted{
+    background:#dbeafe;
+    color:#1565c0;
 }
 
 .dropdown-menu.show{
@@ -1505,43 +1607,42 @@ function renderPets(data){
 <div class="info-grid">
 
     <div class="info-item">
-ชนิด :
-${pet.species=="dog"?"🐶 สุนัข":"🐱 แมว"}
-</div>
-
+        <span class="info-label">ชนิด</span>
+        <span class="info-value">: ${pet.species=="dog"?"🐶 สุนัข":"🐱 แมว"}</span>
+    </div>
 <div class="info-item">
-เพศ : ${pet.gender}
-</div>
+        <span class="info-label">เพศ</span>
+        <span class="info-value">: ${pet.gender}</span>
+    </div>
 
-<div class="info-item">
-อายุ : ${pet.age}
-</div>
-
-<div class="info-item">
-สี : ${pet.color}
-</div>
-
-<div class="info-item">
-น้ำหนัก : ${pet.weight}
-</div>
-
-<div class="info-item">
-จังหวัด : ${pet.province}
-</div>
-
-
-<div class="info-item">
-อำเภอ : ${pet.district}
-</div>
-
-<div class="info-item">
-ตำบล : ${pet.subdistrict}
-</div>
-
-<div class="info-item">
-วันที่หาย : ${pet.lostDate || "-"}
-</div>
-
+    <div class="info-item">
+        <span class="info-label">อายุ</span>
+        <span class="info-value">: ${pet.age}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">สี</span>
+        <span class="info-value">: ${pet.color}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">น้ำหนัก</span>
+        <span class="info-value">: ${pet.weight}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">จังหวัด</span>
+        <span class="info-value">: ${pet.province}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">อำเภอ</span>
+        <span class="info-value">: ${pet.district}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">ตำบล</span>
+        <span class="info-value">: ${pet.subdistrict}</span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">วันที่หาย</span>
+        <span class="info-value">: ${pet.lostDate}</span>
+    </div>
 </div>
 
 <div class="section-title">
@@ -1552,39 +1653,24 @@ ${pet.species=="dog"?"🐶 สุนัข":"🐱 แมว"}
 ${pet.detail}
 </div>
 
-<div class="owner-box">
+<hr class="section-divider">
 
-<div class="owner-profile">
+<a href="user-profile.html?uid=${pet.ownerUid}" class="owner-box">
 
-<img src="${pet.ownerProfile || "img/default-profile.png"}">
+    <div class="owner-profile">
 
-<div>
+        <img src="${pet.ownerProfile || 'img/default-profile.png'}">
 
-<div class="owner-name">
-${pet.ownerName}
-</div>
+        <div class="owner-name">
+            ${pet.ownerName}
+        </div>
 
+    </div>
 
-</div>
-
-</div>
-
-<div class="contact">
-
-<p>Tro. ${pet.phone || "-"}</p>
-
-<p>Line. ${pet.line || "-"}</p>
-
-<p>Facebook. ${pet.facebook || "-"}</p>
-
-<p>Instagram. ${pet.instagram || "-"}</p>
-
-</div>
-
-<a href="profile.html?uid=${pet.ownerUid}"
-class="profile-btn">
-
-ดูโปรไฟล์ผู้โพสต์
+    <div class="contact">
+        <p>📞 ${pet.phone || "-"}</p>
+        <p>Facebook : ${pet.facebook || "-"}</p>
+    </div>
 
 </a>
 
