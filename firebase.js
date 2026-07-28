@@ -24,7 +24,6 @@ const auth = getAuth(app);
 await setPersistence(auth, browserLocalPersistence);
 
 const db = getFirestore(app);
-
 const storage = getStorage(app);
 
 export { auth, db, storage };

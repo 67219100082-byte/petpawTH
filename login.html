@@ -189,8 +189,8 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("uid", user.uid);
 
-        window.location.href = "index.html";
-
+        window.location.replace("index.html");
+        
     } catch (error) {
         alert("Email หรือ Password ไม่ถูกต้อง");
         console.log(error.message);
