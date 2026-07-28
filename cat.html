@@ -1600,14 +1600,11 @@ function renderCats(data){
 <div class="dog-header">
 
     <div class="dog-name">
-        ${cat.name}
+        <span class="info-label">เพศ</span>
+        <span class="info-value">: ${cat.gender}</span>
     </div>
 
     <div class="header-right">
-
-        <div class="status ${cat.status}">
-            ${cat.status}
-        </div>
 
         <div class="adoption-status ${
             cat.adoptionStatus === "ได้บ้านแล้ว"
@@ -1624,8 +1621,8 @@ function renderCats(data){
 <div class="info-grid">
 
     <div class="info-item">
-        <span class="info-label">เพศ</span>
-        <span class="info-value">: ${cat.gender}</span>
+        <span class="info-label">ชื่อ</span>
+        <span class="info-value">: ${cat.name}</span>
     </div>
 
     <div class="info-item">
@@ -1634,13 +1631,13 @@ function renderCats(data){
     </div>
 
     <div class="info-item">
-        <span class="info-label">สี</span>
-        <span class="info-value">: ${cat.color}</span>
+        <span class="info-label">สายพันธุ์</span>
+        <span class="info-value">: ${cat.breed}</span>
     </div>
 
     <div class="info-item">
-        <span class="info-label">ขนาด</span>
-        <span class="info-value">: ${cat.size}</span>
+        <span class="info-label">สี</span>
+        <span class="info-value">: ${cat.color}</span>
     </div>
 
     <div class="info-item">
@@ -1657,7 +1654,10 @@ function renderCats(data){
         <span class="info-label">ทำหมัน</span>
         <span class="info-value">: ${cat.sterilized}</span>
     </div>
-
+<div class="info-item">
+        <span class="info-label">จังหวัด</span>
+        <span class="info-value">: ${cat.province}</span>
+    </div>
     <div class="info-item">
         <span class="info-label">อำเภอ</span>
         <span class="info-value">: ${cat.district}</span>

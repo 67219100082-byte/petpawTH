@@ -43,7 +43,25 @@ body{
 /* ===================================
             Navbar
 =================================== */
+.back-btn{
 
+    text-decoration:none;
+
+    background:#fff;
+
+    color:#8a6847;
+
+    padding:12px 30px;   /* เท่ากับ Home */
+
+    border-radius:14px;
+
+    font-weight:600;
+
+    border:2px solid #8a6847;
+
+    transition:.3s;
+
+}
 .top-nav{
 
     width:100%;
@@ -61,7 +79,7 @@ body{
     box-shadow:0 3px 15px rgba(0,0,0,.08);
 
     position:sticky;
-
+    gap:15px;   /* เพิ่มบรรทัดนี้ */
     top:0;
 
     z-index:999;
@@ -69,7 +87,7 @@ body{
 }
 
 .home-btn{
-
+    border:2px solid #8a6847;
     text-decoration:none;
 
     background:#8a6847;
@@ -89,6 +107,15 @@ body{
 .home-btn:hover{
 
     background:#73553a;
+
+}
+
+
+.back-btn:hover{
+
+    background:#8a6847;
+
+    color:#fff;
 
 }
 
@@ -199,6 +226,7 @@ body{
     }
 
 }
+
 
 /* ===========================
         Section Title
@@ -388,6 +416,9 @@ body{
 
 <nav class="top-nav">
 
+    <a href="Reportmissing.html" class="back-btn">
+        ← กลับ
+    </a>
 <a href="index.html"
 class="home-btn">
 
@@ -1362,7 +1393,7 @@ width:100%;
 <div class="button-group">
 
 <a
-href="profile.html"
+href="Reportmissing.html"
 class="cancel-btn">
 
 ยกเลิก

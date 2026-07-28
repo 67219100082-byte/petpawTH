@@ -1596,7 +1596,8 @@ function renderPets(data){
 <div class="dog-header">
 
     <div class="dog-name">
-        ${pet.name}
+        <span class="info-label">ชนิด</span>
+        <span class="info-value">: ${pet.species=="dog"?"🐶 สุนัข":"🐱 แมว"}</span>
     </div>
 
     <div class="header-right">
@@ -1612,8 +1613,8 @@ function renderPets(data){
 <div class="info-grid">
 
     <div class="info-item">
-        <span class="info-label">ชนิด</span>
-        <span class="info-value">: ${pet.species=="dog"?"🐶 สุนัข":"🐱 แมว"}</span>
+       <span class="info-label">ชื่อ</span>
+        <span class="info-value">: ${pet.name}</span>
     </div>
 <div class="info-item">
         <span class="info-label">เพศ</span>

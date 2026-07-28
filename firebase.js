@@ -1,7 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
+import {
+    getAuth,
+    setPersistence,
+    browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
 
@@ -17,6 +20,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
+
+await setPersistence(auth, browserLocalPersistence);
 
 const db = getFirestore(app);
 

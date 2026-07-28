@@ -1600,14 +1600,11 @@ function renderDogs(data){
 <div class="dog-header">
 
     <div class="dog-name">
-        ${dog.name}
+        <span class="info-label">เพศ</span>
+        <span class="info-value">: ${dog.gender}</span>
     </div>
 
     <div class="header-right">
-
-        <div class="status ${dog.status}">
-            ${dog.status}
-        </div>
 
         <div class="adoption-status ${
     dog.adoptionStatus === "ได้บ้านแล้ว"
@@ -1623,8 +1620,8 @@ function renderDogs(data){
 <div class="info-grid">
 
     <div class="info-item">
-        <span class="info-label">เพศ</span>
-        <span class="info-value">: ${dog.gender}</span>
+        <span class="info-label">ชื่อ</span>
+        <span class="info-value">: ${dog.name}</span>
     </div>
 
     <div class="info-item">
@@ -1633,8 +1630,8 @@ function renderDogs(data){
     </div>
 
     <div class="info-item">
-        <span class="info-label">สี</span>
-        <span class="info-value">: ${dog.color}</span>
+        <span class="info-label">สายพันธุ์</span>
+        <span class="info-value">: ${dog.breed}</span>
     </div>
 
     <div class="info-item">
@@ -1642,10 +1639,6 @@ function renderDogs(data){
         <span class="info-value">: ${dog.size}</span>
     </div>
 
-    <div class="info-item">
-        <span class="info-label">น้ำหนัก</span>
-        <span class="info-value">: ${dog.weight}</span>
-    </div>
 
     <div class="info-item">
         <span class="info-label">วัคซีน</span>
@@ -1656,7 +1649,10 @@ function renderDogs(data){
         <span class="info-label">ทำหมัน</span>
         <span class="info-value">: ${dog.sterilized}</span>
     </div>
-
+    <div class="info-item">
+        <span class="info-label">จังหวัด</span>
+        <span class="info-value">: ${dog.province}</span>
+    </div>
     <div class="info-item">
         <span class="info-label">อำเภอ</span>
         <span class="info-value">: ${dog.district}</span>

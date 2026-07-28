@@ -829,7 +829,7 @@ type="text"
 
 id="age"
 
-placeholder="เช่น 2 ปี หรือ 8 เดือน">
+placeholder="เช่น ประมาณ 2 ปี หรือ 8 เดือน">
 
 </div>
 
@@ -837,7 +837,7 @@ placeholder="เช่น 2 ปี หรือ 8 เดือน">
 
 <label>
 
-สี
+สายพันธุ์
 
 </label>
 
@@ -845,9 +845,9 @@ placeholder="เช่น 2 ปี หรือ 8 เดือน">
 
 type="text"
 
-id="color"
+id="breed"
 
-placeholder="เช่น น้ำตาล">
+placeholder="เช่น สายพันธุ์วิเชียรมาศ โกลเด้น">
 
 </div>
 
@@ -1054,23 +1054,6 @@ placeholder="เช่น คูหาสวรรค์">
 
 </div>
 
-<div class="form-group">
-
-<label>
-
-น้ำหนัก (กิโลกรัม)
-
-</label>
-
-<input
-
-type="number"
-
-id="weight"
-
-placeholder="เช่น 12">
-
-</div>
 
 </div>
 
@@ -1643,7 +1626,7 @@ width:100%;
 <div class="button-group">
 
 <a
-href="profile.html"
+href="index.html"
 class="cancel-btn">
 
 ยกเลิก
@@ -1825,7 +1808,7 @@ const gender = document.getElementById("gender");
 
 const age = document.getElementById("age");
 
-const color = document.getElementById("color");
+const breed = document.getElementById("breed");
 
 const size = document.getElementById("size");
 
@@ -1862,8 +1845,6 @@ const districtLocation = {
 };
 
 const subdistrict = document.getElementById("subdistrict");
-
-const weight = document.getElementById("weight");
 
 const vaccine = document.getElementById("vaccine");
 
@@ -2421,7 +2402,7 @@ gender:gender.value,
 
 age:age.value.trim(),
 
-color:color.value.trim(),
+breed:breed.value.trim(),
 
 size:size.value,
 
@@ -2432,8 +2413,6 @@ province:province.value,
 district:district.value,
 
 subdistrict:subdistrict.value.trim(),
-
-weight:weight.value,
 
 vaccine:vaccine.value,
 

@@ -160,7 +160,9 @@ body{
 import { auth } from "./firebase.js";
 
 import {
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 /* LOGIN */
@@ -171,8 +173,15 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value.trim();
 
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
+    // ให้ Safari จำการเข้าสู่ระบบ
+    await setPersistence(auth, browserLocalPersistence);
+
+    const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+    );
         const user = userCredential.user;
 
         alert("เข้าสู่ระบบสำเร็จ");
