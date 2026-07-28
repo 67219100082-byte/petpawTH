@@ -7,9 +7,16 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
 
     <style>
 
@@ -1147,10 +1154,19 @@ function showNotify(){
 }
 
 // ================= MAP =================
-let map = L.map('map').setView([7.6167, 100.0833], 10);
+let map = L.map("map", {
+    maxZoom: 19
+}).setView([7.6167,100.0833],10);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
+const markers = L.markerClusterGroup();
+
+map.addLayer(markers);
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+    attribution:'© OpenStreetMap',
+    maxZoom:19
 }).addTo(map);
 
 </script>
@@ -1212,107 +1228,89 @@ import {
     getDocs
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-async function loadPets(){
+async function loadPets() {
 
-    const pets=[];
+    const pets = [];
 
-    const dogSnap = await getDocs(collection(db,"dogs"));
+    const dogSnap = await getDocs(collection(db, "dogs"));
 
-dogSnap.forEach(doc=>{
-
-    pets.push({
-
-        id: doc.id,
-
-        type: "dog",
-
-        ...doc.data()
-
+    dogSnap.forEach(doc => {
+        pets.push({
+            id: doc.id,
+            type: "dog",
+            ...doc.data()
+        });
     });
 
-});
+    const catSnap = await getDocs(collection(db, "cats"));
 
-    const catSnap = await getDocs(collection(db,"cats"));
-
-catSnap.forEach(doc=>{
-
-    pets.push({
-
-        id: doc.id,
-
-        type: "cat",
-
-        ...doc.data()
-
+    catSnap.forEach(doc => {
+        pets.push({
+            id: doc.id,
+            type: "cat",
+            ...doc.data()
+        });
     });
 
-});
+    pets.forEach(pet => {
 
-    console.log(pets);
+        if (pet.adoptionStatus === "ได้บ้านแล้ว") return;
+        if (!pet.latitude || !pet.longitude) return;
 
-    pets.forEach(pet=>{
+        const page = pet.type === "dog"
+            ? "dog.html"
+            : "cat.html";
 
-    // ไม่แสดงสัตว์ที่ได้บ้านแล้ว
-    if(pet.adoptionStatus === "ได้บ้านแล้ว") return;
+        const marker = L.marker([pet.latitude, pet.longitude]);
 
-    // ไม่มีพิกัดก็ไม่แสดง
-    if(!pet.latitude || !pet.longitude) return;
+        marker.bindPopup(`
+            <div style="width:220px">
 
-    // เลือกหน้าที่จะเปิด
-    const page = pet.type === "dog"
-        ? "dog.html"
-        : "cat.html";
+                <img src="${pet.image}"
+                style="width:100%;height:150px;object-fit:cover;border-radius:15px;">
 
-    // สร้าง Marker
-    L.marker([pet.latitude, pet.longitude])
+                <h3>เพศ : ${pet.gender}</h3>
 
-    .addTo(map)
+                <div class="info-item">
+                    📍อำเภอ : ${pet.district}
+                </div>
+                <div class="info-item">
+                    📍ตำบล : ${pet.subdistrict}
+                </div>
 
-    .bindPopup(`
+                <div class="info-item">
+                    สายพันธุ์ : ${pet.breed}
+                </div>
 
-    <div style="width:220px">
+                <div class="info-item">
+                    อายุ : ${pet.age}
+                </div>
 
-        <img src="${pet.image}"
-        style="width:100%;height:150px;object-fit:cover;border-radius:15px;">
+                <a href="${page}?id=${pet.id}"
+                style="
+                display:block;
+                margin-top:15px;
+                background:#8a6847;
+                color:white;
+                text-align:center;
+                padding:10px;
+                border-radius:10px;
+                text-decoration:none;
+                font-weight:bold;">
 
-        <h3 style="margin:10px 0 5px;">
-            ${pet.name}
-        </h3>
+                ดูข้อมูลเพิ่มเติม
 
-        <div class="info-item">
-        📍อำเภอ : ${pet.district}
-        </div>
-        <div class="info-item">
-        เพศ : ${pet.gender}
-        </div>
-        <div class="info-item">
-        อายุ : ${pet.age}
-        </div>
+                </a>
 
-        <a href="${page}?id=${pet.id}"
+            </div>
+        `);
 
-        style="
-        display:block;
-        margin-top:15px;
-        background:#8a6847;
-        color:white;
-        text-align:center;
-        padding:10px;
-        border-radius:10px;
-        text-decoration:none;
-        font-weight:bold;">
+        markers.addLayer(marker);
 
-        ดูข้อมูลเพิ่มเติม
-
-        </a>
-
-    </div>
-
-    `);
-
-});
+    });
 
 }
+
 async function loadStatistics(){
 
     // สุนัข

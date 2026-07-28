@@ -2006,16 +2006,11 @@ const map=L.map("map",{
 // แผนที่ OpenStreetMap
 
 L.tileLayer(
-
-"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 {
-
-attribution:"© OpenStreetMap"
-
-}
-
-).addTo(map);
+    attribution:'© OpenStreetMap',
+    maxZoom:19
+}).addTo(map);
 
 
 // จำกัดพื้นที่เฉพาะจังหวัดพัทลุง
