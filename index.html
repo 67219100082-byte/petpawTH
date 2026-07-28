@@ -1333,17 +1333,18 @@ const userMenu = document.getElementById("userMenu");
 const sidebarUserMenu = document.getElementById("sidebarUserMenu");
 
 onAuthStateChanged(auth, async (user) => {
+console.log("Auth =", user);
+    if (user) {
 
-    console.log("USER =", user);
-    console.log("CURRENT =", auth.currentUser);
+        const snap = await getDoc(doc(db, "users", user.uid));
 
-    if (!user) {
-        alert("ยังไม่ได้ Login");
-        return;
-    }
+        let username = "User";
+        let photo = "img/default-profile.png";
 
-    ...
-});
+        if (snap.exists()) {
+            username = snap.data().username || "User";
+            photo = snap.data().profile || "img/default-profile.png";
+        }
 
         // ---------- Desktop ----------
         userMenu.innerHTML = `
