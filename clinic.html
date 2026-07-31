@@ -614,7 +614,50 @@ body.no-scroll{
 	color:white;
 	border:none;
 }
+/* =========================
+   Floating AI Button
+========================= */
 
+.floating-ai{
+    position:fixed;
+
+    right:30px;
+    bottom:120px;   /* อยู่เหนือปุ่ม + */
+
+    width:70px;
+    height:70px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#4A90E2;   /* สีเขียว */
+
+    color:white;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.25);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.floating-ai:hover{
+
+    transform:translateY(-5px);
+
+    background:#357ABD;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+
+}
 /* =========================
    Floating Plus Button
 ========================= */
@@ -1175,6 +1218,10 @@ body.no-scroll{
 	</div>
 </nav>
 </header>
+<!-- ปุ่ม AI -->
+<a href="chatbot.html" class="floating-ai">
+    🤖
+</a>
 <!-- ปุ่มบวก -->
 
 <a href="Add a pet.html" class="floating-btn">
