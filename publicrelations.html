@@ -46,6 +46,42 @@ body{
     background:#f3f3f3;
     min-height:2000px;
 }
+.news-source{
+    margin-top:18px;
+    margin-bottom:22px;   /* เว้นระยะก่อนปุ่ม */
+    padding-top:12px;
+    border-top:1px solid #eee;
+
+    font-size:15px;
+    color:#666;
+    line-height:1.6;
+}
+
+.news-source span:first-child{
+    font-weight:600;
+    color:#8a6847;
+}
+
+.news-btn{
+    display:inline-block;
+    padding:12px 24px;
+
+    background:#8a6847;
+    color:#fff;
+
+    border-radius:12px;
+
+    text-decoration:none;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.news-btn:hover{
+    background:#6b4f33;
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
 
 /* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
 body.no-scroll{
@@ -314,6 +350,105 @@ body.no-scroll{
     color:#999;
     font-size:14px;
     margin-bottom:10px;
+}
+.chatbot-popup{
+
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:500px;
+    height:700px;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+
+    overflow:hidden;
+
+    display:none;
+
+    z-index:100000;
+}
+
+.chat-header{
+
+    background:#4da6ff;
+
+    color:white;
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.chat-header button{
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+.chat-btn{
+    position:fixed;
+
+    right:30px;
+    bottom:120px;
+
+    width:70px;
+    height:70px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#4da6ff;
+
+    color:white;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.chat-btn:hover{
+    transform:translateY(-5px);
+
+    background:#4da6ff;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.chat-btn:active{
+    transform:translateY(-2px) scale(.92);
+}
+.chatbot-popup iframe{
+
+    width:100%;
+    height:650px;
+
+    border:none;
 }
 
 .news-title{
@@ -861,6 +996,87 @@ body.no-scroll{
 
 	font-weight:bold;
 }
+/* =========================
+   Mobile Floating Buttons
+========================= */
+@media (max-width: 768px){
+
+    /* ปุ่ม Chatbot */
+    .chat-btn{
+        width:60px;
+        height:60px;
+
+        right:20px;
+        bottom:105px;
+
+        font-size:28px;
+
+        z-index:9999;
+    }
+
+    /* ปุ่ม + */
+    .floating-btn{
+        width:60px;
+        height:60px;
+
+        right:20px;
+        bottom:25px;
+
+        font-size:36px;
+
+        z-index:9998;
+    }
+
+    /* =========================
+       Chatbot แบบมือถือ
+       เลื่อนขึ้นจากด้านล่าง
+    ========================= */
+
+    .chatbot-popup{
+
+        display:block;
+
+        position:fixed;
+
+        left:0;
+        right:0;
+        bottom:0;
+
+        width:100%;
+        height:100dvh;
+
+        border-radius:25px 25px 0 0;
+
+        transform:translateY(100%);
+
+        transition:transform .35s ease;
+
+        z-index:100000;
+    }
+
+    /* ตอนเปิด Chat */
+    .chatbot-popup.show{
+        transform:translateY(0);
+    }
+
+    .chat-header{
+
+        height:65px;
+
+        border-radius:25px 25px 0 0;
+
+        padding:15px 20px;
+    }
+
+    .chatbot-popup iframe{
+
+        width:100%;
+
+        height:calc(100dvh - 65px);
+
+        border:none;
+    }
+}
 </style>
 </head>
 
@@ -1014,7 +1230,10 @@ body.no-scroll{
                 <div class="news-detail">
                     นายบุญเกียรติ รักเกตุ ปศุสัตว์จังหวัดพัทลุง พร้อมด้วย เจ้าหน้าที่กลุ่มพัฒนาสุขภาพสัตว์ และนายสันติ ชิตชลธาร ปศุสัตว์อำเภอตะโหมด ร่วมกับเทศบาลตำบลแม่ขรี จัดกิจกรรมผ่าตัดทำหมันและฉีดวัคซีนพิษสุนัขบ้าให้กับสุนัขและแมวจรจัด ในเขตพื้นที่เทศบาลตำบลแม่ขรี
                 </div>
-
+                    <div class="news-source">
+            <span>📌 ที่มา :</span>
+            <span>สนง.ปศุสัตว์จังหวัด พัทลุง</span>
+        </div>
                 <a href="https://www.facebook.com/100005441622368/posts/%E0%B8%81%E0%B8%B4%E0%B8%88%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%9C%E0%B9%88%E0%B8%B2%E0%B8%95%E0%B8%B1%E0%B8%94%E0%B8%97%E0%B8%B3%E0%B8%AB%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B9%81%E0%B8%A1%E0%B8%A7%E0%B8%88%E0%B8%A3%E0%B8%88%E0%B8%B1%E0%B8%94-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-16-%E0%B8%81%E0%B8%A3%E0%B8%81%E0%B8%8E%E0%B8%B2%E0%B8%84%E0%B8%A1-2569-%E0%B9%80%E0%B8%A7%E0%B8%A5%E0%B8%B2-1330-%E0%B8%99-%E0%B8%99%E0%B8%B2%E0%B8%A2%E0%B8%9A%E0%B8%B8%E0%B8%8D%E0%B9%80%E0%B8%81%E0%B8%B5/3239281499596539/" class="news-btn">
                     อ่านเพิ่มเติม
                 </a>
@@ -1040,7 +1259,10 @@ body.no-scroll{
                     เจ้าหน้าที่งานสัตวแพทย์ ดำเนินการสำรวจและขึ้นทะเบียนสุนัข-แมว พร้อมฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า ตามโครงการควบคุมและป้องกันโรคพิษสุนัขบ้า  เทศบาลเมืองพัทลุง ปี 2569 
 ภายใต้โครงการสัตว์ปลอดโรค คนปลอดภัย จากโรคพิษสุนัขบ้า ตามพระปณิธาน ศาสตราจารย์ ดร.สมเด็จพระเจ้าน้องนางเธอ เจ้าฟ้าจุฬาภรณวลัยลักษณ์ อัครราชกุมารี กรมพระศรีสวางควัฒน วรขัตติยราชนารี ณ ที่ทำการชุมชนบ้านนางลาด และชุมชนบ้านนางลาดเหนือ จำนวนทั้งหมด 92 ตัว
                 </div>
-
+<div class="news-source">
+            <span>📌 ที่มา :</span>
+            <span>เทศบาลเมืองพัทลุง</span>
+        </div>
                 <a href="https://www.facebook.com/PhatthalungMunicipality/posts/%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B9%81%E0%B8%A1%E0%B8%A7%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-1-%E0%B8%9E%E0%B8%84-2569%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%A7%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C-%E0%B8%94%E0%B8%B3%E0%B9%80%E0%B8%99%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%82/978054438483237/" class="news-btn">
                     อ่านเพิ่มเติม
                 </a>
@@ -1065,7 +1287,10 @@ body.no-scroll{
                 <div class="news-detail">
                     นายบุญเกียรติ รักเกตุ ปศุสัตว์จังหวัดพัทลุง มอบหมายให้ สำนักงานปศุสัตว์อำเภอป่าบอน โดยอาสาป้องกันโรคพิษสุนัขบ้าของอำเภอป่าบอน ร่วมกับเทศบาลตำบลป่าบอน ออกฉีดวัคซีนป้องกันโรคพิษสุนัขบ้าให้กับสุนัขและแมว 
                 </div>
-
+<div class="news-source">
+            <span>📌 ที่มา :</span>
+            <span>สนง.ปศุสัตว์จังหวัด พัทลุง</span>
+        </div>
                 <a href="https://www.facebook.com/100005441622368/posts/%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%84%E0%B8%A7%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%A1%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9E%E0%B8%B4%E0%B8%A9%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82%E0%B8%9A%E0%B9%89%E0%B8%B2-%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B3%E0%B8%9B%E0%B8%B5%E0%B8%87%E0%B8%9A%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%A1%E0%B8%B2%E0%B8%93-2569-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-9-%E0%B8%9E%E0%B8%A4%E0%B8%A9%E0%B8%A0%E0%B8%B2%E0%B8%84%E0%B8%A1-2569/3170687689789254/" class="news-btn">
                     อ่านเพิ่มเติม
                 </a>
@@ -1091,7 +1316,10 @@ body.no-scroll{
                 <div class="news-detail">
                     การดำเนินการนี้มีวัตถุประสงค์เพื่อสร้างภูมิคุ้มกันโรคพิษสุนัขบ้าในสัตว์เลี้ยง และลดความเสี่ยงการ แพร่ระบาดของโรคในชุมชน รวมถึงสร้างความตระหนักรู้ให้ประชาชนเห็นถึงความสำคัญของการ ดูแลสัตว์เลี้ยงอย่างถูกวิธี เพื่อความปลอดภัยของทั้งคนและสัตว์ในพื้นที่ต่อไป
                 </div>
-
+<div class="news-source">
+            <span>📌 ที่มา :</span>
+            <span>77kaoded</span>
+        </div>
                 <a href="https://today.line.me/th/v3/article/vXallRQ" class="news-btn">
                     อ่านเพิ่มเติม
                 </a>
@@ -1117,7 +1345,10 @@ body.no-scroll{
                     เจ้าหน้าที่งานสัตวแพทย์ ดำเนินการสำรวจและขึ้นทะเบียนสุนัข-แมว พร้อมฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า ตามโครงการควบคุมและป้องกันโรคพิษสุนัขบ้า  เทศบาลเมืองพัทลุง ปี 2569 
 ภายใต้โครงการสัตว์ปลอดโรค คนปลอดภัย จากโรคพิษสุนัขบ้า ตามพระปณิธาน ศาสตราจารย์ ดร.สมเด็จพระเจ้าน้องนางเธอ เจ้าฟ้าจุฬาภรณวลัยลักษณ์ อัครราชกุมารี กรมพระศรีสวางควัฒน วรขัตติยราชนารี ณ ที่ทำการชุมชนบ้านลำปำและชุมชนบ้านท่าน้ำหัวนอน  จำนวน 92 ตัว
                 </div>
-
+<div class="news-source">
+            <span>📌 ที่มา :</span>
+            <span>เทศบาลเมืองพัทลุง</span>
+        </div>
                 <a href="https://www.facebook.com/PhatthalungMunicipality/posts/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-30-%E0%B8%A1%E0%B8%B5%E0%B8%842569%E0%B9%80%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%B1%E0%B8%95%E0%B8%A7%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C-%E0%B8%94%E0%B8%B3%E0%B9%80%E0%B8%99%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B3%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%97%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%99%E0%B8%AA%E0%B8%B8%E0%B8%99%E0%B8%B1%E0%B8%82-%E0%B9%81%E0%B8%A1%E0%B8%A7-%E0%B8%9E/951484721140209/" class="news-btn">
                     อ่านเพิ่มเติม
                 </a>
@@ -1142,7 +1373,10 @@ body.no-scroll{
                 <div class="news-detail">
                     ให้บริการผ่าตัดทำหมันและฉีดวัคซีนป้องกันโรคพิษสุนัขบ้าให้สุนัขและแมวของประชาชนผู้ร่วมงาน ในโครงการหน่วยบำบัดทุกข์ บำรุงสุข สร้างรอยยิ้มให้ประชาชน ณ โรงเรียนวัดแหลมดินสอ หมู่ที่ 2 ตำบลเกาะนางคำ อำเภอปากพะยูน จังหวัดพัทลุง โดยมีสุนัขและแมวได้รับการผ่าตัดทำหมันและฉีดวัคซีนรวม จำนวน 31 ตัว
                 </div>
-
+  <div class="news-source">
+            <span>📌 ที่มา :</span>
+            <span>สำนักงานปศุสัตว์เขต 8</span>
+        </div>
                 <a href="https://region8.dld.go.th/index.php/th/news-head/news-activity/new180225690003" class="news-btn">
                     อ่านเพิ่มเติม
                 </a>
@@ -1156,9 +1390,25 @@ body.no-scroll{
 
 </section>
 <!-- ปุ่ม AI -->
-<a href="chatbot.html" class="floating-ai">
+<!-- ปุ่มเปิด Chat -->
+<button id="chatBtn" class="chat-btn">
     🤖
-</a>
+</button>
+
+<!-- กล่อง Chat -->
+<div class="chatbot-popup" id="chatPopup">
+
+    <div class="chat-header">
+
+        <span>🤖 PetPaw AI</span>
+
+        <button id="closeChat">✕</button>
+
+    </div>
+
+    <iframe src="chatbot.html"></iframe>
+
+</div>
 
 <!-- ปุ่มบวก -->
 
@@ -1366,7 +1616,25 @@ sidebarUserMenu.innerHTML = `
     }
 
 });
+const chatBtn = document.getElementById("chatBtn");
+const chatPopup = document.getElementById("chatPopup");
+const closeChat = document.getElementById("closeChat");
 
+chatBtn.onclick = () => {
+
+    chatPopup.classList.add("show");
+
+    chatBtn.style.display = "none";
+
+};
+
+closeChat.onclick = () => {
+
+    chatPopup.classList.remove("show");
+
+    chatBtn.style.display = "flex";
+
+};
 </script>
 
 </body>

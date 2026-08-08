@@ -28,7 +28,106 @@ body{
     background:#f3f3f3;
     min-height:2000px;
 }
+.chatbot-popup{
 
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:500px;
+    height:700px;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+
+    overflow:hidden;
+
+    display:none;
+
+    z-index:100000;
+}
+
+.chat-header{
+
+    background:#4da6ff;
+
+    color:white;
+
+    padding:15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.chat-header button{
+
+    border:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+.chat-btn{
+    position:fixed;
+
+    right:30px;
+    bottom:120px;
+
+    width:70px;
+    height:70px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#4da6ff;
+
+    color:white;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.chat-btn:hover{
+    transform:translateY(-5px);
+
+    background:#4da6ff;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+.chat-btn:active{
+    transform:translateY(-2px) scale(.92);
+}
+
+.chatbot-popup iframe{
+
+    width:100%;
+    height:650px;
+
+    border:none;
+}
 /* ===========================
         Filter
 =========================== */
@@ -1097,7 +1196,87 @@ body.no-scroll{
     }
 
 }
+/* =========================
+   Mobile Floating Buttons
+========================= */
+@media (max-width: 768px){
 
+    /* ปุ่ม Chatbot */
+    .chat-btn{
+        width:60px;
+        height:60px;
+
+        right:20px;
+        bottom:105px;
+
+        font-size:28px;
+
+        z-index:9999;
+    }
+
+    /* ปุ่ม + */
+    .floating-btn{
+        width:60px;
+        height:60px;
+
+        right:20px;
+        bottom:25px;
+
+        font-size:36px;
+
+        z-index:9998;
+    }
+
+    /* =========================
+       Chatbot แบบมือถือ
+       เลื่อนขึ้นจากด้านล่าง
+    ========================= */
+
+    .chatbot-popup{
+
+        display:block;
+
+        position:fixed;
+
+        left:0;
+        right:0;
+        bottom:0;
+
+        width:100%;
+        height:100dvh;
+
+        border-radius:25px 25px 0 0;
+
+        transform:translateY(100%);
+
+        transition:transform .35s ease;
+
+        z-index:100000;
+    }
+
+    /* ตอนเปิด Chat */
+    .chatbot-popup.show{
+        transform:translateY(0);
+    }
+
+    .chat-header{
+
+        height:65px;
+
+        border-radius:25px 25px 0 0;
+
+        padding:15px 20px;
+    }
+
+    .chatbot-popup iframe{
+
+        width:100%;
+
+        height:calc(100dvh - 65px);
+
+        border:none;
+    }
+}
 
 </style>
 </head>
@@ -1219,9 +1398,25 @@ body.no-scroll{
 </nav>
 </header>
 <!-- ปุ่ม AI -->
-<a href="chatbot.html" class="floating-ai">
+<!-- ปุ่มเปิด Chat -->
+<button id="chatBtn" class="chat-btn">
     🤖
-</a>
+</button>
+
+<!-- กล่อง Chat -->
+<div class="chatbot-popup" id="chatPopup">
+
+    <div class="chat-header">
+
+        <span>🤖 PetPaw AI</span>
+
+        <button id="closeChat">✕</button>
+
+    </div>
+
+    <iframe src="chatbot.html"></iframe>
+
+</div>
 <!-- ปุ่มบวก -->
 
 <a href="Add a pet.html" class="floating-btn">
@@ -1661,7 +1856,25 @@ ${username}
     }
 
 });
+const chatBtn = document.getElementById("chatBtn");
+const chatPopup = document.getElementById("chatPopup");
+const closeChat = document.getElementById("closeChat");
 
+chatBtn.onclick = () => {
+
+    chatPopup.classList.add("show");
+
+    chatBtn.style.display = "none";
+
+};
+
+closeChat.onclick = () => {
+
+    chatPopup.classList.remove("show");
+
+    chatBtn.style.display = "flex";
+
+};
 </script>
 </body>
 
