@@ -1013,7 +1013,7 @@ body{
 </section>
 <script type="module">
 
-import { auth, db } from "./firebase.js";
+import { auth, db, storage } from "./firebase.js";
 
 import {
     onAuthStateChanged
@@ -1024,6 +1024,12 @@ import {
     getDoc,
     updateDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
 
 
 // ============================
@@ -1149,42 +1155,6 @@ imageInput.addEventListener("change", (e) => {
 
 });
 // ============================
-// แปลงรูปเป็น Base64
-// ============================
-
-function imageToBase64(file) {
-
-    return new Promise((resolve, reject) => {
-
-        // ถ้าไม่ได้เลือกรูปใหม่
-        if (!file) {
-
-            resolve(currentPhoto);
-
-            return;
-
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = function () {
-
-            resolve(reader.result);
-
-        };
-
-        reader.onerror = function () {
-
-            reject("อ่านรูปไม่สำเร็จ");
-
-        };
-
-        reader.readAsDataURL(file);
-
-    });
-
-}
-// ============================
 // บันทึกข้อมูล
 // ============================
 
@@ -1195,49 +1165,145 @@ saveBtn.addEventListener("click", async () => {
         saveBtn.disabled = true;
         saveBtn.innerHTML = "กำลังบันทึก...";
 
-        const photoURL = await imageToBase64(selectedFile);
-        await updateDoc(doc(db, "users", currentUser.uid), {
+        // =====================================
+        // รูปเดิม
+        // =====================================
+
+        let photoURL = currentPhoto;
 
 
-            district: district.value.trim(),
-    username: username.value.trim(),
+        // =====================================
+        // ถ้ามีการเลือกรูปใหม่
+        // =====================================
 
-    phone: phone.value.trim(),
+        if (selectedFile) {
 
-    province: province.value.trim(),
+            // ตรวจสอบว่าเป็นรูปภาพ
+            if (!selectedFile.type.startsWith("image/")) {
 
-    address: address.value.trim(),
+                alert("กรุณาเลือกไฟล์รูปภาพ");
 
-    facebook: facebook.value.trim(),
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = "บันทึกข้อมูล";
 
-    line: line.value.trim(),
+                return;
+            }
 
-    instagram: instagram.value.trim(),
 
-    about: about.value.trim(),
+            // จำกัดขนาดไม่เกิน 5 MB
+            if (selectedFile.size > 5 * 1024 * 1024) {
 
-    profile: photoURL
+                alert("รูปภาพต้องมีขนาดไม่เกิน 5 MB");
 
-});
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = "บันทึกข้อมูล";
+
+                return;
+            }
+
+
+            // =================================
+            // หานามสกุลไฟล์
+            // =================================
+
+            const extension =
+                selectedFile.name
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            // =================================
+            // ตำแหน่งเก็บรูปใน Firebase Storage
+            // =================================
+
+            const storageRef = ref(
+                storage,
+                `profile/${currentUser.uid}.${extension}`
+            );
+
+
+            // =================================
+            // Upload รูป
+            // =================================
+
+            await uploadBytes(
+                storageRef,
+                selectedFile
+            );
+
+
+            // =================================
+            // ขอ URL ของรูป
+            // =================================
+
+            photoURL =
+                await getDownloadURL(storageRef);
+
+        }
+
+
+        // =====================================
+        // บันทึกข้อมูลลง Firestore
+        // =====================================
+
+        await updateDoc(
+            doc(db, "users", currentUser.uid),
+            {
+
+                district: district.value.trim(),
+
+                username: username.value.trim(),
+
+                phone: phone.value.trim(),
+
+                province: province.value.trim(),
+
+                address: address.value.trim(),
+
+                facebook: facebook.value.trim(),
+
+                line: line.value.trim(),
+
+                instagram: instagram.value.trim(),
+
+                about: about.value.trim(),
+
+                profile: photoURL
+
+            }
+        );
+
+
+        // =====================================
+        // สำเร็จ
+        // =====================================
 
         alert("บันทึกข้อมูลเรียบร้อยแล้ว");
 
         location.href = "profile.html";
 
+
     } catch (error) {
 
-    console.error(error);
+        console.error(
+            "บันทึกโปรไฟล์ไม่สำเร็จ:",
+            error
+        );
 
-    alert(
-        "Code: " + error.code +
-        "\n\nMessage: " + error.message
-    );
+        alert(
+            "ไม่สามารถบันทึกข้อมูลได้\n\n" +
+            "Code: " + (error.code || "-") +
+            "\n\nMessage: " + error.message
+        );
 
-    saveBtn.disabled = false;
 
-    saveBtn.innerHTML = "บันทึกข้อมูล";
+        saveBtn.disabled = false;
 
-}
+        saveBtn.innerHTML =
+            "บันทึกข้อมูล";
+
+    }
 
 });
 

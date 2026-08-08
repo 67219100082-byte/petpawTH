@@ -107,6 +107,46 @@ body{
     margin-top:20px;
     color:#666;
 }
+.profile-upload {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-upload label {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-preview {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    margin: 0 auto 10px;
+    transition: .2s;
+}
+
+.profile-preview:hover {
+    transform: scale(1.05);
+    border-color: #c8a77c;
+}
+
+.upload-text {
+    color: #c8a77c;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* ซ่อน input file ตัวจริง */
+#profile {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
 
 .login-link a{
     color:#c8a77c;
@@ -135,11 +175,6 @@ body{
 
 <h1>ลงทะเบียน</h1>
 
-<img
-    id="preview"
-    class="profile-preview"
-    src="img/default-profile.png">
-	
 <form id="registerForm">
 
     <div class="input-box">
@@ -152,29 +187,50 @@ body{
 
     <div class="input-box">
         <input
-    type="email"
-    id="email"
-    placeholder="Email"
-    required>
+            type="email"
+            id="email"
+            placeholder="Email"
+            required>
     </div>
 
     <div class="input-box">
         <input
-    type="password"
-    id="password"
-    minlength="6"
-    placeholder="Password อย่างน้อย 6 ตัว"
-    required>
+            type="password"
+            id="password"
+            minlength="6"
+            placeholder="Password อย่างน้อย 6 ตัว"
+            required>
     </div>
 
-    <div class="input-box">
+    <!-- รูปโปรไฟล์ -->
+    <div class="profile-upload">
+
+        <label for="profile">
+
+            <img
+                id="profilePreview"
+                class="profile-preview"
+                src="img/default-profile.png"
+            >
+
+            <div class="upload-text">
+                เลือกรูปโปรไฟล์
+            </div>
+
+        </label>
+
         <input
             type="file"
             id="profile"
-            accept="image/*">
+            accept="image/*"
+        >
+
     </div>
 
-    <button type="submit" class="register-btn">
+    <button
+        type="submit"
+        class="register-btn"
+        id="registerButton">
         ลงทะเบียน
     </button>
 
@@ -185,9 +241,275 @@ body{
     <a href="login.html">เข้าสู่ระบบ</a>
 </div>
 </div>
+<script>
+    const profileInput = document.getElementById("profile");
+const profilePreview = document.getElementById("profilePreview");
 
+
+// ===============================
+// แสดงตัวอย่างรูปโปรไฟล์
+// ===============================
+
+profileInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+
+    // ตรวจสอบว่าเป็นรูปภาพ
+    if (!file.type.startsWith("image/")) {
+
+        alert("กรุณาเลือกไฟล์รูปภาพ");
+
+        this.value = "";
+
+        return;
+    }
+
+
+    // จำกัดขนาดไม่เกิน 5 MB
+    if (file.size > 5 * 1024 * 1024) {
+
+        alert("รูปภาพต้องมีขนาดไม่เกิน 5 MB");
+
+        this.value = "";
+
+        return;
+    }
+
+
+    // แสดง Preview
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        profilePreview.src = e.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+// ===============================
+// สมัครสมาชิก
+// ===============================
+
+document
+    .getElementById("registerForm")
+    .addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+
+        const username =
+            document
+                .getElementById("username")
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        const registerButton =
+            document.getElementById("registerButton");
+
+
+        const profileFile =
+            profileInput.files[0];
+
+
+        try {
+
+            // ป้องกันกดปุ่มซ้ำ
+            registerButton.disabled = true;
+            registerButton.textContent = "กำลังสมัคร...";
+
+
+            // ===============================
+            // 1. สร้างบัญชี Firebase Authentication
+            // ===============================
+
+            const userCredential =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            const user =
+                userCredential.user;
+
+
+            // ===============================
+            // 2. รูปโปรไฟล์เริ่มต้น
+            // ===============================
+
+            let profileURL =
+                "img/default-profile.png";
+
+
+            // ===============================
+            // 3. ถ้ามีการเลือกรูป
+            // ===============================
+
+            if (profileFile) {
+
+                const extension =
+                    profileFile.name
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+
+
+                // ที่อยู่ไฟล์ใน Firebase Storage
+                const storageRef =
+                    ref(
+                        storage,
+                        `profile/${user.uid}.${extension}`
+                    );
+
+
+                // Upload รูป
+                await uploadBytes(
+                    storageRef,
+                    profileFile
+                );
+
+
+                // เอา URL รูป
+                profileURL =
+                    await getDownloadURL(
+                        storageRef
+                    );
+            }
+
+
+            // ===============================
+            // 4. บันทึกข้อมูลลง Firestore
+            // ===============================
+
+            await setDoc(
+                doc(db, "users", user.uid),
+                {
+
+                    username: username,
+
+                    email: email,
+
+                    profile: profileURL,
+
+                    role: "user",
+
+                    createdAt: serverTimestamp()
+
+                }
+            );
+
+
+            // ===============================
+            // 5. สมัครสำเร็จ
+            // ===============================
+
+            alert("สมัครสมาชิกสำเร็จ");
+
+            window.location.href =
+                "index.html";
+
+
+        } catch (error) {
+
+            console.error(
+                "Register Error:",
+                error
+            );
+
+
+            // ===============================
+            // แสดง Error
+            // ===============================
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
+
+                alert(
+                    "อีเมลนี้ถูกใช้งานแล้ว"
+                );
+
+            }
+
+            else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                alert(
+                    "รหัสผ่านต้องมีอย่างน้อย 6 ตัว"
+                );
+
+            }
+
+            else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                alert(
+                    "รูปแบบอีเมลไม่ถูกต้อง"
+                );
+
+            }
+
+            else if (
+                error.code ===
+                "storage/unauthorized"
+            ) {
+
+                alert(
+                    "ไม่มีสิทธิ์อัปโหลดรูป กรุณาตรวจสอบ Storage Rules"
+                );
+
+            }
+
+            else {
+
+                alert(
+                    "สมัครสมาชิกไม่สำเร็จ\n" +
+                    error.message
+                );
+
+            }
+
+
+            // เปิดปุ่มกลับมาใช้ใหม่
+            registerButton.disabled = false;
+
+            registerButton.textContent =
+                "ลงทะเบียน";
+
+        }
+
+    });
+</script>
 <script type="module">
-import { auth, db } from "./firebase.js";
+    
+import { auth, db, storage } from "./firebase.js";
 
 import {
     createUserWithEmailAndPassword
@@ -195,26 +517,16 @@ import {
 
 import {
     doc,
-    setDoc
+    setDoc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-/* รูปโปรไฟล์ */
-const profileInput = document.getElementById("profile");
-const preview = document.getElementById("preview");
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
 
-let profileImage = "img/default-profile.png";
-
-profileInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = e => {
-            profileImage = e.target.result;
-            preview.src = profileImage;
-        };
-        reader.readAsDataURL(file);
-    }
-});
 
 /* สมัคร */
 document.getElementById("registerForm").addEventListener("submit", async function (e) {
