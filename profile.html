@@ -3,1724 +3,2084 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>โปรไฟล์ผู้ใช้ | PetPaw</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <title>โปรไฟล์ | PetPaw</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- =========================
+         Google Font : Prompt
+    ========================== -->
 
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-<style>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Prompt",sans-serif;
-}
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-body{
-    background:#f3f3f3;
-}
 
-a{
-    text-decoration:none;
-    color:inherit;
-}
+    <style>
 
-body.no-scroll{
-    overflow:hidden;
-}
+        /* =========================================
+           RESET
+        ========================================= */
 
-/* =====================
-Banner
-===================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.banner{
 
-    position:relative;
+        body {
 
-    width:100%;
+            font-family: "Prompt", sans-serif;
 
-    height:320px;
+            background: #f8f4ee;
+    color: #444;
 
-    background-image:url("img/banner1.png");
+            min-height: 100vh;
 
-    background-size:cover;
+        }
+        /* =========================
+           Navbar
+        ========================= */
 
-    background-position:center;
+        .navbar {
+            width: 100%;
+            height: 70px;
 
-    border-radius:0 0 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    overflow:hidden;
+            padding: 0 50px;
 
-}
+            background: #ffffff;
 
-.banner::before{
+            box-shadow:
+                0 3px 15px rgba(0, 0, 0, 0.08);
 
-    content:"";
+            position: sticky;
+            top: 0;
 
-    position:absolute;
+            z-index: 100;
+        }
 
-    inset:0;
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #796247;
+            text-decoration: none;
+        }
 
-    background:rgba(0,0,0,.08);
+        .home-link {
+            text-decoration: none;
+            color: #796247;
 
-}
+            font-size: 16px;
+            font-weight: 500;
 
-/* =====================
-Banner Title
-===================== */
+            padding: 10px 20px;
 
-.banner-title{
+            border-radius: 12px;
 
-    position:absolute;
+            transition: 0.25s;
+        }
 
-    left:50%;
+        .home-link:hover {
+            background: #8a6847;
+    color: #ffffff;
+        }
 
-    top:58%;
 
-    transform:translate(-50%,-50%);
 
-    text-align:center;
+        /* =========================================
+           HOME BUTTON
+        ========================================= */
 
-    color:white;
+        .home-btn {
 
-    z-index:5;
+            position: fixed;
 
-}
+            top: 25px;
 
-.banner-title h1{
+            left: 25px;
 
-    font-size:42px;
+            z-index: 100;
 
-    margin-bottom:10px;
+            display: inline-flex;
 
-}
+            align-items: center;
 
-.banner-title p{
+            justify-content: center;
 
-    font-size:18px;
+            padding: 10px 20px;
 
-    opacity:.95;
+            background: #8a6847;
+    color: #ffffff;
 
-}
+            text-decoration: none;
 
-/* =====================
-Navbar
-===================== */
+            border-radius: 12px;
 
-.navbar{
+            font-size: 14px;
 
-    position:absolute;
+            font-weight: 500;
 
-    top:25px;
+            box-shadow:
+                0 5px 15px rgba(
+                    79,
+                    70,
+                    229,
+                    0.20
+                );
 
-    left:35px;
+            transition: 0.25s;
 
-    right:35px;
+        }
 
-    display:flex;
 
-    justify-content:space-between;
+        .home-btn:hover {
 
-    align-items:flex-start;
+            background: #8a6847;
 
-    z-index:999;
+            transform: translateY(-2px);
 
-}
+        }
 
-/* =====================
-Navbar Scroll
-===================== */
 
-.navbar.scrolled{
+        /* =========================================
+           MAIN
+        ========================================= */
 
-    position:fixed;
+        .container {
 
-    top:0;
+            width: min(
+                1100px,
+                calc(100% - 40px)
+            );
 
-    left:0;
+            margin: 40px auto 60px;
 
-    right:0;
+        }
 
-    width:100%;
 
-    padding:15px 40px;
+        /* =========================================
+           PROFILE CARD
+        ========================================= */
 
-    background:rgba(255,255,255,.95);
+        .profile-card {
 
-    backdrop-filter:blur(10px);
+            background: #ffffff;
 
-    box-shadow:0 2px 15px rgba(0,0,0,.1);
+            border-radius: 25px;
 
-}
+            overflow: hidden;
 
-/* =====================
-Left Menu
-===================== */
+            box-shadow:
+                0 8px 30px rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
 
-.left-menu{
+        }
 
-    display:flex;
 
-    gap:15px;
+        /* =========================================
+           COVER
+        ========================================= */
 
-    flex-wrap:wrap;
+        .profile-cover {
 
-}
+            width: 100%;
 
-.right-menu{
+            height: 190px;
 
-    display:flex;
+            background:
+        linear-gradient(
+            135deg,
+            #d8c5ad 0%,
+            #c8a77c 50%,
+            #f8f4ee 100%
+        );
 
-    gap:15px;
+        }
 
-}
 
-/* =====================
-Menu Button
-===================== */
+        /* =========================================
+           PROFILE HEADER
+        ========================================= */
 
-.menu-btn{
+        .profile-header {
 
-    padding:14px 25px;
+            display: flex;
 
-    border-radius:15px;
+            align-items: center;
 
-    border:1px solid rgba(255,255,255,.25);
+            justify-content: space-between;
 
-    background:rgba(255,255,255,.18);
+            padding: 0 35px;
 
-    backdrop-filter:blur(10px);
+            margin-top: -65px;
 
-    color:#796247;
+            position: relative;
 
-    font-weight:600;
+        }
 
-    transition:.3s;
 
-}
+        .profile-left {
 
-.menu-btn:hover{
+            display: flex;
 
-    transform:translateY(-4px);
+            align-items: center;
 
-    background:rgba(255,255,255,.3);
+            gap: 22px;
 
-}
+        }
 
-.navbar.scrolled .menu-btn{
 
-    background:#c8a77c;
+        /* =========================================
+           PROFILE IMAGE
+        ========================================= */
 
-    color:white;
+        .profile-photo {
 
-    border:none;
+            width: 130px;
 
-}
+            height: 130px;
 
-/* =====================
-Dropdown Desktop
-===================== */
+            border-radius: 50%;
 
-.menu-item{
+            object-fit: cover;
 
-    position:relative;
+            background: #ffffff;
 
-}
+            border: 6px solid #ffffff;
 
-.dropdown{
+            box-shadow:
+                0 5px 20px rgba(
+                    0,
+                    0,
+                    0,
+                    0.15
+                );
 
-    position:absolute;
+            display: block;
 
-    top:65px;
+        }
 
-    left:0;
 
-    width:210px;
+        /* =========================================
+           PROFILE NAME
+        ========================================= */
 
-    background:white;
+        .profile-name {
 
-    border-radius:18px;
+            padding-top: 65px;
 
-    overflow:hidden;
+        }
 
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
 
-    opacity:0;
+        .profile-name h2 {
 
-    visibility:hidden;
+            font-size: 27px;
 
-    transition:.25s;
+            font-weight: 600;
 
-}
+            line-height: 1.3;
 
-.menu-item:hover .dropdown{
+            color: #796247;
 
-    opacity:1;
+            margin-bottom: 4px;
 
-    visibility:visible;
+        }
 
-}
 
-.dropdown a{
+        .profile-name p {
 
-    display:block;
+            color: #777;
 
-    padding:16px 20px;
+            font-size: 14px;
 
-    color:#444;
+            word-break: break-word;
 
-    font-weight:500;
+        }
 
-}
 
-.dropdown a:hover{
+        /* =========================================
+           EDIT BUTTON
+        ========================================= */
 
-    background:#f2e4d3;
+        .edit-btn {
 
-}
+            display: inline-flex;
 
-/* =====================
-Desktop User
-===================== */
+            align-items: center;
 
-.user-dropdown{
+            justify-content: center;
 
-    position:relative;
+            text-decoration: none;
 
-}
+           background: #8a6847;
+    color: #ffffff;
 
-.user-profile{
+            padding: 11px 20px;
 
-    display:flex;
+            border-radius: 12px;
 
-    align-items:center;
+            font-size: 14px;
 
-    gap:12px;
+            font-weight: 500;
 
-    cursor:pointer;
+            transition: 0.25s;
 
-    padding:8px 15px;
+            margin-top: 65px;
 
-    border-radius:15px;
+            white-space: nowrap;
 
-    background:rgba(255,255,255,.18);
+        }
 
-    backdrop-filter:blur(10px);
 
-}
+        .edit-btn:hover {
 
-.user-profile img{
+            background: #796247;
 
-    width:44px;
+            transform: translateY(-2px);
 
-    height:44px;
+        }
 
-    border-radius:50%;
 
-    object-fit:cover;
+        /* =========================================
+           PROFILE INFORMATION
+        ========================================= */
 
-}
+        .profile-info {
 
-.user-profile span{
+            display: grid;
 
-    color:white;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
 
-    font-weight:600;
+            gap: 18px;
 
-}
+            padding: 35px;
 
-.dropdown-menu{
+        }
 
-    position:absolute;
 
-    top:65px;
+        /* =========================================
+           INFO BOX
+        ========================================= */
 
-    right:0;
+        .info-box {
 
-    width:220px;
+            background: #fdfbf8;
+    border: 1px solid #d8c5ad;
 
-    background:white;
+            border-radius: 15px;
 
-    border-radius:18px;
+            padding: 18px;
 
-    overflow:hidden;
+            min-height: 88px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.18);
+        }
 
-    display:none;
 
-}
+        .info-title {
 
-.dropdown-menu.show{
+            font-size: 13px;
 
-    display:block;
+            color: #777;
 
-}
+            margin-bottom: 7px;
 
-.dropdown-menu a{
+            font-weight: 400;
 
-    display:block;
+        }
 
-    padding:16px 20px;
 
-    color:#555;
+        .info-value {
 
-}
+            font-size: 15px;
 
-.dropdown-menu a:hover{
+            color: #444;
 
-    background:#f3f3f3;
+            font-weight: 500;
 
-}
-/* ==========================================
-   MOBILE MENU
-========================================== */
+            line-height: 1.6;
 
-/* ปุ่ม ☰ */
+            word-break: break-word;
 
-.menu-toggle{
+            white-space: pre-wrap;
 
-    display:none;
+        }
 
-    font-size:28px;
 
-    color:#6b4f33;
+        .info-value a {
 
-    cursor:pointer;
+            color: #796247;
+    text-decoration: underline;
 
-    padding:8px 14px;
+            word-break: break-all;
 
-    border-radius:12px;
+        }
 
-    background:rgba(255,255,255,.85);
 
-    backdrop-filter:blur(10px);
+        .info-value a:hover {
 
-    z-index:1002;
+            text-decoration: underline;
 
-}
+        }
 
-/* ตอน Scroll */
 
-.navbar.scrolled .menu-toggle{
+        /* =========================================
+           STATISTICS
+        ========================================= */
 
-    background:#d8c5ad;
+        .profile-stats {
 
-    border:1px solid #b08a61;
+            display: grid;
 
-}
+            grid-template-columns:
+                repeat(3, 1fr);
 
-/* ==========================================
-   Sidebar
-========================================== */
+            gap: 18px;
 
-.sidebar{
+            padding:
+                0 35px 35px;
 
-    position:fixed;
+        }
 
-    top:0;
 
-    left:-300px;
+        .stat-card {
 
-    width:280px;
+            text-align: center;
 
-    height:100vh;
+            background: #fdfbf8;
+    border: 1px solid #d8c5ad;
 
-    background:#796247;
+            border-radius: 18px;
 
-    padding:25px;
+            padding: 25px 15px;
 
-    transition:.35s;
+            transition: 0.25s;
 
-    z-index:1001;
+        }
 
-    overflow-y:auto;
 
-}
+        .stat-card:hover {
 
-.sidebar.active{
+            transform: translateY(-3px);
 
-    left:0;
+            box-shadow:
+                0 8px 20px rgba(
+                    0,
+                    0,
+                    0,
+                    0.06
+                );
 
-}
+        }
 
-/* ==========================================
-   ปุ่ม Login Register
-========================================== */
 
-.sidebar-buttons{
+        .stat-card h2 {
 
-    display:flex;
+            font-size: 30px;
 
-    gap:10px;
+            font-weight: 600;
 
-    margin-bottom:30px;
+            color: #8a6847;
 
-}
+            margin-bottom: 4px;
 
-.sidebar-buttons a{
+        }
 
-    flex:1;
 
-    text-align:center;
+        .stat-card p {
 
-    padding:14px;
+            font-size: 13px;
 
-    border-radius:12px;
+            color: #777;
 
-    color:white;
+        }
 
-    font-weight:600;
 
-}
+        /* =========================================
+           LOADING
+        ========================================= */
 
-.register-btn{
+        .loading {
 
-    background:#8a6847;
+            position: fixed;
 
-}
+            inset: 0;
 
-.login-btn{
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.92
+                );
 
-    background:#5e4630;
+            display: flex;
 
-}
+            align-items: center;
 
-/* ==========================================
-   Sidebar User
-========================================== */
+            justify-content: center;
 
-.sidebar-user{
+            z-index: 9999;
 
-    display:flex;
+            font-size: 17px;
 
-    align-items:center;
+            color: #8a6847;
 
-    gap:14px;
+        }
 
-    margin-bottom:30px;
 
-}
+        .loading.hidden {
 
-.sidebar-photo{
+            display: none;
 
-    width:60px;
+        }
 
-    height:60px;
 
-    border-radius:50%;
+        /* =========================================
+           MOBILE
+        ========================================= */
 
-    object-fit:cover;
+        @media (max-width: 768px) {
 
-    border:3px solid white;
 
-}
+            .home-btn {
 
-.sidebar-name{
+                top: 15px;
 
-    color:white;
+                left: 15px;
 
-    font-size:19px;
+                padding:
+                    8px 15px;
 
-    font-weight:700;
+                font-size: 13px;
 
-    margin-bottom:5px;
+            }
 
-}
 
-.sidebar-user a{
+            .container {
 
-    color:white;
+                width:
+                    calc(100% - 20px);
 
-    opacity:.9;
+                margin:
+                    20px auto 40px;
 
-    display:block;
+                padding-top: 35px;
 
-    margin-top:6px;
+            }
 
-    font-size:15px;
 
-}
+            .profile-card {
 
-/* ==========================================
-   Sidebar Menu
-========================================== */
+                border-radius: 20px;
 
-.sidebar ul{
+            }
 
-    list-style:none;
 
-}
+            .profile-cover {
 
-.sidebar li{
+                height: 150px;
 
-    margin:0;
+            }
 
-}
 
-.sidebar li a,
+            .profile-header {
 
-.dropdown-btn{
+                flex-direction: column;
 
-    width:100%;
+                align-items: center;
 
-    display:flex;
+                text-align: center;
 
-    justify-content:space-between;
+                padding:
+                    0 20px;
 
-    align-items:center;
+                margin-top: -60px;
 
-    background:none;
+            }
 
-    border:none;
 
-    color:white;
+            .profile-left {
 
-    font-size:18px;
+                flex-direction: column;
 
-    font-weight:500;
+                gap: 10px;
 
-    padding:15px 0;
+            }
 
-    cursor:pointer;
 
-}
+            .profile-photo {
 
-/* ==========================================
-   Submenu
-========================================== */
+                width: 120px;
 
-.submenu{
+                height: 120px;
 
-    display:none;
+            }
 
-    list-style:none;
 
-    padding-left:18px;
+            .profile-name {
 
-}
+                padding-top: 0;
 
-.submenu.show{
+            }
 
-    display:block;
 
-}
+            .profile-name h2 {
 
-.submenu li a{
+                font-size: 23px;
 
-    padding:10px 0;
+            }
 
-    font-size:16px;
 
-}
+            .profile-name p {
 
-/* ==========================================
-   Arrow
-========================================== */
+                font-size: 13px;
 
-.arrow{
+            }
 
-    transition:.3s;
 
-}
+            .edit-btn {
 
-.arrow.rotate{
+                width: 100%;
 
-    transform:rotate(90deg);
+                margin-top: 18px;
 
-}
+            }
 
-/* ==========================================
-   Overlay
-========================================== */
 
-.overlay{
+            .profile-info {
 
-    position:fixed;
+                grid-template-columns: 1fr;
 
-    inset:0;
+                padding:
+                    25px 20px;
 
-    background:rgba(0,0,0,.5);
+                gap: 14px;
 
-    opacity:0;
+            }
 
-    visibility:hidden;
 
-    transition:.3s;
+            .profile-stats {
 
-    z-index:1000;
+                grid-template-columns: 1fr;
 
-}
+                padding:
+                    0 20px 25px;
 
-.overlay.active{
+                gap: 14px;
 
-    opacity:1;
+            }
 
-    visibility:visible;
+        }
 
-}
 
-/* ==========================================
-   Responsive
-========================================== */
+        /* =========================================
+           SMALL MOBILE
+        ========================================= */
 
-@media(max-width:1024px){
+        @media (max-width: 400px) {
 
-    .menu-toggle{
 
-        display:block;
+            .profile-cover {
 
-    }
+                height: 135px;
 
-    .left-menu{
+            }
 
-        display:none;
 
-    }
+            .profile-name h2 {
 
-    .right-menu{
+                font-size: 21px;
 
-        display:none;
+            }
 
-    }
 
-    .navbar{
+            .profile-info {
 
-        position:fixed;
+                padding:
+                    20px 15px;
 
-        top:0;
+            }
 
-        left:0;
 
-        right:0;
+            .profile-stats {
 
-        padding:15px 20px;
+                padding:
+                    0 15px 20px;
 
-        align-items:center;
+            }
 
-    }
 
-    body{
+            .info-box {
 
-        padding-top:70px;
+                padding: 15px;
 
-    }
+            }
 
-    .banner{
+        }
 
-        height:260px;
-
-    }
-
-    .banner-title h1{
-
-        font-size:32px;
-
-    }
-
-}
-
-@media(max-width:600px){
-
-    .banner{
-
-        height:220px;
-
-    }
-
-    .banner-title h1{
-
-        font-size:26px;
-
-    }
-
-    .banner-title p{
-
-        font-size:15px;
-
-    }
-
-}
-/* ==========================================
-   PROFILE SECTION
-========================================== */
-
-.profile-section{
-
-    max-width:1200px;
-
-    margin:60px auto;
-
-    padding:0 20px;
-
-}
-
-/* ==========================================
-   Profile Card
-========================================== */
-
-.profile-card{
-
-    background:white;
-
-    border-radius:30px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-    overflow:hidden;
-
-}
-
-/* ==========================================
-   Cover
-========================================== */
-
-.profile-cover{
-
-    height:180px;
-
-    background:linear-gradient(135deg,#c8a77c,#8a6847);
-
-}
-
-/* ==========================================
-   Header
-========================================== */
-
-.profile-header{
-
-    margin-top:-70px;
-
-    padding:0 40px 35px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-}
-
-/* ==========================================
-   Left
-========================================== */
-
-.profile-left{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:28px;
-
-}
-
-/* ==========================================
-   Photo
-========================================== */
-
-.profile-photo{
-
-    width:140px;
-
-    height:140px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:6px solid white;
-
-    background:white;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.18);
-
-}
-
-/* ==========================================
-   Name
-========================================== */
-
-.profile-name{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-start;
-
-    margin-top:75px;
-
-}
-
-.profile-name h2{
-
-    font-size:38px;
-
-    color:#333;
-
-    margin:0 0 10px 0;
-
-    line-height:1.2;
-
-    font-weight:700;
-
-}
-
-.profile-name p{
-
-    color:#666;
-
-    font-size:18px;
-
-    line-height:1.5;
-
-}
-
-/* ==========================================
-   Right Button
-========================================== */
-
-.edit-btn{
-
-    background:#8a6847;
-
-    color:white;
-
-    padding:14px 28px;
-
-    border-radius:15px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-    margin-top:70px;
-
-
-}
-
-.edit-btn:hover{
-
-    transform:translateY(-3px);
-
-    background:#6f5339;
-
-}
-
-/* ==========================================
-   Info Grid
-========================================== */
-
-.profile-info{
-    
-    padding-top: 40px;
-    padding:45px;
-
-    display:grid;
-
-    padding-top:35px;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:25px;
-
-    flex:1;
-
-}
-
-/* ==========================================
-   Box
-========================================== */
-
-.info-box{
-
-    background:#fafafa;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    border:1px solid #eee;
-
-    transition:.3s;
-
-}
-
-.info-box:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-/* ==========================================
-   Label
-========================================== */
-
-.info-title{
-
-    color:#8a6847;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    margin-bottom:8px;
-
-    text-transform:uppercase;
-
-}
-
-/* ==========================================
-   Value
-========================================== */
-
-.info-value{
-
-    color:#444;
-
-    font-size:18px;
-
-    font-weight:500;
-
-}
-
-/* ==========================================
-   Statistics
-========================================== */
-
-.profile-stats{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:20px;
-
-    padding:0 40px 40px;
-
-}
-
-.stat-card{
-
-    background:#fff7ef;
-
-    border-radius:20px;
-
-    text-align:center;
-
-    padding:30px;
-
-    border:1px solid #ecd4b3;
-
-}
-
-.stat-card h2{
-
-    font-size:38px;
-
-    color:#8a6847;
-
-}
-
-.stat-card p{
-
-    margin-top:8px;
-
-    color:#666;
-
-}
-.topbar{
-
-    width:100%;
-
-    padding:25px 40px;
-
-    display:flex;
-
-    align-items:center;
-
-    background:white;
-
-    box-shadow:0 3px 15px rgba(0,0,0,.08);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:999;
-
-}
-
-.home-btn{
-
-    background:#8a6847;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    padding:14px 28px;
-
-    border-radius:15px;
-
-    font-weight:bold;
-
-    transition:.3s;
-
-}
-
-.home-btn:hover{
-
-    background:#6f5338;
-
-}
-
-/* ==========================================
-   Responsive
-========================================== */
-@media(max-width:1024px){
-
-.topbar{
-
-    padding:15px;
-
-}
-
-.home-btn{
-
-    width:100%;
-
-    text-align:center;
-
-}
-
-}
-@media(max-width:1024px){
-
-    .profile-header{
-
-        flex-direction:column;
-
-        align-items:center;
-
-        text-align:center;
-
-    }
-
-    .profile-left{
-
-        flex-direction:column;
-
-        align-items:center;
-
-    }
-
-    .profile-info{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .profile-stats{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-@media(max-width:1024px){
-
-    .profile-photo{
-
-        width:110px;
-
-        height:110px;
-
-    }
-
-    .profile-name h2{
-
-        font-size:26px;
-
-    }
-
-    .profile-name p{
-
-        font-size:15px;
-
-    }
-
-    .profile-header{
-
-        padding:0 20px 30px;
-
-    }
-
-    .profile-info{
-
-        padding:20px;
-
-    }
-
-    .profile-stats{
-
-        padding:0 20px 20px;
-
-    }
-
-}
-
-</style>
+    </style>
 
 </head>
 
+
 <body>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay"></div>
+    <!-- =========================
+         Navbar
+    ========================= -->
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+    <nav class="navbar">
 
-<div id="sidebarUserMenu">
+        <a
+            href="index.html"
+            class="logo">
 
-<div class="sidebar-buttons">
+            PetPaw
 
-<a href="register.html" class="register-btn">
-ลงทะเบียน
-</a>
+        </a>
 
-<a href="login.html" class="login-btn">
-เข้าสู่ระบบ
-</a>
+        <a
+            href="index.html"
+            class="home-link">
 
-</div>
+            HOME
 
-</div>
+        </a>
 
-<ul>
+    </nav>
 
-<li>
-<a href="index.html">HOME</a>
-</li>
 
-<li>
+    <!-- =========================================
+         LOADING
+    ========================================== -->
 
-<button class="dropdown-btn" id="typeMenu">
+    <div
+        id="loading"
+        class="loading">
 
-ชนิด
+        กำลังโหลดข้อมูล...
 
-<span id="arrow">▶</span>
+    </div>
 
-</button>
 
-<ul class="submenu" id="submenu">
+    <!-- =========================================
+         MAIN
+    ========================================== -->
 
-<li>
-<a href="dog.html">สุนัข</a>
-</li>
+    <main class="container">
 
-<li>
-<a href="cat.html">แมว</a>
-</li>
 
-</ul>
+        <div class="profile-card">
 
-</li>
 
-<li>
+            <!-- =====================================
+                 COVER
+            ====================================== -->
 
-<a href="Reportmissing.html">
+            <div class="profile-cover"></div>
 
-สัตว์เลี้ยงหาย
 
-</a>
+            <!-- =====================================
+                 PROFILE HEADER
+            ====================================== -->
 
-</li>
+            <div class="profile-header">
 
-<li>
 
-<a href="clinic.html">
+                <div class="profile-left">
 
-Clinic
 
-</a>
+                    <img
+                        id="profileImage"
+                        src="img/default-profile.png"
+                        class="profile-photo"
+                        alt="Profile">
 
-</li>
 
-<li>
+                    <div class="profile-name">
 
-<a href="publicrelations.html">
 
-ประชาสัมพันธ์
+                        <h2 id="profileName">
 
-</a>
+                            Loading...
 
-</li>
+                        </h2>
 
-<li>
 
-<a href="ContactUs.html">
+                        <p id="profileEmail">
 
-ติดต่อเรา
+                            -
 
-</a>
+                        </p>
 
-</li>
 
-</ul>
+                    </div>
 
-</div>
 
-<nav class="topbar">
+                </div>
 
-    <a href="index.html" class="home-btn">
-         HOME
-    </a>
 
-</nav>
+                <!--
+                    แสดงเฉพาะเจ้าของโปรไฟล์
+                -->
 
-<!-- ==========================================
-     PROFILE
-========================================== -->
+                <a
+                    href="edit-profile.html"
+                    class="edit-btn"
+                    id="editProfileBtn">
 
-<section class="profile-section">
+                    ✏ แก้ไขโปรไฟล์
 
-    <div class="profile-card">
+                </a>
 
-        <!-- Cover -->
-        <div class="profile-cover"></div>
 
-        <!-- Header -->
-        <div class="profile-header">
+            </div>
 
-            <div class="profile-left">
 
-                <img
-                    id="profileImage"
-                    src="img/default-profile.png"
-                    class="profile-photo"
-                >
+            <!-- =====================================
+                 INFORMATION
+            ====================================== -->
 
-                <div class="profile-name">
+            <div class="profile-info">
 
-                    <h2 id="profileName">
-                        Loading...
+
+                <!-- Username -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        Username
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="username">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        Email
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="email">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        เบอร์โทร
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="phone">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Province -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        จังหวัด
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="province">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- District -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        อำเภอ
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="district">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Address -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        ที่อยู่
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="address">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Facebook -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        Facebook
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="facebook">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Line -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        Line
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="line">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Instagram -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        Instagram
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="instagram">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- About -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        เกี่ยวกับฉัน
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="about">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+                <!-- Created At -->
+
+                <div class="info-box">
+
+                    <div class="info-title">
+
+                        วันที่สมัครสมาชิก
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="createdAt">
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =====================================
+                 STATISTICS
+            ====================================== -->
+
+            <div class="profile-stats">
+
+
+                <div class="stat-card">
+
+                    <h2 id="dogCount">
+
+                        0
+
                     </h2>
 
-                    <p id="profileEmail">
-                        -
+
+                    <p>
+
+                        สุนัขที่ลงประกาศ
+
                     </p>
 
                 </div>
 
+
+                <div class="stat-card">
+
+                    <h2 id="catCount">
+
+                        0
+
+                    </h2>
+
+
+                    <p>
+
+                        แมวที่ลงประกาศ
+
+                    </p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h2 id="totalCount">
+
+                        0
+
+                    </h2>
+
+
+                    <p>
+
+                        รวมทั้งหมด
+
+                    </p>
+
+                </div>
+
+
             </div>
 
-            <a
-    href="edit-profile.html"
-    class="edit-btn"
-    id="editProfileBtn"
->
-    ✏ แก้ไขโปรไฟล์
-</a>
 
         </div>
 
-        <!-- ข้อมูล -->
 
-        <div class="profile-info">
+    </main>
 
-            <div class="info-box">
 
-                <div class="info-title">
-                    Username
-                </div>
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
 
-                <div
-                    class="info-value"
-                    id="username"
-                >
-                    -
-                </div>
+    <script type="module">
 
-            </div>
 
-            <div class="info-box">
+        /* =========================================
+           อ่าน UID จาก URL
 
-                <div class="info-title">
-                    Email
-                </div>
+           profile.html
+           = โปรไฟล์ตัวเอง
 
-                <div
-                    class="info-value"
-                    id="email"
-                >
-                    -
-                </div>
+           profile.html?uid=xxxxx
+           = โปรไฟล์ของ UID ที่ระบุ
+        ========================================== */
 
-            </div>
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
 
-            <div class="info-box">
 
-                <div class="info-title">
-                    เบอร์โทร
-                </div>
+        const profileUid =
+            params.get("uid");
 
-                <div
-                    class="info-value"
-                    id="phone"
-                >
-                    -
-                </div>
 
-            </div>
-            <!-- กล่องเกี่ยวกับฉัน -->
-<div class="info-box">
+        /* =========================================
+           Firebase
+        ========================================== */
 
-    <div class="info-title">
-        เกี่ยวกับฉัน
-    </div>
+        import {
+            auth,
+            db
+        } from "./firebase.js";
 
-    <div
-        class="info-value"
-        id="about"
-    >
-        -
-    </div>
 
-</div>
+        import {
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-            <div class="info-box">
 
-                <div class="info-title">
-                    จังหวัด
-                </div>
+        import {
+            doc,
+            getDoc,
+            collection,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-                <div
-                    class="info-value"
-                    id="province"
-                >
-                    -
-                </div>
 
-            </div>
+        /* =========================================
+           Elements
+        ========================================== */
 
-            <!-- กล่องอำเภอ -->
-<div class="info-box">
+        const profileImage =
+            document.getElementById(
+                "profileImage"
+            );
 
-    <div class="info-title">
-        อำเภอ
-    </div>
 
-    <div
-        class="info-value"
-        id="district"
-    >
-        -
-    </div>
+        const profileName =
+            document.getElementById(
+                "profileName"
+            );
 
-</div>
 
+        const profileEmail =
+            document.getElementById(
+                "profileEmail"
+            );
 
-<!-- กล่อง Facebook -->
-<div class="info-box">
 
-    <div class="info-title">
-        Facebook
-    </div>
+        const username =
+            document.getElementById(
+                "username"
+            );
 
-    <div
-        class="info-value"
-        id="facebook"
-    >
-        -
-    </div>
 
-</div>
+        const email =
+            document.getElementById(
+                "email"
+            );
 
-<!-- กล่อง Line -->
-<div class="info-box">
 
-    <div class="info-title">
-        Line
-    </div>
+        const phone =
+            document.getElementById(
+                "phone"
+            );
 
-    <div
-        class="info-value"
-        id="line"
-    >
-        -
-    </div>
 
-</div>
+        const province =
+            document.getElementById(
+                "province"
+            );
 
-<!-- กล่อง Instagram -->
-<div class="info-box">
 
-    <div class="info-title">
-        Instagram
-    </div>
+        const district =
+            document.getElementById(
+                "district"
+            );
 
-    <div
-        class="info-value"
-        id="instagram"
-    >
-        -
-    </div>
 
-</div>
+        const address =
+            document.getElementById(
+                "address"
+            );
 
-            <div class="info-box">
 
-                <div class="info-title">
-                    วันที่สมัครสมาชิก
-                </div>
+        const facebook =
+            document.getElementById(
+                "facebook"
+            );
 
-                <div
-                    class="info-value"
-                    id="createdAt"
-                >
-                    -
-                </div>
 
-            </div>
+        const line =
+            document.getElementById(
+                "line"
+            );
 
-        </div>
 
-        <!-- สถิติ -->
+        const instagram =
+            document.getElementById(
+                "instagram"
+            );
 
-        <div class="profile-stats">
 
-            <div class="stat-card">
+        const about =
+            document.getElementById(
+                "about"
+            );
 
-                <h2 id="dogCount">
-                    0
-                </h2>
 
-                <p>
-                    สุนัขที่ลงประกาศ
-                </p>
+        const createdAt =
+            document.getElementById(
+                "createdAt"
+            );
 
-            </div>
 
-            <div class="stat-card">
+        const dogCount =
+            document.getElementById(
+                "dogCount"
+            );
 
-                <h2 id="catCount">
-                    0
-                </h2>
 
-                <p>
-                    แมวที่ลงประกาศ
-                </p>
+        const catCount =
+            document.getElementById(
+                "catCount"
+            );
 
-            </div>
 
-            <div class="stat-card">
+        const totalCount =
+            document.getElementById(
+                "totalCount"
+            );
 
-                <h2 id="totalCount">
-                    0
-                </h2>
 
-                <p>
-                    รวมทั้งหมด
-                </p>
+        const editBtn =
+            document.getElementById(
+                "editProfileBtn"
+            );
 
-            </div>
 
-        </div>
+        const loading =
+            document.getElementById(
+                "loading"
+            );
 
-    </div>
 
-</section>
-</main>
+        /* =========================================
+           แสดงข้อมูลหรือ -
+        ========================================== */
 
-<script type="module">
+        function displayValue(value) {
 
-    const params = new URLSearchParams(window.location.search);
+            if (
+                value === undefined ||
+                value === null ||
+                String(value).trim() === ""
+            ) {
 
-const profileUid = params.get("uid");
+                return "-";
 
-import { auth, db } from "./firebase.js";
+            }
 
-import {
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-import {
-    doc,
-    getDoc,
-    collection,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-onAuthStateChanged(auth, async(user)=>{
-
-    if(!user){
-
-        location.href="login.html";
-        return;
-
-    }
-
-    // ---------------------------
-    // ดึงข้อมูลผู้ใช้
-    // ---------------------------
-
-    const uid = profileUid || user.uid;
-
-    const editBtn = document.getElementById("editProfileBtn");
-
-if (uid === user.uid) {
-
-    editBtn.style.display = "inline-flex";
-
-} else {
-
-    editBtn.style.display = "none";
-
-}
-
-const userRef = doc(db,"users",uid);
-
-const userSnap = await getDoc(userRef);
-
-console.log(userSnap.exists());
-
-console.log(userSnap.data());
-    if(userSnap.exists()){
-
-        const data = userSnap.data();
-
-        document.getElementById("profileImage").src =
-        data.profile || "img/default-profile.png";
-
-       document.getElementById("profileName").textContent =
-        data.username || "User";
-
-        document.getElementById("profileEmail").textContent =
-        data.email || "-";
-
-        document.getElementById("username").textContent =
-        data.username || "-";
-
-        document.getElementById("email").textContent =
-        data.email || "-";
-
-        document.getElementById("phone").textContent =
-        data.phone || "-";
-
-        document.getElementById("province").textContent =
-        data.province || "-";
-
-        document.getElementById("district").textContent =
-        data.district || "-";
-        document.getElementById("about").textContent =
-        data.about || "-";
-        if(data.facebook){
-
-
-    document.getElementById("facebook").innerHTML =
-    `<a href="${data.facebook}" target="_blank">${data.facebook}</a>`;
-
-}else{
-
-    document.getElementById("facebook").textContent="-";
-
-}
-document.getElementById("line").textContent =
-data.line || "-";
-if(data.instagram){
-
-    const ig = data.instagram.replace("@","");
-
-    document.getElementById("instagram").innerHTML =
-
-    `<a href="https://instagram.com/${ig}" target="_blank">@${ig}</a>`;
-
-}else{
-
-    document.getElementById("instagram").textContent="-";
-
-}
-
-        // วันที่สมัคร
-
-        if(data.createdAt){
-
-            const date=data.createdAt.toDate();
-
-            document.getElementById("createdAt").textContent=
-
-            date.toLocaleDateString("th-TH");
+            return String(value);
 
         }
 
-    }
 
-    // ---------------------------
-    // นับจำนวนสัตว์เลี้ยง
-    // ---------------------------
+        /* =========================================
+           Format วันที่
+        ========================================== */
 
-    let dogCount=0;
+        function formatDate(value) {
 
-    let catCount=0;
+            if (!value) {
 
-    // dogs
+                return "-";
 
-    const dogs=await getDocs(collection(db,"dogs"));
+            }
 
-    dogs.forEach(doc=>{
 
-        if(doc.data().ownerUid===uid){
+            try {
 
-            dogCount++;
+                let date;
+
+
+                if (
+                    typeof value.toDate ===
+                    "function"
+                ) {
+
+                    date =
+                        value.toDate();
+
+                } else if (
+                    value instanceof Date
+                ) {
+
+                    date =
+                        value;
+
+                } else {
+
+                    date =
+                        new Date(value);
+
+                }
+
+
+                if (
+                    isNaN(
+                        date.getTime()
+                    )
+                ) {
+
+                    return "-";
+
+                }
+
+
+                return date.toLocaleDateString(
+                    "th-TH",
+                    {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "formatDate error:",
+                    error
+                );
+
+
+                return "-";
+
+            }
 
         }
 
-    });
 
-    // cats
+        /* =========================================
+           Facebook
+        ========================================== */
 
-    const cats=await getDocs(collection(db,"cats"));
+        function createFacebookLink(
+            value
+        ) {
 
-    cats.forEach(doc=>{
+            if (
+                !value ||
+                value.trim() === ""
+            ) {
 
-        if(doc.data().ownerUid===uid){
+                facebook.textContent =
+                    "-";
 
-            catCount++;
+                return;
+
+            }
+
+
+            let url =
+                value.trim();
+
+
+            if (
+                !url.startsWith("http://") &&
+                !url.startsWith("https://")
+            ) {
+
+                url =
+                    "https://" + url;
+
+            }
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                url;
+
+
+            link.target =
+                "_blank";
+
+
+            link.rel =
+                "noopener noreferrer";
+
+
+            link.textContent =
+                value;
+
+
+            facebook.innerHTML =
+                "";
+
+
+            facebook.appendChild(
+                link
+            );
 
         }
 
-    });
 
-    document.getElementById("dogCount").textContent=dogCount;
+        /* =========================================
+           Instagram
+        ========================================== */
 
-    document.getElementById("catCount").textContent=catCount;
+        function createInstagramLink(
+            value
+        ) {
 
-    document.getElementById("totalCount").textContent=
+            if (
+                !value ||
+                value.trim() === ""
+            ) {
 
-    dogCount+catCount;
+                instagram.textContent =
+                    "-";
 
-});
+                return;
+
+            }
 
 
-</script>
+            let ig =
+                value.trim();
+
+
+            ig =
+                ig.replace(
+                    /^@/,
+                    ""
+                );
+
+
+            if (
+                ig.includes(
+                    "instagram.com/"
+                )
+            ) {
+
+                try {
+
+                    const url =
+                        new URL(
+                            ig.startsWith("http")
+                                ? ig
+                                : "https://" + ig
+                        );
+
+
+                    ig =
+                        url.pathname
+                            .replace(
+                                /^\/|\/$/g,
+                                ""
+                            );
+
+                } catch (error) {
+
+                    console.warn(
+                        "Instagram URL ไม่ถูกต้อง"
+                    );
+
+                }
+
+            }
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                "https://instagram.com/" +
+                encodeURIComponent(ig);
+
+
+            link.target =
+                "_blank";
+
+
+            link.rel =
+                "noopener noreferrer";
+
+
+            link.textContent =
+                "@" + ig;
+
+
+            instagram.innerHTML =
+                "";
+
+
+            instagram.appendChild(
+                link
+            );
+
+        }
+
+
+        /* =========================================
+           Authentication
+        ========================================== */
+
+        onAuthStateChanged(
+            auth,
+            async (user) => {
+
+                /* ===============================
+                   ไม่ได้ Login
+                =============================== */
+
+                if (!user) {
+
+                    location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                try {
+
+
+                    /* ===============================
+                       UID
+                    =============================== */
+
+                    const uid =
+                        profileUid ||
+                        user.uid;
+
+
+                    console.log(
+                        "Login UID:",
+                        user.uid
+                    );
+
+
+                    console.log(
+                        "Profile UID:",
+                        uid
+                    );
+
+
+                    /* ===============================
+                       Edit Button
+
+                       เจ้าของเท่านั้น
+                    =============================== */
+
+                    if (
+                        uid === user.uid
+                    ) {
+
+                        editBtn.style.display =
+                            "inline-flex";
+
+                    } else {
+
+                        editBtn.style.display =
+                            "none";
+
+                    }
+
+
+                    /* ===============================
+                       User Document
+                    =============================== */
+
+                    const userRef =
+                        doc(
+                            db,
+                            "users",
+                            uid
+                        );
+
+
+                    const userSnap =
+                        await getDoc(
+                            userRef
+                        );
+
+
+                    console.log(
+                        "User exists:",
+                        userSnap.exists()
+                    );
+
+
+                    if (
+                        userSnap.exists()
+                    ) {
+
+
+                        const data =
+                            userSnap.data();
+
+
+                        console.log(
+                            "User data:",
+                            data
+                        );
+
+
+                        /* =========================
+                           รูปโปรไฟล์
+                        ========================== */
+
+                        profileImage.src =
+                            data.profile ||
+                            "img/default-profile.png";
+
+
+                        /* =========================
+                           Username
+                        ========================== */
+
+                        const name =
+                            displayValue(
+                                data.username
+                            );
+
+
+                        profileName.textContent =
+                            name === "-"
+                                ? "User"
+                                : name;
+
+
+                        username.textContent =
+                            name;
+
+
+                        /* =========================
+                           Email
+                        ========================== */
+
+                        const userEmail =
+                            data.email ||
+                            (
+                                uid === user.uid
+                                    ? user.email
+                                    : ""
+                            );
+
+
+                        profileEmail.textContent =
+                            displayValue(
+                                userEmail
+                            );
+
+
+                        email.textContent =
+                            displayValue(
+                                userEmail
+                            );
+
+
+                        /* =========================
+                           Phone
+                        ========================== */
+
+                        phone.textContent =
+                            displayValue(
+                                data.phone
+                            );
+
+
+                        /* =========================
+                           Province
+                        ========================== */
+
+                        province.textContent =
+                            displayValue(
+                                data.province
+                            );
+
+
+                        /* =========================
+                           District
+                        ========================== */
+
+                        district.textContent =
+                            displayValue(
+                                data.district
+                            );
+
+
+                        /* =========================
+                           Address
+                        ========================== */
+
+                        address.textContent =
+                            displayValue(
+                                data.address
+                            );
+
+
+                        /* =========================
+                           Facebook
+                        ========================== */
+
+                        createFacebookLink(
+                            data.facebook
+                        );
+
+
+                        /* =========================
+                           Line
+                        ========================== */
+
+                        line.textContent =
+                            displayValue(
+                                data.line
+                            );
+
+
+                        /* =========================
+                           Instagram
+                        ========================== */
+
+                        createInstagramLink(
+                            data.instagram
+                        );
+
+
+                        /* =========================
+                           About
+                        ========================== */
+
+                        about.textContent =
+                            displayValue(
+                                data.about
+                            );
+
+
+                        /* =========================
+                           วันที่สมัคร
+                        ========================== */
+
+                        createdAt.textContent =
+                            formatDate(
+                                data.createdAt
+                            );
+
+
+                    } else {
+
+
+                        /*
+                         * ถ้าไม่พบ users/{uid}
+                         */
+
+                        profileImage.src =
+                            "img/default-profile.png";
+
+
+                        profileName.textContent =
+                            "User";
+
+
+                        profileEmail.textContent =
+                            "-";
+
+
+                        username.textContent =
+                            "-";
+
+
+                        email.textContent =
+                            "-";
+
+
+                        phone.textContent =
+                            "-";
+
+
+                        province.textContent =
+                            "-";
+
+
+                        district.textContent =
+                            "-";
+
+
+                        address.textContent =
+                            "-";
+
+
+                        facebook.textContent =
+                            "-";
+
+
+                        line.textContent =
+                            "-";
+
+
+                        instagram.textContent =
+                            "-";
+
+
+                        about.textContent =
+                            "-";
+
+
+                        /*
+                         * ถ้าเป็นเจ้าของตัวเอง
+                         * ใช้วันที่สร้าง Firebase Account
+                         */
+
+                        if (
+                            uid === user.uid &&
+                            user.metadata.creationTime
+                        ) {
+
+                            createdAt.textContent =
+                                formatDate(
+                                    user.metadata
+                                        .creationTime
+                                );
+
+                        } else {
+
+                            createdAt.textContent =
+                                "-";
+
+                        }
+
+                    }
+
+
+                    /* =====================================
+                       นับจำนวนสุนัข
+                    ====================================== */
+
+                    let dogTotal =
+                        0;
+
+
+                    const dogsSnapshot =
+                        await getDocs(
+                            collection(
+                                db,
+                                "dogs"
+                            )
+                        );
+
+
+                    dogsSnapshot.forEach(
+                        (petDoc) => {
+
+                            const pet =
+                                petDoc.data();
+
+
+                            if (
+                                pet.ownerUid ===
+                                uid
+                            ) {
+
+                                dogTotal++;
+
+                            }
+
+                        }
+                    );
+
+
+                    /* =====================================
+                       นับจำนวนแมว
+                    ====================================== */
+
+                    let catTotal =
+                        0;
+
+
+                    const catsSnapshot =
+                        await getDocs(
+                            collection(
+                                db,
+                                "cats"
+                            )
+                        );
+
+
+                    catsSnapshot.forEach(
+                        (petDoc) => {
+
+                            const pet =
+                                petDoc.data();
+
+
+                            if (
+                                pet.ownerUid ===
+                                uid
+                            ) {
+
+                                catTotal++;
+
+                            }
+
+                        }
+                    );
+
+
+                    /* =====================================
+                       แสดงจำนวน
+                    ====================================== */
+
+                    dogCount.textContent =
+                        dogTotal;
+
+
+                    catCount.textContent =
+                        catTotal;
+
+
+                    totalCount.textContent =
+                        dogTotal +
+                        catTotal;
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "Profile error:",
+                        error
+                    );
+
+
+                    alert(
+                        "ไม่สามารถโหลดข้อมูลโปรไฟล์ได้\n\n" +
+                        "Code: " +
+                        (
+                            error.code ||
+                            "unknown"
+                        ) +
+                        "\n\nMessage: " +
+                        error.message
+                    );
+
+
+                } finally {
+
+
+                    /* ===============================
+                       ปิด Loading
+                    =============================== */
+
+                    loading.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 

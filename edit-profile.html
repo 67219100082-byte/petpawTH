@@ -5,757 +5,480 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>แก้ไขโปรไฟล์ | PetPaw</title>
 
-    <!-- Prompt Font -->
+    <!-- Google Font : Prompt -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
 
-*{
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    margin:0;
-    padding:0;
+        body {
+            font-family: "Prompt", sans-serif;
+            background: #f8f4ee;
+            color: #182338;
+            min-height: 100vh;
+        }
 
-    box-sizing:border-box;
+        /* =========================
+           Navbar
+        ========================= */
 
-    font-family:"Prompt",sans-serif;
+        .navbar {
+            width: 100%;
+            height: 70px;
 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 3px 15px rgba(0, 0, 0, 0.08);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #796247;
+            text-decoration: none;
+        }
+
+        .home-link {
+            text-decoration: none;
+            color: #796247;
+
+            font-size: 16px;
+            font-weight: 500;
+
+            padding: 10px 20px;
+
+            border-radius: 12px;
+
+            transition: 0.25s;
+        }
+
+        .home-link:hover {
+    background: #8a6847;
+    color: #ffffff;
 }
 
-body{
+        /* =========================
+           Main
+        ========================= */
 
-    background:#f5f5f5;
+        .container {
+            width: min(1100px, calc(100% - 40px));
+            margin: 45px auto 60px;
+        }
 
+        /* =========================
+           Profile Top
+        ========================= */
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+
+            background: #ffffff;
+
+            padding: 30px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.07);
+
+            margin-bottom: 25px;
+        }
+
+        .photo-box {
+            width: 150px;
+            flex-shrink: 0;
+
+            text-align: center;
+        }
+
+        #profileImage {
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            display: block;
+
+            margin: auto;
+
+            border: 5px solid #eef2ff;
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .change-photo {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding: 8px 14px;
+
+            border-radius: 10px;
+
+            background: #c8a77c;
+    color: white;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .change-photo:hover {
+            background: #8a6847;
+            color: #ffffff;
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .profile-info h1 {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* =========================
+           Edit Card
+        ========================= */
+
+        .edit-card {
+            background: #ffffff;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+
+            margin-bottom: 25px;
+
+            color: #182338;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+
+            font-size: 14px;
+            font-weight: 500;
+
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            border: 1px solid #dfe3eb;
+
+            background: #ffffff;
+
+            border-radius: 12px;
+
+            padding: 13px 15px;
+
+            font-family: "Prompt", sans-serif;
+
+            font-size: 14px;
+
+            color: #182338;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            border-color: #c8a77c;
+
+            box-shadow:
+                0 0 0 3px rgba(200, 167, 124, 0.18);
+        }
+
+        .form-group input[readonly] {
+            background: #f3f4f6;
+            color: #777;
+            cursor: not-allowed;    
+        }
+
+        .form-group textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        /* =========================
+           Buttons
+        ========================= */
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 30px;
+        }
+
+        .save-btn,
+        .cancel-btn {
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 12px 25px;
+
+            font-family: "Prompt", sans-serif;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            transition: 0.25s;
+        }
+
+        .save-btn {
+    background: #8a6847;
+    color: white;
 }
 
-/* ===========================
-        Navbar
-=========================== */
-
-.top-nav{
-
-    width:100%;
-
-    background:white;
-
-    padding:18px 40px;
-
-    display:flex;
-
-    justify-content:flex-start;
-
-    align-items:center;
-
-    box-shadow:0 3px 15px rgba(0,0,0,.08);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:999;
-
+.save-btn:hover {
+    background: #796247;
 }
 
-.home-btn{
+        .save-btn:disabled {
+            background: #a5a5a5;
+            cursor: not-allowed;
+        }
 
-    text-decoration:none;
-
-    background:#8a6847;
-
-    color:white;
-
-    padding:12px 28px;
-
-    border-radius:14px;
-
-    font-weight:600;
-
-    transition:.3s;
-
+        .cancel-btn {
+    color: #8a6847;
+    border: 1px solid #c8a77c;
+    background: white;
 }
 
-.home-btn:hover{
-
-    background:#73553a;
-
+.cancel-btn:hover {
+    background: #f8f4ee;
 }
 
-/* ===========================
-        Header
-=========================== */
+        /* =========================
+           Loading
+        ========================= */
 
-.profile-header{
+        .loading {
+            position: fixed;
 
-    width:100%;
+            inset: 0;
 
-    height:220px;
+            background: rgba(255, 255, 255, 0.85);
 
-    background:linear-gradient(135deg,#8a6847,#b08a61);
+            display: flex;
 
-    display:flex;
+            justify-content: center;
+            align-items: center;
 
-    justify-content:center;
+            z-index: 9999;
 
-    align-items:center;
+            font-size: 18px;
 
-}
+            color: #8a6847;
+        }
 
-.profile-box{
+        .loading.hidden {
+            display: none;
+        }
 
-    width:90%;
+        /* =========================
+           Mobile
+        ========================= */
 
-    max-width:1100px;
+        @media (max-width: 768px) {
 
-    background:white;
+            .navbar {
+                padding: 0 20px;
+            }
 
-    border-radius:25px;
+            .container {
+                width: calc(100% - 24px);
 
-    padding:40px;
+                margin-top: 20px;
+            }
 
-    margin-top:220px;
+            .profile-top {
+                flex-direction: column;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+                text-align: center;
 
-}
+                padding: 25px 20px;
 
-.profile-top{
+                gap: 15px;
+            }
 
-    display:flex;
+            .photo-box {
+                width: 100%;
+            }
 
-    align-items:center;
+            .profile-info h1 {
+                font-size: 25px;
+            }
 
-    gap:30px;
+            .edit-card {
+                padding: 25px 18px;
+            }
 
-}
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
 
-/* รูป */
+            .form-group.full-width {
+                grid-column: auto;
+            }
 
-.photo-box{
+            .button-group {
+                flex-direction: column;
+            }
 
-    position:relative;
+            .save-btn,
+            .cancel-btn {
+                width: 100%;
+                text-align: center;
+            }
 
-}
-
-.photo-box img{
-
-    width:180px;
-
-    height:180px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:6px solid white;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-}
-
-/* ปุ่มเปลี่ยนรูป */
-
-.change-photo{
-
-    margin-top:15px;
-
-    width:180px;
-
-    background:#8a6847;
-
-    color:white;
-
-    text-align:center;
-
-    padding:12px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.change-photo:hover{
-
-    background:#73553a;
-
-}
-
-.profile-info{
-
-    flex:1;
-
-}
-
-.profile-info h1{
-
-    color:#444;
-
-    font-size:36px;
-
-    margin-bottom:10px;
-
-}
-
-.profile-info p{
-
-    color:#777;
-
-    font-size:18px;
-
-}
-/* ===========================
-        Edit Form
-=========================== */
-
-.edit-section{
-
-    width:100%;
-
-    margin-top:180px;
-
-    margin-bottom:60px;
-
-}
-
-.edit-container{
-
-    width:90%;
-
-    max-width:1100px;
-
-    margin:auto;
-
-}
-
-.edit-card{
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:40px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
-}
-
-/* ===========================
-        Title
-=========================== */
-
-.card-title{
-
-    font-size:28px;
-
-    color:#8a6847;
-
-    font-weight:700;
-
-    margin-bottom:35px;
-
-}
-
-/* ===========================
-        Form
-=========================== */
-
-.form-group{
-
-    display:flex;
-
-    flex-direction:column;
-
-    margin-bottom:28px;
-
-}
-
-.form-group label{
-
-    font-size:17px;
-
-    font-weight:600;
-
-    color:#555;
-
-    margin-bottom:10px;
-
-}
-
-.form-group input,
-.form-group select{
-
-    width:100%;
-
-    height:58px;
-
-    border:2px solid #e3e3e3;
-
-    border-radius:15px;
-
-    padding:0 20px;
-
-    font-size:17px;
-
-    outline:none;
-
-    transition:.3s;
-
-    background:#fff;
-
-}
-
-.form-group input:focus,
-.form-group select:focus{
-
-    border-color:#8a6847;
-
-    box-shadow:0 0 10px rgba(138,104,71,.15);
-
-}   
-
-.form-group input[readonly],
-.form-group select[disabled]{
-
-    background:#f5f5f5;
-
-    color:#777;
-
-}
-
-/* ===========================
-        Grid
-=========================== */
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:25px;
-
-}
-
-.full-width{
-
-    grid-column:1/3;
-
-}
-/* ===========================
-        Upload Photo
-=========================== */
-
-.photo-box{
-
-    position:relative;
-
-    width:180px;
-
-}
-
-.photo-box input{
-
-    display:none;
-
-}
-
-.change-photo{
-
-    display:block;
-
-    margin-top:15px;
-
-    width:100%;
-
-    text-align:center;
-
-    background:#8a6847;
-
-    color:white;
-
-    padding:12px 0;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.change-photo:hover{
-
-    background:#73553a;
-
-    transform:translateY(-2px);
-
-}
-
-/* ===========================
-        Buttons
-=========================== */
-
-.button-group{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:18px;
-
-    margin-top:40px;
-
-}
-
-.save-btn{
-
-    border:none;
-
-    background:#8a6847;
-
-    color:white;
-
-    padding:15px 40px;
-
-    border-radius:15px;
-
-    font-size:17px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.save-btn:hover{
-
-    background:#73553a;
-
-    transform:translateY(-3px);
-
-    box-shadow:0 8px 20px rgba(0,0,0,.18);
-
-}
-
-.cancel-btn{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-decoration:none;
-
-    background:#e7e7e7;
-
-    color:#555;
-
-    padding:15px 40px;
-
-    border-radius:15px;
-
-    font-size:17px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.cancel-btn:hover{
-
-    background:#d7d7d7;
-
-    transform:translateY(-3px);
-
-}
-
-/* ===========================
-        Card Animation
-=========================== */
-
-.edit-card{
-
-    animation:fadeUp .6s ease;
-
-}
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(35px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ===========================
-        Scrollbar
-=========================== */
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#b08a61;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#f2f2f2;
-
-}
-/* ===========================
-        Responsive
-=========================== */
-
-@media (max-width:1024px){
-
-    .profile-box{
-
-        width:95%;
-
-        padding:35px;
-
-    }
-
-    .profile-top{
-
-        flex-direction:column;
-
-        align-items:center;
-
-        text-align:center;
-
-    }
-
-    .photo-box{
-
-        width:170px;
-
-    }
-
-    .photo-box img{
-
-        width:170px;
-
-        height:170px;
-
-    }
-
-    .profile-info h1{
-
-        font-size:30px;
-
-    }
-
-    .profile-info p{
-
-        font-size:17px;
-
-    }
-
-    .form-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .full-width{
-
-        grid-column:1;
-
-    }
-
-}
-
-/* ===========================
-        Mobile
-=========================== */
-
-@media (max-width:768px){
-
-    .top-nav{
-
-        padding:15px 20px;
-
-    }
-
-    .home-btn{
-
-        width:100%;
-
-        text-align:center;
-
-    }
-
-    .profile-header{
-
-        height:180px;
-
-    }
-
-    .profile-box{
-
-        margin-top:160px;
-
-        padding:25px;
-
-    }
-
-    .photo-box{
-
-        width:150px;
-
-    }
-
-    .photo-box img{
-
-        width:150px;
-
-        height:150px;
-
-    }
-
-    .change-photo{
-
-        font-size:15px;
-
-    }
-
-    .profile-info h1{
-
-        font-size:26px;
-
-    }
-
-    .profile-info p{
-
-        font-size:16px;
-
-    }
-
-    .card-title{
-
-        font-size:24px;
-
-    }
-
-    .form-group label{
-
-        font-size:16px;
-
-    }
-
-    .form-group input,
-.form-group select{
-
-    width:100%;
-
-    height:58px;
-
-    border:2px solid #e3e3e3;
-
-    border-radius:15px;
-
-    padding:0 20px;
-
-    font-size:17px;
-
-    outline:none;
-
-    transition:.3s;
-
-    background:#fff;
-
-}
-
-    .button-group{
-
-        flex-direction:column;
-
-    }
-
-    .save-btn,
-
-    .cancel-btn{
-
-        width:100%;
-
-    }
-
-}
-
-/* ===========================
-        End CSS
-=========================== */
+        }
 
     </style>
 
 </head>
 
+
 <body>
-    <!-- ===========================
-        Navbar
-=========================== -->
 
-<nav class="top-nav">
+    <!-- =========================
+         Navbar
+    ========================= -->
 
-    <a href="index.html" class="home-btn">
+    <nav class="navbar">
 
-        HOME
+        <a
+            href="index.html"
+            class="logo">
 
-    </a>
+            PetPaw
 
-</nav>
+        </a>
 
-<!-- ===========================
-        Header
-=========================== -->
+        <a
+            href="index.html"
+            class="home-link">
 
-<header class="profile-header">
+            HOME
 
-    <div class="profile-box">
+        </a>
+
+    </nav>
+
+
+    <!-- Loading -->
+
+    <div
+        id="loading"
+        class="loading">
+
+        กำลังโหลดข้อมูล...
+
+    </div>
+
+
+    <!-- =========================
+         Main
+    ========================= -->
+
+    <main class="container">
+
+
+        <!-- Profile Top -->
 
         <div class="profile-top">
+
 
             <!-- รูปโปรไฟล์ -->
 
@@ -781,6 +504,7 @@ body{
 
             </div>
 
+
             <!-- ข้อมูล -->
 
             <div class="profile-info">
@@ -801,19 +525,13 @@ body{
 
         </div>
 
-    </div>
 
-</header>
-
-<!-- ===========================
-        Form
-=========================== -->
-
-<section class="edit-section">
-
-    <div class="edit-container">
+        <!-- =========================
+             Edit Card
+        ========================= -->
 
         <div class="edit-card">
+
 
             <div class="card-title">
 
@@ -821,13 +539,15 @@ body{
 
             </div>
 
+
             <div class="form-grid">
+
 
                 <!-- Username -->
 
                 <div class="form-group">
 
-                    <label>
+                    <label for="username">
 
                         Username
 
@@ -835,15 +555,17 @@ body{
 
                     <input
                         type="text"
-                        id="username">
+                        id="username"
+                        placeholder="กรอก Username">
 
                 </div>
+
 
                 <!-- Email -->
 
                 <div class="form-group">
 
-                    <label>
+                    <label for="email">
 
                         Email
 
@@ -856,11 +578,12 @@ body{
 
                 </div>
 
+
                 <!-- Phone -->
 
                 <div class="form-group">
 
-                    <label>
+                    <label for="phone">
 
                         เบอร์โทร
 
@@ -868,62 +591,135 @@ body{
 
                     <input
                         type="text"
-                        id="phone">
+                        id="phone"
+                        placeholder="กรอกเบอร์โทร">
 
                 </div>
+
 
                 <!-- Province -->
 
                 <div class="form-group">
 
-    <label>จังหวัด</label>
+                    <label for="province">
 
-    <select id="province">
+                        จังหวัด
 
-        <option value="พัทลุง">พัทลุง</option>
+                    </label>
 
-    </select>
+                    <select id="province">
 
-</div>
+                        <option value="">
+
+                            -- เลือกจังหวัด --
+
+                        </option>
+
+                        <option value="พัทลุง">
+
+                            พัทลุง
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- District -->
+
                 <div class="form-group">
 
-    <label>อำเภอ</label>
+                    <label for="district">
 
-    <select id="district">
+                        อำเภอ
 
-        <option value="">-- เลือกอำเภอ --</option>
+                    </label>
 
-        <option value="เมืองพัทลุง">เมืองพัทลุง</option>
+                    <select id="district">
 
-        <option value="กงหรา">กงหรา</option>
+                        <option value="">
 
-        <option value="เขาชัยสน">เขาชัยสน</option>
+                            -- เลือกอำเภอ --
 
-        <option value="ตะโหมด">ตะโหมด</option>
+                        </option>
 
-        <option value="ควนขนุน">ควนขนุน</option>
+                        <option value="เมืองพัทลุง">
 
-        <option value="ปากพะยูน">ปากพะยูน</option>
+                            เมืองพัทลุง
 
-        <option value="ป่าบอน">ป่าบอน</option>
+                        </option>
 
-        <option value="ศรีบรรพต">ศรีบรรพต</option>
+                        <option value="กงหรา">
 
-        <option value="ศรีนครินทร์">ศรีนครินทร์</option>
+                            กงหรา
 
-        <option value="บางแก้ว">บางแก้ว</option>
+                        </option>
 
-        <option value="ป่าพะยอม">ป่าพะยอม</option>
+                        <option value="เขาชัยสน">
 
-    </select>
+                            เขาชัยสน
 
-</div>
+                        </option>
+
+                        <option value="ตะโหมด">
+
+                            ตะโหมด
+
+                        </option>
+
+                        <option value="ควนขนุน">
+
+                            ควนขนุน
+
+                        </option>
+
+                        <option value="ปากพะยูน">
+
+                            ปากพะยูน
+
+                        </option>
+
+                        <option value="ป่าบอน">
+
+                            ป่าบอน
+
+                        </option>
+
+                        <option value="ศรีบรรพต">
+
+                            ศรีบรรพต
+
+                        </option>
+
+                        <option value="ศรีนครินทร์">
+
+                            ศรีนครินทร์
+
+                        </option>
+
+                        <option value="บางแก้ว">
+
+                            บางแก้ว
+
+                        </option>
+
+                        <option value="ป่าพะยอม">
+
+                            ป่าพะยอม
+
+                        </option>
+
+                    </select>
+
+                </div>
+
 
                 <!-- Address -->
 
                 <div class="form-group full-width">
 
-                    <label>
+                    <label for="address">
 
                         ที่อยู่
 
@@ -931,64 +727,92 @@ body{
 
                     <input
                         type="text"
-                        id="address">
+                        id="address"
+                        placeholder="กรอกที่อยู่">
 
                 </div>
+
+
                 <!-- Facebook -->
-<div class="form-group">
 
-    <label>Facebook</label>
+                <div class="form-group">
 
-    <input
-        type="text"
-        id="facebook"
-        placeholder="https://facebook.com/yourname">
+                    <label for="facebook">
 
-</div>
+                        Facebook
 
-<!-- Line -->
-<div class="form-group">
+                    </label>
 
-    <label>Line ID</label>
+                    <input
+                        type="text"
+                        id="facebook"
+                        placeholder="Facebook">
 
-    <input
-        type="text"
-        id="line"
-        placeholder="line123">
+                </div>
 
-</div>
 
-<!-- Instagram -->
-<div class="form-group">
+                <!-- Line -->
 
-    <label>Instagram</label>
+                <div class="form-group">
 
-    <input
-        type="text"
-        id="instagram"
-        placeholder="@username">
+                    <label for="line">
 
-</div>
+                        Line ID
 
-<!-- About -->
-<div class="form-group">
+                    </label>
 
-    <label>เกี่ยวกับฉัน</label>
+                    <input
+                        type="text"
+                        id="line"
+                        placeholder="Line ID">
 
-    <textarea
-        id="about"
-        rows="5"
-        placeholder="แนะนำตัว หรือบอกเหตุผลที่รักสัตว์"></textarea>
+                </div>
 
-</div>
+
+                <!-- Instagram -->
+
+                <div class="form-group">
+
+                    <label for="instagram">
+
+                        Instagram
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="instagram"
+                        placeholder="Instagram">
+
+                </div>
+
+
+                <!-- About -->
+
+                <div class="form-group full-width">
+
+                    <label for="about">
+
+                        เกี่ยวกับฉัน
+
+                    </label>
+
+                    <textarea
+                        id="about"
+                        placeholder="แนะนำตัวเกี่ยวกับคุณ"></textarea>
+
+                </div>
+
 
             </div>
+
 
             <!-- Buttons -->
 
             <div class="button-group">
 
                 <button
+                    type="button"
                     class="save-btn"
                     id="saveBtn">
 
@@ -997,7 +821,7 @@ body{
                 </button>
 
                 <a
-                    href="index.html"
+                    href="profile.html"
                     class="cancel-btn">
 
                     ยกเลิก
@@ -1006,308 +830,569 @@ body{
 
             </div>
 
+
         </div>
 
-    </div>
+    </main>
 
-</section>
-<script type="module">
 
-import { auth, db, storage } from "./firebase.js";
+    <!-- =========================
+         JavaScript
+    ========================= -->
 
-import {
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+    <script type="module">
 
-import {
-    doc,
-    getDoc,
-    updateDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import {
+            auth,
+            db
+        } from "./firebase.js";
 
-import {
-    ref,
-    uploadBytes,
-    getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
 
+        import {
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-// ============================
-// ตัวแปร
-// ============================
 
-const profileImage = document.getElementById("profileImage");
+        import {
+            doc,
+            getDoc,
+            updateDoc
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-const imageInput = document.getElementById("imageInput");
 
-const username = document.getElementById("username");
+        // ============================
+        // ตัวแปร
+        // ============================
 
-const email = document.getElementById("email");
+        const profileImage =
+            document.getElementById("profileImage");
 
-const phone = document.getElementById("phone");
+        const imageInput =
+            document.getElementById("imageInput");
 
-const province = document.getElementById("province");
+        const username =
+            document.getElementById("username");
 
-const district = document.getElementById("district");
+        const email =
+            document.getElementById("email");
 
-const address = document.getElementById("address");
+        const phone =
+            document.getElementById("phone");
 
-const facebook = document.getElementById("facebook");
+        const province =
+            document.getElementById("province");
 
-const line = document.getElementById("line");
+        const district =
+            document.getElementById("district");
 
-const instagram = document.getElementById("instagram");
+        const address =
+            document.getElementById("address");
 
-const about = document.getElementById("about");
+        const facebook =
+            document.getElementById("facebook");
 
-const saveBtn = document.getElementById("saveBtn");
+        const line =
+            document.getElementById("line");
 
-let currentUser = null;
+        const instagram =
+            document.getElementById("instagram");
 
-let selectedFile = null;
+        const about =
+            document.getElementById("about");
 
-// เก็บรูปเดิมจาก Firestore
-let currentPhoto = "";
+        const saveBtn =
+            document.getElementById("saveBtn");
 
+        const loading =
+            document.getElementById("loading");
 
-// ============================
-// โหลดข้อมูลผู้ใช้
-// ============================
 
+        let currentUser = null;
 
-onAuthStateChanged(auth, async (user)=>{
+        let selectedFile = null;
 
-    console.log("user =", user);
+        // รูปเดิมจาก Firestore
 
-    if(!user){
-        alert("กรุณาเข้าสู่ระบบ");
-        location.href="login.html";
-        return;
-    }
+        let currentPhoto =
+            "img/default-profile.png";
 
-    console.log("UID =", user.uid);
 
-    currentUser = user;
+        // ============================
+        // โหลดข้อมูลผู้ใช้
+        // ============================
 
-    const userRef = doc(db,"users",user.uid);
+        onAuthStateChanged(
+            auth,
+            async (user) => {
 
-    const snap = await getDoc(userRef);
+                console.log("user =", user);
 
-    console.log("exists =", snap.exists());
 
-    if(snap.exists()){
-        console.log(snap.data());
-    }
+                // ยังไม่ได้ Login
 
-    if(snap.exists()){
+                if (!user) {
 
-        const data = snap.data();
+                    alert("กรุณาเข้าสู่ระบบ");
 
-        username.value = data.username || "";
+                    location.href = "login.html";
 
-        email.value = data.email || user.email;
+                    return;
 
-        phone.value = data.phone || "";
+                }
 
-        province.value = data.province || "";
 
-        district.value = data.district || "";
+                currentUser = user;
 
-        address.value = data.address || "";
 
-        facebook.value = data.facebook || "";
+                console.log(
+                    "UID =",
+                    user.uid
+                );
 
-        line.value = data.line || "";
 
-        instagram.value = data.instagram || "";
+                try {
 
-        about.value = data.about || "";
+                    const userRef =
+                        doc(
+                            db,
+                            "users",
+                            user.uid
+                        );
 
-        currentPhoto =
-        data.profile || "img/default-profile.png";
 
-        profileImage.src = currentPhoto;
+                    const snap =
+                        await getDoc(userRef);
 
-    }
 
-});
-// ============================
-// Preview รูปที่เลือก
-// ============================
+                    console.log(
+                        "exists =",
+                        snap.exists()
+                    );
 
-imageInput.addEventListener("change", (e) => {
 
-    const file = e.target.files[0];
+                    if (snap.exists()) {
 
-    if (!file) return;
+                        const data =
+                            snap.data();
 
-    selectedFile = file;
 
-    const reader = new FileReader();
+                        console.log(
+                            "User data =",
+                            data
+                        );
 
-    reader.onload = function (event) {
 
-        profileImage.src = event.target.result;
+                        // =========================
+                        // ใส่ข้อมูลลง Form
+                        // =========================
 
-    };
+                        username.value =
+                            data.username || "";
 
-    reader.readAsDataURL(file);
 
-});
-// ============================
-// บันทึกข้อมูล
-// ============================
+                        email.value =
+                            data.email ||
+                            user.email ||
+                            "";
 
-saveBtn.addEventListener("click", async () => {
 
-    try {
+                        phone.value =
+                            data.phone || "";
 
-        saveBtn.disabled = true;
-        saveBtn.innerHTML = "กำลังบันทึก...";
 
-        // =====================================
-        // รูปเดิม
-        // =====================================
+                        province.value =
+                            data.province || "";
 
-        let photoURL = currentPhoto;
 
+                        district.value =
+                            data.district || "";
 
-        // =====================================
-        // ถ้ามีการเลือกรูปใหม่
-        // =====================================
 
-        if (selectedFile) {
+                        address.value =
+                            data.address || "";
 
-            // ตรวจสอบว่าเป็นรูปภาพ
-            if (!selectedFile.type.startsWith("image/")) {
 
-                alert("กรุณาเลือกไฟล์รูปภาพ");
+                        facebook.value =
+                            data.facebook || "";
 
-                saveBtn.disabled = false;
-                saveBtn.innerHTML = "บันทึกข้อมูล";
 
-                return;
+                        line.value =
+                            data.line || "";
+
+
+                        instagram.value =
+                            data.instagram || "";
+
+
+                        about.value =
+                            data.about || "";
+
+
+                        // =========================
+                        // รูปโปรไฟล์
+                        // =========================
+
+                        currentPhoto =
+                            data.profile ||
+                            "img/default-profile.png";
+
+
+                        profileImage.src =
+                            currentPhoto;
+
+                    } else {
+
+                        // ถ้าไม่มี Document
+
+                        email.value =
+                            user.email || "";
+
+
+                        currentPhoto =
+                            "img/default-profile.png";
+
+
+                        profileImage.src =
+                            currentPhoto;
+
+
+                        console.warn(
+                            "ไม่พบข้อมูล users/" +
+                            user.uid
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "โหลดข้อมูลไม่สำเร็จ:",
+                        error
+                    );
+
+
+                    alert(
+                        "ไม่สามารถโหลดข้อมูลโปรไฟล์ได้\n\n" +
+                        error.message
+                    );
+
+                } finally {
+
+                    loading.classList.add(
+                        "hidden"
+                    );
+
+                }
+
             }
+        );
 
 
-            // จำกัดขนาดไม่เกิน 5 MB
-            if (selectedFile.size > 5 * 1024 * 1024) {
+        // ============================
+        // Preview รูปที่เลือก
+        // ============================
 
-                alert("รูปภาพต้องมีขนาดไม่เกิน 5 MB");
+        imageInput.addEventListener(
+            "change",
+            (event) => {
 
-                saveBtn.disabled = false;
-                saveBtn.innerHTML = "บันทึกข้อมูล";
+                const file =
+                    event.target.files[0];
 
-                return;
+
+                if (!file) {
+
+                    return;
+
+                }
+
+
+                // ตรวจสอบประเภทไฟล์
+
+                if (
+                    !file.type.startsWith(
+                        "image/"
+                    )
+                ) {
+
+                    alert(
+                        "กรุณาเลือกไฟล์รูปภาพ"
+                    );
+
+                    imageInput.value = "";
+
+                    return;
+
+                }
+
+
+                // จำกัดขนาด 2 MB
+
+                if (
+                    file.size >
+                    2 * 1024 * 1024
+                ) {
+
+                    alert(
+                        "รูปโปรไฟล์ต้องมีขนาดไม่เกิน 2 MB"
+                    );
+
+                    imageInput.value = "";
+
+                    return;
+
+                }
+
+
+                selectedFile =
+                    file;
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function (event) {
+
+                        profileImage.src =
+                            event.target.result;
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
             }
+        );
 
 
-            // =================================
-            // หานามสกุลไฟล์
-            // =================================
+        // ============================
+        // แปลงรูปเป็น Base64
+        // ============================
 
-            const extension =
-                selectedFile.name
-                    .split(".")
-                    .pop()
-                    .toLowerCase();
+        function imageToBase64(file) {
+
+            return new Promise(
+                (resolve, reject) => {
 
 
-            // =================================
-            // ตำแหน่งเก็บรูปใน Firebase Storage
-            // =================================
+                    // ไม่มีการเลือกรูปใหม่
 
-            const storageRef = ref(
-                storage,
-                `profile/${currentUser.uid}.${extension}`
+                    if (!file) {
+
+                        resolve(
+                            currentPhoto
+                        );
+
+                        return;
+
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function () {
+
+                            resolve(
+                                reader.result
+                            );
+
+                        };
+
+
+                    reader.onerror =
+                        function () {
+
+                            reject(
+                                new Error(
+                                    "อ่านรูปไม่สำเร็จ"
+                                )
+                            );
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
             );
-
-
-            // =================================
-            // Upload รูป
-            // =================================
-
-            await uploadBytes(
-                storageRef,
-                selectedFile
-            );
-
-
-            // =================================
-            // ขอ URL ของรูป
-            // =================================
-
-            photoURL =
-                await getDownloadURL(storageRef);
 
         }
 
 
-        // =====================================
-        // บันทึกข้อมูลลง Firestore
-        // =====================================
+        // ============================
+        // บันทึกข้อมูล
+        // ============================
 
-        await updateDoc(
-            doc(db, "users", currentUser.uid),
-            {
+        saveBtn.addEventListener(
+            "click",
+            async () => {
 
-                district: district.value.trim(),
+                // ป้องกันกรณี User ยังโหลดไม่เสร็จ
 
-                username: username.value.trim(),
+                if (!currentUser) {
 
-                phone: phone.value.trim(),
+                    alert(
+                        "กรุณารอสักครู่ แล้วลองใหม่อีกครั้ง"
+                    );
 
-                province: province.value.trim(),
+                    return;
 
-                address: address.value.trim(),
+                }
 
-                facebook: facebook.value.trim(),
 
-                line: line.value.trim(),
+                try {
 
-                instagram: instagram.value.trim(),
+                    // =========================
+                    // ป้องกันกดซ้ำ
+                    // =========================
 
-                about: about.value.trim(),
+                    saveBtn.disabled =
+                        true;
 
-                profile: photoURL
+                    saveBtn.innerHTML =
+                        "กำลังบันทึก...";
+
+
+                    // =========================
+                    // ตรวจสอบ Username
+                    // =========================
+
+                    if (
+                        username.value.trim() === ""
+                    ) {
+
+                        alert(
+                            "กรุณากรอก Username"
+                        );
+
+                        username.focus();
+
+                        saveBtn.disabled =
+                            false;
+
+                        saveBtn.innerHTML =
+                            "บันทึกข้อมูล";
+
+                        return;
+
+                    }
+
+
+                    // =========================
+                    // แปลงรูป
+                    // =========================
+
+                    const photoURL =
+                        await imageToBase64(
+                            selectedFile
+                        );
+
+
+                    // =========================
+                    // Reference
+                    // =========================
+
+                    const userRef =
+                        doc(
+                            db,
+                            "users",
+                            currentUser.uid
+                        );
+
+
+                    // =========================
+                    // Update Firestore
+                    // =========================
+
+                    await updateDoc(
+                        userRef,
+                        {
+
+                            username:
+                                username.value.trim(),
+
+                            phone:
+                                phone.value.trim(),
+
+                            province:
+                                province.value.trim(),
+
+                            district:
+                                district.value.trim(),
+
+                            address:
+                                address.value.trim(),
+
+                            facebook:
+                                facebook.value.trim(),
+
+                            line:
+                                line.value.trim(),
+
+                            instagram:
+                                instagram.value.trim(),
+
+                            about:
+                                about.value.trim(),
+
+                            profile:
+                                photoURL
+
+                        }
+                    );
+
+
+                    // =========================
+                    // สำเร็จ
+                    // =========================
+
+                    alert(
+                        "บันทึกข้อมูลเรียบร้อยแล้ว"
+                    );
+
+
+                    location.href =
+                        "profile.html";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "บันทึกข้อมูลไม่สำเร็จ:",
+                        error
+                    );
+
+
+                    alert(
+                        "บันทึกข้อมูลไม่สำเร็จ\n\n" +
+                        "Code: " +
+                        (error.code || "unknown") +
+                        "\n\nMessage: " +
+                        error.message
+                    );
+
+
+                    saveBtn.disabled =
+                        false;
+
+                    saveBtn.innerHTML =
+                        "บันทึกข้อมูล";
+
+                }
 
             }
         );
 
+    </script>
 
-        // =====================================
-        // สำเร็จ
-        // =====================================
-
-        alert("บันทึกข้อมูลเรียบร้อยแล้ว");
-
-        location.href = "profile.html";
-
-
-    } catch (error) {
-
-        console.error(
-            "บันทึกโปรไฟล์ไม่สำเร็จ:",
-            error
-        );
-
-        alert(
-            "ไม่สามารถบันทึกข้อมูลได้\n\n" +
-            "Code: " + (error.code || "-") +
-            "\n\nMessage: " + error.message
-        );
-
-
-        saveBtn.disabled = false;
-
-        saveBtn.innerHTML =
-            "บันทึกข้อมูล";
-
-    }
-
-});
-
-</script>
 </body>
 
 </html>
