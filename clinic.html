@@ -1860,21 +1860,104 @@ const chatBtn = document.getElementById("chatBtn");
 const chatPopup = document.getElementById("chatPopup");
 const closeChat = document.getElementById("closeChat");
 
+const isMobile = () => window.innerWidth <= 768;
+
 chatBtn.onclick = () => {
 
-    chatPopup.classList.add("show");
+    if(isMobile()){
+
+        chatPopup.classList.add("show");
+        document.body.classList.add("no-scroll");
+
+    }else{
+
+        chatPopup.style.display = "block";
+
+    }
 
     chatBtn.style.display = "none";
-
 };
 
 closeChat.onclick = () => {
 
-    chatPopup.classList.remove("show");
+    if(isMobile()){
+
+        chatPopup.classList.remove("show");
+        document.body.classList.remove("no-scroll");
+
+    }else{
+
+        chatPopup.style.display = "none";
+
+    }
 
     chatBtn.style.display = "flex";
-
 };
+// =========================
+// Full Image Viewer
+// =========================
+
+const imageViewer = document.getElementById("imageViewer");
+const fullImage = document.getElementById("fullImage");
+const imageViewerClose = document.getElementById("imageViewerClose");
+
+window.openImageViewer = function(imageUrl){
+
+    fullImage.src = imageUrl;
+
+    imageViewer.classList.add("show");
+
+    // ป้องกันหน้าเว็บด้านหลังเลื่อน
+    document.body.classList.add("no-scroll");
+};
+
+
+// =========================
+// ปิดรูป
+// =========================
+
+function closeImageViewer(){
+
+    imageViewer.classList.remove("show");
+
+    document.body.classList.remove("no-scroll");
+
+    setTimeout(() => {
+        fullImage.src = "";
+    }, 300);
+}
+
+
+// ปุ่ม X
+imageViewerClose.addEventListener("click", function(){
+
+    closeImageViewer();
+
+});
+
+
+// คลิกพื้นหลัง
+imageViewer.addEventListener("click", function(e){
+
+    if(e.target === imageViewer){
+
+        closeImageViewer();
+
+    }
+
+});
+
+
+// กด ESC
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Escape"){
+
+        closeImageViewer();
+
+    }
+
+});
 </script>
 </body>
 

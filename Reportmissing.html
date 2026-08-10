@@ -2286,20 +2286,38 @@ const chatBtn = document.getElementById("chatBtn");
 const chatPopup = document.getElementById("chatPopup");
 const closeChat = document.getElementById("closeChat");
 
+const isMobile = () => window.innerWidth <= 768;
+
 chatBtn.onclick = () => {
 
-    chatPopup.classList.add("show");
+    if(isMobile()){
+
+        chatPopup.classList.add("show");
+        document.body.classList.add("no-scroll");
+
+    }else{
+
+        chatPopup.style.display = "block";
+
+    }
 
     chatBtn.style.display = "none";
-
 };
 
 closeChat.onclick = () => {
 
-    chatPopup.classList.remove("show");
+    if(isMobile()){
+
+        chatPopup.classList.remove("show");
+        document.body.classList.remove("no-scroll");
+
+    }else{
+
+        chatPopup.style.display = "none";
+
+    }
 
     chatBtn.style.display = "flex";
-
 };
 // =========================
 // Full Image Viewer
@@ -2315,13 +2333,16 @@ window.openImageViewer = function(imageUrl){
 
     imageViewer.classList.add("show");
 
-    // ล็อกการเลื่อนหน้าเว็บ
+    // ป้องกันหน้าเว็บด้านหลังเลื่อน
     document.body.classList.add("no-scroll");
 };
 
 
-// ปิดด้วยปุ่ม X
-imageViewerClose.onclick = function(){
+// =========================
+// ปิดรูป
+// =========================
+
+function closeImageViewer(){
 
     imageViewer.classList.remove("show");
 
@@ -2330,37 +2351,36 @@ imageViewerClose.onclick = function(){
     setTimeout(() => {
         fullImage.src = "";
     }, 300);
-};
+}
 
 
-// กดพื้นที่ด้านนอกเพื่อปิด
-imageViewer.onclick = function(e){
+// ปุ่ม X
+imageViewerClose.addEventListener("click", function(){
+
+    closeImageViewer();
+
+});
+
+
+// คลิกพื้นหลัง
+imageViewer.addEventListener("click", function(e){
 
     if(e.target === imageViewer){
 
-        imageViewer.classList.remove("show");
+        closeImageViewer();
 
-        document.body.classList.remove("no-scroll");
-
-        setTimeout(() => {
-            fullImage.src = "";
-        }, 300);
     }
-};
+
+});
 
 
-// กด ESC เพื่อปิด
+// กด ESC
 document.addEventListener("keydown", function(e){
 
     if(e.key === "Escape"){
 
-        imageViewer.classList.remove("show");
+        closeImageViewer();
 
-        document.body.classList.remove("no-scroll");
-
-        setTimeout(() => {
-            fullImage.src = "";
-        }, 300);
     }
 
 });
