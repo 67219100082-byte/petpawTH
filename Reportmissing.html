@@ -29,6 +29,120 @@ body{
     background:#f3f3f3;
     min-height:2000px;
 }
+/* =========================
+   Full Image Viewer
+========================= */
+
+.image-viewer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.88);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:999999;
+}
+
+.image-viewer.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.image-viewer img{
+    max-width:95vw;
+    max-height:90vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 40px rgba(0,0,0,.5);
+
+    transform:scale(.9);
+    transition:.3s;
+}
+
+.image-viewer.show img{
+    transform:scale(1);
+}
+
+.image-viewer-close{
+    position:absolute;
+
+    top:20px;
+    right:25px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.2s;
+}
+
+.image-viewer-close:hover{
+    background:rgba(255,255,255,.3);
+    transform:scale(1.08);
+}
+
+/* รูปใน Card ให้รู้ว่ากดได้ */
+.dog-image{
+    cursor:zoom-in;
+    transition:.25s;
+}
+
+.dog-image:hover{
+    filter:brightness(.9);
+}
+
+
+/* มือถือ */
+@media(max-width:600px){
+
+    .image-viewer{
+        padding:15px;
+    }
+
+    .image-viewer img{
+        max-width:100%;
+        max-height:85vh;
+        border-radius:10px;
+    }
+
+    .image-viewer-close{
+        top:15px;
+        right:15px;
+
+        width:45px;
+        height:45px;
+
+        font-size:26px;
+    }
+}
 
 /* ===========================
         Filter
@@ -1462,6 +1576,24 @@ body.no-scroll{
 </head>
 
 <body>
+    <!-- =========================
+     Full Image Viewer
+========================= -->
+
+<div class="image-viewer" id="imageViewer">
+
+    <button
+        class="image-viewer-close"
+        id="imageViewerClose">
+        ×
+    </button>
+
+    <img
+        id="fullImage"
+        src=""
+        alt="รูปสัตว์เลี้ยง">
+
+</div>
  <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
@@ -1831,7 +1963,11 @@ function renderPets(data){
 
 <div class="dog-card">
 
-<img src="${pet.image}" class="dog-image">
+<img
+    src="${pet.image}"
+    class="dog-image"
+    onclick="openImageViewer('${pet.image}')"
+    alt="${pet.name || 'สัตว์เลี้ยง'}">
 
 <div class="dog-content">
 
@@ -1903,7 +2039,7 @@ ${pet.detail}
 
 <hr class="section-divider">
 
-<a href="user-profile.html?uid=${pet.ownerUid}" class="owner-box">
+<a href="profile.html?uid=${pet.ownerUid}" class="owner-box">
 
     <div class="owner-profile">
 
@@ -2165,6 +2301,69 @@ closeChat.onclick = () => {
     chatBtn.style.display = "flex";
 
 };
+// =========================
+// Full Image Viewer
+// =========================
+
+const imageViewer = document.getElementById("imageViewer");
+const fullImage = document.getElementById("fullImage");
+const imageViewerClose = document.getElementById("imageViewerClose");
+
+window.openImageViewer = function(imageUrl){
+
+    fullImage.src = imageUrl;
+
+    imageViewer.classList.add("show");
+
+    // ล็อกการเลื่อนหน้าเว็บ
+    document.body.classList.add("no-scroll");
+};
+
+
+// ปิดด้วยปุ่ม X
+imageViewerClose.onclick = function(){
+
+    imageViewer.classList.remove("show");
+
+    document.body.classList.remove("no-scroll");
+
+    setTimeout(() => {
+        fullImage.src = "";
+    }, 300);
+};
+
+
+// กดพื้นที่ด้านนอกเพื่อปิด
+imageViewer.onclick = function(e){
+
+    if(e.target === imageViewer){
+
+        imageViewer.classList.remove("show");
+
+        document.body.classList.remove("no-scroll");
+
+        setTimeout(() => {
+            fullImage.src = "";
+        }, 300);
+    }
+};
+
+
+// กด ESC เพื่อปิด
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Escape"){
+
+        imageViewer.classList.remove("show");
+
+        document.body.classList.remove("no-scroll");
+
+        setTimeout(() => {
+            fullImage.src = "";
+        }, 300);
+    }
+
+});
 </script>
 </body>
 
