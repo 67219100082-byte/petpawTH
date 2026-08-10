@@ -44,15 +44,219 @@
 
 
         body {
-
-            font-family: "Prompt", sans-serif;
-
-            background: #f8f4ee;
+    font-family: "Prompt", sans-serif;
+    background: #ffffff;
     color: #444;
+    min-height: 100vh;
+}
+/* =========================================
+   PROFILE IMAGE LIGHTBOX
+========================================= */
 
-            min-height: 100vh;
+.profile-photo {
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
 
-        }
+.profile-photo:hover {
+    transform: scale(1.03);
+}
+
+
+/* =========================================
+   IMAGE MODAL
+========================================= */
+
+.image-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.85);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    z-index: 10000;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+.image-modal.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* รูปใหญ่ */
+
+.image-modal img {
+    max-width: 90vw;
+
+    max-height: 90vh;
+
+    width: auto;
+
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 40px rgba(
+            0,
+            0,
+            0,
+            0.35
+        );
+
+    transform: scale(0.92);
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.image-modal.active img {
+    transform: scale(1);
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* =========================
+   ปุ่มย้อนกลับ
+========================= */
+
+.back-btn {
+    border: none;
+
+    background: #f1e7dc;
+    color: #796247;
+
+    font-family: "Prompt", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+
+    padding: 10px 18px;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.back-btn:hover {
+    background: #e5d5c4;
+    color: #5f4b38;
+
+    transform: translateY(-2px);
+}
+
+
+/* ปุ่มปิด */
+
+.image-modal-close {
+    position: absolute;
+
+    top: 20px;
+
+    right: 25px;
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.15
+    );
+
+    color: #ffffff;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+
+.image-modal-close:hover {
+    background: rgba(
+        255,
+        255,
+        255,
+        0.3
+    );
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .image-modal {
+        padding: 15px;
+    }
+
+    .image-modal img {
+        max-width: 95vw;
+        max-height: 85vh;
+        border-radius: 12px;
+    }
+
+    .image-modal-close {
+        top: 15px;
+        right: 15px;
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 24px;
+    }
+
+}
         /* =========================
            Navbar
         ========================= */
@@ -204,21 +408,15 @@
            COVER
         ========================================= */
 
-        .profile-cover {
+        /* =========================================
+   COVER
+========================================= */
 
-            width: 100%;
-
-            height: 190px;
-
-            background:
-        linear-gradient(
-            135deg,
-            #d8c5ad 0%,
-            #c8a77c 50%,
-            #f8f4ee 100%
-        );
-
-        }
+.profile-cover {
+    width: 100%;
+    height: 190px;
+    background: #f8f4ee;
+}
 
 
         /* =========================================
@@ -368,66 +566,77 @@
            PROFILE INFORMATION
         ========================================= */
 
-        .profile-info {
+        /* =========================================
+   PROFILE INFORMATION
+========================================= */
 
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
-            gap: 18px;
-
-            padding: 35px;
-
-        }
+.profile-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    padding: 35px;
+}
 
 
         /* =========================================
            INFO BOX
         ========================================= */
 
-        .info-box {
+        /* =========================================
+   INFO BOX
+========================================= */
 
-            background: #fdfbf8;
-    border: 1px solid #d8c5ad;
+.info-box {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 18px;
 
-            border-radius: 15px;
+    padding: 24px 26px;
 
-            padding: 18px;
+    min-height: 120px;
 
-            min-height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-        }
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.info-box:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.07);
+
+    border-color: #e5ddd3;
+}
 
 
         .info-title {
+    font-size: 13px;
+    color: #777777;
 
-            font-size: 13px;
+    margin-bottom: 8px;
 
-            color: #777;
-
-            margin-bottom: 7px;
-
-            font-weight: 400;
-
-        }
+    font-weight: 400;
+}
 
 
-        .info-value {
-
-            font-size: 15px;
-
-            color: #444;
-
-            font-weight: 500;
-
-            line-height: 1.6;
-
-            word-break: break-word;
-
-            white-space: pre-wrap;
-
-        }
+     .info-value {
+    font-size: 16px;
+    color: #222222;
+    font-weight: 400;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
 
 
         .info-value a {
@@ -466,57 +675,88 @@
         }
 
 
-        .stat-card {
+        /* =========================================
+   STATISTICS
+========================================= */
 
-            text-align: center;
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
-            background: #fdfbf8;
-    border: 1px solid #d8c5ad;
+    gap: 22px;
 
-            border-radius: 18px;
-
-            padding: 25px 15px;
-
-            transition: 0.25s;
-
-        }
+    padding: 0 35px 35px;
+}
 
 
-        .stat-card:hover {
+/* =========================================
+   STAT CARD
+========================================= */
 
-            transform: translateY(-3px);
+.stat-card {
+    text-align: center;
 
-            box-shadow:
-                0 8px 20px rgba(
-                    0,
-                    0,
-                    0,
-                    0.06
-                );
+    background: #ffffff;
 
-        }
+    border: 1px solid #eeeeee;
+
+    border-radius: 18px;
+
+    padding: 25px 15px;
+
+    min-height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
 
 
-        .stat-card h2 {
+.stat-card:hover {
+    transform: translateY(-2px);
 
-            font-size: 30px;
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.07);
 
-            font-weight: 600;
-
-            color: #8a6847;
-
-            margin-bottom: 4px;
-
-        }
+    border-color: #e5ddd3;
+}
 
 
-        .stat-card p {
+/* =========================================
+   STAT NUMBER
+========================================= */
 
-            font-size: 13px;
+.stat-card h2 {
+    font-size: 30px;
 
-            color: #777;
+    font-weight: 600;
 
-        }
+    color: #8a6847;
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================================
+   STAT TITLE
+========================================= */
+
+.stat-card p {
+    font-size: 13px;
+
+    color: #777777;
+
+    font-weight: 400;
+}
 
 
         /* =========================================
@@ -621,6 +861,7 @@
                 margin-top: -60px;
 
             }
+            
 
 
             .profile-left {
@@ -749,19 +990,26 @@
 
 <body>
 
-    <!-- =========================
-         Navbar
-    ========================= -->
-
     <nav class="navbar">
 
-        <a
-            href="index.html"
-            class="logo">
+    <a
+        href="index.html"
+        class="logo">
 
-            PetPaw
+        PetPaw
 
-        </a>
+    </a>
+
+    <div class="nav-right">
+
+        <button
+            type="button"
+            class="back-btn"
+            onclick="history.back()">
+
+            ← ย้อนกลับ
+
+        </button>
 
         <a
             href="index.html"
@@ -771,8 +1019,9 @@
 
         </a>
 
-    </nav>
+    </div>
 
+</nav>
 
     <!-- =========================================
          LOADING
@@ -1180,14 +1429,41 @@
         </div>
 
 
-    </main>
+</main>
 
 
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
+<!-- =========================================
+     PROFILE IMAGE LIGHTBOX
+========================================== -->
 
-    <script type="module">
+<div
+    class="image-modal"
+    id="imageModal">
+
+    <button
+        type="button"
+        class="image-modal-close"
+        id="imageModalClose"
+        aria-label="ปิด">
+
+        ×
+
+    </button>
+
+
+    <img
+        id="fullProfileImage"
+        src=""
+        alt="รูปโปรไฟล์ขนาดใหญ่">
+
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script type="module">
 
 
         /* =========================================
@@ -1241,6 +1517,147 @@
             document.getElementById(
                 "profileImage"
             );
+            /* =========================================
+   PROFILE IMAGE LIGHTBOX
+========================================= */
+
+const imageModal =
+    document.getElementById(
+        "imageModal"
+    );
+
+
+const fullProfileImage =
+    document.getElementById(
+        "fullProfileImage"
+    );
+
+
+const imageModalClose =
+    document.getElementById(
+        "imageModalClose"
+    );
+
+
+/* =========================================
+   กดรูปโปรไฟล์
+========================================= */
+
+profileImage.addEventListener(
+    "click",
+    () => {
+
+        /*
+         * ใช้รูปเดียวกับรูปโปรไฟล์
+         */
+
+        fullProfileImage.src =
+            profileImage.src;
+
+
+        imageModal.classList.add(
+            "active"
+        );
+
+
+        /*
+         * ป้องกันหน้าเว็บด้านหลังเลื่อน
+         */
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+);
+
+
+/* =========================================
+   ปิดรูป
+========================================= */
+
+function closeImageModal() {
+
+    imageModal.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+
+    /*
+     * ล้าง src หลังจากปิด
+     */
+
+    setTimeout(
+        () => {
+
+            fullProfileImage.src = "";
+
+        },
+        250
+    );
+
+}
+
+
+/* =========================================
+   ปุ่ม X
+========================================= */
+
+imageModalClose.addEventListener(
+    "click",
+    closeImageModal
+);
+
+
+/* =========================================
+   คลิกพื้นที่ด้านนอกเพื่อปิด
+========================================= */
+
+imageModal.addEventListener(
+    "click",
+    (event) => {
+
+        /*
+         * ต้องคลิกพื้นหลัง
+         * ไม่ใช่ตัวรูป
+         */
+
+        if (
+            event.target === imageModal
+        ) {
+
+            closeImageModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   กด ESC เพื่อปิด
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key === "Escape" &&
+            imageModal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeImageModal();
+
+        }
+
+    }
+);
 
 
         const profileName =
@@ -1451,172 +1868,54 @@
 
 
         /* =========================================
-           Facebook
-        ========================================== */
+   Facebook
+========================================== */
 
-        function createFacebookLink(
-            value
-        ) {
+function createFacebookLink(value) {
 
-            if (
-                !value ||
-                value.trim() === ""
-            ) {
+    if (
+        !value ||
+        value.trim() === ""
+    ) {
 
-                facebook.textContent =
-                    "-";
+        facebook.textContent = "-";
 
-                return;
+        return;
+    }
 
-            }
-
-
-            let url =
-                value.trim();
+    facebook.textContent =
+        value.trim();
+}
 
 
-            if (
-                !url.startsWith("http://") &&
-                !url.startsWith("https://")
-            ) {
+/* =========================================
+   Instagram
+========================================== */
 
-                url =
-                    "https://" + url;
+function createInstagramLink(value) {
 
-            }
+    if (
+        !value ||
+        value.trim() === ""
+    ) {
 
+        instagram.textContent = "-";
 
-            const link =
-                document.createElement(
-                    "a"
-                );
+        return;
+    }
 
+    let ig =
+        value.trim();
 
-            link.href =
-                url;
+    ig =
+        ig.replace(
+            /^@/,
+            ""
+        );
 
-
-            link.target =
-                "_blank";
-
-
-            link.rel =
-                "noopener noreferrer";
-
-
-            link.textContent =
-                value;
-
-
-            facebook.innerHTML =
-                "";
-
-
-            facebook.appendChild(
-                link
-            );
-
-        }
-
-
-        /* =========================================
-           Instagram
-        ========================================== */
-
-        function createInstagramLink(
-            value
-        ) {
-
-            if (
-                !value ||
-                value.trim() === ""
-            ) {
-
-                instagram.textContent =
-                    "-";
-
-                return;
-
-            }
-
-
-            let ig =
-                value.trim();
-
-
-            ig =
-                ig.replace(
-                    /^@/,
-                    ""
-                );
-
-
-            if (
-                ig.includes(
-                    "instagram.com/"
-                )
-            ) {
-
-                try {
-
-                    const url =
-                        new URL(
-                            ig.startsWith("http")
-                                ? ig
-                                : "https://" + ig
-                        );
-
-
-                    ig =
-                        url.pathname
-                            .replace(
-                                /^\/|\/$/g,
-                                ""
-                            );
-
-                } catch (error) {
-
-                    console.warn(
-                        "Instagram URL ไม่ถูกต้อง"
-                    );
-
-                }
-
-            }
-
-
-            const link =
-                document.createElement(
-                    "a"
-                );
-
-
-            link.href =
-                "https://instagram.com/" +
-                encodeURIComponent(ig);
-
-
-            link.target =
-                "_blank";
-
-
-            link.rel =
-                "noopener noreferrer";
-
-
-            link.textContent =
-                "@" + ig;
-
-
-            instagram.innerHTML =
-                "";
-
-
-            instagram.appendChild(
-                link
-            );
-
-        }
+    instagram.textContent =
+        "@" + ig;
+}
 
 
         /* =========================================

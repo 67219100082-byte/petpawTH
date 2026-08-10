@@ -1917,17 +1917,61 @@ async function loadCats(){
 
     allCats = [];
 
-    snapshot.forEach(doc=>{
+    snapshot.forEach(doc => {
 
-        allCats.push({
+    allCats.push({
 
-            id:doc.id,
-
-            ...doc.data()
-
-        });
+        id: doc.id,
+        ...doc.data()
 
     });
+
+});
+
+
+/* =========================================
+   เรียงโพสต์
+   1. เพิ่มล่าสุดอยู่ด้านบน
+   2. ได้บ้านแล้วอยู่ด้านล่าง
+========================================= */
+
+allCats.sort((a, b) => {
+
+    // สถานะได้บ้านแล้ว
+    const aAdopted =
+        a.adoptionStatus === "ได้บ้านแล้ว";
+
+    const bAdopted =
+        b.adoptionStatus === "ได้บ้านแล้ว";
+
+
+    // ถ้าสถานะต่างกัน
+    // ให้ "ได้บ้านแล้ว" ไปอยู่ด้านล่าง
+    if (aAdopted && !bAdopted) {
+        return 1;
+    }
+
+    if (!aAdopted && bAdopted) {
+        return -1;
+    }
+
+
+    // ถ้าสถานะเหมือนกัน
+    // เรียงจากวันที่เพิ่มล่าสุด -> เก่าสุด
+    const aTime =
+        a.createdAt?.toMillis
+            ? a.createdAt.toMillis()
+            : new Date(a.createdAt || 0).getTime();
+
+    const bTime =
+        b.createdAt?.toMillis
+            ? b.createdAt.toMillis()
+            : new Date(b.createdAt || 0).getTime();
+
+
+    return bTime - aTime;
+
+});
 
    console.log(allCats);
 
