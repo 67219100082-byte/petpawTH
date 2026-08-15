@@ -58,6 +58,79 @@
     font-size:38px;
     margin-bottom:35px;
 }
+/* =========================
+   PAGE LOADING
+========================= */
+
+#pageLoader{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+    gap:14px;
+
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(2px);
+
+    z-index:999999;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:opacity .4s ease,
+               visibility .4s ease;
+}
+
+#pageLoader.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+
+/* วงกลมหมุน */
+
+.loader-spinner{
+    width:55px;
+    height:55px;
+
+    border:5px solid #eadfce;
+    border-top:5px solid #8a6847;
+
+    border-radius:50%;
+
+    animation:loaderSpin .8s linear infinite;
+}
+
+
+/* ข้อความ */
+
+.loader-text{
+    color:#8a6847;
+
+    font-size:18px;
+    font-weight:600;
+
+    text-shadow:
+        0 1px 3px rgba(255,255,255,.8);
+}
+
+
+@keyframes loaderSpin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
 
 .about-section p{
     color:#555;
@@ -1365,6 +1438,15 @@ body.no-scroll{
 </head>
 
 <body>
+    <div id="pageLoader">
+
+    <div class="loader-spinner"></div>
+
+    <div class="loader-text">
+        กำลังโหลดเว็บไซต์...
+    </div>
+
+</div>
  <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
@@ -1763,6 +1845,42 @@ if (typeMenu) {
 
 </script>
 <script type="module">
+    // =========================
+// PAGE LOADING
+// =========================
+
+async function finishPageLoading(){
+
+    const loader = document.getElementById("pageLoader");
+
+    if(!loader) return;
+
+    // รอให้รูปภาพทั้งหมดโหลดเสร็จ
+    const images = Array.from(document.images);
+
+    await Promise.all(
+        images.map(img => {
+            if(img.complete){
+                return Promise.resolve();
+            }
+
+            return new Promise(resolve => {
+                img.addEventListener("load", resolve, {once:true});
+                img.addEventListener("error", resolve, {once:true});
+            });
+        })
+    );
+
+    // รออีกนิดให้หน้าเว็บแสดงผลเรียบร้อย
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    loader.classList.add("hide");
+
+    // ลบออกจากหน้าเว็บหลัง animation
+    setTimeout(() => {
+        loader.remove();
+    }, 500);
+}
 
     import { auth, db } from "./firebase.js";
 import {
@@ -2002,6 +2120,29 @@ document.addEventListener("keydown", function(e){
     }
 
 });
+</script>
+<script>
+
+    // JavaScript เดิมของเว็บไซต์
+    // ...
+
+
+    window.addEventListener("load", function(){
+
+        const loader = document.getElementById("pageLoader");
+
+        if(loader){
+
+            loader.classList.add("hide");
+
+            setTimeout(() => {
+                loader.remove();
+            }, 500);
+
+        }
+
+    });
+
 </script>
 </body>
 </html>

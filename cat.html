@@ -1,71 +1,1839 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หาบ้านแมวจรจัด | PetPaw</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
 
-    <style>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-a{
-	text-decoration:none;
-	color:inherit;
-}   
+<title>หาบ้านแมวจรจัด | PetPaw</title>
+
+
+<!-- =========================================================
+     GOOGLE FONT
+========================================================= -->
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
-	
     margin:0;
     padding:0;
     box-sizing:border-box;
     font-family:"Prompt", sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     background:#f3f3f3;
     min-height:2000px;
+    color:#333;
 }
 
-/* ===========================
-        Filter
-=========================== */
+body.no-scroll{
+    overflow:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+select{
+    font-family:"Prompt", sans-serif;
+}
+
+
+/* =========================================================
+   PAGE LOADER
+========================================================= */
+
+#pageLoader{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:14px;
+
+    background:rgba(255,255,255,.35);
+
+    backdrop-filter:blur(2px);
+
+    z-index:999999;
+
+    opacity:1;
+
+    visibility:visible;
+
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
+}
+
+#pageLoader.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+}
+
+.loader-spinner{
+
+    width:55px;
+
+    height:55px;
+
+    border:5px solid #eadfce;
+
+    border-top:5px solid #8a6847;
+
+    border-radius:50%;
+
+    animation:
+        loaderSpin .8s linear infinite;
+}
+
+.loader-text{
+
+    color:#8a6847;
+
+    font-size:18px;
+
+    font-weight:600;
+}
+
+@keyframes loaderSpin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-section{
+
+    width:90%;
+
+    max-width:1500px;
+
+    margin:40px auto 20px;
+}
+
+.filter-box{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.filter-box label{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    color:#555;
+}
+
+.filter-box select{
+
+    width:260px;
+
+    height:50px;
+
+    border-radius:14px;
+
+    border:2px solid #ddd;
+
+    padding:0 15px;
+
+    font-size:16px;
+
+    outline:none;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.filter-box select:focus{
+
+    border-color:#c8a77c;
+
+    box-shadow:
+        0 0 0 3px rgba(200,167,124,.15);
+}
+
+
+/* =========================================================
+   CAT SECTION
+========================================================= */
+
+.dog-section{
+
+    width:90%;
+
+    max-width:1500px;
+
+    margin:35px auto 0;
+
+    padding-bottom:180px;
+}
+
+
+/* =========================================================
+   CARD CONTAINER
+========================================================= */
+
+.dog-container{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap:22px;
+
+    align-items:start;
+}
+
+
+/* =========================================================
+   CAT CARD
+========================================================= */
+
+.dog-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.08);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+    min-width:0;
+}
+
+.dog-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.13);
+}
+
+
+/* =========================================================
+   IMAGE AREA
+========================================================= */
+
+.image-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    height:240px;
+
+    overflow:hidden;
+
+    background:#eee;
+}
+
+.dog-image{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    cursor:zoom-in;
+
+    transition:
+        transform .35s ease,
+        filter .25s ease;
+}
+
+.dog-card:hover .dog-image{
+
+    transform:scale(1.025);
+
+    filter:brightness(.96);
+}
+
+
+/* =========================================================
+   IMAGE ZOOM BUTTON
+========================================================= */
+
+.image-zoom-btn{
+
+    position:absolute;
+
+    right:12px;
+
+    bottom:12px;
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(55,55,55,.9);
+
+    color:#63c8ff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.25);
+
+    transition:.25s;
+
+    z-index:2;
+}
+
+.image-zoom-btn:hover{
+
+    transform:scale(1.08);
+
+    background:#444;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.dog-content{
+
+    padding:18px 17px 16px;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.dog-header{
+
+    display:block;
+
+    margin-bottom:12px;
+}
+
+
+/* =========================================================
+   NAME + STATUS
+========================================================= */
+
+.name-status-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.dog-name{
+
+    flex:1;
+
+    min-width:0;
+
+    font-size:21px;
+
+    font-weight:700;
+
+    color:#292929;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.adoption-status{
+
+    flex-shrink:0;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 11px;
+
+    border-radius:18px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   STATUS AVAILABLE
+========================================================= */
+
+.adoption-status.available{
+
+    background:#e7f7e9;
+
+    color:#2e8b36;
+}
+
+
+/* =========================================================
+   STATUS ADOPTED
+========================================================= */
+
+.adoption-status.adopted{
+
+    background:#dbeafe;
+
+    color:#1565c0;
+}
+
+
+/* =========================================================
+   GENDER
+========================================================= */
+
+.gender-text{
+
+    margin-top:2px;
+
+    color:#777;
+
+    font-size:14px;
+
+    font-weight:400;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:7px;
+
+    margin-top:14px;
+}
+
+
+/* =========================================================
+   INFORMATION ITEM
+========================================================= */
+
+.info-item{
+
+    min-width:0;
+
+    min-height:54px;
+
+    padding:8px 10px;
+
+    background:#f7f7f7;
+
+    border-radius:12px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   INFO LABEL
+========================================================= */
+
+.info-label{
+
+    width:auto;
+
+    font-size:11px;
+
+    line-height:1.3;
+
+    color:#999;
+
+    font-weight:400;
+
+    margin-bottom:2px;
+}
+
+
+/* =========================================================
+   INFO VALUE
+========================================================= */
+
+.info-value{
+
+    flex:initial;
+
+    min-width:0;
+
+    color:#333;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    line-height:1.35;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location-box{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:9px;
+
+    margin-top:10px;
+
+    padding:10px 12px;
+
+    background:#f7f2eb;
+
+    border-radius:12px;
+
+    color:#735b42;
+
+    font-size:13px;
+
+    line-height:1.55;
+
+    min-height:43px;
+}
+
+.location-icon{
+
+    flex-shrink:0;
+
+    font-size:15px;
+
+    line-height:1.4;
+}
+
+.location-text{
+
+    min-width:0;
+
+    word-break:break-word;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title{
+
+    margin-top:12px;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#7b6249;
+}
+
+
+/* =========================================================
+   DETAIL
+========================================================= */
+
+.detail{
+
+    background:#fafafa;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    line-height:1.65;
+
+    color:#666;
+
+    font-size:13px;
+
+    min-height:60px;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.section-divider{
+
+    border:0;
+
+    border-top:
+        1px solid #e5e5e5;
+
+    margin:13px 0 10px;
+}
+
+
+/* =========================================================
+   OWNER
+========================================================= */
+
+.owner-box{
+
+    display:block;
+
+    padding:0;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.owner-box:hover{
+
+    background:#faf8f5;
+}
+
+.owner-profile{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:5px 8px;
+}
+
+.owner-profile img{
+
+    width:48px;
+
+    height:48px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:1px solid #eee;
+
+    transition:.25s;
+}
+
+.owner-box:hover .owner-profile img{
+
+    transform:scale(1.04);
+}
+
+.owner-name-area{
+
+    min-width:0;
+
+    flex:1;
+}
+
+.owner-name{
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#292929;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.owner-role{
+
+    margin-top:1px;
+
+    font-size:11px;
+
+    color:#888;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:7px;
+
+    margin-top:5px;
+}
+
+.contact p{
+
+    margin:0;
+
+    min-width:0;
+
+    padding:8px 9px;
+
+    border-radius:10px;
+
+    background:#f7f7f7;
+
+    color:#555;
+
+    font-size:11px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+
+/* =========================================================
+   OWNER ACTIONS
+========================================================= */
 
 .owner-actions{
+
     display:flex;
-    gap:10px;
-    margin-top:20px;
+
+    gap:7px;
+
+    margin-top:12px;
 }
 
 .status-btn,
 .delete-btn{
+
     flex:1;
-    padding:12px;
+
+    min-height:38px;
+
+    padding:8px 10px;
+
     border:none;
-    border-radius:12px;
+
+    border-radius:9px;
+
     color:white;
+
     cursor:pointer;
-    font-size:15px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.status-btn{
+
+    background:#2e7d32;
+}
+
+.delete-btn{
+
+    background:#d32f2f;
+}
+
+.status-btn:hover{
+
+    background:#1b5e20;
+
+    transform:translateY(-1px);
+}
+
+.delete-btn:hover{
+
+    background:#b71c1c;
+
+    transform:translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state{
+
+    grid-column:1 / -1;
+
+    padding:60px 20px;
+
+    text-align:center;
+
+    color:#777;
+
+    background:#fff;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.06);
+}
+
+.empty-state h2{
+
+    font-size:22px;
+
+    margin-bottom:8px;
+
+    color:#555;
+}
+
+.empty-state p{
+
+    color:#999;
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   FULL IMAGE VIEWER
+========================================================= */
+
+.image-viewer{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.88);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:999999;
+}
+
+.image-viewer.show{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+.image-viewer img{
+
+    max-width:95vw;
+
+    max-height:90vh;
+
+    width:auto;
+
+    height:auto;
+
+    object-fit:contain;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.5);
+
+    transform:scale(.9);
+
+    transition:.3s;
+}
+
+.image-viewer.show img{
+
+    transform:scale(1);
+}
+
+.image-viewer-close{
+
+    position:absolute;
+
+    top:20px;
+
+    right:25px;
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    transition:.2s;
+
+    z-index:2;
+}
+
+.image-viewer-close:hover{
+
+    background:rgba(255,255,255,.3);
+
+    transform:scale(1.08);
+}
+
+
+/* =========================================================
+   NOTIFY
+========================================================= */
+
+.notify-box{
+
+    position:fixed;
+
+    top:30px;
+
+    right:30px;
+
+    background:#c8a77c;
+
+    color:white;
+
+    padding:18px 25px;
+
+    border-radius:18px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.2);
+
+    z-index:99999;
+
+    opacity:0;
+
+    transform:translateY(-20px);
+
+    transition:.4s;
+}
+
+.notify-box.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   BANNER
+========================================================= */
+
+.banner{
+
+    position:relative;
+
+    width:100%;
+
+    height:45vw;
+
+    min-height:220px;
+
+    max-height:420px;
+
+    margin:0 auto;
+
+    background-image:
+        url("img/banner2.png");
+
+    background-size:cover;
+
+    background-position:center center;
+
+    background-repeat:no-repeat;
+
+    overflow:hidden;
+
+    border-radius:
+        0 0 30px 30px;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.15);
+}
+
+.banner::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.08);
+
+    z-index:1;
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+
+    position:absolute;
+
+    top:25px;
+
+    left:35px;
+
+    right:35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    z-index:9999;
+}
+
+.left-menu{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+}
+
+.menu-item{
+
+    position:relative;
+}
+
+.menu-btn{
+
+    padding:14px 25px;
+
+    border:none;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    color:#796247;
+
+    background:
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(10px);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    transition:.3s;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.menu-btn:hover{
+
+    transform:translateY(-5px);
+
+    background:
+        rgba(255,255,255,.3);
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.2);
+}
+
+
+/* =========================================================
+   DESKTOP DROPDOWN
+========================================================= */
+
+.dropdown{
+
+    position:absolute;
+
+    top:70px;
+
+    left:0;
+
+    background:white;
+
+    border-radius:18px;
+
+    min-width:220px;
+
+    padding:10px 0;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.15);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:.25s;
+
+    z-index:99999;
+}
+
+.menu-item::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:55px;
+
+    width:100%;
+
+    height:25px;
+}
+
+.dropdown a{
+
+    display:block;
+
+    padding:18px 22px;
+
+    color:#444;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.dropdown a:hover{
+
+    background:#f2e4d3;
+}
+
+.menu-item:hover .dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   RIGHT MENU
+========================================================= */
+
+.right-menu{
+
+    display:flex;
+
+    gap:15px;
+}
+
+
+/* =========================================================
+   USER PROFILE
+========================================================= */
+
+.user-dropdown{
+
+    position:relative;
+}
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:8px 15px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(10px);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    cursor:pointer;
+}
+
+.user-profile img{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid white;
+}
+
+.user-profile span{
+
+    color:#796247 !important;
+
+    font-weight:600;
+
+    font-size:16px;
+}
+
+
+/* =========================================================
+   USER DROPDOWN
+========================================================= */
+
+.dropdown-menu{
+
+    position:absolute;
+
+    top:65px;
+
+    right:0;
+
+    width:220px;
+
+    background:white;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.15);
+
+    display:none;
+
+    overflow:hidden;
+}
+
+.dropdown-menu.show{
+
+    display:block;
+}
+
+.dropdown-menu a{
+
+    display:block;
+
+    padding:15px 20px;
+
+    color:#444;
+
+    text-decoration:none;
+}
+
+.dropdown-menu a:hover{
+
+    background:#f3f3f3;
+}
+
+
+/* =========================================================
+   SCROLLED NAVBAR
+========================================================= */
+
+.navbar.scrolled{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    padding:15px 40px;
+
+    background:
+        rgba(255,255,255,.95);
+
+    backdrop-filter:
+        blur(10px);
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.08);
+}
+
+.navbar.scrolled .menu-btn{
+
+    background:#c8a77c;
+
+    color:white;
+
+    border:none;
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.menu-toggle{
+
+    display:none;
+
+    font-size:28px;
+
+    color:#6b4f33;
+
+    cursor:pointer;
+
+    padding:8px 14px;
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.85);
+
+    backdrop-filter:
+        blur(10px);
+
+    z-index:1002;
+}
+
+.navbar.scrolled .menu-toggle{
+
+    background:#d8c5ad;
+
+    border:
+        1px solid #b08a61;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.18);
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    left:-300px;
+
+    width:280px;
+
+    height:100vh;
+
+    padding:25px;
+
+    background:#796247;
+
+    transition:.35s;
+
+    z-index:100001;
+
+    overflow-y:auto;
+}
+
+.sidebar.active{
+
+    left:0;
+}
+
+.sidebar-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:30px;
+}
+
+.sidebar-buttons a{
+
+    flex:1;
+
+    text-align:center;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    text-decoration:none;
+
     font-weight:600;
 }
+
+.register-btn,
+.login-btn{
+
+    background:#6A513A;
+}
+
+
+/* =========================================================
+   SIDEBAR MENU
+========================================================= */
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:0;
+}
+
+.sidebar li{
+
+    margin:0;
+}
+
+.sidebar li a,
+.dropdown-btn{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    width:100%;
+
+    padding:14px 0;
+
+    background:none;
+
+    border:none;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:500;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    text-align:left;
+}
+
+.submenu{
+
+    display:none;
+
+    list-style:none;
+
+    padding-left:20px;
+}
+
+.submenu.show{
+
+    display:block;
+}
+
+.submenu li a{
+
+    padding:10px 0;
+
+    font-size:17px;
+}
+
+.arrow{
+
+    transition:.3s;
+}
+
+.arrow.rotate{
+
+    transform:rotate(90deg);
+}
+
+
+/* =========================================================
+   SIDEBAR USER
+========================================================= */
+
+.sidebar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:30px;
+}
+
+.sidebar-user img{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #fff;
+}
+
+.sidebar-info{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.sidebar-name{
+
+    color:#fff;
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+.sidebar-link{
+
+    color:#eee;
+
+    text-decoration:none;
+
+    margin-top:6px;
+
+    font-size:15px;
+}
+
+.sidebar-link.logout{
+
+    color:#ffd6d6;
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.overlay{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:
+        rgba(0,0,0,.5);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:100000;
+}
+
+.overlay.active{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+
+/* =========================================================
+   FLOATING AI BUTTON
+========================================================= */
+
+.floating-ai{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:120px;
+
+    width:70px;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#4A90E2;
+
+    color:white;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.floating-ai:hover{
+
+    transform:translateY(-5px);
+
+    background:#357ABD;
+}
+
+
+/* =========================================================
+   CHAT BUTTON
+========================================================= */
+
+.chat-btn{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:120px;
+
+    width:70px;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#4da6ff;
+
+    color:white;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.chat-btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.3);
+}
+
+.chat-btn:active{
+
+    transform:
+        translateY(-2px)
+        scale(.92);
+}
+
+
+/* =========================================================
+   CHAT POPUP
+========================================================= */
+
 .chatbot-popup{
 
     position:fixed;
 
     right:20px;
+
     bottom:20px;
 
     width:500px;
+
     height:700px;
 
     background:#fff;
 
     border-radius:25px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3);
 
     overflow:hidden;
 
@@ -75,6 +1843,8 @@ body{
 }
 
 .chat-header{
+
+    height:65px;
 
     background:#4da6ff;
 
@@ -101,1388 +1871,172 @@ body{
 
     cursor:pointer;
 }
-.chat-btn{
-    position:fixed;
 
-    right:30px;
-    bottom:120px;
-
-    width:70px;
-    height:70px;
-
-    border:none;
-    border-radius:50%;
-
-    background:#4da6ff;
-
-    color:white;
-
-    font-size:34px;
-
-    cursor:pointer;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.25);
-
-    z-index:9999;
-
-    transition:.3s;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-
-
-.chat-btn:hover{
-    transform:translateY(-5px);
-
-    background:#4da6ff;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
-}
-
-.chat-btn:active{
-    transform:translateY(-2px) scale(.92);
-}
 .chatbot-popup iframe{
 
     width:100%;
+
     height:650px;
 
     border:none;
 }
-/* ==========================
-   Chatbot Mobile (LINE / Messenger Style)
-========================== */
-@media (max-width:768px){
 
-    .chat-btn{
-        right:20px;
-        bottom:20px;
-        width:65px;
-        height:65px;
-        font-size:30px;
-        z-index:99999;
-    }
 
-    .chatbot-popup{
+/* =========================================================
+   FLOATING PLUS
+========================================================= */
 
-        display:block;          /* ใช้ transform ซ่อนแทน */
-        position:fixed;
+.floating-btn{
 
-        left:0;
-        right:0;
-        bottom:0;
-
-        width:100%;
-        height:100dvh;
-
-        border-radius:25px 25px 0 0;
-
-        transform:translateY(100%);
-        transition:.35s ease;
-
-        z-index:100000;
-    }
-
-    .chatbot-popup.show{
-        transform:translateY(0);
-    }
-
-    .chat-header{
-
-        height:65px;
-
-        border-radius:25px 25px 0 0;
-    }
-
-    .chatbot-popup iframe{
-        width:100%;
-        height:calc(100dvh - 65px);
-    }
-
-}
-
-.status-btn{
-    background:#2e7d32;
-}
-
-.delete-btn{
-    background:#d32f2f;
-}
-
-.status-btn:hover{
-    background:#1b5e20;
-}
-
-.delete-btn:hover{
-    background:#b71c1c;
-}
-.filter-section{
-
-    width:90%;
-
-    max-width:1300px;
-
-    margin:40px auto 20px;
-
-}
-/* =========================
-   Full Image Viewer
-========================= */
-
-.image-viewer{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.88);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:30px;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.3s;
-
-    z-index:999999;
-}
-
-.image-viewer.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.image-viewer img{
-    max-width:95vw;
-    max-height:90vh;
-
-    width:auto;
-    height:auto;
-
-    object-fit:contain;
-
-    border-radius:15px;
-
-    box-shadow:0 10px 40px rgba(0,0,0,.5);
-
-    transform:scale(.9);
-    transition:.3s;
-}
-
-.image-viewer.show img{
-    transform:scale(1);
-}
-
-.image-viewer-close{
-    position:absolute;
-    top:20px;
-    right:25px;
-
-    width:50px;
-    height:50px;
-
-    border:none;
-    border-radius:50%;
-
-    background:rgba(255,255,255,.15);
-    color:white;
-
-    font-size:30px;
-
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transition:.2s;
-
-    z-index:2;
-}
-
-.image-viewer-close:hover{
-    background:rgba(255,255,255,.3);
-    transform:scale(1.08);
-}
-
-/* รูปที่กดดูเต็มได้ */
-.dog-image{
-    cursor:zoom-in;
-    transition:.25s;
-}
-
-.dog-image:hover{
-    filter:brightness(.9);
-}
-
-@media(max-width:600px){
-
-    .image-viewer{
-        padding:15px;
-    }
-
-    .image-viewer img{
-        max-width:100%;
-        max-height:85vh;
-        border-radius:10px;
-    }
-
-    .image-viewer-close{
-        top:15px;
-        right:15px;
-
-        width:45px;
-        height:45px;
-
-        font-size:26px;
-    }
-}
-
-.filter-box{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.filter-box label{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:#555;
-
-}
-
-.filter-box select{
-
-    width:260px;
-
-    height:50px;
-
-    border-radius:12px;
-
-    border:2px solid #ddd;
-
-    padding:0 15px;
-
-    font-size:16px;
-
-    outline:none;
-
-}
-
-/* ===========================
-        Dog Section
-=========================== */
-
-.dog-section{
-
-    width:90%;
-
-    max-width:1500px;
-
-    margin:50px auto;
-
-}
-
-.dog-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:25px;
-
-    align-items:start;
-
-}
-@media(max-width:1200px){
-
-.dog-container{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-}
-
-@media(max-width:900px){
-
-.dog-container{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:600px){
-
-.dog-container{
-
-grid-template-columns:1fr;
-
-}
-
-}
-.dog-card{
-
-    background:#fff;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.dog-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.dog-image{
-
-    width:100%;
-
-    height:240px;
-
-    object-fit:cover;
-
-}
-
-.dog-content{
-
-    padding:25px;
-
-}
-
-.dog-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    margin-bottom:20px;
-}
-.header-right{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    flex-shrink:0;
-}
-
-.dog-name{
-    flex:1;
-    min-width:0;
-
-    font-size:24px;
-    font-weight:700;
-    color:#333;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.status{
-
-    padding:8px 18px;
-
-    border-radius:36px;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:600;
-
-
-}
-
-.status.หาบ้าน{
-
-    background:#4CAF50;
-
-}
-
-.status.หาย{
-
-    background:#F44336;
-
-}
-
-.status.พบแล้ว{
-
-    background:#2196F3;
-
-}
-
-.info-grid{
-    margin-top:18px;
-    background:transparent;   /* ไม่มีพื้นหลัง */
-    border:none;
-    border-radius:0;
-    overflow:visible;
-}
-
-.info-item{
-    display:flex;
-    align-items:center;
-
-    padding:14px 0;           /* เดิม 24px 36px */
-    font-size:18px;
-    color:#444;
-
-    line-height:1.5;
-    border-bottom:1px solid #ececec;
-}
-
-.info-item:last-child{
-    border-bottom:none;
-}
-
-.info-label{
-    width:110px;
-    font-weight:700;
-    color:#333;
-    flex-shrink:0;
-}
-
-.info-value{
-    color:#555;
-}
-
-.section-title{
-
-    margin-top:30px;
-
-    margin-bottom:10px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    color:#8a6847;
-
-}
-
-.detail{
-
-    background:#fafafa;
-
-    padding:18px;
-
-    border-radius:15px;
-
-    line-height:1.9;
-
-    color:#666;
-
-    margin-top:10px;
-
-}
-
-.owner-box{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-
-    gap:18px;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    text-decoration:none;
-
-    color:inherit;
-
-    transition:.25s;
-
-    cursor:pointer;
-}
-
-.owner-box:hover{
-
-    background:#f8f5ef;
-
-    transform:translateY(-2px);
-
-}
-
-.owner-profile{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.owner-profile img{
-
-    width:70px;
-
-    height:70px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-}
-.owner-profile h3{
-
-    color:#333;
-
-    font-size:22px;
-
-    margin-bottom:5px;
-
-}
-.owner-profile p{
-
-    color:#777;
-
-    font-size:15px;
-
-}
-.owner-box:hover img{
-
-    transform:scale(1.05);
-
-}
-
-.owner-profile img{
-
-    transition:.25s;
-
-}
-
-.owner-name{
-
-    font-size:18px;
-
-    font-weight:bold;
-
-}
-
-.contact{
-
-    width:100%;
-
-    display:grid;
-
-    gap:10px;
-
-}
-
-.contact p{
-
-    margin:0;
-
-    padding:12px 15px;
-
-    border-radius:12px;
-
-    background:#f8f8f8;
-
-    color:#555;
-
-    word-break:break-word;
-
-}
-.owner-profile img{
-
-    flex-shrink:0;
-
-    width:70px;
-
-    height:70px;
-
-}
-.section-divider{
-    border:0;
-    border-top:1px solid #e5e5e5;
-    margin:28px 0;
-}
-.owner-name{
-
-    font-size:20px;
-
-    font-weight:700;
-
-    color:#333;
-
-}
-.profile-btn{
-
-    margin-top:20px;
-
-    display:block;
-
-    text-align:center;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    background:#8a6847;
-
-    color:#fff;
-
-    font-weight:600;
-
-}
-
-.profile-btn:hover{
-
-    background:#6d5339;
-
-}
-/* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
-body.no-scroll{
-    overflow: hidden;
-}
-.user-dropdown{
-    position:relative;
-}
-
-.user-profile{
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    cursor:pointer;
-
-    padding:8px 15px;
-
-    border-radius:15px;
-
-    background:rgba(255,255,255,.15);
-
-    backdrop-filter:blur(10px);
-
-}
-
-.user-profile img{
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-}
-
-.user-profile span{
-
-    color:white;
-
-    font-weight:bold;
-
-}
-
-.dropdown-menu{
-
-    position:absolute;
-
-    top:65px;
-    right:0;
-
-    width:220px;
-
-    background:white;
-
-    border-radius:15px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-
-    display:none;
-
-    overflow:hidden;
-
-}
-.adoption-status{
-    margin-top:12px;
-    display:inline-block;
-    padding:8px 16px;
-    border-radius:20px;
-    font-weight:600;
-    font-size:15px;
-}
-
-/* กำลังหาบ้าน */
-.adoption-status.available{
-    background:#e8f7ea;
-    color:#2e7d32;
-}
-
-/* ได้บ้านแล้ว */
-.adoption-status.adopted{
-    background:#dbeafe;
-    color:#1565c0;
-}
-
-.dropdown-menu.show{
-
-    display:block;
-
-}
-
-.dropdown-menu a{
-
-    display:block;
-
-    padding:15px 20px;
-
-    color:#444;
-
-    text-decoration:none;
-
-}
-
-.dropdown-menu a:hover{
-
-    background:#f3f3f3;
-
-}
-/* =========================
-   เพิ่มโปรไฟล์เมื่อล็อกอิน
-========================= */
-.user-profile{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-}
-
-.user-profile span{
-    color:#796247 !important;
-    font-weight:600;
-    font-size:16px;
-}
-
-.user-profile img{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid white;
-}
-
-/* =========================
-   Banner
-========================= */
-
-.banner{
-    position: relative;
-
-    width: 100%;
-    height: 45vw;
-    min-height: 220px;
-    max-height: 420px;
-
-    margin: 0 auto;
-
-    background-image: url("img/banner2.png");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-
-    overflow: hidden;
-
-    border-radius: 0 0 30px 30px;
-
-    box-shadow: 0 5px 25px rgba(0,0,0,.15);
-}
-	/* =========================
-   NOTIFY
-========================= */
-
-.notify-box{
-
-	position:fixed;
-
-	top:30px;
-	right:30px;
-
-	background:#c8a77c;
-
-	color:white;
-
-	padding:18px 25px;
-
-	border-radius:18px;
-
-	font-weight:bold;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.2);
-
-	z-index:99999;
-
-	opacity:0;
-
-	transform:translateY(-20px);
-
-	transition:0.4s;
-}
-
-.notify-box.show{
-
-	opacity:1;
-
-	transform:translateY(0);
-}
-
-/* Overlay */
-
-.banner::before{
-	content:"";
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background:rgba(0,0,0,0.08);
-	border-radius:30px;
-	z-index:1;
-	pointer-events:none;
-}
-
-/* =========================
-   Navbar
-========================= */
-
-.navbar{
-	position:absolute;
-	top:25px;
-	left:35px;
-	right:35px;
-
-	display:flex;
-	justify-content:space-between;
-	align-items:flex-start;
-
-	z-index:9999;
-}
-
-/* =========================
-   เมนูซ้าย
-========================= */
-
-.left-menu{
-	display:flex;
-	gap:15px;
-	flex-wrap:wrap;
-}
-
-/* กล่องเมนู */
-
-.menu-item{
-	position:relative;
-}
-
-/* ปุ่มเมนู */
-
-.menu-btn{
-	padding:14px 25px;
-
-	border:none;
-	border-radius:15px;
-
-	font-size:16px;
-	font-weight:bold;
-
-	cursor:pointer;
-
-	color:#796247;
-
-	background:rgba(255,255,255,0.18);
-
-	backdrop-filter:blur(10px);
-
-	border:1px solid rgba(255,255,255,0.25);
-
-	transition:0.3s;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-
-/* Hover */
-
-.menu-btn:hover{
-	transform:translateY(-5px);
-
-	background:rgba(255,255,255,0.3);
-
-	box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* =========================
-   Dropdown
-========================= */
-
-.dropdown{
-	position:absolute;
-
-	top:70px;
-	left:0;
-
-	background:white;
-
-	border-radius:18px;
-
-	min-width:220px;
-
-	padding:10px 0;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.15);
-
-	opacity:0;
-	visibility:hidden;
-
-	transform:translateY(10px);
-
-	transition:0.25s;
-
-	z-index:99999;
-}
-
-/* ทำพื้นที่กัน dropdown หาย */
-
-.menu-item::after{
-	content:"";
-	position:absolute;
-	left:0;
-	top:55px;
-	width:100%;
-	height:25px;
-}
-
-/* ลิงก์ */
-
-.dropdown a{
-	display:block;
-
-	padding:18px 22px;
-
-	color:#444;
-
-	font-weight:bold;
-
-	transition:0.3s;
-}
-
-/* Hover */
-
-.dropdown a:hover{
-	background:#f2e4d3;
-}
-
-/* แสดง dropdown */
-
-.menu-item:hover .dropdown{
-	opacity:1;
-	visibility:visible;
-	transform:translateY(0);
-}
-
-/* =========================
-   ปุ่มขวา
-========================= */
-
-.right-menu{
-	display:flex;
-	gap:15px;
-}
-
-/* =========================
-   Navbar ตอน Scroll
-========================= */
-
-.navbar.scrolled{
-	position:fixed;
-
-	top:0;
-	left:0;
-
-	width:100%;
-
-	padding:15px 40px;
-
-	background:rgba(255,255,255,0.95);
-
-	backdrop-filter:blur(10px);
-
-	box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-/* ปุ่มตอน scroll */
-
-.navbar.scrolled .menu-btn{
-	background:#c8a77c;
-	color:white;
-	border:none;
-}
-/* =========================
-   Floating AI Button
-========================= */
-
-.floating-ai{
     position:fixed;
 
     right:30px;
-    bottom:120px;   /* อยู่เหนือปุ่ม + */
+
+    bottom:30px;
 
     width:70px;
+
     height:70px;
 
     border:none;
+
     border-radius:50%;
 
-    background:#4A90E2;   /* สีเขียว */
+    background:#8a6847;
 
     color:white;
 
-    font-size:34px;
+    font-size:42px;
 
     cursor:pointer;
 
-    box-shadow:0 5px 20px rgba(0,0,0,0.25);
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
 
     z-index:9999;
 
     transition:.3s;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
 
-.floating-ai:hover{
-
-    transform:translateY(-5px);
-
-    background:#357ABD;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
-
-}
-/* =========================
-   Floating Plus Button
-========================= */
-
-
-.floating-btn{
-	position:fixed;
-
-	right:30px;
-	bottom:30px;
-
-	width:70px;
-	height:70px;
-
-	border:none;
-	border-radius:50%;
-
-	background:#8a6847;
-
-	color:white;
-
-	font-size:42px;
-
-	cursor:pointer;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.25);
-
-	z-index:9999;
-
-	transition:0.3s;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-
-/* Hover */
-
 .floating-btn:hover{
-	transform:translateY(-5px) rotate(90deg);
 
-	background:#8a6847;
+    transform:
+        translateY(-5px)
+        rotate(90deg);
 
-	box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
-/* ==========================
-   Sidebar Mobile
-========================== */
-/* ตอน Navbar เลื่อน */
-.navbar.scrolled .menu-toggle{
-    background:#d8c5ad;
-    border:1px solid #b08a61;
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
-}
-
-/* ปุ่ม ☰ */
-.menu-toggle{
-    display:none;
-    font-size:28px;
-    color:#6b4f33;
-    cursor:pointer;
-    padding:8px 14px;
-    border-radius:12px;
-    background:rgba(255,255,255,.85);
-    backdrop-filter:blur(10px);
-    z-index:1002;
-}
-
-/* Sidebar */
-.sidebar{
-    position:fixed;
-    top:0;
-    left:-300px;
-
-    width:280px;
-    height:100vh;
-
-    padding:25px;
-
-    background:#796247;
-
-    transition:.35s;
-    z-index:1001;
-}
-
-.sidebar.active{
-    left:0;
-}
-
-/* ปุ่มบนสุด */
-.sidebar-buttons{
-    display:flex;
-    gap:10px;
-    margin-bottom:30px;
-}
-
-.sidebar-buttons a{
-    flex:1;
-    text-align:center;
-    padding:15px;
-    border-radius:12px;
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.register-btn,
-.login-btn{
-    background:#6A513A;
-}
-
-/* เมนูหลัก */
-.sidebar ul{
-    list-style:none;
-    padding:0;
-    margin:0;
-}
-
-.sidebar li{
-    margin:0;
-}
-
-.sidebar li a,
-.dropdown-btn{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    width:100%;
-
-    padding:14px 0;
-
-    background:none;
-    border:none;
-
-    color:#fff;
-    font-size:18px;
-    font-weight:500;
-
-    text-decoration:none;
-    cursor:pointer;
-}
-
-/* เมนูย่อย */
-.submenu{
-    display:none;
-    list-style:none;
-    padding-left:20px;
-}
-
-.submenu.show{
-    display:block;
-}
-
-.submenu li a{
-    padding:10px 0;
-    font-size:17px;
-}
-
-/* ลูกศร */
-.arrow{
-    transition:.3s;
-}
-
-.arrow.rotate{
-    transform:rotate(90deg);
-}
-
-/* Overlay */
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.5);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.3s;
-    z-index:1000;
-}
-
-.overlay.active{
-    opacity:1;
-    visibility:visible;
-}
-.sidebar-user{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:30px;
-}
-
-.sidebar-user img{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #fff;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.3);
 }
 
 
-.sidebar-user a{
-    color:#fff;
-    font-size:14px;
-    text-decoration:none;
-    opacity:.8;
+/* =========================================================
+   RESPONSIVE 1200
+========================================================= */
+
+@media(max-width:1200px){
+
+    .dog-container{
+
+        grid-template-columns:
+            repeat(3, minmax(0,1fr));
+    }
+
 }
 
-@media (max-width:1024px){
+
+/* =========================================================
+   RESPONSIVE 1024
+========================================================= */
+
+@media(max-width:1024px){
 
     .menu-toggle{
+
         display:block;
     }
 
     .left-menu,
     .right-menu{
+
         display:none;
     }
 
     .banner{
+
         width:100%;
+
         height:55vw;
+
         min-height:230px;
+
         max-height:320px;
 
         background-size:cover;
+
         background-position:center center;
-        background-repeat:no-repeat;
     }
 
-}
-.sidebar-user{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:30px;
-}
-
-.sidebar-info{
-    display:flex;
-    flex-direction:column;
-}
-
-.sidebar-name{
-    color:#fff;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.sidebar-link{
-    color:#eee;
-    text-decoration:none;
-    margin-top:6px;
-    font-size:15px;
-}
-
-.sidebar-link.logout{
-    color:#ffd6d6;
-}
-/* ==========================
-   Mobile Navbar
-========================== */
-@media (max-width:1024px){
-
     .navbar{
+
         position:fixed;
+
         top:0;
+
         left:0;
+
         right:0;
 
         padding:15px 20px;
 
         display:flex;
+
         justify-content:space-between;
+
         align-items:center;
 
         z-index:9999;
     }
 
-    .menu-toggle{
-        display:block;
-    }
-
     body{
+
         padding-top:70px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE 900
+========================================================= */
+
+@media(max-width:900px){
+
+    .dog-container{
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
     }
 
 }
+
+
+/* =========================================================
+   RESPONSIVE 768
+========================================================= */
+
 @media(max-width:768px){
+
+    .filter-section{
+
+        width:92%;
+
+        margin-top:25px;
+    }
 
     .filter-box{
 
@@ -1490,102 +2044,340 @@ body.no-scroll{
 
         align-items:stretch;
 
+        gap:8px;
     }
 
     .filter-box select{
 
         width:100%;
-
     }
 
-    .dog-grid{
+    .dog-section{
 
-        grid-template-columns:1fr;
+        width:92%;
 
+        margin-top:25px;
     }
 
-}
-
-
-.user-profile{
-
-	display:flex;
-	align-items:center;
-	gap:12px;
-
-	padding:8px 15px;
-
-	border-radius:15px;
-
-	background:rgba(255,255,255,0.18);
-
-	backdrop-filter:blur(10px);
-
-	border:1px solid rgba(255,255,255,0.25);
-}
-
-.user-profile img{
-
-	width:45px;
-	height:45px;
-
-	border-radius:50%;
-
-	object-fit:cover;
-
-	border:2px solid white;
-}
-
-.user-profile span{
-
-	color:white;
-
-	font-weight:bold;
-}
-/* =========================
-   Mobile Floating Buttons
-========================= */
-@media (max-width: 768px){
-
-    /* ปุ่ม Chatbot */
     .chat-btn{
+
         width:60px;
+
         height:60px;
 
         right:20px;
+
         bottom:105px;
 
         font-size:28px;
-
-        z-index:9999;
     }
 
-    /* ปุ่ม + */
     .floating-btn{
+
         width:60px;
+
         height:60px;
 
         right:20px;
+
         bottom:25px;
 
         font-size:36px;
+    }
 
-        z-index:9998;
+    .chatbot-popup{
+
+        display:block;
+
+        position:fixed;
+
+        left:0;
+
+        right:0;
+
+        bottom:0;
+
+        width:100%;
+
+        height:100dvh;
+
+        border-radius:
+            25px 25px 0 0;
+
+        transform:
+            translateY(100%);
+
+        transition:.35s ease;
+
+        z-index:100000;
+    }
+
+    .chatbot-popup.show{
+
+        transform:
+            translateY(0);
+    }
+
+    .chatbot-popup iframe{
+
+        width:100%;
+
+        height:
+            calc(100dvh - 65px);
+    }
+
+    .chat-header{
+
+        border-radius:
+            25px 25px 0 0;
     }
 
 }
+
+
+/* =========================================================
+   RESPONSIVE 600
+========================================================= */
+
+@media(max-width:600px){
+
+    .dog-container{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+    }
+
+    .dog-section{
+
+        width:92%;
+
+        margin:
+            25px auto 150px;
+    }
+
+    .dog-card{
+
+        border-radius:18px;
+    }
+
+    .image-wrapper{
+
+        height:230px;
+    }
+
+    .dog-content{
+
+        padding:17px 16px 15px;
+    }
+
+    .dog-name{
+
+        font-size:20px;
+    }
+
+    .adoption-status{
+
+        padding:6px 10px;
+
+        font-size:12px;
+    }
+
+    .info-grid{
+
+        gap:7px;
+    }
+
+    .info-item{
+
+        min-height:53px;
+
+        padding:8px 10px;
+    }
+
+    .info-label{
+
+        font-size:10px;
+    }
+
+    .info-value{
+
+        font-size:13px;
+    }
+
+    .location-box{
+
+        font-size:12px;
+
+        padding:9px 10px;
+    }
+
+    .detail{
+
+        font-size:12px;
+
+        padding:11px;
+    }
+
+    .owner-profile img{
+
+        width:46px;
+
+        height:46px;
+    }
+
+    .owner-name{
+
+        font-size:13px;
+    }
+
+    .contact p{
+
+        font-size:10px;
+    }
+
+    .owner-actions{
+
+        gap:7px;
+    }
+
+    .status-btn,
+    .delete-btn{
+
+        min-height:37px;
+
+        font-size:12px;
+    }
+
+    .image-viewer{
+
+        padding:15px;
+    }
+
+    .image-viewer img{
+
+        max-width:100%;
+
+        max-height:85vh;
+
+        border-radius:10px;
+    }
+
+    .image-viewer-close{
+
+        top:15px;
+
+        right:15px;
+
+        width:45px;
+
+        height:45px;
+
+        font-size:26px;
+    }
+
+    .notify-box{
+
+        top:20px;
+
+        right:20px;
+
+        left:20px;
+
+        text-align:center;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+    .name-status-row{
+
+        gap:6px;
+    }
+
+    .dog-name{
+
+        font-size:18px;
+    }
+
+    .adoption-status{
+
+        font-size:10px;
+
+        padding:5px 8px;
+    }
+
+    .info-item{
+
+        min-height:51px;
+
+        padding:7px 8px;
+    }
+
+    .info-value{
+
+        font-size:12px;
+    }
+
+    .contact{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =========================================================
+   PREVENT HORIZONTAL OVERFLOW
+========================================================= */
+
+body{
+
+    overflow-x:hidden;
+}
+
 </style>
+
 </head>
 
-<body>
-    <!-- Full Image Viewer -->
 
-<div class="image-viewer" id="imageViewer">
+<body>
+
+
+<!-- =========================================================
+     PAGE LOADER
+========================================================= -->
+
+<div id="pageLoader">
+
+    <div class="loader-spinner"></div>
+
+    <div class="loader-text">
+        กำลังโหลดเว็บไซต์...
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FULL IMAGE VIEWER
+========================================================= -->
+
+<div class="image-viewer"
+     id="imageViewer">
 
     <button
         class="image-viewer-close"
         id="imageViewerClose">
+
         ×
+
     </button>
 
     <img
@@ -1594,290 +2386,625 @@ body.no-scroll{
         alt="รูปสัตว์เลี้ยง">
 
 </div>
- <!-- Overlay -->
-<div class="overlay" id="overlay"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
 
-    <div id="sidebarUserMenu" class="sidebar-buttons">
+<!-- =========================================================
+     OVERLAY
+========================================================= -->
 
-        <a href="register.html" class="register-btn">
+<div class="overlay"
+     id="overlay">
+</div>
+
+
+<!-- =========================================================
+     SIDEBAR MOBILE
+========================================================= -->
+
+<div class="sidebar"
+     id="sidebar">
+
+
+    <div id="sidebarUserMenu"
+         class="sidebar-buttons">
+
+        <a href="register.html"
+           class="register-btn">
+
             ลงทะเบียน
+
         </a>
 
-        <a href="login.html" class="login-btn">
+        <a href="login.html"
+           class="login-btn">
+
             เข้าสู่ระบบ
+
         </a>
 
     </div>
 
+
     <ul>
 
         <li>
-            <a href="index.html">HOME</a>
+
+            <a href="index.html">
+                HOME
+            </a>
+
         </li>
+
 
         <li>
 
-            <button class="dropdown-btn" id="typeMenu">
+            <button
+                class="dropdown-btn"
+                id="typeMenu">
+
                 ชนิด
-                <span class="arrow" id="arrow">▶</span>
+
+                <span
+                    class="arrow"
+                    id="arrow">
+
+                    ▶
+
+                </span>
+
             </button>
 
-            <ul class="submenu" id="submenu">
-                <li><a href="dog.html">สุนัข</a></li>
-                <li><a href="cat.html">แมว</a></li>
+
+            <ul
+                class="submenu"
+                id="submenu">
+
+                <li>
+
+                    <a href="dog.html">
+                        สุนัข
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="cat.html">
+                        แมว
+                    </a>
+
+                </li>
+
             </ul>
 
         </li>
 
-        <li><a href="Reportmissing.html">สัตว์เลี้ยงหาย</a></li>
-        <li><a href="clinic.html">Clinic</a></li>
-        <li><a href="publicrelations.html">ประชาสัมพันธ์</a></li>
-        <li><a href="ContactUs.html">ติดต่อเรา</a></li>
+
+        <li>
+
+            <a href="Reportmissing.html">
+                สัตว์เลี้ยงหาย
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="clinic.html">
+                Clinic
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="publicrelations.html">
+                ประชาสัมพันธ์
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="ContactUs.html">
+                ติดต่อเรา
+            </a>
+
+        </li>
 
     </ul>
 
 </div>
 
-<!-- Banner -->
+
+<!-- =========================================================
+     BANNER + NAVBAR
+========================================================= -->
 
 <header class="banner">
 
-	<!-- Navbar -->
 
-<nav class="navbar" id="navbar">
+    <nav
+        class="navbar"
+        id="navbar">
 
-		<!-- เมนูซ้าย -->
-         <div class="menu-toggle" id="menuToggle">
-             ☰
+
+        <!-- MOBILE MENU -->
+
+        <div
+            class="menu-toggle"
+            id="menuToggle">
+
+            ☰
+
         </div>
 
-		<div class="left-menu">
 
-			<a href="index.html" class="menu-btn">
-				HOME
-			</a>
+        <!-- LEFT MENU -->
 
-			<!-- เมนูชนิด -->
+        <div class="left-menu">
 
-			<div class="menu-item">
 
-				<button class="menu-btn">
-					ชนิด ▼
-				</button>
+            <a
+                href="index.html"
+                class="menu-btn">
 
-				<div class="dropdown">
+                HOME
 
-					<a href="dog.html">หมา</a>
+            </a>
 
-					<a href="cat.html">แมว</a>
 
-				</div>
+            <div class="menu-item">
 
-			</div>
+                <button class="menu-btn">
 
-			<a href="Reportmissing.html" class="menu-btn">
-				สัตว์เลี้ยงหาย
-			</a>
-            <a href="clinic.html" class="menu-btn">
-				Clinic
-			</a>
+                    ชนิด ▼
 
-			<a href="publicrelations.html" class="menu-btn">
-				ประชาสัมพันธ์
-			</a>
+                </button>
 
-			<a href="ContactUs.html" class="menu-btn">
-				ติดต่อเรา
-			</a>
 
-			
+                <div class="dropdown">
 
-		</div>
+                    <a href="dog.html">
+                        หมา
+                    </a>
 
-		<!-- ปุ่มขวา -->
+                    <a href="cat.html">
+                        แมว
+                    </a>
 
-		<div class="right-menu" id="userMenu">
+                </div>
 
-    <a href="register.html" class="menu-btn">
-        ลงทะเบียน
-    </a>
+            </div>
 
-    <a href="login.html" class="menu-btn">
-        เข้าสู่ระบบ
-    </a>
-	</div>
-</nav>
+
+            <a
+                href="Reportmissing.html"
+                class="menu-btn">
+
+                สัตว์เลี้ยงหาย
+
+            </a>
+
+
+            <a
+                href="clinic.html"
+                class="menu-btn">
+
+                Clinic
+
+            </a>
+
+
+            <a
+                href="publicrelations.html"
+                class="menu-btn">
+
+                ประชาสัมพันธ์
+
+            </a>
+
+
+            <a
+                href="ContactUs.html"
+                class="menu-btn">
+
+                ติดต่อเรา
+
+            </a>
+
+
+        </div>
+
+
+        <!-- RIGHT MENU -->
+
+        <div
+            class="right-menu"
+            id="userMenu">
+
+
+            <a
+                href="register.html"
+                class="menu-btn">
+
+                ลงทะเบียน
+
+            </a>
+
+
+            <a
+                href="login.html"
+                class="menu-btn">
+
+                เข้าสู่ระบบ
+
+            </a>
+
+
+        </div>
+
+    </nav>
+
 </header>
 
-<!-- ===========================
-        Filter
-=========================== -->
+
+<!-- =========================================================
+     FILTER
+========================================================= -->
 
 <section class="filter-section">
 
+
     <div class="filter-box">
 
-        <label>เลือกอำเภอ</label>
+
+        <label>
+            เลือกอำเภอ
+        </label>
+
 
         <select id="districtFilter">
+
 
             <option value="ทั้งหมด">
                 รวมทุกอำเภอ
             </option>
 
-            <option value="เมืองพัทลุง">เมืองพัทลุง</option>
 
-            <option value="กงหรา">กงหรา</option>
+            <option value="เมืองพัทลุง">
+                เมืองพัทลุง
+            </option>
 
-            <option value="เขาชัยสน">เขาชัยสน</option>
 
-            <option value="ควนขนุน">ควนขนุน</option>
+            <option value="กงหรา">
+                กงหรา
+            </option>
 
-            <option value="ตะโหมด">ตะโหมด</option>
 
-            <option value="บางแก้ว">บางแก้ว</option>
+            <option value="เขาชัยสน">
+                เขาชัยสน
+            </option>
 
-            <option value="ปากพะยูน">ปากพะยูน</option>
 
-            <option value="ป่าบอน">ป่าบอน</option>
+            <option value="ควนขนุน">
+                ควนขนุน
+            </option>
 
-            <option value="ป่าพะยอม">ป่าพะยอม</option>
 
-            <option value="ศรีบรรพต">ศรีบรรพต</option>
+            <option value="ตะโหมด">
+                ตะโหมด
+            </option>
 
-            <option value="ศรีนครินทร์">ศรีนครินทร์</option>
+
+            <option value="บางแก้ว">
+                บางแก้ว
+            </option>
+
+
+            <option value="ปากพะยูน">
+                ปากพะยูน
+            </option>
+
+
+            <option value="ป่าบอน">
+                ป่าบอน
+            </option>
+
+
+            <option value="ป่าพะยอม">
+                ป่าพะยอม
+            </option>
+
+
+            <option value="ศรีบรรพต">
+                ศรีบรรพต
+            </option>
+
+
+            <option value="ศรีนครินทร์">
+                ศรีนครินทร์
+            </option>
+
 
         </select>
 
     </div>
 
 </section>
-<!-- ===========================
-        Dog List
-=========================== -->
+
+
+<!-- =========================================================
+     CAT LIST
+========================================================= -->
 
 <section class="dog-section">
 
-    <div class="dog-container" id="catContainer">
+
+    <div
+        class="dog-container"
+        id="catContainer">
 
     </div>
+
 
 </section>
 
-<!-- ปุ่ม AI -->
-<!-- ปุ่มเปิด Chat -->
-<button id="chatBtn" class="chat-btn">
+
+<!-- =========================================================
+     CHAT BUTTON
+========================================================= -->
+
+<button
+    id="chatBtn"
+    class="chat-btn">
+
     🤖
+
 </button>
 
-<!-- กล่อง Chat -->
-<div class="chatbot-popup" id="chatPopup">
+
+<!-- =========================================================
+     CHAT POPUP
+========================================================= -->
+
+<div
+    class="chatbot-popup"
+    id="chatPopup">
+
 
     <div class="chat-header">
 
-        <span>🤖 PetPaw AI</span>
 
-        <button id="closeChat">✕</button>
+        <span>
+            🤖 PetPaw AI
+        </span>
+
+
+        <button
+            id="closeChat">
+
+            ✕
+
+        </button>
+
 
     </div>
 
-    <iframe src="chatbot.html"></iframe>
+
+    <iframe
+        src="chatbot.html">
+    </iframe>
+
 
 </div>
-<!-- ปุ่มบวก -->
 
-<a href="Add a pet.html" class="floating-btn">
-	+
+
+<!-- =========================================================
+     ADD PET BUTTON
+========================================================= -->
+
+<a
+    href="Add a pet.html"
+    class="floating-btn">
+
+    +
+
 </a>
 
+
+<!-- =========================================================
+     NAVBAR SCROLL
+========================================================= -->
+
 <script>
 
+window.addEventListener(
+    "scroll",
+    function(){
 
-window.addEventListener("scroll", function(){
+        const navbar =
+            document.getElementById("navbar");
 
-	let navbar = document.getElementById("navbar");
 
-	if(window.scrollY > 50){
+        if(window.scrollY > 50){
 
-		navbar.classList.add("scrolled");
+            navbar.classList.add("scrolled");
 
-	}else{
+        }else{
 
-		navbar.classList.remove("scrolled");
+            navbar.classList.remove("scrolled");
 
-	}
+        }
 
-});
+    }
+);
 
 </script>
+
+
+<!-- =========================================================
+     MOBILE SIDEBAR
+========================================================= -->
+
 <script>
-const navbar = document.getElementById("navbar");
-const menu = document.getElementById("menuToggle");
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
+
+const navbar =
+    document.getElementById("navbar");
+
+const menu =
+    document.getElementById("menuToggle");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const overlay =
+    document.getElementById("overlay");
 
 
+menu.addEventListener(
+    "click",
+    function(){
 
-// ================= Sidebar =================
-menu.onclick = () => {
-    sidebar.classList.add("active");
-    overlay.classList.add("active");
-    document.body.classList.add("no-scroll");
-    navbar.style.display = "none";
-};
+        sidebar.classList.add("active");
 
-overlay.onclick = closeMenu;
+        overlay.classList.add("active");
 
-function closeMenu() {
+        document.body.classList.add("no-scroll");
+
+        navbar.style.display = "none";
+
+    }
+);
+
+
+overlay.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+function closeMenu(){
+
     sidebar.classList.remove("active");
+
     overlay.classList.remove("active");
+
     document.body.classList.remove("no-scroll");
-    navbar.style.display = "flex";
+
+    navbar.style.display = "";
+
 }
 
-
 </script>
+
+
+<!-- =========================================================
+     SIDEBAR SUBMENU
+========================================================= -->
+
 <script>
 
-const typeMenu = document.getElementById("typeMenu");
-const submenu = document.getElementById("submenu");
-const arrow = document.getElementById("arrow");
+const typeMenu =
+    document.getElementById("typeMenu");
 
-if (typeMenu) {
-    typeMenu.addEventListener("click", () => {
-        submenu.classList.toggle("show");
-        arrow.classList.toggle("rotate");
-    });
+const submenu =
+    document.getElementById("submenu");
+
+const arrow =
+    document.getElementById("arrow");
+
+
+if(typeMenu){
+
+    typeMenu.addEventListener(
+        "click",
+        function(){
+
+            submenu.classList.toggle("show");
+
+            arrow.classList.toggle("rotate");
+
+        }
+    );
+
 }
 
 </script>
+
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
 <script type="module">
 
-import { auth, db } from "./firebase.js";
+
+/* =========================================================
+   IMPORT FIREBASE
+========================================================= */
+
+import { auth, db }
+from "./firebase.js";
+
 
 import {
+
     onAuthStateChanged,
+
     signOut
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
 
 import {
+
     doc,
+
     getDoc,
+
     collection,
+
     getDocs,
-    query,
-    where,
+
     updateDoc,
+
     deleteDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-const userMenu = document.getElementById("userMenu");
-const sidebarUserMenu = document.getElementById("sidebarUserMenu");
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-const catContainer = document.getElementById("catContainer");
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const userMenu =
+    document.getElementById("userMenu");
+
+const sidebarUserMenu =
+    document.getElementById(
+        "sidebarUserMenu"
+    );
+
+const catContainer =
+    document.getElementById(
+        "catContainer"
+    );
+
+const districtFilter =
+    document.getElementById(
+        "districtFilter"
+    );
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 let allCats = [];
 
@@ -1885,550 +3012,1731 @@ let currentUser = null;
 
 let isAdmin = false;
 
-const params = new URLSearchParams(window.location.search);
 
-const catId = params.get("id");
-
-const districtFilter = document.getElementById("districtFilter");
-districtFilter.addEventListener("change", () => {
-
-    const district = districtFilter.value;
-
-    if (district === "ทั้งหมด") {
-
-        renderCats(allCats);
-
-    } else {
-
-        const filteredCats = allCats.filter(cat => cat.district === district);
-
-        renderCats(filteredCats);
-
-    }
-
-});
-
-
-async function loadCats(){
-
-    const snapshot = await getDocs(
-        collection(db,"cats")
+const params =
+    new URLSearchParams(
+        window.location.search
     );
 
-    allCats = [];
-
-    snapshot.forEach(doc => {
-
-    allCats.push({
-
-        id: doc.id,
-        ...doc.data()
-
-    });
-
-});
+const catId =
+    params.get("id");
 
 
-/* =========================================
-   เรียงโพสต์
-   1. เพิ่มล่าสุดอยู่ด้านบน
-   2. ได้บ้านแล้วอยู่ด้านล่าง
-========================================= */
+/* =========================================================
+   PAGE LOADING
+========================================================= */
 
-allCats.sort((a, b) => {
+async function finishPageLoading(){
 
-    // สถานะได้บ้านแล้ว
-    const aAdopted =
-        a.adoptionStatus === "ได้บ้านแล้ว";
-
-    const bAdopted =
-        b.adoptionStatus === "ได้บ้านแล้ว";
+    const loader =
+        document.getElementById(
+            "pageLoader"
+        );
 
 
-    // ถ้าสถานะต่างกัน
-    // ให้ "ได้บ้านแล้ว" ไปอยู่ด้านล่าง
-    if (aAdopted && !bAdopted) {
-        return 1;
-    }
-
-    if (!aAdopted && bAdopted) {
-        return -1;
-    }
-
-
-    // ถ้าสถานะเหมือนกัน
-    // เรียงจากวันที่เพิ่มล่าสุด -> เก่าสุด
-    const aTime =
-        a.createdAt?.toMillis
-            ? a.createdAt.toMillis()
-            : new Date(a.createdAt || 0).getTime();
-
-    const bTime =
-        b.createdAt?.toMillis
-            ? b.createdAt.toMillis()
-            : new Date(b.createdAt || 0).getTime();
-
-
-    return bTime - aTime;
-
-});
-
-   console.log(allCats);
-
-if(catId){
-
-    const cat = allCats.filter(item => item.id === catId);
-
-    renderCats(cat);
-
-}else{
-
-    renderCats(allCats);
-
-}
-
-}
-function renderCats(data){
-
-    catContainer.innerHTML = "";
-
-    if(data.length===0){
-
-        catContainer.innerHTML = `
-        <h2 style="
-        text-align:center;
-        color:#777;
-        grid-column:1/-1;">
-        ยังไม่มีข้อมูลแมว
-        </h2>`;
+    if(!loader){
 
         return;
 
     }
 
-    data.forEach(cat=>{
 
-        catContainer.innerHTML += `
+    const images =
+        Array.from(
+            document.images
+        );
+
+
+    await Promise.all(
+
+        images.map(
+            img => {
+
+                if(img.complete){
+
+                    return Promise.resolve();
+
+                }
+
+
+                return new Promise(
+                    resolve => {
+
+                        img.addEventListener(
+                            "load",
+                            resolve,
+                            {once:true}
+                        );
+
+                        img.addEventListener(
+                            "error",
+                            resolve,
+                            {once:true}
+                        );
+
+                    }
+                );
+
+            }
+        )
+
+    );
+
+
+    await new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                300
+            )
+    );
+
+
+    loader.classList.add(
+        "hide"
+    );
+
+
+    setTimeout(
+        () => loader.remove(),
+        500
+    );
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+districtFilter.addEventListener(
+    "change",
+    async function(){
+
+        const district =
+            districtFilter.value;
+
+
+        if(
+            district === "ทั้งหมด"
+        ){
+
+            await renderCats(
+                allCats
+            );
+
+            return;
+
+        }
+
+
+        const filteredCats =
+            allCats.filter(
+                cat =>
+                    cat.district ===
+                    district
+            );
+
+
+        await renderCats(
+            filteredCats
+        );
+
+    }
+);
+
+
+/* =========================================================
+   OWNER PROFILE
+========================================================= */
+
+async function getOwnerProfile(uid){
+
+    if(!uid){
+
+        return {
+
+            username:"ผู้ใช้",
+
+            profile:
+                "img/default-profile.png"
+
+        };
+
+    }
+
+
+    try{
+
+        const snap =
+            await getDoc(
+                doc(
+                    db,
+                    "users",
+                    uid
+                )
+            );
+
+
+        if(!snap.exists()){
+
+            return {
+
+                username:"ผู้ใช้",
+
+                profile:
+                    "img/default-profile.png"
+
+            };
+
+        }
+
+
+        const user =
+            snap.data();
+
+
+        return {
+
+            username:
+                user.username ||
+                "ผู้ใช้",
+
+            profile:
+                user.profile ||
+                "img/default-profile.png"
+
+        };
+
+    }catch(error){
+
+        console.error(
+            "Owner profile error:",
+            error
+        );
+
+
+        return {
+
+            username:"ผู้ใช้",
+
+            profile:
+                "img/default-profile.png"
+
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD CATS
+========================================================= */
+
+async function loadCats(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "cats"
+                )
+            );
+
+
+        allCats = [];
+
+
+        snapshot.forEach(
+            catDoc => {
+
+                allCats.push({
+
+                    id:catDoc.id,
+
+                    ...catDoc.data()
+
+                });
+
+            }
+        );
+
+
+        /* =================================================
+           SORT
+
+           1. ล่าสุดอยู่ด้านบน
+           2. ได้บ้านแล้วอยู่ด้านล่าง
+        ================================================= */
+
+        allCats.sort(
+            (a,b) => {
+
+                const aAdopted =
+                    a.adoptionStatus ===
+                    "ได้บ้านแล้ว";
+
+                const bAdopted =
+                    b.adoptionStatus ===
+                    "ได้บ้านแล้ว";
+
+
+                if(
+                    aAdopted &&
+                    !bAdopted
+                ){
+
+                    return 1;
+
+                }
+
+
+                if(
+                    !aAdopted &&
+                    bAdopted
+                ){
+
+                    return -1;
+
+                }
+
+
+                const aTime =
+                    a.createdAt?.toMillis
+                    ? a.createdAt.toMillis()
+                    : new Date(
+                        a.createdAt || 0
+                    ).getTime();
+
+
+                const bTime =
+                    b.createdAt?.toMillis
+                    ? b.createdAt.toMillis()
+                    : new Date(
+                        b.createdAt || 0
+                    ).getTime();
+
+
+                return bTime - aTime;
+
+            }
+        );
+
+
+        console.log(
+            "Cats:",
+            allCats
+        );
+
+
+        if(catId){
+
+            const cat =
+                allCats.filter(
+                    item =>
+                        item.id === catId
+                );
+
+
+            await renderCats(
+                cat
+            );
+
+        }else{
+
+            await renderCats(
+                allCats
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Load cats error:",
+            error
+        );
+
+
+        catContainer.innerHTML = `
+
+            <div class="empty-state">
+
+                <h2>
+                    ไม่สามารถโหลดข้อมูลได้
+                </h2>
+
+                <p>
+                    กรุณาลองใหม่อีกครั้ง
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    ){
+
+        return "-";
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   IMAGE URL FOR ONCLICK
+========================================================= */
+
+function escapeJSString(value){
+
+    return String(value || "")
+
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+
+        .replace(
+            /'/g,
+            "\\'"
+        )
+
+        .replace(
+            /\r/g,
+            "\\r"
+        )
+
+        .replace(
+            /\n/g,
+            "\\n"
+        );
+
+}
+
+
+/* =========================================================
+   RENDER CATS
+========================================================= */
+
+async function renderCats(data){
+
+    catContainer.innerHTML = "";
+
+
+    if(!data.length){
+
+        catContainer.innerHTML = `
+
+            <div class="empty-state">
+
+                <h2>
+                    ยังไม่มีข้อมูลแมว
+                </h2>
+
+                <p>
+                    ลองเปลี่ยนอำเภอที่เลือก
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       LOAD OWNER
+    ===================================================== */
+
+    const catsWithOwner =
+        await Promise.all(
+
+            data.map(
+                async cat => {
+
+                    const owner =
+                        await getOwnerProfile(
+                            cat.ownerUid
+                        );
+
+
+                    return {
+
+                        ...cat,
+
+                        owner
+
+                    };
+
+                }
+            )
+
+        );
+
+
+    /* =====================================================
+       CREATE CARDS
+    ===================================================== */
+
+    catsWithOwner.forEach(
+        cat => {
+
+
+            const image =
+                cat.image ||
+                "img/default-pet.png";
+
+
+            const adoptionStatus =
+                cat.adoptionStatus ||
+                cat.status ||
+                "กำลังหาบ้าน";
+
+
+            const statusClass =
+                adoptionStatus ===
+                "ได้บ้านแล้ว"
+                ? "adopted"
+                : "available";
+
+
+            const imageForJS =
+                escapeJSString(
+                    image
+                );
+
+
+            const province =
+                cat.province ||
+                "ไม่ระบุ";
+
+
+            const district =
+                cat.district ||
+                "ไม่ระบุ";
+
+
+            const subdistrict =
+                cat.subdistrict ||
+                "ไม่ระบุ";
+
+
+            catContainer.innerHTML += `
+
+
+<!-- =====================================================
+     CAT CARD
+===================================================== -->
 
 <div class="dog-card">
 
-<img
-    src="${cat.image}"
-    class="dog-image"
-    onclick="openImageViewer('${cat.image}')"
-    alt="รูปสัตว์เลี้ยง">
 
-<div class="dog-content">
+    <!-- =========================
+         IMAGE
+    ========================== -->
+
+    <div class="image-wrapper">
+
+
+        <img
+
+            src="${escapeHTML(image)}"
+
+            class="dog-image"
+
+            onclick="openImageViewer('${imageForJS}')"
+
+            alt="รูปแมว"
+
+            loading="lazy"
+
+        >
+
+
+        <button
+
+            type="button"
+
+            class="image-zoom-btn"
+
+            onclick="openImageViewer('${imageForJS}')"
+
+            aria-label="ดูรูปภาพขนาดใหญ่">
+
+            🔍
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <div class="dog-content">
+
+
+        <!-- =========================
+     HEADER
+========================== -->
 
 <div class="dog-header">
 
-    <div class="dog-name">
-        <span class="info-label">เพศ</span>
-        <span class="info-value">: ${cat.gender}</span>
-    </div>
+    <div class="name-status-row">
 
-    <div class="header-right">
+        <div class="dog-name">
 
-        <div class="adoption-status ${
-            cat.adoptionStatus === "ได้บ้านแล้ว"
-        ? "adopted"
-        : "available"
-}">
-    ${cat.adoptionStatus || cat.status}
-</div>
+            เพศ :
+            ${escapeHTML(
+                cat.gender ||
+                "ไม่ระบุ"
+            )}
 
-    </div>
+        </div>
 
-</div>
 
-<div class="info-grid">
+        <div
+            class="adoption-status
+            ${statusClass}">
 
-    <div class="info-item">
-        <span class="info-label">ชื่อ</span>
-        <span class="info-value">: ${cat.name}</span>
-    </div>
+            ${escapeHTML(
+                adoptionStatus
+            )}
 
-    <div class="info-item">
-        <span class="info-label">อายุ</span>
-        <span class="info-value">: ${cat.age}</span>
-    </div>
-
-    <div class="info-item">
-        <span class="info-label">สายพันธุ์</span>
-        <span class="info-value">: ${cat.breed}</span>
-    </div>
-
-    <div class="info-item">
-        <span class="info-label">วัคซีน</span>
-        <span class="info-value">: ${cat.vaccine}</span>
-    </div>
-
-    <div class="info-item">
-        <span class="info-label">ทำหมัน</span>
-        <span class="info-value">: ${cat.sterilized}</span>
-    </div>
-<div class="info-item">
-        <span class="info-label">จังหวัด</span>
-        <span class="info-value">: ${cat.province}</span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">อำเภอ</span>
-        <span class="info-value">: ${cat.district}</span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">ตำบล</span>
-        <span class="info-value">: ${cat.subdistrict}</span>
-    </div>
-
-</div>
-<div class="section-title">
-รายละเอียด
-</div>
-
-<div class="detail">
-${cat.detail}
-</div>
-
-<hr class="section-divider">
-
-<a href="profile.html?uid=${cat.ownerUid}" class="owner-box">
-
-    <div class="owner-profile">
-
-        <img src="${cat.ownerProfile || 'img/default-profile.png'}">
-
-        <div class="owner-name">
-            ${cat.ownerName}
         </div>
 
     </div>
 
-    <div class="contact">
-        <p>📞 ${cat.phone || "-"}</p>
-        <p>Facebook : ${cat.facebook || "-"}</p>
+</div>
+
+
+<!-- =========================
+     INFORMATION
+========================== -->
+
+<div class="info-grid">
+
+<div class="info-item">
+
+        <span class="info-label">
+            ชื่อ
+        </span>
+
+        <span class="info-value">
+
+    ${escapeHTML(
+        cat.name ||
+        "ไม่มีชื่อ"
+    )}
+
+</span>
+
+    </div>
+    <div class="info-item">
+
+        <span class="info-label">
+            อายุ
+        </span>
+
+        <span class="info-value">
+
+            ${escapeHTML(
+                cat.age
+            )}
+
+        </span>
+
     </div>
 
-</a>
 
-${currentUser && (currentUser.uid === cat.ownerUid || isAdmin) ? `
+    <div class="info-item">
+
+        <span class="info-label">
+            สายพันธุ์
+        </span>
+
+        <span class="info-value">
+
+            ${escapeHTML(
+                cat.breed
+            )}
+
+        </span>
+
+    </div>
 
 
-<div class="owner-actions">
+    <div class="info-item">
 
-    <button
-    class="status-btn"
-    onclick="changeCatStatus('${cat.id}')">
-    เปลี่ยนสถานะ
-</button>
+        <span class="info-label">
+            ขนาด
+        </span>
 
-    <button
-        class="delete-btn"
-        onclick="deleteCat('${cat.id}')">
+        <span class="info-value">
 
-        ลบโพสต์
+            ${escapeHTML(
+                cat.size ||
+                cat.petSize ||
+                "-"
+            )}
 
-</button>
+        </span>
+
+    </div>
+
+
+    <div class="info-item">
+
+        <span class="info-label">
+            วัคซีน
+        </span>
+
+        <span class="info-value">
+
+            ${escapeHTML(
+                cat.vaccine
+            )}
+
+        </span>
+
+    </div>
+
+
+    <div class="info-item">
+
+        <span class="info-label">
+            ทำหมัน
+        </span>
+
+        <span class="info-value">
+
+            ${escapeHTML(
+                cat.sterilized
+            )}
+
+        </span>
+
+    </div>
+
+
+    
+
 
 </div>
 
-` : ""}
 
-</div>   
+        <!-- =========================
+             LOCATION
+        ========================== -->
 
-</div>  
-
-</div>   
+        <div class="location-box">
 
 
-`;
+            <span class="location-icon">
+                📍
+            </span>
 
-    });
+
+            <span class="location-text">
+
+                ${escapeHTML(
+                    province
+                )}
+
+                /
+
+                ${escapeHTML(
+                    district
+                )}
+
+                /
+
+                ${escapeHTML(
+                    subdistrict
+                )}
+
+            </span>
+
+
+        </div>
+
+
+
+        <!-- =========================
+             DETAIL TITLE
+        ========================== -->
+
+        <div class="section-title">
+
+            รายละเอียด
+
+        </div>
+
+
+
+        <!-- =========================
+             DETAIL
+        ========================== -->
+
+        <div class="detail">
+
+            ${escapeHTML(
+                cat.detail
+            )}
+
+        </div>
+
+
+
+        <!-- =========================
+             DIVIDER
+        ========================== -->
+
+        <hr
+            class="section-divider"
+        >
+
+
+
+        <!-- =========================
+             OWNER
+        ========================== -->
+
+        <a
+
+            href="profile.html?uid=${encodeURIComponent(
+                cat.ownerUid || ""
+            )}"
+
+            class="owner-box"
+
+        >
+
+
+            <div class="owner-profile">
+
+
+                <img
+
+                    src="${escapeHTML(
+                        cat.owner.profile
+                    )}"
+
+                    alt="รูปโปรไฟล์ผู้โพสต์"
+
+                    loading="lazy"
+
+                >
+
+
+                <div class="owner-name-area">
+
+
+                    <div class="owner-name">
+
+                        ${escapeHTML(
+                            cat.owner.username
+                        )}
+
+                    </div>
+
+
+                    <div class="owner-role">
+
+                        ผู้โพสต์
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="contact">
+
+
+                <p>
+
+                    📞
+
+                    ${escapeHTML(
+                        cat.phone ||
+                        "-"
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    Facebook :
+
+                    ${escapeHTML(
+                        cat.facebook ||
+                        "-"
+                    )}
+
+                </p>
+
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- =========================
+             OWNER ACTIONS
+        ========================== -->
+
+        ${
+            currentUser &&
+            (
+                currentUser.uid ===
+                cat.ownerUid ||
+                isAdmin
+            )
+
+            ? `
+
+                <div
+                    class="owner-actions">
+
+
+                    <button
+
+                        type="button"
+
+                        class="status-btn"
+
+                        onclick="
+                            changeCatStatus(
+                                '${escapeJSString(cat.id)}'
+                            )
+                        ">
+
+                        เปลี่ยนสถานะ
+
+                    </button>
+
+
+                    <button
+
+                        type="button"
+
+                        class="delete-btn"
+
+                        onclick="
+                            deleteCat(
+                                '${escapeJSString(cat.id)}'
+                            )
+                        ">
+
+                        ลบโพสต์
+
+                    </button>
+
+
+                </div>
+
+            `
+
+            : ""
+
+        }
+
+
+    </div>
+
+</div>
+
+
+            `;
+
+        }
+    );
 
 }
 
-// =============================
-// เปลี่ยนสถานะ
-// =============================
-window.changeCatStatus = async function(id){
 
-    const status = prompt(
+/* =========================================================
+   CHANGE STATUS
+========================================================= */
+
+window.changeCatStatus =
+    async function(id){
+
+        const status =
+            prompt(
 `เลือกสถานะ
 
 กำลังหาบ้าน
 ได้บ้านแล้ว`
-    );
+            );
 
-    if(!status) return;
 
-    await updateDoc(
-        doc(db,"cats",id),
-        {
-            adoptionStatus: status
-        }
-    );
+        if(!status){
 
-    alert("อัปเดตสถานะเรียบร้อย");
+            return;
 
-    loadCats();
-
-};
-
-// =============================
-// ลบโพสต์
-// =============================
-window.deleteCat = async function(id){
-
-    const cat = allCats.find(item => item.id === id);
-
-    if(!cat){
-        return;
-    }
-
-    if(currentUser.uid !== cat.ownerUid && !isAdmin){
-        alert("คุณไม่มีสิทธิ์ลบโพสต์นี้");
-        return;
-    }
-
-    const ok = confirm("ต้องการลบโพสต์นี้หรือไม่");
-
-    if(!ok) return;
-
-    await deleteDoc(doc(db,"cats",id));
-
-    alert("ลบโพสต์เรียบร้อย");
-
-    loadCats();
-
-};
-
-onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
-console.log("Auth =", user);
-    if (user) {
-
-        const snap = await getDoc(doc(db, "users", user.uid));
-
-        let username = "User";
-        let photo = "img/default-profile.png";
-
-        if (snap.exists()) {
-            username = snap.data().username || "User";
-            photo = snap.data().profile || "img/default-profile.png";
-            isAdmin = snap.data().role === "admin";
         }
 
-        // ---------- Desktop ----------
-        userMenu.innerHTML = `
-            <div class="user-dropdown">
 
-                <div class="user-profile" id="profileBtn">
+        if(
+            status !==
+                "กำลังหาบ้าน" &&
+            status !==
+                "ได้บ้านแล้ว"
+        ){
 
-                    <img src="${photo}">
-                    <span>${username}</span>
+            alert(
+                "กรุณาเลือกสถานะให้ถูกต้อง"
+            );
+
+            return;
+
+        }
+
+
+        try{
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    "cats",
+                    id
+                ),
+
+                {
+
+                    adoptionStatus:
+                        status
+
+                }
+
+            );
+
+
+            alert(
+                "อัปเดตสถานะเรียบร้อย"
+            );
+
+
+            await loadCats();
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+            alert(
+                "ไม่สามารถอัปเดตสถานะได้"
+            );
+
+        }
+
+    };
+
+
+/* =========================================================
+   DELETE CAT
+========================================================= */
+
+window.deleteCat =
+    async function(id){
+
+        const cat =
+            allCats.find(
+                item =>
+                    item.id === id
+            );
+
+
+        if(!cat){
+
+            return;
+
+        }
+
+
+        if(
+            !currentUser ||
+            (
+                currentUser.uid !==
+                cat.ownerUid &&
+                !isAdmin
+            )
+        ){
+
+            alert(
+                "คุณไม่มีสิทธิ์ลบโพสต์นี้"
+            );
+
+            return;
+
+        }
+
+
+        const ok =
+            confirm(
+                "ต้องการลบโพสต์นี้หรือไม่"
+            );
+
+
+        if(!ok){
+
+            return;
+
+        }
+
+
+        try{
+
+            await deleteDoc(
+
+                doc(
+                    db,
+                    "cats",
+                    id
+                )
+
+            );
+
+
+            alert(
+                "ลบโพสต์เรียบร้อย"
+            );
+
+
+            await loadCats();
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+            alert(
+                "ไม่สามารถลบโพสต์ได้"
+            );
+
+        }
+
+    };
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+
+        currentUser =
+            user;
+
+
+        isAdmin = false;
+
+
+        console.log(
+            "Auth =",
+            user
+        );
+
+
+        /* =================================================
+           LOGGED IN
+        ================================================= */
+
+        if(user){
+
+            const snap =
+                await getDoc(
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    )
+                );
+
+
+            let username =
+                "User";
+
+
+            let photo =
+                "img/default-profile.png";
+
+
+            if(snap.exists()){
+
+                const userData =
+                    snap.data();
+
+
+                username =
+                    userData.username ||
+                    "User";
+
+
+                photo =
+                    userData.profile ||
+                    "img/default-profile.png";
+
+
+                isAdmin =
+                    userData.role ===
+                    "admin";
+
+            }
+
+
+            /* =============================================
+               DESKTOP USER
+            ============================================= */
+
+            userMenu.innerHTML = `
+
+                <div
+                    class="user-dropdown">
+
+
+                    <div
+                        class="user-profile"
+                        id="profileBtn">
+
+
+                        <img
+                            src="${escapeHTML(photo)}"
+                            alt="โปรไฟล์">
+
+
+                        <span>
+
+                            ${escapeHTML(
+                                username
+                            )}
+
+                        </span>
+
+
+                    </div>
+
+
+
+                    <div
+                        class="dropdown-menu"
+                        id="dropdownMenu">
+
+
+                        <a href="profile.html">
+
+                            โปรไฟล์
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            id="logoutBtn">
+
+                            ออกจากระบบ
+
+                        </a>
+
+
+                    </div>
+
 
                 </div>
 
-                <div class="dropdown-menu" id="dropdownMenu">
+            `;
 
-                    <a href="profile.html">โปรไฟล์</a>
 
-                    <a href="#" id="logoutBtn">ออกจากระบบ</a>
+            /* =============================================
+               MOBILE USER
+            ============================================= */
+
+            sidebarUserMenu.className = "";
+
+
+            sidebarUserMenu.innerHTML = `
+
+                <div
+                    class="sidebar-user">
+
+
+                    <img
+
+                        src="${escapeHTML(photo)}"
+
+                        class="sidebar-photo"
+
+                        alt="รูปโปรไฟล์"
+
+                    >
+
+
+                    <div>
+
+
+                        <div
+                            class="sidebar-name">
+
+                            ${escapeHTML(
+                                username
+                            )}
+
+                        </div>
+
+
+                        <a
+                            href="profile.html"
+                            class="sidebar-link">
+
+                            โปรไฟล์
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            id="sidebarLogout"
+                            class="sidebar-link logout">
+
+                            ออกจากระบบ
+
+                        </a>
+
+
+                    </div>
+
 
                 </div>
 
-            </div>
-        `;
-
-        // ---------- Mobile Sidebar ---------- 
-sidebarUserMenu.className = "";
-sidebarUserMenu.innerHTML = `
-<div class="sidebar-user">
-
-    <img src="${photo}" class="sidebar-photo">
-
-    <div>
-
-        <div class="sidebar-name">
-            ${username}
-        </div>
-
-        <a href="profile.html">
-            โปรไฟล์
-        </a>
-
-        <br>
-
-        <a href="#" id="sidebarLogout">
-            ออกจากระบบ
-        </a>
-
-    </div>
-
-</div>
-`;
+            `;
 
 
-        // Desktop Dropdown
-        document.getElementById("profileBtn").onclick = () => {
+            /* =============================================
+               DESKTOP PROFILE DROPDOWN
+            ============================================= */
 
-            document
-                .getElementById("dropdownMenu")
-                .classList.toggle("show");
+            const profileBtn =
+                document.getElementById(
+                    "profileBtn"
+                );
 
-        };
 
-        // Desktop Logout
-        document.getElementById("logoutBtn").onclick = async () => {
+            const dropdownMenu =
+                document.getElementById(
+                    "dropdownMenu"
+                );
 
-            await signOut(auth);
-            location.reload();
 
-        };
+            if(profileBtn){
 
-        // Mobile Logout
-        document.getElementById("sidebarLogout").onclick = async () => {
+                profileBtn.addEventListener(
+                    "click",
+                    function(){
 
-    await signOut(auth);
-    location.reload();
+                        dropdownMenu.classList.toggle(
+                            "show"
+                        );
 
-};
+                    }
+                );
+
+            }
+
+
+            /* =============================================
+               DESKTOP LOGOUT
+            ============================================= */
+
+            const logoutBtn =
+                document.getElementById(
+                    "logoutBtn"
+                );
+
+
+            if(logoutBtn){
+
+                logoutBtn.addEventListener(
+                    "click",
+                    async function(e){
+
+                        e.preventDefault();
+
+                        await signOut(auth);
+
+                        location.reload();
+
+                    }
+                );
+
+            }
+
+
+            /* =============================================
+               MOBILE LOGOUT
+            ============================================= */
+
+            const sidebarLogout =
+                document.getElementById(
+                    "sidebarLogout"
+                );
+
+
+            if(sidebarLogout){
+
+                sidebarLogout.addEventListener(
+                    "click",
+                    async function(e){
+
+                        e.preventDefault();
+
+                        await signOut(auth);
+
+                        location.reload();
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           LOGGED OUT
+        ================================================= */
+
+        else{
+
+            userMenu.innerHTML = `
+
+                <a
+                    href="register.html"
+                    class="menu-btn">
+
+                    ลงทะเบียน
+
+                </a>
+
+
+                <a
+                    href="login.html"
+                    class="menu-btn">
+
+                    เข้าสู่ระบบ
+
+                </a>
+
+            `;
+
+
+            sidebarUserMenu.className =
+                "sidebar-buttons";
+
+
+            sidebarUserMenu.innerHTML = `
+
+                <a
+                    href="register.html"
+                    class="register-btn">
+
+                    ลงทะเบียน
+
+                </a>
+
+
+                <a
+                    href="login.html"
+                    class="login-btn">
+
+                    เข้าสู่ระบบ
+
+                </a>
+
+            `;
+
+        }
+
+
+        /* =================================================
+           LOAD CATS
+        ================================================= */
+
+        await loadCats();
+
+
+        /* =================================================
+           FINISH LOADER
+        ================================================= */
+
+        await finishPageLoading();
 
     }
+);
 
-    else {
 
-        userMenu.innerHTML = `
+/* =========================================================
+   CHATBOT
+========================================================= */
 
-        <a href="register.html" class="menu-btn">
-            ลงทะเบียน
-        </a>
+const chatBtn =
+    document.getElementById(
+        "chatBtn"
+    );
 
-        <a href="login.html" class="menu-btn">
-            เข้าสู่ระบบ
-        </a>
+const chatPopup =
+    document.getElementById(
+        "chatPopup"
+    );
 
-        `;
+const closeChat =
+    document.getElementById(
+        "closeChat"
+    );
 
-        sidebarUserMenu.className = "sidebar-buttons";
 
-sidebarUserMenu.innerHTML = `
-<a href="register.html" class="register-btn">
-    ลงทะเบียน
-</a>
+const isMobile =
+    () =>
+        window.innerWidth <= 768;
 
-<a href="login.html" class="login-btn">
-    เข้าสู่ระบบ
-</a>
-`;
 
-    }
+chatBtn.addEventListener(
+    "click",
+    function(){
 
-   await loadCats();
+        if(isMobile()){
 
-});
-const chatBtn = document.getElementById("chatBtn");
-const chatPopup = document.getElementById("chatPopup");
-const closeChat = document.getElementById("closeChat");
+            chatPopup.classList.add(
+                "show"
+            );
 
-const isMobile = () => window.innerWidth <= 768;
+            document.body.classList.add(
+                "no-scroll"
+            );
 
-chatBtn.onclick = () => {
+        }else{
 
-    if(isMobile()){
+            chatPopup.style.display =
+                "block";
 
-        chatPopup.classList.add("show");
-        document.body.classList.add("no-scroll");
+        }
 
-    }else{
 
-        chatPopup.style.display = "block";
-
-    }
-
-    chatBtn.style.display = "none";
-};
-
-closeChat.onclick = () => {
-
-    if(isMobile()){
-
-        chatPopup.classList.remove("show");
-        document.body.classList.remove("no-scroll");
-
-    }else{
-
-        chatPopup.style.display = "none";
+        chatBtn.style.display =
+            "none";
 
     }
-
-    chatBtn.style.display = "flex";
-};
-// =========================
-// Full Image Viewer
-// =========================
-
-const imageViewer = document.getElementById("imageViewer");
-const fullImage = document.getElementById("fullImage");
-const imageViewerClose = document.getElementById("imageViewerClose");
-
-window.openImageViewer = function(imageUrl){
-
-    fullImage.src = imageUrl;
-
-    imageViewer.classList.add("show");
-
-    // ป้องกันหน้าเว็บด้านหลังเลื่อน
-    document.body.classList.add("no-scroll");
-};
+);
 
 
-// =========================
-// ปิดรูป
-// =========================
+closeChat.addEventListener(
+    "click",
+    function(){
+
+        if(isMobile()){
+
+            chatPopup.classList.remove(
+                "show"
+            );
+
+            document.body.classList.remove(
+                "no-scroll"
+            );
+
+        }else{
+
+            chatPopup.style.display =
+                "none";
+
+        }
+
+
+        chatBtn.style.display =
+            "flex";
+
+    }
+);
+
+
+/* =========================================================
+   FULL IMAGE VIEWER
+========================================================= */
+
+const imageViewer =
+    document.getElementById(
+        "imageViewer"
+    );
+
+const fullImage =
+    document.getElementById(
+        "fullImage"
+    );
+
+const imageViewerClose =
+    document.getElementById(
+        "imageViewerClose"
+    );
+
+
+window.openImageViewer =
+    function(imageUrl){
+
+        fullImage.src =
+            imageUrl;
+
+        imageViewer.classList.add(
+            "show"
+        );
+
+        document.body.classList.add(
+            "no-scroll"
+        );
+
+    };
+
 
 function closeImageViewer(){
 
-    imageViewer.classList.remove("show");
+    imageViewer.classList.remove(
+        "show"
+    );
 
-    document.body.classList.remove("no-scroll");
+    document.body.classList.remove(
+        "no-scroll"
+    );
 
-    setTimeout(() => {
-        fullImage.src = "";
-    }, 300);
+
+    setTimeout(
+        () => {
+
+            fullImage.src = "";
+
+        },
+        300
+    );
+
 }
 
 
-// ปุ่ม X
-imageViewerClose.addEventListener("click", function(){
+/* =========================================================
+   CLOSE IMAGE
+========================================================= */
 
-    closeImageViewer();
+imageViewerClose.addEventListener(
+    "click",
+    closeImageViewer
+);
 
-});
 
+/* =========================================================
+   CLICK BACKGROUND
+========================================================= */
 
-// คลิกพื้นหลัง
-imageViewer.addEventListener("click", function(e){
+imageViewer.addEventListener(
+    "click",
+    function(e){
 
-    if(e.target === imageViewer){
+        if(
+            e.target ===
+            imageViewer
+        ){
 
-        closeImageViewer();
+            closeImageViewer();
+
+        }
 
     }
+);
 
-});
 
+/* =========================================================
+   ESC
+========================================================= */
 
-// กด ESC
-document.addEventListener("keydown", function(e){
+document.addEventListener(
+    "keydown",
+    function(e){
 
-    if(e.key === "Escape"){
+        if(
+            e.key ===
+            "Escape"
+        ){
 
-        closeImageViewer();
+            closeImageViewer();
+
+        }
 
     }
+);
 
-});
 </script>
+
+
 </body>
 
 </html>

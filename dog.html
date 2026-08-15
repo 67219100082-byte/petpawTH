@@ -1,2553 +1,4158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>หาบ้านสุนัขจรจัด | PetPaw</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- =========================
+         Google Font
+    ========================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
 
     <style>
 
-a{
-	text-decoration:none;
-	color:inherit;
-}   
+    /* =====================================================
+       RESET
+    ===================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Prompt", sans-serif;
-}
-
-
-body{
-    background:#f3f3f3;
-    min-height:2000px;
-}
-/* =========================
-   Full Image Viewer
-========================= */
-
-.image-viewer{
-    position:fixed;
-    inset:0;
-
-    background:rgba(0,0,0,.88);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:30px;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.3s;
-
-    z-index:999999;
-}
-
-.image-viewer.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.image-viewer img{
-    max-width:95vw;
-    max-height:90vh;
-
-    width:auto;
-    height:auto;
-
-    object-fit:contain;
-
-    border-radius:15px;
-
-    box-shadow:0 10px 40px rgba(0,0,0,.5);
-
-    transform:scale(.9);
-    transition:.3s;
-}
-
-.image-viewer.show img{
-    transform:scale(1);
-}
-
-.image-viewer-close{
-    position:absolute;
-
-    top:20px;
-    right:25px;
-
-    width:50px;
-    height:50px;
-
-    border:none;
-    border-radius:50%;
-
-    background:rgba(255,255,255,.15);
-    color:white;
-
-    font-size:30px;
-
-    cursor:pointer;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    transition:.2s;
-
-    z-index:2;
-}
-
-.image-viewer-close:hover{
-    background:rgba(255,255,255,.3);
-    transform:scale(1.08);
-}
-
-/* รูปสุนัขสามารถกดดูได้ */
-.dog-image{
-    cursor:zoom-in;
-    transition:.25s;
-}
-
-.dog-image:hover{
-    filter:brightness(.9);
-}
-
-
-/* Mobile */
-@media(max-width:600px){
-
-    .image-viewer{
-        padding:15px;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Prompt", sans-serif;
     }
 
-    .image-viewer img{
-        max-width:100%;
-        max-height:85vh;
-        border-radius:10px;
+    html {
+        scroll-behavior: smooth;
     }
 
-    .image-viewer-close{
-        top:15px;
-        right:15px;
-
-        width:45px;
-        height:45px;
-
-        font-size:26px;
-    }
-}
-
-/* ===========================
-        Filter
-=========================== */
-
-.owner-actions{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
-
-.status-btn,
-.delete-btn{
-    flex:1;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-}
-
-.status-btn{
-    background:#2e7d32;
-}
-
-.delete-btn{
-    background:#d32f2f;
-}
-
-.status-btn:hover{
-    background:#1b5e20;
-}
-
-.delete-btn:hover{
-    background:#b71c1c;
-}
-.filter-section{
-
-    width:90%;
-
-    max-width:1300px;
-
-    margin:40px auto 20px;
-
-}
-
-.filter-box{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.filter-box label{
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:#555;
-
-}
-
-.filter-box select{
-
-    width:260px;
-
-    height:50px;
-
-    border-radius:12px;
-
-    border:2px solid #ddd;
-
-    padding:0 15px;
-
-    font-size:16px;
-
-    outline:none;
-
-}
-
-/* ===========================
-        Dog Section
-=========================== */
-
-.dog-section{
-
-    width:90%;
-
-    max-width:1500px;
-
-    margin:50px auto;
-
-}
-
-.dog-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:25px;
-
-    align-items:start;
-
-}
-@media(max-width:1200px){
-
-.dog-container{
-
-grid-template-columns:repeat(3,1fr);
-
-}
-
-}
-
-@media(max-width:900px){
-
-.dog-container{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-}
-
-@media(max-width:600px){
-
-.dog-container{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-.dog-card{
-
-    background:#fff;
-
-    border-radius:25px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-.chat-btn{
-    position:fixed;
-
-    right:30px;
-    bottom:120px;
-
-    width:70px;
-    height:70px;
-
-    border:none;
-    border-radius:50%;
-
-    background:#4da6ff;
-
-    color:white;
-
-    font-size:34px;
-
-    cursor:pointer;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.25);
-
-    z-index:9999;
-
-    transition:.3s;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.chat-btn:hover{
-    transform:translateY(-5px);
-
-    background:#4da6ff;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
-}
-
-.chat-btn:active{
-    transform:translateY(-2px) scale(.92);
-}
-.chatbot-popup{
-
-    position:fixed;
-
-    right:20px;
-    bottom:20px;
-
-    width:500px;
-    height:700px;
-
-    background:#fff;
-
-    border-radius:25px;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
-
-    overflow:hidden;
-
-    display:none;
-
-    z-index:100000;
-}
-
-.chat-header{
-
-    background:#4da6ff;
-
-    color:white;
-
-    padding:15px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-}
-.chatbot-popup{
-
-    position:fixed;
-
-    right:20px;
-    bottom:20px;
-
-    width:500px;
-    height:700px;
-
-    background:#fff;
-
-    border-radius:25px;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
-
-    overflow:hidden;
-
-    display:none;
-
-    z-index:100000;
-}
-
-.chat-header{
-
-    background:#4da6ff;
-
-    color:white;
-
-    padding:15px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-}
-
-.chat-header button{
-
-    border:none;
-
-    background:none;
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-}
-
-.chatbot-popup iframe{
-
-    width:100%;
-    height:650px;
-
-    border:none;
-}
-
-.chat-header button{
-
-    border:none;
-
-    background:none;
-
-    color:white;
-
-    font-size:20px;
-
-    cursor:pointer;
-}
-
-.chatbot-popup iframe{
-
-    width:100%;
-    height:650px;
-
-    border:none;
-}
-
-.dog-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.dog-image{
-
-    width:100%;
-
-    height:240px;
-
-    object-fit:cover;
-
-}
-
-.dog-content{
-
-    padding:25px;
-
-}
-
-.dog-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-    margin-bottom:20px;
-}
-.header-right{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    flex-shrink:0;
-}
-
-.dog-name{
-    flex:1;
-    min-width:0;
-
-    font-size:24px;
-    font-weight:700;
-    color:#333;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.status{
-
-    padding:8px 18px;
-
-    border-radius:36px;
-
-    color:white;
-
-    font-size:14px;
-    font-weight:600;
-
-
-}
-
-.status.หาบ้าน{
-
-    background:#4CAF50;
-
-}
-
-.status.หาย{
-
-    background:#F44336;
-
-}
-
-.status.พบแล้ว{
-
-    background:#2196F3;
-
-}
-
-.info-grid{
-    margin-top:18px;
-    background:transparent;   /* ไม่มีพื้นหลัง */
-    border:none;
-    border-radius:0;
-    overflow:visible;
-}
-
-.info-item{
-    display:flex;
-    align-items:center;
-
-    padding:14px 0;           /* เดิม 24px 36px */
-    font-size:18px;
-    color:#444;
-
-    line-height:1.5;
-    border-bottom:1px solid #ececec;
-}
-
-.info-item:last-child{
-    border-bottom:none;
-}
-
-.info-label{
-    width:110px;
-    font-weight:700;
-    color:#333;
-    flex-shrink:0;
-}
-
-.info-value{
-    color:#555;
-}
-
-.section-title{
-
-    margin-top:30px;
-
-    margin-bottom:10px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    color:#8a6847;
-
-}
-
-.detail{
-
-    background:#fafafa;
-
-    padding:18px;
-
-    border-radius:15px;
-
-    line-height:1.9;
-
-    color:#666;
-
-    margin-top:10px;
-
-}
-
-.owner-box{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-
-    gap:18px;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    text-decoration:none;
-
-    color:inherit;
-
-    transition:.25s;
-
-    cursor:pointer;
-}
-
-.owner-box:hover{
-
-    background:#f8f5ef;
-
-    transform:translateY(-2px);
-
-}
-
-.owner-profile{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.owner-profile img{
-
-    width:70px;
-
-    height:70px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-}
-.owner-profile h3{
-
-    color:#333;
-
-    font-size:22px;
-
-    margin-bottom:5px;
-
-}
-.owner-profile p{
-
-    color:#777;
-
-    font-size:15px;
-
-}
-.owner-box:hover img{
-
-    transform:scale(1.05);
-
-}
-
-.owner-profile img{
-
-    transition:.25s;
-
-}
-
-.owner-name{
-
-    font-size:18px;
-
-    font-weight:bold;
-
-}
-
-.contact{
-
-    width:100%;
-
-    display:grid;
-
-    gap:10px;
-
-}
-
-.contact p{
-
-    margin:0;
-
-    padding:12px 15px;
-
-    border-radius:12px;
-
-    background:#f8f8f8;
-
-    color:#555;
-
-    word-break:break-word;
-
-}
-.owner-profile img{
-
-    flex-shrink:0;
-
-    width:70px;
-
-    height:70px;
-
-}
-.section-divider{
-    border:0;
-    border-top:1px solid #e5e5e5;
-    margin:28px 0;
-}
-.owner-name{
-
-    font-size:20px;
-
-    font-weight:700;
-
-    color:#333;
-
-}
-.profile-btn{
-
-    margin-top:20px;
-
-    display:block;
-
-    text-align:center;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    background:#8a6847;
-
-    color:#fff;
-
-    font-weight:600;
-
-}
-
-.profile-btn:hover{
-
-    background:#6d5339;
-
-}
-/* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
-body.no-scroll{
-    overflow: hidden;
-}
-.user-dropdown{
-    position:relative;
-}
-
-.user-profile{
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    cursor:pointer;
-
-    padding:8px 15px;
-
-    border-radius:15px;
-
-    background:rgba(255,255,255,.15);
-
-    backdrop-filter:blur(10px);
-
-}
-
-.user-profile img{
-
-    width:45px;
-    height:45px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-}
-
-.user-profile span{
-
-    color:white;
-
-    font-weight:bold;
-
-}
-
-.dropdown-menu{
-
-    position:absolute;
-
-    top:65px;
-    right:0;
-
-    width:220px;
-
-    background:white;
-
-    border-radius:15px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-
-    display:none;
-
-    overflow:hidden;
-
-}
-.adoption-status{
-    margin-top:12px;
-    display:inline-block;
-    padding:8px 16px;
-    border-radius:20px;
-    font-weight:600;
-    font-size:15px;
-}
-
-/* กำลังหาบ้าน */
-.adoption-status.available{
-    background:#e8f7ea;
-    color:#2e7d32;
-}
-
-/* ได้บ้านแล้ว */
-.adoption-status.adopted{
-    background:#dbeafe;
-    color:#1565c0;
-}
-
-.dropdown-menu.show{
-
-    display:block;
-
-}
-
-.dropdown-menu a{
-
-    display:block;
-
-    padding:15px 20px;
-
-    color:#444;
-
-    text-decoration:none;
-
-}
-
-.dropdown-menu a:hover{
-
-    background:#f3f3f3;
-
-}
-/* =========================
-   เพิ่มโปรไฟล์เมื่อล็อกอิน
-========================= */
-.user-profile{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-}
-
-.user-profile span{
-    color:#796247 !important;
-    font-weight:600;
-    font-size:16px;
-}
-
-.user-profile img{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid white;
-}
-
-/* =========================
-   Banner
-========================= */
-
-.banner{
-    position: relative;
-
-    width: 100%;
-    height: 45vw;
-    min-height: 220px;
-    max-height: 420px;
-
-    margin: 0 auto;
-
-    background-image: url("img/banner3.png");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-
-    overflow: hidden;
-
-    border-radius: 0 0 30px 30px;
-
-    box-shadow: 0 5px 25px rgba(0,0,0,.15);
-}
-	/* =========================
-   NOTIFY
-========================= */
-
-.notify-box{
-
-	position:fixed;
-
-	top:30px;
-	right:30px;
-
-	background:#c8a77c;
-
-	color:white;
-
-	padding:18px 25px;
-
-	border-radius:18px;
-
-	font-weight:bold;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.2);
-
-	z-index:99999;
-
-	opacity:0;
-
-	transform:translateY(-20px);
-
-	transition:0.4s;
-}
-
-.notify-box.show{
-
-	opacity:1;
-
-	transform:translateY(0);
-}
-
-/* Overlay */
-
-.banner::before{
-	content:"";
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background:rgba(0,0,0,0.08);
-	border-radius:30px;
-	z-index:1;
-	pointer-events:none;
-}
-
-/* =========================
-   Navbar
-========================= */
-
-.navbar{
-	position:absolute;
-	top:25px;
-	left:35px;
-	right:35px;
-
-	display:flex;
-	justify-content:space-between;
-	align-items:flex-start;
-
-	z-index:9999;
-}
-
-/* =========================
-   เมนูซ้าย
-========================= */
-
-.left-menu{
-	display:flex;
-	gap:15px;
-	flex-wrap:wrap;
-}
-
-/* กล่องเมนู */
-
-.menu-item{
-	position:relative;
-}
-
-/* ปุ่มเมนู */
-
-.menu-btn{
-	padding:14px 25px;
-
-	border:none;
-	border-radius:15px;
-
-	font-size:16px;
-	font-weight:bold;
-
-	cursor:pointer;
-
-	color:#796247;
-
-	background:rgba(255,255,255,0.18);
-
-	backdrop-filter:blur(10px);
-
-	border:1px solid rgba(255,255,255,0.25);
-
-	transition:0.3s;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-
-/* Hover */
-
-.menu-btn:hover{
-	transform:translateY(-5px);
-
-	background:rgba(255,255,255,0.3);
-
-	box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* =========================
-   Dropdown
-========================= */
-
-.dropdown{
-	position:absolute;
-
-	top:70px;
-	left:0;
-
-	background:white;
-
-	border-radius:18px;
-
-	min-width:220px;
-
-	padding:10px 0;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.15);
-
-	opacity:0;
-	visibility:hidden;
-
-	transform:translateY(10px);
-
-	transition:0.25s;
-
-	z-index:99999;
-}
-
-/* ทำพื้นที่กัน dropdown หาย */
-
-.menu-item::after{
-	content:"";
-	position:absolute;
-	left:0;
-	top:55px;
-	width:100%;
-	height:25px;
-}
-
-/* ลิงก์ */
-
-.dropdown a{
-	display:block;
-
-	padding:18px 22px;
-
-	color:#444;
-
-	font-weight:bold;
-
-	transition:0.3s;
-}
-
-/* Hover */
-
-.dropdown a:hover{
-	background:#f2e4d3;
-}
-
-/* แสดง dropdown */
-
-.menu-item:hover .dropdown{
-	opacity:1;
-	visibility:visible;
-	transform:translateY(0);
-}
-
-/* =========================
-   ปุ่มขวา
-========================= */
-
-.right-menu{
-	display:flex;
-	gap:15px;
-}
-
-/* =========================
-   Navbar ตอน Scroll
-========================= */
-
-.navbar.scrolled{
-	position:fixed;
-
-	top:0;
-	left:0;
-
-	width:100%;
-
-	padding:15px 40px;
-
-	background:rgba(255,255,255,0.95);
-
-	backdrop-filter:blur(10px);
-
-	box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-/* ปุ่มตอน scroll */
-
-.navbar.scrolled .menu-btn{
-	background:#c8a77c;
-	color:white;
-	border:none;
-}
-/* =========================
-   Floating AI Button
-========================= */
-
-.floating-ai{
-    position:fixed;
-
-    right:30px;
-    bottom:120px;   /* อยู่เหนือปุ่ม + */
-
-    width:70px;
-    height:70px;
-
-    border:none;
-    border-radius:50%;
-
-    background:#4A90E2;   /* สีเขียว */
-
-    color:white;
-
-    font-size:34px;
-
-    cursor:pointer;
-
-    box-shadow:0 5px 20px rgba(0,0,0,0.25);
-
-    z-index:9999;
-
-    transition:.3s;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.floating-ai:hover{
-
-    transform:translateY(-5px);
-
-    background:#357ABD;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
-
-}
-/* =========================
-   Floating Plus Button
-========================= */
-
-
-.floating-btn{
-	position:fixed;
-
-	right:30px;
-	bottom:30px;
-
-	width:70px;
-	height:70px;
-
-	border:none;
-	border-radius:50%;
-
-	background:#8a6847;
-
-	color:white;
-
-	font-size:42px;
-
-	cursor:pointer;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.25);
-
-	z-index:9999;
-
-	transition:0.3s;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-
-/* Hover */
-
-.floating-btn:hover{
-	transform:translateY(-5px) rotate(90deg);
-
-	background:#8a6847;
-
-	box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
-/* ==========================
-   Sidebar Mobile
-========================== */
-/* ตอน Navbar เลื่อน */
-.navbar.scrolled .menu-toggle{
-    background:#d8c5ad;
-    border:1px solid #b08a61;
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
-}
-
-/* ปุ่ม ☰ */
-.menu-toggle{
-    display:none;
-    font-size:28px;
-    color:#6b4f33;
-    cursor:pointer;
-    padding:8px 14px;
-    border-radius:12px;
-    background:rgba(255,255,255,.85);
-    backdrop-filter:blur(10px);
-    z-index:1002;
-}
-
-/* Sidebar */
-.sidebar{
-    position:fixed;
-    top:0;
-    left:-300px;
-
-    width:280px;
-    height:100vh;
-
-    padding:25px;
-
-    background:#796247;
-
-    transition:.35s;
-    z-index:1001;
-}
-
-.sidebar.active{
-    left:0;
-}
-
-/* ปุ่มบนสุด */
-.sidebar-buttons{
-    display:flex;
-    gap:10px;
-    margin-bottom:30px;
-}
-
-.sidebar-buttons a{
-    flex:1;
-    text-align:center;
-    padding:15px;
-    border-radius:12px;
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.register-btn,
-.login-btn{
-    background:#6A513A;
-}
-
-/* เมนูหลัก */
-.sidebar ul{
-    list-style:none;
-    padding:0;
-    margin:0;
-}
-
-.sidebar li{
-    margin:0;
-}
-
-.sidebar li a,
-.dropdown-btn{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    width:100%;
-
-    padding:14px 0;
-
-    background:none;
-    border:none;
-
-    color:#fff;
-    font-size:18px;
-    font-weight:500;
-
-    text-decoration:none;
-    cursor:pointer;
-}
-
-/* เมนูย่อย */
-.submenu{
-    display:none;
-    list-style:none;
-    padding-left:20px;
-}
-
-.submenu.show{
-    display:block;
-}
-
-.submenu li a{
-    padding:10px 0;
-    font-size:17px;
-}
-
-/* ลูกศร */
-.arrow{
-    transition:.3s;
-}
-
-.arrow.rotate{
-    transform:rotate(90deg);
-}
-
-/* Overlay */
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.5);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.3s;
-    z-index:1000;
-}
-
-.overlay.active{
-    opacity:1;
-    visibility:visible;
-}
-.sidebar-user{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:30px;
-}
-
-.sidebar-user img{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #fff;
-}
-
-
-.sidebar-user a{
-    color:#fff;
-    font-size:14px;
-    text-decoration:none;
-    opacity:.8;
-}
-
-@media (max-width:1024px){
-
-    .menu-toggle{
-        display:block;
+    body {
+        background: #f3f3f3;
+        color: #333;
+        min-height: 2000px;
     }
 
-    .left-menu,
-    .right-menu{
-        display:none;
+    body.no-scroll {
+        overflow: hidden;
     }
 
-    .banner{
-        width:100%;
-        height:55vw;
-        min-height:230px;
-        max-height:320px;
-
-        background-size:cover;
-        background-position:center center;
-        background-repeat:no-repeat;
+    a {
+        text-decoration: none;
+        color: inherit;
     }
 
-}
-.sidebar-user{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:30px;
-}
 
-.sidebar-info{
-    display:flex;
-    flex-direction:column;
-}
+    /* =====================================================
+       PAGE LOADER
+    ===================================================== */
 
-.sidebar-name{
-    color:#fff;
-    font-size:24px;
-    font-weight:bold;
-}
+    #pageLoader {
 
-.sidebar-link{
-    color:#eee;
-    text-decoration:none;
-    margin-top:6px;
-    font-size:15px;
-}
+        position: fixed;
+        inset: 0;
 
-.sidebar-link.logout{
-    color:#ffd6d6;
-}
-/* ==========================
-   Mobile Navbar
-========================== */
-@media (max-width:1024px){
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    .navbar{
-        position:fixed;
-        top:0;
-        left:0;
-        right:0;
+        flex-direction: column;
+        gap: 14px;
 
-        padding:15px 20px;
+        background: rgba(255, 255, 255, 0.35);
 
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
+        backdrop-filter: blur(2px);
 
-        z-index:9999;
+        z-index: 999999;
+
+        opacity: 1;
+        visibility: visible;
+
+        transition:
+            opacity .4s ease,
+            visibility .4s ease;
     }
 
-    .menu-toggle{
-        display:block;
+    #pageLoader.hide {
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
-    body{
-        padding-top:70px;
+    .loader-spinner {
+
+        width: 55px;
+        height: 55px;
+
+        border: 5px solid #eadfce;
+        border-top: 5px solid #8a6847;
+
+        border-radius: 50%;
+
+        animation: loaderSpin .8s linear infinite;
     }
 
-}
-@media(max-width:768px){
+    .loader-text {
 
-    .filter-box{
+        color: #8a6847;
 
-        flex-direction:column;
+        font-size: 18px;
+        font-weight: 600;
 
-        align-items:stretch;
+        text-shadow:
+            0 1px 3px rgba(255, 255, 255, .8);
+    }
+
+    @keyframes loaderSpin {
+
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
 
     }
 
-    .filter-box select{
 
-        width:100%;
+    /* =====================================================
+       FULL IMAGE VIEWER
+    ===================================================== */
+
+    .image-viewer {
+
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0, 0, 0, .88);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 30px;
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition: .3s;
+
+        z-index: 999999;
+    }
+
+    .image-viewer.show {
+
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .image-viewer img {
+
+        max-width: 95vw;
+        max-height: 90vh;
+
+        width: auto;
+        height: auto;
+
+        object-fit: contain;
+
+        border-radius: 15px;
+
+        box-shadow:
+            0 10px 40px rgba(0, 0, 0, .5);
+
+        transform: scale(.9);
+
+        transition: .3s;
+    }
+
+    .image-viewer.show img {
+        transform: scale(1);
+    }
+
+    .image-viewer-close {
+
+        position: absolute;
+
+        top: 20px;
+        right: 25px;
+
+        width: 50px;
+        height: 50px;
+
+        border: none;
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, .15);
+
+        color: white;
+
+        font-size: 30px;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: .2s;
+
+        z-index: 2;
+    }
+
+    .image-viewer-close:hover {
+
+        background: rgba(255, 255, 255, .3);
+
+        transform: scale(1.08);
+    }
+
+    .dog-image {
+        cursor: zoom-in;
+    }
+
+
+    /* =====================================================
+       NOTIFICATION
+    ===================================================== */
+
+    .notify-box {
+
+        position: fixed;
+
+        top: 30px;
+        right: 30px;
+
+        background: #c8a77c;
+
+        color: white;
+
+        padding: 18px 25px;
+
+        border-radius: 18px;
+
+        font-weight: bold;
+
+        box-shadow:
+            0 5px 20px rgba(0, 0, 0, .2);
+
+        z-index: 99999;
+
+        opacity: 0;
+
+        transform: translateY(-20px);
+
+        transition: .4s;
+    }
+
+    .notify-box.show {
+
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+
+    /* =====================================================
+       BANNER
+    ===================================================== */
+
+    .banner {
+
+        position: relative;
+
+        width: 100%;
+
+        height: 45vw;
+
+        min-height: 220px;
+        max-height: 420px;
+
+        margin: 0 auto;
+
+        background-image:
+            url("img/banner3.png");
+
+        background-size: cover;
+
+        background-position: center center;
+
+        background-repeat: no-repeat;
+
+        overflow: hidden;
+
+        border-radius:
+            0 0 30px 30px;
+
+        box-shadow:
+            0 5px 25px rgba(0, 0, 0, .15);
+    }
+
+    .banner::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            rgba(0, 0, 0, .08);
+
+        border-radius: 30px;
+
+        z-index: 1;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    .navbar {
+
+        position: absolute;
+
+        top: 25px;
+        left: 35px;
+        right: 35px;
+
+        display: flex;
+
+        justify-content: space-between;
+        align-items: flex-start;
+
+        z-index: 9999;
+    }
+
+
+    /* LEFT MENU */
+
+    .left-menu {
+
+        display: flex;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+    }
+
+    .menu-item {
+        position: relative;
+    }
+
+
+    /* MENU BUTTON */
+
+    .menu-btn {
+
+        padding: 14px 25px;
+
+        border: none;
+
+        border-radius: 15px;
+
+        font-size: 16px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        color: #796247;
+
+        background:
+            rgba(255, 255, 255, .18);
+
+        backdrop-filter:
+            blur(10px);
+
+        border:
+            1px solid rgba(255, 255, 255, .25);
+
+        transition: .3s;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-btn:hover {
+
+        transform: translateY(-5px);
+
+        background:
+            rgba(255, 255, 255, .3);
+
+        box-shadow:
+            0 10px 20px rgba(0, 0, 0, .2);
+    }
+
+
+    /* DESKTOP DROPDOWN */
+
+    .dropdown {
+
+        position: absolute;
+
+        top: 70px;
+        left: 0;
+
+        background: white;
+
+        border-radius: 18px;
+
+        min-width: 220px;
+
+        padding: 10px 0;
+
+        box-shadow:
+            0 5px 20px rgba(0, 0, 0, .15);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+            translateY(10px);
+
+        transition: .25s;
+
+        z-index: 99999;
+    }
+
+    .menu-item::after {
+
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        top: 55px;
+
+        width: 100%;
+        height: 25px;
+    }
+
+    .dropdown a {
+
+        display: block;
+
+        padding: 18px 22px;
+
+        color: #444;
+
+        font-weight: bold;
+
+        transition: .3s;
+    }
+
+    .dropdown a:hover {
+        background: #f2e4d3;
+    }
+
+    .menu-item:hover .dropdown {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translateY(0);
+    }
+
+
+    /* RIGHT MENU */
+
+    .right-menu {
+
+        display: flex;
+
+        gap: 15px;
+    }
+
+
+    /* USER PROFILE */
+
+    .user-dropdown {
+        position: relative;
+    }
+
+    .user-profile {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 8px 15px;
+
+        border-radius: 15px;
+
+        background:
+            rgba(255, 255, 255, .18);
+
+        backdrop-filter:
+            blur(10px);
+
+        border:
+            1px solid rgba(255, 255, 255, .25);
+
+        cursor: pointer;
+    }
+
+    .user-profile img {
+
+        width: 45px;
+        height: 45px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        border: 2px solid white;
+    }
+
+    .user-profile span {
+
+        color: #796247 !important;
+
+        font-weight: 600;
+
+        font-size: 16px;
+    }
+
+    .dropdown-menu {
+
+        position: absolute;
+
+        top: 65px;
+        right: 0;
+
+        width: 220px;
+
+        background: white;
+
+        border-radius: 15px;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, .15);
+
+        display: none;
+
+        overflow: hidden;
+
+        z-index: 99999;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+    .dropdown-menu a {
+
+        display: block;
+
+        padding: 15px 20px;
+
+        color: #444;
+    }
+
+    .dropdown-menu a:hover {
+        background: #f3f3f3;
+    }
+
+
+    /* NAVBAR SCROLL */
+
+    .navbar.scrolled {
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+
+        padding: 15px 40px;
+
+        background:
+            rgba(255, 255, 255, .95);
+
+        backdrop-filter:
+            blur(10px);
+
+        box-shadow:
+            0 2px 10px rgba(0, 0, 0, .08);
+    }
+
+    .navbar.scrolled .menu-btn {
+
+        background: #c8a77c;
+
+        color: white;
+
+        border: none;
+    }
+
+
+    /* =====================================================
+       SIDEBAR MOBILE
+    ===================================================== */
+
+    .menu-toggle {
+
+        display: none;
+
+        font-size: 28px;
+
+        color: #6b4f33;
+
+        cursor: pointer;
+
+        padding: 8px 14px;
+
+        border-radius: 12px;
+
+        background:
+            rgba(255, 255, 255, .85);
+
+        backdrop-filter:
+            blur(10px);
+
+        z-index: 1002;
+    }
+
+    .navbar.scrolled .menu-toggle {
+
+        background: #d8c5ad;
+
+        border:
+            1px solid #b08a61;
+
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, .18);
+    }
+
+
+    /* SIDEBAR */
+
+    .sidebar {
+
+        position: fixed;
+
+        top: 0;
+        left: -300px;
+
+        width: 280px;
+        height: 100vh;
+
+        padding: 25px;
+
+        background: #796247;
+
+        transition: .35s;
+
+        z-index: 1001;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-buttons {
+
+        display: flex;
+
+        gap: 10px;
+
+        margin-bottom: 30px;
+    }
+
+    .sidebar-buttons a {
+
+        flex: 1;
+
+        text-align: center;
+
+        padding: 15px;
+
+        border-radius: 12px;
+
+        color: #fff;
+
+        font-weight: 600;
+    }
+
+    .register-btn,
+    .login-btn {
+        background: #6A513A;
+    }
+
+    .sidebar ul {
+
+        list-style: none;
+
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar li {
+        margin: 0;
+    }
+
+    .sidebar li a,
+    .dropdown-btn {
+
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+
+        padding: 14px 0;
+
+        background: none;
+
+        border: none;
+
+        color: #fff;
+
+        font-size: 18px;
+
+        font-weight: 500;
+
+        text-decoration: none;
+
+        cursor: pointer;
+    }
+
+    .submenu {
+
+        display: none;
+
+        list-style: none;
+
+        padding-left: 20px;
+    }
+
+    .submenu.show {
+        display: block;
+    }
+
+    .submenu li a {
+
+        padding: 10px 0;
+
+        font-size: 17px;
+    }
+
+    .arrow {
+        transition: .3s;
+    }
+
+    .arrow.rotate {
+        transform: rotate(90deg);
+    }
+
+    .overlay {
+
+        position: fixed;
+
+        inset: 0;
+
+        background:
+            rgba(0, 0, 0, .5);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: .3s;
+
+        z-index: 1000;
+    }
+
+    .overlay.active {
+
+        opacity: 1;
+
+        visibility: visible;
+    }
+
+    .sidebar-user {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        margin-bottom: 30px;
+    }
+
+    .sidebar-user img {
+
+        width: 55px;
+        height: 55px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        border: 2px solid #fff;
+    }
+
+    .sidebar-info {
+
+        display: flex;
+
+        flex-direction: column;
+    }
+
+    .sidebar-name {
+
+        color: #fff;
+
+        font-size: 24px;
+
+        font-weight: bold;
+    }
+
+    .sidebar-link {
+
+        color: #eee;
+
+        margin-top: 6px;
+
+        font-size: 15px;
+    }
+
+    .sidebar-link.logout {
+        color: #ffd6d6;
+    }
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    .filter-section {
+
+        width: 90%;
+
+        max-width: 1300px;
+
+        margin: 40px auto 20px;
+    }
+
+    .filter-box {
+
+        display: flex;
+
+        justify-content: flex-end;
+        align-items: center;
+
+        gap: 15px;
+    }
+
+    .filter-box label {
+
+        font-size: 18px;
+
+        font-weight: 600;
+
+        color: #555;
+    }
+
+    .filter-box select {
+
+        width: 260px;
+
+        height: 50px;
+
+        border-radius: 12px;
+
+        border: 2px solid #ddd;
+
+        padding: 0 15px;
+
+        font-size: 16px;
+
+        outline: none;
+
+        background: white;
+
+        cursor: pointer;
+    }
+
+
+    /* =====================================================
+       NEW DOG CARDS
+    ===================================================== */
+
+    .dog-section {
+
+        width: 92%;
+
+        max-width: 1500px;
+
+        margin: 35px auto 70px;
+    }
+
+    .dog-container {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 22px;
+
+        align-items: start;
+    }
+
+
+    /* CARD */
+
+    .dog-card {
+
+        background: #fff;
+
+        border-radius: 22px;
+
+        overflow: hidden;
+
+        border: 1px solid #eee;
+
+        box-shadow:
+            0 8px 25px rgba(0, 0, 0, .07);
+
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease;
+
+        position: relative;
+    }
+
+    .dog-card:hover {
+
+        transform:
+            translateY(-6px);
+
+        box-shadow:
+            0 15px 35px rgba(0, 0, 0, .12);
+    }
+
+
+    /* CARD IMAGE */
+
+    .dog-image-wrapper {
+
+        position: relative;
+
+        width: 100%;
+
+        height: 210px;
+
+        overflow: hidden;
+
+        background: #eee;
+    }
+
+    .dog-image {
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        display: block;
+
+        transition:
+            transform .4s ease,
+            filter .3s ease;
+    }
+
+    .dog-card:hover .dog-image {
+
+        transform: scale(1.04);
+
+        filter: brightness(.94);
+    }
+
+
+    /* IMAGE ZOOM ICON */
+
+    .image-zoom {
+
+        position: absolute;
+
+        right: 12px;
+        bottom: 12px;
+
+        width: 38px;
+        height: 38px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        background:
+            rgba(0, 0, 0, .55);
+
+        backdrop-filter:
+            blur(5px);
+
+        color: white;
+
+        font-size: 17px;
+
+        pointer-events: none;
+    }
+
+
+    /* CARD CONTENT */
+
+    .dog-content {
+
+        padding: 18px;
+    }
+
+
+    /* TITLE */
+
+    .dog-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+        margin-bottom: 15px;
+    }
+
+    .dog-title-area {
+
+        min-width: 0;
+
+        flex: 1;
+    }
+
+    .dog-name {
+
+        font-size: 21px;
+
+        font-weight: 700;
+
+        color: #292929;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        line-height: 1.3;
+    }
+
+    .dog-gender {
+
+        color: #777;
+
+        font-size: 14px;
+
+        margin-top: 4px;
+    }
+
+
+    /* STATUS */
+
+    .adoption-status {
+
+        flex-shrink: 0;
+
+        padding: 6px 11px;
+
+        border-radius: 20px;
+
+        font-size: 12px;
+
+        font-weight: 600;
+
+        white-space: nowrap;
+    }
+
+    .adoption-status.available {
+
+        background: #e8f7ea;
+
+        color: #2e7d32;
+    }
+
+    .adoption-status.adopted {
+
+        background: #dbeafe;
+
+        color: #1565c0;
+    }
+
+
+    /* =====================================================
+       QUICK INFO
+    ===================================================== */
+
+    .quick-info {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+
+        margin-bottom: 15px;
+    }
+
+    .quick-item {
+
+        min-width: 0;
+
+        background: #f8f8f8;
+
+        border-radius: 12px;
+
+        padding: 9px 10px;
+    }
+
+    .quick-label {
+
+        display: block;
+
+        color: #999;
+
+        font-size: 11px;
+
+        margin-bottom: 2px;
+    }
+
+    .quick-value {
+
+        display: block;
+
+        color: #444;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* =====================================================
+       LOCATION
+    ===================================================== */
+
+    .location-box {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        padding: 10px 12px;
+
+        border-radius: 12px;
+
+        background: #f8f5ef;
+
+        color: #796247;
+
+        font-size: 13px;
+
+        margin-bottom: 14px;
+    }
+
+    .location-icon {
+        font-size: 15px;
+    }
+
+    .location-text {
+
+        min-width: 0;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* =====================================================
+       DETAIL
+    ===================================================== */
+
+    .section-title {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: #8a6847;
+
+        margin-bottom: 6px;
+    }
+
+    .detail {
+
+        color: #777;
+
+        font-size: 13px;
+
+        line-height: 1.65;
+
+        background: #fafafa;
+
+        padding: 11px 12px;
+
+        border-radius: 12px;
+
+        display: -webkit-box;
+
+        -webkit-line-clamp: 3;
+
+        -webkit-box-orient: vertical;
+
+        overflow: hidden;
+
+        min-height: 65px;
+
+        margin-bottom: 15px;
+    }
+
+
+    /* =====================================================
+       OWNER
+    ===================================================== */
+
+    .section-divider {
+
+        border: 0;
+
+        border-top:
+            1px solid #eee;
+
+        margin: 15px 0;
+    }
+
+    .owner-box {
+
+        display: block;
+
+        border-radius: 14px;
+
+        padding: 10px;
+
+        transition: .2s;
+    }
+
+    .owner-box:hover {
+
+        background: #faf7f2;
+    }
+
+    .owner-profile {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        margin-bottom: 9px;
+    }
+
+    .owner-profile img {
+
+        width: 42px;
+        height: 42px;
+
+        border-radius: 50%;
+
+        object-fit: cover;
+
+        flex-shrink: 0;
+
+        border: 2px solid #eee;
+
+        transition: .25s;
+    }
+
+    .owner-box:hover img {
+        transform: scale(1.05);
+    }
+
+    .owner-name {
+
+        font-size: 14px;
+
+        font-weight: 700;
+
+        color: #333;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+    .owner-role {
+
+        color: #999;
+
+        font-size: 11px;
+    }
+
+    .contact {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 7px;
+    }
+
+    .contact p {
+
+        margin: 0;
+
+        padding: 8px 9px;
+
+        border-radius: 9px;
+
+        background: #f8f8f8;
+
+        color: #666;
+
+        font-size: 11px;
+
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+
+    /* =====================================================
+       OWNER ACTIONS
+    ===================================================== */
+
+    .owner-actions {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+
+        margin-top: 13px;
+    }
+
+    .status-btn,
+    .delete-btn {
+
+        border: none;
+
+        border-radius: 10px;
+
+        padding: 10px;
+
+        color: white;
+
+        cursor: pointer;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        transition: .2s;
+    }
+
+    .status-btn {
+        background: #2e7d32;
+    }
+
+    .delete-btn {
+        background: #d32f2f;
+    }
+
+    .status-btn:hover {
+        background: #1b5e20;
+    }
+
+    .delete-btn:hover {
+        background: #b71c1c;
+    }
+
+
+    /* =====================================================
+       FLOATING AI BUTTON
+    ===================================================== */
+
+    .chat-btn {
+
+        position: fixed;
+
+        right: 30px;
+        bottom: 120px;
+
+        width: 70px;
+        height: 70px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: #4A90E2;
+
+        color: white;
+
+        font-size: 34px;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 5px 20px rgba(0, 0, 0, .25);
+
+        z-index: 9999;
+
+        transition: .3s;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chat-btn:hover {
+
+        transform:
+            translateY(-5px);
+
+        background: #357ABD;
+
+        box-shadow:
+            0 10px 25px rgba(0, 0, 0, .3);
+    }
+
+    .chat-btn:active {
+
+        transform:
+            translateY(-2px) scale(.92);
+    }
+
+
+    /* =====================================================
+       CHATBOT
+    ===================================================== */
+
+    .chatbot-popup {
+
+        position: fixed;
+
+        right: 20px;
+        bottom: 20px;
+
+        width: 500px;
+        height: 700px;
+
+        background: white;
+
+        border-radius: 25px;
+
+        box-shadow:
+            0 15px 40px rgba(0, 0, 0, .3);
+
+        overflow: hidden;
+
+        display: none;
+
+        z-index: 100000;
+    }
+
+    .chat-header {
+
+        height: 50px;
+
+        background: #4da6ff;
+
+        color: white;
+
+        padding: 15px;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+    }
+
+    .chat-header button {
+
+        border: none;
+
+        background: none;
+
+        color: white;
+
+        font-size: 20px;
+
+        cursor: pointer;
+    }
+
+    .chatbot-popup iframe {
+
+        width: 100%;
+
+        height: 650px;
+
+        border: none;
+    }
+
+
+    /* =====================================================
+       FLOATING PLUS
+    ===================================================== */
+
+    .floating-btn {
+
+        position: fixed;
+
+        right: 30px;
+        bottom: 30px;
+
+        width: 70px;
+        height: 70px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: #8a6847;
+
+        color: white;
+
+        font-size: 42px;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 5px 20px rgba(0, 0, 0, .25);
+
+        z-index: 9999;
+
+        transition: .3s;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .floating-btn:hover {
+
+        transform:
+            translateY(-5px) rotate(90deg);
+
+        background: #8a6847;
+
+        box-shadow:
+            0 10px 25px rgba(0, 0, 0, .3);
+    }
+
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
+
+    @media (max-width: 1200px) {
+
+        .dog-container {
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+        }
 
     }
 
-    .dog-grid{
 
-        grid-template-columns:1fr;
+    /* =====================================================
+       MOBILE NAVBAR
+    ===================================================== */
+
+    @media (max-width: 1024px) {
+
+        .menu-toggle {
+            display: block;
+        }
+
+        .left-menu,
+        .right-menu {
+            display: none;
+        }
+
+        .navbar {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            padding: 15px 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            z-index: 9999;
+        }
+
+        body {
+            padding-top: 70px;
+        }
+
+        .banner {
+
+            width: 100%;
+
+            height: 55vw;
+
+            min-height: 230px;
+            max-height: 320px;
+
+            background-size: cover;
+
+            background-position: center center;
+
+            background-repeat: no-repeat;
+        }
 
     }
 
-}
 
+    /* =====================================================
+       TABLET CARD
+    ===================================================== */
 
-.user-profile{
+    @media (max-width: 900px) {
 
-	display:flex;
-	align-items:center;
-	gap:12px;
+        .dog-container {
 
-	padding:8px 15px;
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
 
-	border-radius:15px;
+            gap: 18px;
+        }
 
-	background:rgba(255,255,255,0.18);
-
-	backdrop-filter:blur(10px);
-
-	border:1px solid rgba(255,255,255,0.25);
-}
-
-.user-profile img{
-
-	width:45px;
-	height:45px;
-
-	border-radius:50%;
-
-	object-fit:cover;
-
-	border:2px solid white;
-}
-
-.user-profile span{
-
-	color:white;
-
-	font-weight:bold;
-}
-/* ==========================
-   Chatbot Mobile (LINE / Messenger Style)
-========================== */
-@media (max-width:768px){
-
-    .chat-btn{
-        right:20px;
-        bottom:20px;
-        width:65px;
-        height:65px;
-        font-size:30px;
-        z-index:99999;
     }
 
-    .chatbot-popup{
 
-        display:block;          /* ใช้ transform ซ่อนแทน */
-        position:fixed;
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
-        left:0;
-        right:0;
-        bottom:0;
+    @media (max-width: 768px) {
 
-        width:100%;
-        height:100dvh;
+        .filter-section {
 
-        border-radius:25px 25px 0 0;
+            width: 90%;
 
-        transform:translateY(100%);
-        transition:.35s ease;
+            margin:
+                25px auto 15px;
+        }
 
-        z-index:100000;
+        .filter-box {
+
+            flex-direction: column;
+
+            align-items: stretch;
+
+            gap: 8px;
+        }
+
+        .filter-box label {
+
+            font-size: 15px;
+        }
+
+        .filter-box select {
+
+            width: 100%;
+
+            height: 46px;
+
+            font-size: 14px;
+        }
+
+        .dog-section {
+
+            width: 92%;
+
+            margin-top: 25px;
+        }
+
+        .dog-container {
+
+            grid-template-columns: 1fr;
+
+            gap: 18px;
+        }
+
+        .dog-image-wrapper {
+
+            height: 220px;
+        }
+
+        .dog-content {
+
+            padding: 16px;
+        }
+
+        .dog-name {
+            font-size: 20px;
+        }
+
+        .quick-item {
+
+            padding:
+                9px 10px;
+        }
+
+        .quick-label {
+            font-size: 10px;
+        }
+
+        .quick-value {
+            font-size: 12px;
+        }
+
+        .location-box {
+            font-size: 12px;
+        }
+
+
+        /* FLOATING CHAT */
+
+        .chat-btn {
+
+            width: 60px;
+            height: 60px;
+
+            right: 20px;
+            bottom: 105px;
+
+            font-size: 28px;
+
+            z-index: 9999;
+        }
+
+
+        /* FLOATING PLUS */
+
+        .floating-btn {
+
+            width: 60px;
+            height: 60px;
+
+            right: 20px;
+            bottom: 25px;
+
+            font-size: 36px;
+
+            z-index: 9998;
+        }
+
+
+        /* MOBILE CHAT */
+
+        .chatbot-popup {
+
+            display: block;
+
+            position: fixed;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            width: 100%;
+
+            height: 100dvh;
+
+            border-radius:
+                25px 25px 0 0;
+
+            transform:
+                translateY(100%);
+
+            transition:
+                transform .35s ease;
+
+            z-index: 100000;
+        }
+
+        .chatbot-popup.show {
+            transform: translateY(0);
+        }
+
+        .chat-header {
+
+            height: 65px;
+
+            border-radius:
+                25px 25px 0 0;
+
+            padding:
+                15px 20px;
+        }
+
+        .chatbot-popup iframe {
+
+            width: 100%;
+
+            height:
+                calc(100dvh - 65px);
+
+            border: none;
+        }
+
     }
 
-    .chatbot-popup.show{
-        transform:translateY(0);
+
+    /* =====================================================
+       SMALL MOBILE
+    ===================================================== */
+
+    @media (max-width: 600px) {
+
+        .image-viewer {
+            padding: 15px;
+        }
+
+        .image-viewer img {
+
+            max-width: 100%;
+
+            max-height: 85vh;
+
+            border-radius: 10px;
+        }
+
+        .image-viewer-close {
+
+            top: 15px;
+            right: 15px;
+
+            width: 45px;
+            height: 45px;
+
+            font-size: 26px;
+        }
+
+        .dog-image-wrapper {
+            height: 210px;
+        }
+
+        .owner-actions {
+            grid-template-columns: 1fr;
+        }
+
     }
 
-    .chat-header{
+    </style>
 
-        height:65px;
-
-        border-radius:25px 25px 0 0;
-    }
-
-    .chatbot-popup iframe{
-        width:100%;
-        height:calc(100dvh - 65px);
-    }
-
-}
-
-/* =========================
-   Mobile Floating Buttons
-========================= */
-@media (max-width: 768px){
-
-    /* ปุ่ม Chatbot */
-    .chat-btn{
-        width:60px;
-        height:60px;
-
-        right:20px;
-        bottom:105px;
-
-        font-size:28px;
-
-        z-index:9999;
-    }
-
-    /* ปุ่ม + */
-    .floating-btn{
-        width:60px;
-        height:60px;
-
-        right:20px;
-        bottom:25px;
-
-        font-size:36px;
-
-        z-index:9998;
-    }
-
-    /* =========================
-       Chatbot แบบมือถือ
-       เลื่อนขึ้นจากด้านล่าง
-    ========================= */
-
-    .chatbot-popup{
-
-        display:block;
-
-        position:fixed;
-
-        left:0;
-        right:0;
-        bottom:0;
-
-        width:100%;
-        height:100dvh;
-
-        border-radius:25px 25px 0 0;
-
-        transform:translateY(100%);
-
-        transition:transform .35s ease;
-
-        z-index:100000;
-    }
-
-    /* ตอนเปิด Chat */
-    .chatbot-popup.show{
-        transform:translateY(0);
-    }
-
-    .chat-header{
-
-        height:65px;
-
-        border-radius:25px 25px 0 0;
-
-        padding:15px 20px;
-    }
-
-    .chatbot-popup iframe{
-
-        width:100%;
-
-        height:calc(100dvh - 65px);
-
-        border:none;
-    }
-}
-</style>
 </head>
 
+
 <body>
-    <!-- =========================
-     Full Image Viewer
-========================= -->
 
-<div class="image-viewer" id="imageViewer">
 
-    <button
-        class="image-viewer-close"
-        id="imageViewerClose">
-        ×
-    </button>
+    <!-- =====================================================
+         PAGE LOADER
+    ===================================================== -->
 
-    <img
-        id="fullImage"
-        src=""
-        alt="รูปสุนัข">
+    <div id="pageLoader">
 
-</div>
- <!-- Overlay -->
-<div class="overlay" id="overlay"></div>
+        <div class="loader-spinner"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-
-    <div id="sidebarUserMenu" class="sidebar-buttons">
-
-        <a href="register.html" class="register-btn">
-            ลงทะเบียน
-        </a>
-
-        <a href="login.html" class="login-btn">
-            เข้าสู่ระบบ
-        </a>
-
-    </div>
-
-    <ul>
-
-        <li>
-            <a href="index.html">HOME</a>
-        </li>
-
-        <li>
-
-            <button class="dropdown-btn" id="typeMenu">
-                ชนิด
-                <span class="arrow" id="arrow">▶</span>
-            </button>
-
-            <ul class="submenu" id="submenu">
-                <li><a href="dog.html">สุนัข</a></li>
-                <li><a href="cat.html">แมว</a></li>
-            </ul>
-
-        </li>
-
-        <li><a href="Reportmissing.html">สัตว์เลี้ยงหาย</a></li>
-        <li><a href="clinic.html">Clinic</a></li>
-        <li><a href="publicrelations.html">ประชาสัมพันธ์</a></li>
-        <li><a href="ContactUs.html">ติดต่อเรา</a></li>
-
-    </ul>
-
-</div>
-
-<!-- Banner -->
-
-<header class="banner">
-
-	<!-- Navbar -->
-
-<nav class="navbar" id="navbar">
-
-		<!-- เมนูซ้าย -->
-         <div class="menu-toggle" id="menuToggle">
-             ☰
+        <div class="loader-text">
+            กำลังโหลดเว็บไซต์...
         </div>
 
-		<div class="left-menu">
+    </div>
 
-			<a href="index.html" class="menu-btn">
-				HOME
-			</a>
 
-			<!-- เมนูชนิด -->
 
-			<div class="menu-item">
+    <!-- =====================================================
+         FULL IMAGE VIEWER
+    ===================================================== -->
 
-				<button class="menu-btn">
-					ชนิด ▼
-				</button>
+    <div class="image-viewer"
+         id="imageViewer">
 
-				<div class="dropdown">
+        <button
+            class="image-viewer-close"
+            id="imageViewerClose">
 
-					<a href="dog.html">หมา</a>
+            ×
 
-					<a href="cat.html">แมว</a>
+        </button>
 
-				</div>
+        <img
+            id="fullImage"
+            src=""
+            alt="รูปสุนัข">
 
-			</div>
+    </div>
 
-			<a href="Reportmissing.html" class="menu-btn">
-				สัตว์เลี้ยงหาย
-			</a>
-            <a href="clinic.html" class="menu-btn">
-				Clinic
-			</a>
 
-			<a href="publicrelations.html" class="menu-btn">
-				ประชาสัมพันธ์
-			</a>
 
-			<a href="ContactUs.html" class="menu-btn">
-				ติดต่อเรา
-			</a>
+    <!-- =====================================================
+         OVERLAY
+    ===================================================== -->
 
-			
+    <div
+        class="overlay"
+        id="overlay">
+    </div>
 
-		</div>
 
-		<!-- ปุ่มขวา -->
 
-		<div class="right-menu" id="userMenu">
+    <!-- =====================================================
+         MOBILE SIDEBAR
+    ===================================================== -->
 
-    <a href="register.html" class="menu-btn">
-        ลงทะเบียน
+    <div
+        class="sidebar"
+        id="sidebar">
+
+
+        <div
+            id="sidebarUserMenu"
+            class="sidebar-buttons">
+
+            <a
+                href="register.html"
+                class="register-btn">
+
+                ลงทะเบียน
+
+            </a>
+
+            <a
+                href="login.html"
+                class="login-btn">
+
+                เข้าสู่ระบบ
+
+            </a>
+
+        </div>
+
+
+        <ul>
+
+            <li>
+
+                <a href="index.html">
+                    HOME
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <button
+                    class="dropdown-btn"
+                    id="typeMenu">
+
+                    ชนิด
+
+                    <span
+                        class="arrow"
+                        id="arrow">
+
+                        ▶
+
+                    </span>
+
+                </button>
+
+
+                <ul
+                    class="submenu"
+                    id="submenu">
+
+                    <li>
+                        <a href="dog.html">
+                            สุนัข
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cat.html">
+                            แมว
+                        </a>
+                    </li>
+
+                </ul>
+
+            </li>
+
+
+            <li>
+                <a href="Reportmissing.html">
+                    สัตว์เลี้ยงหาย
+                </a>
+            </li>
+
+            <li>
+                <a href="clinic.html">
+                    Clinic
+                </a>
+            </li>
+
+            <li>
+                <a href="publicrelations.html">
+                    ประชาสัมพันธ์
+                </a>
+            </li>
+
+            <li>
+                <a href="ContactUs.html">
+                    ติดต่อเรา
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         BANNER
+    ===================================================== -->
+
+    <header class="banner">
+
+
+        <!-- NAVBAR -->
+
+        <nav
+            class="navbar"
+            id="navbar">
+
+
+            <!-- MOBILE MENU -->
+
+            <div
+                class="menu-toggle"
+                id="menuToggle">
+
+                ☰
+
+            </div>
+
+
+            <!-- LEFT MENU -->
+
+            <div class="left-menu">
+
+
+                <a
+                    href="index.html"
+                    class="menu-btn">
+
+                    HOME
+
+                </a>
+
+
+                <!-- TYPE -->
+
+                <div class="menu-item">
+
+                    <button class="menu-btn">
+
+                        ชนิด ▼
+
+                    </button>
+
+
+                    <div class="dropdown">
+
+                        <a href="dog.html">
+                            หมา
+                        </a>
+
+                        <a href="cat.html">
+                            แมว
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="Reportmissing.html"
+                    class="menu-btn">
+
+                    สัตว์เลี้ยงหาย
+
+                </a>
+
+
+                <a
+                    href="clinic.html"
+                    class="menu-btn">
+
+                    Clinic
+
+                </a>
+
+
+                <a
+                    href="publicrelations.html"
+                    class="menu-btn">
+
+                    ประชาสัมพันธ์
+
+                </a>
+
+
+                <a
+                    href="ContactUs.html"
+                    class="menu-btn">
+
+                    ติดต่อเรา
+
+                </a>
+
+            </div>
+
+
+            <!-- RIGHT MENU -->
+
+            <div
+                class="right-menu"
+                id="userMenu">
+
+
+                <a
+                    href="register.html"
+                    class="menu-btn">
+
+                    ลงทะเบียน
+
+                </a>
+
+
+                <a
+                    href="login.html"
+                    class="menu-btn">
+
+                    เข้าสู่ระบบ
+
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         FILTER
+    ===================================================== -->
+
+    <section class="filter-section">
+
+
+        <div class="filter-box">
+
+
+            <label>
+                เลือกอำเภอ
+            </label>
+
+
+            <select id="districtFilter">
+
+
+                <option value="ทั้งหมด">
+                    รวมทุกอำเภอ
+                </option>
+
+
+                <option value="เมืองพัทลุง">
+                    เมืองพัทลุง
+                </option>
+
+
+                <option value="กงหรา">
+                    กงหรา
+                </option>
+
+
+                <option value="เขาชัยสน">
+                    เขาชัยสน
+                </option>
+
+
+                <option value="ควนขนุน">
+                    ควนขนุน
+                </option>
+
+
+                <option value="ตะโหมด">
+                    ตะโหมด
+                </option>
+
+
+                <option value="บางแก้ว">
+                    บางแก้ว
+                </option>
+
+
+                <option value="ปากพะยูน">
+                    ปากพะยูน
+                </option>
+
+
+                <option value="ป่าบอน">
+                    ป่าบอน
+                </option>
+
+
+                <option value="ป่าพะยอม">
+                    ป่าพะยอม
+                </option>
+
+
+                <option value="ศรีบรรพต">
+                    ศรีบรรพต
+                </option>
+
+
+                <option value="ศรีนครินทร์">
+                    ศรีนครินทร์
+                </option>
+
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DOG LIST
+    ===================================================== -->
+
+    <section class="dog-section">
+
+
+        <div
+            class="dog-container"
+            id="dogContainer">
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CHAT BUTTON
+    ===================================================== -->
+
+    <button
+        id="chatBtn"
+        class="chat-btn">
+
+        🤖
+
+    </button>
+
+
+
+    <!-- =====================================================
+         CHAT POPUP
+    ===================================================== -->
+
+    <div
+        class="chatbot-popup"
+        id="chatPopup">
+
+
+        <div class="chat-header">
+
+
+            <span>
+                🤖 PetPaw AI
+            </span>
+
+
+            <button id="closeChat">
+                ✕
+            </button>
+
+
+        </div>
+
+
+        <iframe
+            src="chatbot.html">
+        </iframe>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ADD PET
+    ===================================================== -->
+
+    <a
+        href="Add a pet.html"
+        class="floating-btn">
+
+        +
+
     </a>
 
-    <a href="login.html" class="menu-btn">
-        เข้าสู่ระบบ
-    </a>
-	</div>
-</nav>
-</header>
-
-<!-- ===========================
-        Filter
-=========================== -->
-
-<section class="filter-section">
-
-    <div class="filter-box">
-
-        <label>เลือกอำเภอ</label>
-
-        <select id="districtFilter">
-
-            <option value="ทั้งหมด">
-                รวมทุกอำเภอ
-            </option>
-
-            <option value="เมืองพัทลุง">เมืองพัทลุง</option>
-
-            <option value="กงหรา">กงหรา</option>
-
-            <option value="เขาชัยสน">เขาชัยสน</option>
-
-            <option value="ควนขนุน">ควนขนุน</option>
-
-            <option value="ตะโหมด">ตะโหมด</option>
-
-            <option value="บางแก้ว">บางแก้ว</option>
-
-            <option value="ปากพะยูน">ปากพะยูน</option>
-
-            <option value="ป่าบอน">ป่าบอน</option>
-
-            <option value="ป่าพะยอม">ป่าพะยอม</option>
-
-            <option value="ศรีบรรพต">ศรีบรรพต</option>
-
-            <option value="ศรีนครินทร์">ศรีนครินทร์</option>
-
-        </select>
-
-    </div>
-
-</section>
-<!-- ===========================
-        Dog List
-=========================== -->
-
-<section class="dog-section">
-
-    <div class="dog-container" id="dogContainer">
-
-    </div>
-
-</section>
-<!-- ปุ่มเปิด Chat -->
-<button id="chatBtn" class="chat-btn">
-    🤖
-</button>
-
-<!-- กล่อง Chat -->
-<div class="chatbot-popup" id="chatPopup">
-
-    <div class="chat-header">
-
-        <span>🤖 PetPaw AI</span>
-
-        <button id="closeChat">✕</button>
-
-    </div>
-
-    <iframe src="chatbot.html"></iframe>
-
-</div>
-
-<!-- ปุ่มบวก -->
-
-<a href="Add a pet.html" class="floating-btn">
-	+
-</a>
-
-<script>
 
 
-window.addEventListener("scroll", function(){
+    <!-- =====================================================
+         NAVBAR SCROLL
+    ===================================================== -->
 
-	let navbar = document.getElementById("navbar");
+    <script>
 
-	if(window.scrollY > 50){
+    window.addEventListener("scroll", function () {
 
-		navbar.classList.add("scrolled");
+        const navbar =
+            document.getElementById("navbar");
 
-	}else{
+        if (window.scrollY > 50) {
 
-		navbar.classList.remove("scrolled");
+            navbar.classList.add("scrolled");
 
-	}
+        } else {
 
-});
+            navbar.classList.remove("scrolled");
 
-</script>
-<script>
-const navbar = document.getElementById("navbar");
-const menu = document.getElementById("menuToggle");
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
+        }
 
-
-
-// ================= Sidebar =================
-menu.onclick = () => {
-    sidebar.classList.add("active");
-    overlay.classList.add("active");
-    document.body.classList.add("no-scroll");
-    navbar.style.display = "none";
-};
-
-overlay.onclick = closeMenu;
-
-function closeMenu() {
-    sidebar.classList.remove("active");
-    overlay.classList.remove("active");
-    document.body.classList.remove("no-scroll");
-    navbar.style.display = "flex";
-}
-
-
-</script>
-<script>
-
-const typeMenu = document.getElementById("typeMenu");
-const submenu = document.getElementById("submenu");
-const arrow = document.getElementById("arrow");
-
-if (typeMenu) {
-    typeMenu.addEventListener("click", () => {
-        submenu.classList.toggle("show");
-        arrow.classList.toggle("rotate");
     });
-}
 
-</script>
-<script type="module">
+    </script>
 
-import { auth, db } from "./firebase.js";
 
-import {
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-import {
-    doc,
-    getDoc,
-    collection,
-    getDocs,
-    query,
-    where,
-    updateDoc,
-    deleteDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+    <!-- =====================================================
+         SIDEBAR
+    ===================================================== -->
 
-const userMenu = document.getElementById("userMenu");
-const sidebarUserMenu = document.getElementById("sidebarUserMenu");
+    <script>
 
-const dogContainer = document.getElementById("dogContainer");
+    const navbar =
+        document.getElementById("navbar");
 
-let allDogs = [];
+    const menu =
+        document.getElementById("menuToggle");
 
-let currentUser = null;
+    const sidebar =
+        document.getElementById("sidebar");
 
-let isAdmin = false;
+    const overlay =
+        document.getElementById("overlay");
 
-const params = new URLSearchParams(window.location.search);
 
-const dogId = params.get("id");
+    menu.onclick = () => {
 
-const districtFilter = document.getElementById("districtFilter");
-districtFilter.addEventListener("change", () => {
+        sidebar.classList.add("active");
 
-    const district = districtFilter.value;
+        overlay.classList.add("active");
 
-    if (district === "ทั้งหมด") {
+        document.body.classList.add("no-scroll");
 
-        renderDogs(allDogs);
+        navbar.style.display = "none";
 
-    } else {
+    };
 
-        const filteredDogs = allDogs.filter(dog => dog.district === district);
 
-        renderDogs(filteredDogs);
+    overlay.onclick = closeMenu;
+
+
+    function closeMenu() {
+
+        sidebar.classList.remove("active");
+
+        overlay.classList.remove("active");
+
+        document.body.classList.remove("no-scroll");
+
+        navbar.style.display = "flex";
 
     }
 
-});
+    </script>
 
 
-async function loadDogs(){
 
-    const snapshot = await getDocs(
-        collection(db,"dogs")
+    <!-- =====================================================
+         MOBILE SUBMENU
+    ===================================================== -->
+
+    <script>
+
+    const typeMenu =
+        document.getElementById("typeMenu");
+
+    const submenu =
+        document.getElementById("submenu");
+
+    const arrow =
+        document.getElementById("arrow");
+
+
+    if (typeMenu) {
+
+        typeMenu.addEventListener("click", () => {
+
+            submenu.classList.toggle("show");
+
+            arrow.classList.toggle("rotate");
+
+        });
+
+    }
+
+    </script>
+
+
+
+    <!-- =====================================================
+         FIREBASE + MAIN JAVASCRIPT
+    ===================================================== -->
+
+    <script type="module">
+
+
+    /* =====================================================
+       IMPORT FIREBASE
+    ===================================================== */
+
+    import {
+        auth,
+        db
+    } from "./firebase.js";
+
+
+    import {
+        onAuthStateChanged,
+        signOut
+    } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+
+    import {
+        doc,
+        getDoc,
+        collection,
+        getDocs,
+        updateDoc,
+        deleteDoc
+    } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const userMenu =
+        document.getElementById("userMenu");
+
+    const sidebarUserMenu =
+        document.getElementById("sidebarUserMenu");
+
+    const dogContainer =
+        document.getElementById("dogContainer");
+
+    const districtFilter =
+        document.getElementById("districtFilter");
+
+
+
+    /* =====================================================
+       GLOBAL VARIABLES
+    ===================================================== */
+
+    let allDogs = [];
+
+    let currentUser = null;
+
+    let isAdmin = false;
+
+
+
+    /* =====================================================
+       URL PARAMETER
+    ===================================================== */
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const dogId =
+        params.get("id");
+
+
+
+    /* =====================================================
+       DISTRICT FILTER
+    ===================================================== */
+
+    districtFilter.addEventListener(
+        "change",
+        async () => {
+
+            const district =
+                districtFilter.value;
+
+
+            if (district === "ทั้งหมด") {
+
+                await renderDogs(allDogs);
+
+                return;
+            }
+
+
+            const filteredDogs =
+                allDogs.filter(
+                    dog =>
+                        dog.district === district
+                );
+
+
+            await renderDogs(filteredDogs);
+
+        }
     );
 
-    allDogs = [];
-
-    snapshot.forEach(doc => {
-
-    allDogs.push({
-
-        id: doc.id,
-        ...doc.data()
-
-    });
-
-});
 
 
-/* =========================================
-   เรียงโพสต์
-   1. เพิ่มล่าสุดอยู่ด้านบน
-   2. ได้บ้านแล้วอยู่ด้านล่าง
-========================================= */
+    /* =====================================================
+       GET OWNER PROFILE
+    ===================================================== */
 
-allDogs.sort((a, b) => {
+    async function getOwnerProfile(uid) {
 
-    // สถานะได้บ้านแล้ว
-    const aAdopted =
-        a.adoptionStatus === "ได้บ้านแล้ว";
+        if (!uid) {
 
-    const bAdopted =
-        b.adoptionStatus === "ได้บ้านแล้ว";
+            return {
 
+                username: "ผู้ใช้",
 
-    // ถ้าสถานะต่างกัน
-    // ให้ "ได้บ้านแล้ว" ไปอยู่ด้านล่าง
-    if (aAdopted && !bAdopted) {
-        return 1;
-    }
+                profile:
+                    "img/default-profile.png"
 
-    if (!aAdopted && bAdopted) {
-        return -1;
-    }
+            };
+
+        }
 
 
-    // ถ้าสถานะเหมือนกัน
-    // เรียงจากวันที่เพิ่มล่าสุด -> เก่าสุด
-    const aTime =
-        a.createdAt?.toMillis
-            ? a.createdAt.toMillis()
-            : new Date(a.createdAt || 0).getTime();
+        try {
 
-    const bTime =
-        b.createdAt?.toMillis
-            ? b.createdAt.toMillis()
-            : new Date(b.createdAt || 0).getTime();
+            const snap =
+                await getDoc(
+                    doc(db, "users", uid)
+                );
 
 
-    return bTime - aTime;
+            if (!snap.exists()) {
 
-});
+                return {
 
-   console.log(allDogs);
+                    username: "ผู้ใช้",
 
-if(dogId){
+                    profile:
+                        "img/default-profile.png"
 
-    const dog = allDogs.filter(item => item.id === dogId);
+                };
 
-    renderDogs(dog);
+            }
 
-}else{
 
-    renderDogs(allDogs);
+            const user =
+                snap.data();
 
-}
 
-}
-function renderDogs(data){
+            return {
 
-    dogContainer.innerHTML = "";
+                username:
+                    user.username || "ผู้ใช้",
 
-    if(data.length===0){
+                profile:
+                    user.profile ||
+                    "img/default-profile.png"
 
-        dogContainer.innerHTML=`
-        <h2 style="
-        text-align:center;
-        color:#777;
-        grid-column:1/-1;">
-        ยังไม่มีข้อมูลสุนัข
-        </h2>`;
+            };
 
-        return;
+        } catch (error) {
+
+            console.error(
+                "ไม่สามารถโหลดข้อมูลผู้โพสต์:",
+                error
+            );
+
+
+            return {
+
+                username: "ผู้ใช้",
+
+                profile:
+                    "img/default-profile.png"
+
+            };
+
+        }
 
     }
 
-    data.forEach(dog=>{
 
-        dogContainer.innerHTML += `
 
-<div class="dog-card">
+    /* =====================================================
+       LOAD DOGS
+    ===================================================== */
 
-<img
-    src="${dog.image}"
-    class="dog-image"
-    onclick="openImageViewer('${dog.image}')"
-    alt="${dog.name || 'รูปสุนัข'}">
+    async function loadDogs() {
+
+        try {
+
+            const snapshot =
+                await getDocs(
+                    collection(db, "dogs")
+                );
+
+
+            allDogs = [];
+
+
+            snapshot.forEach(
+                dogDoc => {
+
+                    allDogs.push({
+
+                        id: dogDoc.id,
+
+                        ...dogDoc.data()
+
+                    });
+
+                }
+            );
+
+
+            /* =============================================
+               SORT
+               1. ได้บ้านแล้วอยู่ด้านล่าง
+               2. เพิ่มล่าสุดอยู่ด้านบน
+            ============================================= */
+
+            allDogs.sort(
+                (a, b) => {
+
+                    const aAdopted =
+                        a.adoptionStatus ===
+                        "ได้บ้านแล้ว";
+
+
+                    const bAdopted =
+                        b.adoptionStatus ===
+                        "ได้บ้านแล้ว";
+
+
+                    if (
+                        aAdopted &&
+                        !bAdopted
+                    ) {
+
+                        return 1;
+
+                    }
+
+
+                    if (
+                        !aAdopted &&
+                        bAdopted
+                    ) {
+
+                        return -1;
+
+                    }
+
+
+                    const aTime =
+                        a.createdAt?.toMillis
+                            ? a.createdAt.toMillis()
+                            : new Date(
+                                a.createdAt || 0
+                            ).getTime();
+
+
+                    const bTime =
+                        b.createdAt?.toMillis
+                            ? b.createdAt.toMillis()
+                            : new Date(
+                                b.createdAt || 0
+                            ).getTime();
+
+
+                    return bTime - aTime;
+
+                }
+            );
+
+
+            console.log(
+                "Dogs:",
+                allDogs
+            );
+
+
+            /* =============================================
+               OPEN SPECIFIC DOG
+            ============================================= */
+
+            if (dogId) {
+
+                const dog =
+                    allDogs.filter(
+                        item =>
+                            item.id === dogId
+                    );
+
+
+                await renderDogs(dog);
+
+            } else {
+
+                await renderDogs(allDogs);
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "โหลดข้อมูลสุนัขไม่สำเร็จ:",
+                error
+            );
+
+
+            dogContainer.innerHTML = `
+
+                <h2 style="
+                    text-align:center;
+                    color:#777;
+                    grid-column:1/-1;
+                    padding:50px;
+                ">
+
+                    ไม่สามารถโหลดข้อมูลสุนัขได้
+
+                </h2>
+
+            `;
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       RENDER DOGS
+    ===================================================== */
+
+    async function renderDogs(data) {
+
+        dogContainer.innerHTML = "";
+
+
+        if (data.length === 0) {
+
+            dogContainer.innerHTML = `
+
+                <div style="
+                    grid-column:1/-1;
+                    text-align:center;
+                    padding:60px 20px;
+                    color:#888;
+                ">
+
+                    <div style="
+                        font-size:50px;
+                        margin-bottom:10px;
+                    ">
+                        🐶
+                    </div>
+
+                    <h2 style="
+                        font-size:20px;
+                        color:#777;
+                        margin-bottom:5px;
+                    ">
+                        ยังไม่มีข้อมูลสุนัข
+                    </h2>
+
+                    <p style="
+                        font-size:14px;
+                    ">
+                        ลองเลือกอำเภออื่น
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+
+        /* =============================================
+           GET OWNER DATA
+        ============================================= */
+
+        const dogsWithOwner =
+            await Promise.all(
+
+                data.map(
+                    async dog => {
+
+                        const owner =
+                            await getOwnerProfile(
+                                dog.ownerUid
+                            );
+
+
+                        return {
+                            ...dog,
+                            owner
+                        };
+
+                    }
+                )
+
+            );
+
+
+
+        /* =============================================
+           CREATE CARD
+        ============================================= */
+
+        dogsWithOwner.forEach(
+            dog => {
+
+
+                const image =
+                    dog.image ||
+                    "img/default-dog.png";
+
+
+                const adoptionStatus =
+                    dog.adoptionStatus ||
+                    dog.status ||
+                    "กำลังหาบ้าน";
+
+
+                const statusClass =
+                    adoptionStatus ===
+                    "ได้บ้านแล้ว"
+                        ? "adopted"
+                        : "available";
+
+
+                const province =
+                    dog.province ||
+                    "-";
+
+
+                const district =
+                    dog.district ||
+                    "-";
+
+
+                const subdistrict =
+                    dog.subdistrict ||
+                    "-";
+
+
+                const gender =
+                    dog.gender ||
+                    "-";
+
+
+                const age =
+                    dog.age ||
+                    "-";
+
+
+                const breed =
+                    dog.breed ||
+                    "-";
+
+
+                const size =
+                    dog.size ||
+                    "-";
+
+
+                const vaccine =
+                    dog.vaccine ||
+                    "-";
+
+
+                const sterilized =
+                    dog.sterilized ||
+                    "-";
+
+
+                const detail =
+                    dog.detail ||
+                    "ไม่มีรายละเอียด";
+
+
+                const phone =
+                    dog.phone ||
+                    "-";
+
+
+                const facebook =
+                    dog.facebook ||
+                    "-";
+
+
+                dogContainer.innerHTML += `
+
+
+                <!-- =================================
+                     DOG CARD
+                ================================== -->
+
+                <article class="dog-card">
+
+
+                    <!-- IMAGE -->
+
+                    <div class="dog-image-wrapper">
+
+
+                        <img
+
+                            src="${image}"
+
+                            class="dog-image"
+
+                            onclick="openImageViewer('${image}')"
+
+                            alt="${dog.name || "รูปสุนัข"}"
+
+                        >
+
+
+                        <div class="image-zoom">
+
+                            🔍
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- CONTENT -->
 
 <div class="dog-content">
 
-<div class="dog-header">
 
-    <div class="dog-name">
-        <span class="info-label">เพศ</span>
-        <span class="info-value">: ${dog.gender}</span>
-    </div>
+    <!-- TITLE -->
 
-    <div class="header-right">
-
-        <div class="adoption-status ${
-    dog.adoptionStatus === "ได้บ้านแล้ว"
-        ? "adopted"
-        : "available"
-}">
-    ${dog.adoptionStatus || dog.status}
-</div>
-
-    </div>
-
-</div>
-<div class="info-grid">
-
-    <div class="info-item">
-        <span class="info-label">ชื่อ</span>
-        <span class="info-value">: ${dog.name}</span>
-    </div>
-
-    <div class="info-item">
-        <span class="info-label">อายุ</span>
-        <span class="info-value">: ${dog.age}</span>
-    </div>
-
-    <div class="info-item">
-        <span class="info-label">สายพันธุ์</span>
-        <span class="info-value">: ${dog.breed}</span>
-    </div>
-
-    <div class="info-item">
-        <span class="info-label">ขนาด</span>
-        <span class="info-value">: ${dog.size}</span>
-    </div>
+    <div class="dog-header">
 
 
-    <div class="info-item">
-        <span class="info-label">วัคซีน</span>
-        <span class="info-value">: ${dog.vaccine}</span>
-    </div>
+        <div class="dog-title-area">
 
-    <div class="info-item">
-        <span class="info-label">ทำหมัน</span>
-        <span class="info-value">: ${dog.sterilized}</span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">จังหวัด</span>
-        <span class="info-value">: ${dog.province}</span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">อำเภอ</span>
-        <span class="info-value">: ${dog.district}</span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">ตำบล</span>
-        <span class="info-value">: ${dog.subdistrict}</span>
-    </div>
 
-</div>
-<div class="section-title">
-รายละเอียด
-</div>
+            <div class="dog-name">
 
-<div class="detail">
-${dog.detail}
-</div>
+                เพศ : ${gender}
 
-<hr class="section-divider">
+            </div>
 
-<a href="profile.html?uid=${dog.ownerUid}" class="owner-box">
 
-    <div class="owner-profile">
-
-        <img src="${dog.ownerProfile || 'img/default-profile.png'}">
-
-        <div class="owner-name">
-            ${dog.ownerName}
         </div>
 
+
+        <div class="adoption-status ${statusClass}">
+
+            ${adoptionStatus}
+
+        </div>
+
+
     </div>
 
-    <div class="contact">
-        <p>📞 ${dog.phone || "-"}</p>
-        <p>Facebook : ${dog.facebook || "-"}</p>
+
+
+    <!-- QUICK INFO -->
+
+    <div class="quick-info">
+
+<div class="quick-item">
+
+            <span class="quick-label">
+                ชื่อ
+            </span>
+
+            <span class="quick-value">
+                ${dog.name || "ไม่ระบุชื่อ"}
+            </span>
+
+        </div>
+        <div class="quick-item">
+
+            <span class="quick-label">
+                อายุ
+            </span>
+
+            <span class="quick-value">
+                ${age}
+            </span>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <span class="quick-label">
+                สายพันธุ์
+            </span>
+
+            <span class="quick-value">
+                ${breed}
+            </span>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <span class="quick-label">
+                ขนาด
+            </span>
+
+            <span class="quick-value">
+                ${size}
+            </span>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <span class="quick-label">
+                วัคซีน
+            </span>
+
+            <span class="quick-value">
+                ${vaccine}
+            </span>
+
+        </div>
+
+
+        <div class="quick-item">
+
+            <span class="quick-label">
+                ทำหมัน
+            </span>
+
+            <span class="quick-value">
+                ${sterilized}
+            </span>
+
+        </div>
+
+
+        
+
+
     </div>
 
-</a>
-
-${currentUser && (currentUser.uid === dog.ownerUid || isAdmin) ? `
-
-<div class="owner-actions">
-
-    <button
-        class="status-btn"
-        onclick="changeStatus('${dog.id}')">
-
-        เปลี่ยนสถานะ
-
-    </button>
-
-    <button
-        class="delete-btn"
-        onclick="deleteDog('${dog.id}')">
-
-        ลบโพสต์
-
-</button>
-
-</div>
-
-` : ""}
-
-</div>   
-
-</div>  
-
-</div>   
 
 
-`;
+                        <!-- LOCATION -->
 
-    });
+                        <div class="location-box">
 
-}
 
-// =============================
-// เปลี่ยนสถานะ
-// =============================
-window.changeStatus = async function(id){
+                            <span class="location-icon">
+                                📍
+                            </span>
 
-    const status = prompt(
-`เลือกสถานะ
+
+                            <span class="location-text">
+
+                                ${province}
+                                /
+                                ${district}
+                                /
+                                ${subdistrict}
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <!-- DETAIL -->
+
+                        <div class="section-title">
+
+                            รายละเอียด
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            ${detail}
+
+                        </div>
+
+
+
+                        <!-- DIVIDER -->
+
+                        <hr class="section-divider">
+
+
+
+                        <!-- OWNER -->
+
+                        <a
+                            href="profile.html?uid=${dog.ownerUid}"
+                            class="owner-box">
+
+
+                            <div class="owner-profile">
+
+
+                                <img
+                                    src="${dog.owner.profile}"
+                                    alt="รูปผู้โพสต์"
+                                >
+
+
+                                <div>
+
+
+                                    <div class="owner-name">
+
+                                        ${dog.owner.username}
+
+                                    </div>
+
+
+                                    <div class="owner-role">
+
+                                        ผู้โพสต์
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="contact">
+
+
+                                <p>
+                                    📞 ${phone}
+                                </p>
+
+
+                                <p>
+                                    Facebook :
+                                    ${facebook}
+                                </p>
+
+
+                            </div>
+
+
+                        </a>
+
+
+
+                        <!-- OWNER ACTIONS -->
+
+                        ${
+                            currentUser &&
+                            (
+                                currentUser.uid === dog.ownerUid ||
+                                isAdmin
+                            )
+                            ?
+
+                            `
+
+                            <div class="owner-actions">
+
+
+                                <button
+                                    class="status-btn"
+                                    onclick="changeStatus('${dog.id}')">
+
+                                    เปลี่ยนสถานะ
+
+                                </button>
+
+
+                                <button
+                                    class="delete-btn"
+                                    onclick="deleteDog('${dog.id}')">
+
+                                    ลบโพสต์
+
+                                </button>
+
+
+                            </div>
+
+                            `
+
+                            :
+
+                            ""
+
+                        }
+
+
+                    </div>
+
+                </article>
+
+
+                `;
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CHANGE STATUS
+    ===================================================== */
+
+    window.changeStatus =
+        async function (id) {
+
+
+            const status =
+                prompt(
+
+                    `เลือกสถานะ
 
 กำลังหาบ้าน
 ได้บ้านแล้ว`
-    );
 
-    if(!status) return;
-
-    await updateDoc(
-        doc(db,"dogs",id),
-        {
-            adoptionStatus: status
-        }
-    );
-
-    alert("อัปเดตสถานะเรียบร้อย");
-
-    loadDogs();
-
-};
-
-// =============================
-// ลบโพสต์
-// =============================
-window.deleteDog = async function(id){
-
-    const dog = allDogs.find(item => item.id === id);
-
-    if(!dog){
-        return;
-    }
-
-    if(currentUser.uid !== dog.ownerUid && !isAdmin){
-        alert("คุณไม่มีสิทธิ์ลบโพสต์นี้");
-        return;
-    }
-
-    const ok = confirm("ต้องการลบโพสต์นี้หรือไม่");
-
-    if(!ok) return;
-
-    await deleteDoc(doc(db,"dogs",id));
-
-    alert("ลบโพสต์เรียบร้อย");
-
-    loadDogs();
-
-};  
+                );
 
 
-onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
-console.log("Auth =", user);
-    if (user) {
-
-        const snap = await getDoc(doc(db, "users", user.uid));
-
-        let username = "User";
-        let photo = "img/default-profile.png";
-
-        if (snap.exists()) {
-            username = snap.data().username || "User";
-            photo = snap.data().profile || "img/default-profile.png";
-            isAdmin = snap.data().role === "admin";
-        }
-
-        // ---------- Desktop ----------
-        userMenu.innerHTML = `
-            <div class="user-dropdown">
-
-                <div class="user-profile" id="profileBtn">
-
-                    <img src="${photo}">
-                    <span>${username}</span>
-
-                </div>
-
-                <div class="dropdown-menu" id="dropdownMenu">
-
-                    <a href="profile.html">โปรไฟล์</a>
-
-                    <a href="#" id="logoutBtn">ออกจากระบบ</a>
-
-                </div>
-
-            </div>
-        `;
-
-        // ---------- Mobile Sidebar ---------- 
-sidebarUserMenu.className = "";
-sidebarUserMenu.innerHTML = `
-<div class="sidebar-user">
-
-    <img src="${photo}" class="sidebar-photo">
-
-    <div>
-
-        <div class="sidebar-name">
-            ${username}
-        </div>
-
-        <a href="profile.html">
-            โปรไฟล์
-        </a>
-
-        <br>
-
-        <a href="#" id="sidebarLogout">
-            ออกจากระบบ
-        </a>
-
-    </div>
-
-</div>
-`;
+            if (!status) {
+                return;
+            }
 
 
-        // Desktop Dropdown
-        document.getElementById("profileBtn").onclick = () => {
+            if (
+                status !== "กำลังหาบ้าน" &&
+                status !== "ได้บ้านแล้ว"
+            ) {
 
-            document
-                .getElementById("dropdownMenu")
-                .classList.toggle("show");
+                alert(
+                    "กรุณาเลือกสถานะที่ถูกต้อง"
+                );
+
+                return;
+            }
+
+
+            try {
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "dogs",
+                        id
+                    ),
+
+                    {
+                        adoptionStatus:
+                            status
+                    }
+
+                );
+
+
+                alert(
+                    "อัปเดตสถานะเรียบร้อย"
+                );
+
+
+                await loadDogs();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "ไม่สามารถอัปเดตสถานะได้"
+                );
+
+            }
 
         };
 
-        // Desktop Logout
-        document.getElementById("logoutBtn").onclick = async () => {
 
-            await signOut(auth);
-            location.reload();
+
+    /* =====================================================
+       DELETE DOG
+    ===================================================== */
+
+    window.deleteDog =
+        async function (id) {
+
+
+            const dog =
+                allDogs.find(
+                    item =>
+                        item.id === id
+                );
+
+
+            if (!dog) {
+                return;
+            }
+
+
+            if (
+                !currentUser ||
+                (
+                    currentUser.uid !== dog.ownerUid &&
+                    !isAdmin
+                )
+            ) {
+
+                alert(
+                    "คุณไม่มีสิทธิ์ลบโพสต์นี้"
+                );
+
+                return;
+            }
+
+
+            const ok =
+                confirm(
+                    "ต้องการลบโพสต์นี้หรือไม่"
+                );
+
+
+            if (!ok) {
+                return;
+            }
+
+
+            try {
+
+                await deleteDoc(
+                    doc(
+                        db,
+                        "dogs",
+                        id
+                    )
+                );
+
+
+                alert(
+                    "ลบโพสต์เรียบร้อย"
+                );
+
+
+                await loadDogs();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "ไม่สามารถลบโพสต์ได้"
+                );
+
+            }
 
         };
 
-        // Mobile Logout
-        document.getElementById("sidebarLogout").onclick = async () => {
 
-    await signOut(auth);
-    location.reload();
 
-};
+    /* =====================================================
+       AUTH STATE
+    ===================================================== */
+
+    onAuthStateChanged(
+        auth,
+        async user => {
+
+
+            currentUser = user;
+
+            isAdmin = false;
+
+
+            console.log(
+                "Auth =",
+                user
+            );
+
+
+
+            /* =============================================
+               LOGGED IN
+            ============================================= */
+
+            if (user) {
+
+
+                try {
+
+
+                    const snap =
+                        await getDoc(
+                            doc(
+                                db,
+                                "users",
+                                user.uid
+                            )
+                        );
+
+
+                    let username = "User";
+
+                    let photo =
+                        "img/default-profile.png";
+
+
+                    if (snap.exists()) {
+
+
+                        const userData =
+                            snap.data();
+
+
+                        username =
+                            userData.username ||
+                            "User";
+
+
+                        photo =
+                            userData.profile ||
+                            "img/default-profile.png";
+
+
+                        isAdmin =
+                            userData.role ===
+                            "admin";
+
+                    }
+
+
+
+                    /* =================================
+                       DESKTOP USER
+                    ================================= */
+
+                    userMenu.innerHTML = `
+
+
+                        <div class="user-dropdown">
+
+
+                            <div
+                                class="user-profile"
+                                id="profileBtn">
+
+
+                                <img
+                                    src="${photo}"
+                                    alt="โปรไฟล์"
+                                >
+
+
+                                <span>
+                                    ${username}
+                                </span>
+
+
+                            </div>
+
+
+                            <div
+                                class="dropdown-menu"
+                                id="dropdownMenu">
+
+
+                                <a href="profile.html">
+                                    โปรไฟล์
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    id="logoutBtn">
+
+                                    ออกจากระบบ
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    `;
+
+
+
+                    /* =================================
+                       MOBILE SIDEBAR USER
+                    ================================= */
+
+                    sidebarUserMenu.className = "";
+
+                    sidebarUserMenu.innerHTML = `
+
+
+                        <div class="sidebar-user">
+
+
+                            <img
+                                src="${photo}"
+                                class="sidebar-photo"
+                                alt="โปรไฟล์"
+                            >
+
+
+                            <div class="sidebar-info">
+
+
+                                <div class="sidebar-name">
+
+                                    ${username}
+
+                                </div>
+
+
+                                <a
+                                    href="profile.html"
+                                    class="sidebar-link">
+
+                                    โปรไฟล์
+
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    id="sidebarLogout"
+                                    class="sidebar-link logout">
+
+                                    ออกจากระบบ
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    `;
+
+
+
+                    /* =================================
+                       DESKTOP PROFILE DROPDOWN
+                    ================================= */
+
+                    const profileBtn =
+                        document.getElementById(
+                            "profileBtn"
+                        );
+
+
+                    const dropdownMenu =
+                        document.getElementById(
+                            "dropdownMenu"
+                        );
+
+
+                    if (
+                        profileBtn &&
+                        dropdownMenu
+                    ) {
+
+                        profileBtn.onclick =
+                            () => {
+
+                                dropdownMenu
+                                    .classList
+                                    .toggle("show");
+
+                            };
+
+                    }
+
+
+
+                    /* =================================
+                       DESKTOP LOGOUT
+                    ================================= */
+
+                    const logoutBtn =
+                        document.getElementById(
+                            "logoutBtn"
+                        );
+
+
+                    if (logoutBtn) {
+
+                        logoutBtn.onclick =
+                            async event => {
+
+                                event.preventDefault();
+
+                                await signOut(auth);
+
+                                location.reload();
+
+                            };
+
+                    }
+
+
+
+                    /* =================================
+                       MOBILE LOGOUT
+                    ================================= */
+
+                    const sidebarLogout =
+                        document.getElementById(
+                            "sidebarLogout"
+                        );
+
+
+                    if (sidebarLogout) {
+
+                        sidebarLogout.onclick =
+                            async event => {
+
+                                event.preventDefault();
+
+                                await signOut(auth);
+
+                                location.reload();
+
+                            };
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "โหลดข้อมูลผู้ใช้ไม่สำเร็จ:",
+                        error
+                    );
+
+                }
+
+
+
+            }
+
+            /* =============================================
+               NOT LOGGED IN
+            ============================================= */
+
+            else {
+
+
+                userMenu.innerHTML = `
+
+
+                    <a
+                        href="register.html"
+                        class="menu-btn">
+
+                        ลงทะเบียน
+
+                    </a>
+
+
+                    <a
+                        href="login.html"
+                        class="menu-btn">
+
+                        เข้าสู่ระบบ
+
+                    </a>
+
+
+                `;
+
+
+                sidebarUserMenu.className =
+                    "sidebar-buttons";
+
+
+                sidebarUserMenu.innerHTML = `
+
+
+                    <a
+                        href="register.html"
+                        class="register-btn">
+
+                        ลงทะเบียน
+
+                    </a>
+
+
+                    <a
+                        href="login.html"
+                        class="login-btn">
+
+                        เข้าสู่ระบบ
+
+                    </a>
+
+
+                `;
+
+            }
+
+
+
+            /* =============================================
+               LOAD DOG DATA
+            ============================================= */
+
+            await loadDogs();
+
+
+            finishPageLoading();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       PAGE LOADING
+    ===================================================== */
+
+    async function finishPageLoading() {
+
+
+        const loader =
+            document.getElementById(
+                "pageLoader"
+            );
+
+
+        if (!loader) {
+            return;
+        }
+
+
+        const images =
+            Array.from(
+                document.images
+            );
+
+
+        await Promise.all(
+
+            images.map(
+                img => {
+
+
+                    if (img.complete) {
+
+                        return Promise.resolve();
+
+                    }
+
+
+                    return new Promise(
+                        resolve => {
+
+
+                            img.addEventListener(
+                                "load",
+                                resolve,
+                                { once: true }
+                            );
+
+
+                            img.addEventListener(
+                                "error",
+                                resolve,
+                                { once: true }
+                            );
+
+
+                        }
+                    );
+
+                }
+            )
+
+        );
+
+
+        await new Promise(
+            resolve =>
+                setTimeout(
+                    resolve,
+                    300
+                )
+        );
+
+
+        loader.classList.add(
+            "hide"
+        );
+
+
+        setTimeout(
+            () => {
+
+                loader.remove();
+
+            },
+            500
+        );
 
     }
 
-    else {
 
-        userMenu.innerHTML = `
 
-        <a href="register.html" class="menu-btn">
-            ลงทะเบียน
-        </a>
+    /* =====================================================
+       CHATBOT
+    ===================================================== */
 
-        <a href="login.html" class="menu-btn">
-            เข้าสู่ระบบ
-        </a>
+    const chatBtn =
+        document.getElementById(
+            "chatBtn"
+        );
 
-        `;
 
-        sidebarUserMenu.className = "sidebar-buttons";
+    const chatPopup =
+        document.getElementById(
+            "chatPopup"
+        );
 
-sidebarUserMenu.innerHTML = `
-<a href="register.html" class="register-btn">
-    ลงทะเบียน
-</a>
 
-<a href="login.html" class="login-btn">
-    เข้าสู่ระบบ
-</a>
-`;
+    const closeChat =
+        document.getElementById(
+            "closeChat"
+        );
+
+
+    const isMobile =
+        () =>
+            window.innerWidth <= 768;
+
+
+
+    chatBtn.onclick =
+        () => {
+
+
+            if (isMobile()) {
+
+
+                chatPopup.classList.add(
+                    "show"
+                );
+
+
+                document.body.classList.add(
+                    "no-scroll"
+                );
+
+
+            } else {
+
+
+                chatPopup.style.display =
+                    "block";
+
+            }
+
+
+            chatBtn.style.display =
+                "none";
+
+        };
+
+
+
+    closeChat.onclick =
+        () => {
+
+
+            if (isMobile()) {
+
+
+                chatPopup.classList.remove(
+                    "show"
+                );
+
+
+                document.body.classList.remove(
+                    "no-scroll"
+                );
+
+
+            } else {
+
+
+                chatPopup.style.display =
+                    "none";
+
+            }
+
+
+            chatBtn.style.display =
+                "flex";
+
+        };
+
+
+
+    /* =====================================================
+       FULL IMAGE VIEWER
+    ===================================================== */
+
+    const imageViewer =
+        document.getElementById(
+            "imageViewer"
+        );
+
+
+    const fullImage =
+        document.getElementById(
+            "fullImage"
+        );
+
+
+    const imageViewerClose =
+        document.getElementById(
+            "imageViewerClose"
+        );
+
+
+
+    window.openImageViewer =
+        function (imageUrl) {
+
+
+            fullImage.src =
+                imageUrl;
+
+
+            imageViewer.classList.add(
+                "show"
+            );
+
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+
+        };
+
+
+
+    function closeImageViewer() {
+
+
+        imageViewer.classList.remove(
+            "show"
+        );
+
+
+        document.body.classList.remove(
+            "no-scroll"
+        );
+
+
+        setTimeout(
+            () => {
+
+                fullImage.src = "";
+
+            },
+            300
+        );
 
     }
 
-    await loadDogs();
-
-});
-const chatBtn = document.getElementById("chatBtn");
-const chatPopup = document.getElementById("chatPopup");
-const closeChat = document.getElementById("closeChat");
-
-const isMobile = () => window.innerWidth <= 768;
-
-chatBtn.onclick = () => {
-
-    if(isMobile()){
-
-        chatPopup.classList.add("show");
-        document.body.classList.add("no-scroll");
-
-    }else{
-
-        chatPopup.style.display = "block";
-
-    }
-
-    chatBtn.style.display = "none";
-};
-
-closeChat.onclick = () => {
-
-    if(isMobile()){
-
-        chatPopup.classList.remove("show");
-        document.body.classList.remove("no-scroll");
-
-    }else{
-
-        chatPopup.style.display = "none";
-
-    }
-
-    chatBtn.style.display = "flex";
-};
-// =========================
-// Full Image Viewer
-// =========================
-
-const imageViewer = document.getElementById("imageViewer");
-const fullImage = document.getElementById("fullImage");
-const imageViewerClose = document.getElementById("imageViewerClose");
-
-window.openImageViewer = function(imageUrl){
-
-    fullImage.src = imageUrl;
-
-    imageViewer.classList.add("show");
-
-    // ป้องกันหน้าเว็บด้านหลังเลื่อน
-    document.body.classList.add("no-scroll");
-};
 
 
-// =========================
-// ปิดรูป
-// =========================
+    /* CLOSE BUTTON */
 
-function closeImageViewer(){
-
-    imageViewer.classList.remove("show");
-
-    document.body.classList.remove("no-scroll");
-
-    setTimeout(() => {
-        fullImage.src = "";
-    }, 300);
-}
+    imageViewerClose.addEventListener(
+        "click",
+        closeImageViewer
+    );
 
 
-// ปุ่ม X
-imageViewerClose.addEventListener("click", function(){
 
-    closeImageViewer();
+    /* CLICK BACKGROUND */
 
-});
-
-
-// คลิกพื้นหลัง
-imageViewer.addEventListener("click", function(e){
-
-    if(e.target === imageViewer){
-
-        closeImageViewer();
-
-    }
-
-});
+    imageViewer.addEventListener(
+        "click",
+        event => {
 
 
-// กด ESC
-document.addEventListener("keydown", function(e){
+            if (
+                event.target ===
+                imageViewer
+            ) {
 
-    if(e.key === "Escape"){
+                closeImageViewer();
 
-        closeImageViewer();
+            }
 
-    }
+        }
+    );
 
-});
-</script>
+
+
+    /* ESC */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeImageViewer();
+
+            }
+
+        }
+    );
+
+
+    </script>
+
+
 </body>
 
 </html>
