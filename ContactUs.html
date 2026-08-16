@@ -8,81 +8,72 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ปุ่มส่งอีเมล */
+   <style>
+/* =========================================================
+   PETPAW CONTACT US
+   ปรับเฉพาะ "เนื้อหา"
+   Navbar / Banner / Sidebar / Chatbot / Floating Button
+   ยังคงรูปแบบเดิม
+========================================================= */
 
-.email-btn{
-    display:inline-block;
-    margin-top:18px;
-    padding:12px 28px;
-    background:#796247;
-    color:#fff;
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Prompt", sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f3f3f3;
+    color:#444;
+    min-height:2000px;
+}
+
+a{
     text-decoration:none;
-    border-radius:30px;
-    font-weight:600;
-    transition:.3s;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    color:inherit;
 }
 
-.email-btn:hover{
-    background:#5f4934;
-    transform:translateY(-3px);
-    box-shadow:0 8px 18px rgba(0,0,0,.2);
+body.no-scroll{
+    overflow:hidden;
 }
 
-.email-btn:active{
-    transform:scale(.97);
-}
 
-        /* ==========================
-   About
-========================== */
-
-/* ==========================
-   About Website
-========================== */
-
-.about-section{
-    max-width:1100px;
-    margin:70px auto;
-    padding:45px;
-    background:#fff;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.about-section h2{
-    text-align:center;
-    color:#6b4f33;
-    font-size:38px;
-    margin-bottom:35px;
-}
-/* =========================
+/* =========================================================
    PAGE LOADING
-========================= */
+========================================================= */
 
 #pageLoader{
     position:fixed;
     inset:0;
 
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    flex-direction:column;
     gap:14px;
 
-    background:rgba(255,255,255,0.35);
-    backdrop-filter:blur(2px);
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(4px);
 
     z-index:999999;
 
     opacity:1;
     visibility:visible;
 
-    transition:opacity .4s ease,
-               visibility .4s ease;
+    transition:
+        opacity .4s ease,
+        visibility .4s ease;
 }
 
 #pageLoader.hide{
@@ -90,9 +81,6 @@
     visibility:hidden;
     pointer-events:none;
 }
-
-
-/* วงกลมหมุน */
 
 .loader-spinner{
     width:55px;
@@ -106,19 +94,11 @@
     animation:loaderSpin .8s linear infinite;
 }
 
-
-/* ข้อความ */
-
 .loader-text{
     color:#8a6847;
-
     font-size:18px;
     font-weight:600;
-
-    text-shadow:
-        0 1px 3px rgba(255,255,255,.8);
 }
-
 
 @keyframes loaderSpin{
 
@@ -132,348 +112,232 @@
 
 }
 
-.about-section p{
-    color:#555;
-    font-size:18px;
-    line-height:2;
-    text-align:justify;
-    text-indent:40px;
-    margin-bottom:20px;
+
+/* =========================================================
+   BANNER
+   ของเดิม
+========================================================= */
+
+.banner{
+    position:relative;
+
+    width:100%;
+    height:45vw;
+
+    min-height:220px;
+    max-height:420px;
+
+    margin:0 auto;
+
+    background-image:url("img/banner5.png");
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+
+    overflow:hidden;
+
+    border-radius:0 0 30px 30px;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.15);
 }
 
-.about-section strong{
-    color:#796247;
+.banner::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.08);
+
+    border-radius:30px;
+
+    z-index:1;
+
+    pointer-events:none;
 }
 
-/* ==========================
-   Reference
-========================== */
 
-.reference-section{
-    max-width:1100px;
-    margin:40px auto 80px;
-    padding:35px 45px;
-    background:#fff;
-    border-radius:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
+/* =========================================================
+   NAVBAR
+   ของเดิม
+========================================================= */
 
-.reference-section h3{
-    color:#6b4f33;
-    margin-bottom:20px;
-    text-align:center;
-    font-size:30px;
-}
+.navbar{
+    position:absolute;
 
-.reference-section ul{
-    padding-left:25px;
-}
+    top:25px;
+    left:35px;
+    right:35px;
 
-.reference-section li{
-    margin-bottom:18px;
-    line-height:1.8;
-    color:#555;
-}
-
-/* ==========================
-   Responsive
-========================== */
-
-@media(max-width:768px){
-
-    .about-section,
-    .reference-section{
-        margin:30px 15px;
-        padding:25px;
-    }
-
-    .about-section h2{
-        font-size:30px;
-    }
-
-    .reference-section h3{
-        font-size:24px;
-    }
-
-    .about-section p{
-        font-size:16px;
-        text-indent:25px;
-    }
-
-}
-/* ==========================
-   ผู้พัฒนาเว็บไซต์
-========================== */
-
-.contact-section{
-    margin-top:70px;
-}
-
-.contact-section h2{
-    text-align:center;
-    color:#6b4f33;
-    margin-bottom:40px;
-    font-size:36px;
-}
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
-}
-
-.contact-card{
-    background:#fff;
-    border-radius:20px;
-    padding:35px 25px;
-    text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.contact-card:hover{
-    transform:translateY(-8px);
-}
-
-.contact-card img{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid #c8a77c;
-    margin-bottom:20px;
-}
-
-.contact-card h3{
-    color:#6b4f33;
-    margin-bottom:10px;
-}
-
-.contact-card p{
-    color:#666;
-    margin:8px 0;
-    line-height:1.8;
-}
-
-@media(max-width:768px){
-
-    .contact-card img{
-        width:120px;
-        height:120px;
-    }
-
-}
-
-/* ==========================
-   Developer
-========================== */
-
-.contact-section{
-    margin-top:70px;
-}
-
-.contact-section h2{
-    text-align:center;
-    color:#6b4f33;
-    margin-bottom:35px;
-}
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-
-.contact-card{
-    background:#fff;
-    border-radius:20px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.contact-card:hover{
-    transform:translateY(-6px);
-}
-
-.contact-card h3{
-    color:#796247;
-    margin-bottom:18px;
-}
-
-.contact-card p{
-    color:#555;
-    margin:10px 0;
-    line-height:1.7;
-}
-
-.about{
-    max-width:1200px;
-    margin:70px auto;
-    padding:0 25px;
-}
-
-.about h1{
-    text-align:center;
-    font-size:42px;
-    color:#6b4f33;
-    margin-bottom:20px;
-}
-
-.about-text{
-    max-width:900px;
-    margin:auto;
-    text-align:center;
-    color:#555;
-    line-height:2;
-    font-size:18px;
-}
-
-.about-grid{
-    margin-top:60px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-}
-
-.about-card{
-    background:#fff;
-    border-radius:20px;
-    padding:35px 25px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.about-card:hover{
-    transform:translateY(-8px);
-}
-
-.about-card .icon{
-    font-size:55px;
-    margin-bottom:15px;
-}
-
-.about-card h3{
-    color:#796247;
-    margin-bottom:15px;
-}
-
-.about-card p{
-    color:#666;
-    line-height:1.8;
-}
-
-.mission{
-    margin-top:70px;
-    background:#fff;
-    padding:45px;
-    border-radius:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-.mission h2{
-    color:#6b4f33;
-    margin-bottom:20px;
-}
-
-.mission p{
-    line-height:2;
-    color:#555;
-}
-
-.technology{
-    margin-top:60px;
-}
-
-.technology h2{
-    text-align:center;
-    color:#6b4f33;
-    margin-bottom:30px;
-}
-
-.tech-list{
     display:flex;
+
+    justify-content:space-between;
+    align-items:flex-start;
+
+    z-index:9999;
+}
+
+.left-menu{
+    display:flex;
+    gap:15px;
     flex-wrap:wrap;
+}
+
+.menu-item{
+    position:relative;
+}
+
+.menu-btn{
+    padding:14px 25px;
+
+    border:none;
+    border-radius:15px;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    color:#796247;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    transition:.3s;
+
+    display:flex;
+    align-items:center;
     justify-content:center;
+}
+
+.menu-btn:hover{
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,.3);
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.2);
+}
+
+.right-menu{
+    display:flex;
     gap:15px;
 }
 
-.tech-list span{
-    background:#796247;
-    color:#fff;
-    padding:12px 25px;
-    border-radius:50px;
-    font-weight:500;
-}
 
-.contact-box{
-    margin-top:70px;
+/* =========================================================
+   NAVBAR DROPDOWN
+========================================================= */
+
+.dropdown{
+    position:absolute;
+
+    top:70px;
+    left:0;
+
     background:#fff;
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    border-radius:18px;
+
+    min-width:220px;
+
+    padding:10px 0;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.15);
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(10px);
+
+    transition:.25s;
+
+    z-index:99999;
 }
 
-.contact-box h2{
-    color:#6b4f33;
-    margin-bottom:20px;
+.menu-item::after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:55px;
+
+    width:100%;
+    height:25px;
 }
 
-.contact-box p{
-    margin:12px 0;
-    color:#555;
-    font-size:17px;
+.dropdown a{
+    display:block;
+
+    padding:18px 22px;
+
+    color:#444;
+
+    font-weight:bold;
+
+    transition:.3s;
 }
 
-@media(max-width:768px){
-
-    .about h1{
-        font-size:32px;
-    }
-
-    .about-text{
-        font-size:16px;
-    }
-
-    .mission{
-        padding:30px;
-    }
-
+.dropdown a:hover{
+    background:#f2e4d3;
 }
 
-a{
-	text-decoration:none;
-	color:inherit;
-}   
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Prompt", sans-serif;
+.menu-item:hover .dropdown{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
 }
 
 
-body{
-    background:#f3f3f3;
-    min-height:2000px;
+/* =========================================================
+   NAVBAR SCROLL
+========================================================= */
+
+.navbar.scrolled{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    padding:15px 40px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.08);
 }
 
-/* ล็อกการเลื่อนหน้าจอเมื่อเปิด Sidebar */
-body.no-scroll{
-    overflow: hidden;
+.navbar.scrolled .menu-btn{
+    background:#c8a77c;
+    color:#fff;
+    border:none;
 }
+
+
+/* =========================================================
+   USER PROFILE
+========================================================= */
+
 .user-dropdown{
     position:relative;
 }
 
 .user-profile{
-
     display:flex;
+
     align-items:center;
+
     gap:12px;
 
     cursor:pointer;
@@ -482,14 +346,14 @@ body.no-scroll{
 
     border-radius:15px;
 
-    background:rgba(255,255,255,.15);
+    background:rgba(255,255,255,.18);
 
     backdrop-filter:blur(10px);
 
+    border:1px solid rgba(255,255,255,.25);
 }
 
 .user-profile img{
-
     width:45px;
     height:45px;
 
@@ -497,18 +361,18 @@ body.no-scroll{
 
     object-fit:cover;
 
+    border:2px solid #fff;
 }
 
 .user-profile span{
+    color:#796247 !important;
 
-    color:white;
+    font-weight:600;
 
-    font-weight:bold;
-
+    font-size:16px;
 }
 
 .dropdown-menu{
-
     position:absolute;
 
     top:65px;
@@ -516,19 +380,814 @@ body.no-scroll{
 
     width:220px;
 
-    background:white;
+    background:#fff;
 
     border-radius:15px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.15);
 
     display:none;
 
     overflow:hidden;
 
+    z-index:99999;
 }
-.chatbot-popup{
 
+.dropdown-menu.show{
+    display:block;
+}
+
+.dropdown-menu a{
+    display:block;
+
+    padding:15px 20px;
+
+    color:#444;
+
+    transition:.25s;
+}
+
+.dropdown-menu a:hover{
+    background:#f3f3f3;
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.menu-toggle{
+    display:none;
+
+    font-size:28px;
+
+    color:#6b4f33;
+
+    cursor:pointer;
+
+    padding:8px 14px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.85);
+
+    backdrop-filter:blur(10px);
+
+    z-index:1002;
+}
+
+.navbar.scrolled .menu-toggle{
+    background:#d8c5ad;
+
+    border:1px solid #b08a61;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.18);
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar{
+    position:fixed;
+
+    top:0;
+    left:-300px;
+
+    width:280px;
+    height:100vh;
+
+    padding:25px;
+
+    background:#796247;
+
+    transition:.35s;
+
+    z-index:1001;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.sidebar-buttons{
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:30px;
+}
+
+.sidebar-buttons a{
+    flex:1;
+
+    text-align:center;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    font-weight:600;
+}
+
+.register-btn,
+.login-btn{
+    background:#6A513A;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    margin:0;
+}
+
+.sidebar li a,
+.dropdown-btn{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    width:100%;
+
+    padding:14px 0;
+
+    background:none;
+
+    border:none;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:500;
+
+    cursor:pointer;
+}
+
+.submenu{
+    display:none;
+
+    list-style:none;
+
+    padding-left:20px;
+}
+
+.submenu.show{
+    display:block;
+}
+
+.submenu li a{
+    padding:10px 0;
+
+    font-size:17px;
+}
+
+.arrow{
+    transition:.3s;
+}
+
+.arrow.rotate{
+    transform:rotate(90deg);
+}
+
+.overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:1000;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.sidebar-user{
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:30px;
+}
+
+.sidebar-user img{
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid #fff;
+}
+
+.sidebar-info{
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar-name{
+    color:#fff;
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+.sidebar-user a{
+    color:#eee;
+
+    font-size:15px;
+
+    text-decoration:none;
+
+    opacity:.9;
+}
+
+.sidebar-link.logout{
+    color:#ffd6d6;
+}
+
+
+/* =========================================================
+   =========================================================
+   CONTENT
+   เริ่มส่วนที่ปรับใหม่
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   ABOUT SECTION
+========================================================= */
+
+.about-section{
+    width:min(1100px, calc(100% - 40px));
+
+    margin:65px auto 40px;
+
+    padding:50px 55px;
+
+    background:#fff;
+
+    border-radius:28px;
+
+    box-shadow:
+        0 10px 35px rgba(121,98,71,.10);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+/* เส้นตกแต่งด้านบน */
+
+.about-section::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:6px;
+
+    background:linear-gradient(
+        90deg,
+        #8a6847,
+        #c8a77c,
+        #e3d2bb
+    );
+}
+
+
+/* หัวข้อ */
+
+.about-section h2{
+    text-align:center;
+
+    color:#6b4f33;
+
+    font-size:36px;
+
+    font-weight:700;
+
+    margin-bottom:38px;
+
+    position:relative;
+}
+
+.about-section h2::after{
+    content:"";
+
+    display:block;
+
+    width:70px;
+    height:4px;
+
+    margin:14px auto 0;
+
+    background:#c8a77c;
+
+    border-radius:10px;
+}
+
+
+/* เนื้อหา */
+
+.about-content{
+    width:100%;
+}
+
+.about-section p{
+    color:#555;
+
+    font-size:17px;
+
+    line-height:2;
+
+    text-align:left;
+
+    margin-bottom:22px;
+}
+
+.about-section strong{
+    color:#796247;
+
+    font-weight:600;
+}
+
+
+/* =========================================================
+   ABOUT HIGHLIGHT
+========================================================= */
+
+.about-highlight{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap:20px;
+
+    margin-top:40px;
+}
+
+.about-highlight-card{
+    background:#faf8f5;
+
+    border:1px solid #eee4d8;
+
+    border-radius:20px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.about-highlight-card:hover{
+    transform:translateY(-7px);
+
+    border-color:#d7c1a4;
+
+    box-shadow:
+        0 12px 25px rgba(121,98,71,.12);
+
+    background:#fff;
+}
+
+.about-icon{
+    width:70px;
+    height:70px;
+
+    margin:0 auto 17px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#f0e6da;
+
+    border-radius:50%;
+
+    font-size:34px;
+}
+
+.about-highlight-card h3{
+    color:#6b4f33;
+
+    font-size:19px;
+
+    margin-bottom:10px;
+}
+
+.about-highlight-card p{
+    color:#666;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    text-align:center;
+
+    margin:0;
+}
+
+
+/* =========================================================
+   MISSION / PRIVACY
+========================================================= */
+
+.mission{
+    width:min(1100px, calc(100% - 40px));
+
+    margin:35px auto;
+
+    padding:38px 45px;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 8px 28px rgba(121,98,71,.08);
+
+    border-left:5px solid #c8a77c;
+}
+
+.mission h2{
+    color:#6b4f33;
+
+    font-size:27px;
+
+    margin-bottom:15px;
+}
+
+.mission p{
+    color:#555;
+
+    line-height:2;
+
+    font-size:16px;
+}
+
+
+/* =========================================================
+   TECHNOLOGY
+========================================================= */
+
+.technology{
+    width:min(1100px, calc(100% - 40px));
+
+    margin:55px auto;
+
+    text-align:center;
+}
+
+.technology h2{
+    color:#6b4f33;
+
+    font-size:30px;
+
+    margin-bottom:28px;
+
+    position:relative;
+}
+
+.technology h2::after{
+    content:"";
+
+    display:block;
+
+    width:55px;
+    height:3px;
+
+    background:#c8a77c;
+
+    border-radius:10px;
+
+    margin:12px auto 0;
+}
+
+.tech-list{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:12px;
+}
+
+.tech-list span{
+    background:#796247;
+
+    color:#fff;
+
+    padding:11px 22px;
+
+    border-radius:50px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    box-shadow:
+        0 4px 10px rgba(121,98,71,.15);
+
+    transition:.25s;
+}
+
+.tech-list span:hover{
+    transform:translateY(-3px);
+
+    background:#6b4f33;
+
+    box-shadow:
+        0 7px 15px rgba(121,98,71,.2);
+}
+
+
+/* =========================================================
+   DEVELOPERS
+========================================================= */
+
+.contact-section{
+    width:min(1100px, calc(100% - 40px));
+
+    margin:65px auto;
+}
+
+.contact-section h2{
+    text-align:center;
+
+    color:#6b4f33;
+
+    font-size:32px;
+
+    margin-bottom:35px;
+
+    position:relative;
+}
+
+.contact-section h2::after{
+    content:"";
+
+    display:block;
+
+    width:65px;
+    height:4px;
+
+    margin:12px auto 0;
+
+    background:#c8a77c;
+
+    border-radius:10px;
+}
+
+.contact-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap:25px;
+}
+
+.contact-card{
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:35px 25px 32px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 28px rgba(121,98,71,.10);
+
+    border:1px solid #eee7df;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.contact-card:hover{
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 15px 35px rgba(121,98,71,.16);
+}
+
+
+/* รูปผู้พัฒนา */
+
+.contact-card img{
+    width:145px;
+    height:145px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #e4d1b9;
+
+    padding:3px;
+
+    background:#fff;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 5px 15px rgba(121,98,71,.12);
+}
+
+
+/* ชื่อ */
+
+.contact-card h3{
+    color:#6b4f33;
+
+    font-size:19px;
+
+    line-height:1.6;
+
+    margin-bottom:15px;
+}
+
+
+/* รายละเอียด */
+
+.contact-card p{
+    color:#666;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin:7px 0;
+}
+
+
+/* Email */
+
+.email-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    margin-top:18px;
+
+    padding:11px 25px;
+
+    background:#796247;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    font-size:14px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.15);
+
+    transition:.3s;
+}
+
+.email-btn:hover{
+    background:#5f4934;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,.2);
+}
+
+.email-btn:active{
+    transform:scale(.97);
+}
+
+
+/* =========================================================
+   REPORT PROBLEM
+========================================================= */
+
+.mission:last-of-type{
+    margin-bottom:80px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #faf7f3
+        );
+}
+
+.mission:last-of-type h2{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.mission:last-of-type h2::before{
+    content:"⚠️";
+
+    font-size:24px;
+}
+
+
+/* =========================================================
+   CHATBOT
+   รูปแบบเดิม
+========================================================= */
+
+.chat-btn{
+    position:fixed;
+
+    right:30px;
+    bottom:120px;
+
+    width:70px;
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#4A90E2;
+
+    color:#fff;
+
+    font-size:34px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
+
+    z-index:9999;
+
+    transition:.3s;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.chat-btn:hover{
+    transform:translateY(-5px);
+
+    background:#357ABD;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.3);
+}
+
+.chat-btn:active{
+    transform:
+        translateY(-2px)
+        scale(.92);
+}
+
+.chatbot-popup{
     position:fixed;
 
     right:20px;
@@ -541,7 +1200,8 @@ body.no-scroll{
 
     border-radius:25px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3);
 
     overflow:hidden;
 
@@ -551,27 +1211,24 @@ body.no-scroll{
 }
 
 .chat-header{
-
     background:#4da6ff;
 
-    color:white;
+    color:#fff;
 
     padding:15px;
 
     display:flex;
 
     justify-content:space-between;
-
     align-items:center;
 }
 
 .chat-header button{
-
     border:none;
 
     background:none;
 
-    color:white;
+    color:#fff;
 
     font-size:20px;
 
@@ -579,614 +1236,107 @@ body.no-scroll{
 }
 
 .chatbot-popup iframe{
-
     width:100%;
     height:650px;
 
     border:none;
-}.chat-btn{
+}
+
+
+/* =========================================================
+   FLOATING PLUS
+========================================================= */
+
+.floating-btn{
     position:fixed;
 
     right:30px;
-    bottom:120px;
+    bottom:30px;
 
     width:70px;
     height:70px;
 
     border:none;
+
     border-radius:50%;
 
-    background:#4da6ff;
+    background:#8a6847;
 
-    color:white;
+    color:#fff;
 
-    font-size:34px;
+    font-size:42px;
 
     cursor:pointer;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.25);
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.25);
 
     z-index:9999;
 
     transition:.3s;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 }
 
-.chat-btn:hover{
-    transform:translateY(-5px);
+.floating-btn:hover{
+    transform:
+        translateY(-5px)
+        rotate(90deg);
 
-    background:#4da6ff;
+    background:#8a6847;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.3);
 }
 
-.chat-btn:active{
-    transform:translateY(-2px) scale(.92);
-}
-.dropdown-menu.show{
 
-    display:block;
-
-}
-
-.dropdown-menu a{
-
-    display:block;
-
-    padding:15px 20px;
-
-    color:#444;
-
-    text-decoration:none;
-
-}
-
-.dropdown-menu a:hover{
-
-    background:#f3f3f3;
-
-}
-/* =========================
-   เพิ่มโปรไฟล์เมื่อล็อกอิน
-========================= */
-.user-profile{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-}
-
-.user-profile span{
-    color:#796247 !important;
-    font-weight:600;
-    font-size:16px;
-}
-
-.user-profile img{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid white;
-}
-
-/* =========================
-   Banner
-========================= */
-
-.banner{
-    position: relative;
-
-    width: 100%;
-    height: 45vw;
-    min-height: 220px;
-    max-height: 420px;
-
-    margin: 0 auto;
-
-    background-image: url("img/banner5.png");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-
-    overflow: hidden;
-
-    border-radius: 0 0 30px 30px;
-
-    box-shadow: 0 5px 25px rgba(0,0,0,.15);
-}
-	/* =========================
-   NOTIFY
-========================= */
+/* =========================================================
+   NOTIFICATION
+========================================================= */
 
 .notify-box{
+    position:fixed;
 
-	position:fixed;
+    top:30px;
+    right:30px;
 
-	top:30px;
-	right:30px;
+    background:#c8a77c;
 
-	background:#c8a77c;
+    color:#fff;
 
-	color:white;
+    padding:18px 25px;
 
-	padding:18px 25px;
+    border-radius:18px;
 
-	border-radius:18px;
+    font-weight:bold;
 
-	font-weight:bold;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.2);
 
-	box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    z-index:99999;
 
-	z-index:99999;
+    opacity:0;
 
-	opacity:0;
+    transform:translateY(-20px);
 
-	transform:translateY(-20px);
-
-	transition:0.4s;
+    transition:.4s;
 }
 
 .notify-box.show{
-
-	opacity:1;
-
-	transform:translateY(0);
-}
-
-/* Overlay */
-
-.banner::before{
-	content:"";
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background:rgba(0,0,0,0.08);
-	border-radius:30px;
-	z-index:1;
-	pointer-events:none;
-}
-
-/* =========================
-   Navbar
-========================= */
-
-.navbar{
-	position:absolute;
-	top:25px;
-	left:35px;
-	right:35px;
-
-	display:flex;
-	justify-content:space-between;
-	align-items:flex-start;
-
-	z-index:9999;
-}
-
-/* =========================
-   เมนูซ้าย
-========================= */
-
-.left-menu{
-	display:flex;
-	gap:15px;
-	flex-wrap:wrap;
-}
-
-/* กล่องเมนู */
-
-.menu-item{
-	position:relative;
-}
-
-/* ปุ่มเมนู */
-
-.menu-btn{
-	padding:14px 25px;
-
-	border:none;
-	border-radius:15px;
-
-	font-size:16px;
-	font-weight:bold;
-
-	cursor:pointer;
-
-	color:#796247;
-
-	background:rgba(255,255,255,0.18);
-
-	backdrop-filter:blur(10px);
-
-	border:1px solid rgba(255,255,255,0.25);
-
-	transition:0.3s;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-
-/* Hover */
-
-.menu-btn:hover{
-	transform:translateY(-5px);
-
-	background:rgba(255,255,255,0.3);
-
-	box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* =========================
-   Dropdown
-========================= */
-
-.dropdown{
-	position:absolute;
-
-	top:70px;
-	left:0;
-
-	background:white;
-
-	border-radius:18px;
-
-	min-width:220px;
-
-	padding:10px 0;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.15);
-
-	opacity:0;
-	visibility:hidden;
-
-	transform:translateY(10px);
-
-	transition:0.25s;
-
-	z-index:99999;
-}
-
-/* ทำพื้นที่กัน dropdown หาย */
-
-.menu-item::after{
-	content:"";
-	position:absolute;
-	left:0;
-	top:55px;
-	width:100%;
-	height:25px;
-}
-
-/* ลิงก์ */
-
-.dropdown a{
-	display:block;
-
-	padding:18px 22px;
-
-	color:#444;
-
-	font-weight:bold;
-
-	transition:0.3s;
-}
-
-/* Hover */
-
-.dropdown a:hover{
-	background:#f2e4d3;
-}
-
-/* แสดง dropdown */
-
-.menu-item:hover .dropdown{
-	opacity:1;
-	visibility:visible;
-	transform:translateY(0);
-}
-
-/* =========================
-   ปุ่มขวา
-========================= */
-
-.right-menu{
-	display:flex;
-	gap:15px;
-}
-
-/* =========================
-   Navbar ตอน Scroll
-========================= */
-
-.navbar.scrolled{
-	position:fixed;
-
-	top:0;
-	left:0;
-
-	width:100%;
-
-	padding:15px 40px;
-
-	background:rgba(255,255,255,0.95);
-
-	backdrop-filter:blur(10px);
-
-	box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-/* ปุ่มตอน scroll */
-
-.navbar.scrolled .menu-btn{
-	background:#c8a77c;
-	color:white;
-	border:none;
-}
-/* =========================
-   Floating AI Button
-========================= */
-
-.floating-ai{
-    position:fixed;
-
-    right:30px;
-    bottom:120px;   /* อยู่เหนือปุ่ม + */
-
-    width:70px;
-    height:70px;
-
-    border:none;
-    border-radius:50%;
-
-    background:#4A90E2;   /* สีเขียว */
-
-    color:white;
-
-    font-size:34px;
-
-    cursor:pointer;
-
-    box-shadow:0 5px 20px rgba(0,0,0,0.25);
-
-    z-index:9999;
-
-    transition:.3s;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.floating-ai:hover{
-
-    transform:translateY(-5px);
-
-    background:#357ABD;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
-
-}
-/* =========================
-   Floating Plus Button
-========================= */
-
-
-.floating-btn{
-	position:fixed;
-
-	right:30px;
-	bottom:30px;
-
-	width:70px;
-	height:70px;
-
-	border:none;
-	border-radius:50%;
-
-	background:#8a6847;
-
-	color:white;
-
-	font-size:42px;
-
-	cursor:pointer;
-
-	box-shadow:0 5px 20px rgba(0,0,0,0.25);
-
-	z-index:9999;
-
-	transition:0.3s;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-}
-
-/* Hover */
-
-.floating-btn:hover{
-	transform:translateY(-5px) rotate(90deg);
-
-	background:#8a6847;
-
-	box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
-/* ==========================
-   Sidebar Mobile
-========================== */
-/* ตอน Navbar เลื่อน */
-.navbar.scrolled .menu-toggle{
-    background:#d8c5ad;
-    border:1px solid #b08a61;
-    box-shadow:0 4px 12px rgba(0,0,0,.18);
-}
-
-/* ปุ่ม ☰ */
-.menu-toggle{
-    display:none;
-    font-size:28px;
-    color:#6b4f33;
-    cursor:pointer;
-    padding:8px 14px;
-    border-radius:12px;
-    background:rgba(255,255,255,.85);
-    backdrop-filter:blur(10px);
-    z-index:1002;
-}
-
-/* Sidebar */
-.sidebar{
-    position:fixed;
-    top:0;
-    left:-300px;
-
-    width:280px;
-    height:100vh;
-
-    padding:25px;
-
-    background:#796247;
-
-    transition:.35s;
-    z-index:1001;
-}
-
-.sidebar.active{
-    left:0;
-}
-
-/* ปุ่มบนสุด */
-.sidebar-buttons{
-    display:flex;
-    gap:10px;
-    margin-bottom:30px;
-}
-
-.sidebar-buttons a{
-    flex:1;
-    text-align:center;
-    padding:15px;
-    border-radius:12px;
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.register-btn,
-.login-btn{
-    background:#6A513A;
-}
-
-/* เมนูหลัก */
-.sidebar ul{
-    list-style:none;
-    padding:0;
-    margin:0;
-}
-
-.sidebar li{
-    margin:0;
-}
-
-.sidebar li a,
-.dropdown-btn{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    width:100%;
-
-    padding:14px 0;
-
-    background:none;
-    border:none;
-
-    color:#fff;
-    font-size:18px;
-    font-weight:500;
-
-    text-decoration:none;
-    cursor:pointer;
-}
-
-/* เมนูย่อย */
-.submenu{
-    display:none;
-    list-style:none;
-    padding-left:20px;
-}
-
-.submenu.show{
-    display:block;
-}
-
-.submenu li a{
-    padding:10px 0;
-    font-size:17px;
-}
-
-/* ลูกศร */
-.arrow{
-    transition:.3s;
-}
-
-.arrow.rotate{
-    transform:rotate(90deg);
-}
-
-/* Overlay */
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.5);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.3s;
-    z-index:1000;
-}
-
-.overlay.active{
     opacity:1;
-    visibility:visible;
-}
-.sidebar-user{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:30px;
-}
 
-.sidebar-user img{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #fff;
+    transform:translateY(0);
 }
 
 
-.sidebar-user a{
-    color:#fff;
-    font-size:14px;
-    text-decoration:none;
-    opacity:.8;
-}
+/* =========================================================
+   TABLET
+========================================================= */
 
-@media (max-width:1024px){
+@media(max-width:1024px){
 
     .menu-toggle{
         display:block;
@@ -1199,51 +1349,20 @@ body.no-scroll{
 
     .banner{
         width:100%;
+
         height:55vw;
+
         min-height:230px;
         max-height:320px;
 
         background-size:cover;
-        background-position:center center;
-        background-repeat:no-repeat;
+
+        background-position:center;
     }
-
-}
-.sidebar-user{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    margin-bottom:30px;
-}
-
-.sidebar-info{
-    display:flex;
-    flex-direction:column;
-}
-
-.sidebar-name{
-    color:#fff;
-    font-size:24px;
-    font-weight:bold;
-}
-
-.sidebar-link{
-    color:#eee;
-    text-decoration:none;
-    margin-top:6px;
-    font-size:15px;
-}
-
-.sidebar-link.logout{
-    color:#ffd6d6;
-}
-/* ==========================
-   Mobile Navbar
-========================== */
-@media (max-width:1024px){
 
     .navbar{
         position:fixed;
+
         top:0;
         left:0;
         right:0;
@@ -1251,74 +1370,205 @@ body.no-scroll{
         padding:15px 20px;
 
         display:flex;
+
         justify-content:space-between;
         align-items:center;
 
         z-index:9999;
     }
 
-    .menu-toggle{
-        display:block;
-    }
-
     body{
         padding-top:70px;
     }
 
+
+    /* CONTENT */
+
+    .about-highlight{
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+
+    .contact-grid{
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+
 }
 
-.user-profile{
 
-	display:flex;
-	align-items:center;
-	gap:12px;
+/* =========================================================
+   MOBILE
+========================================================= */
 
-	padding:8px 15px;
+@media(max-width:768px){
 
-	border-radius:15px;
+    /* =========================
+       Content Width
+    ========================= */
 
-	background:rgba(255,255,255,0.18);
+    .about-section,
+    .mission,
+    .technology,
+    .contact-section{
+        width:calc(100% - 30px);
+    }
 
-	backdrop-filter:blur(10px);
 
-	border:1px solid rgba(255,255,255,0.25);
-}
+    /* =========================
+       About
+    ========================= */
 
-.user-profile img{
+    .about-section{
+        margin:35px auto 25px;
 
-	width:45px;
-	height:45px;
+        padding:35px 22px;
 
-	border-radius:50%;
+        border-radius:22px;
+    }
 
-	object-fit:cover;
+    .about-section h2{
+        font-size:29px;
 
-	border:2px solid white;
-}
+        margin-bottom:28px;
+    }
 
-.user-profile span{
+    .about-section p{
+        font-size:15px;
 
-	color:white;
+        line-height:1.9;
 
-	font-weight:bold;
-}
-/* ==========================
-   Chatbot Mobile (LINE / Messenger Style)
-========================== */
-@media (max-width:768px){
+        margin-bottom:18px;
+    }
+
+
+    /* =========================
+       Highlight
+    ========================= */
+
+    .about-highlight{
+        grid-template-columns:1fr;
+
+        gap:15px;
+
+        margin-top:30px;
+    }
+
+    .about-highlight-card{
+        padding:25px 20px;
+    }
+
+    .about-icon{
+        width:60px;
+        height:60px;
+
+        font-size:30px;
+    }
+
+
+    /* =========================
+       Mission
+    ========================= */
+
+    .mission{
+        margin:25px auto;
+
+        padding:28px 23px;
+
+        border-radius:20px;
+    }
+
+    .mission h2{
+        font-size:23px;
+    }
+
+    .mission p{
+        font-size:15px;
+
+        line-height:1.9;
+    }
+
+
+    /* =========================
+       Technology
+    ========================= */
+
+    .technology{
+        margin:45px auto;
+    }
+
+    .technology h2{
+        font-size:27px;
+    }
+
+    .tech-list{
+        gap:9px;
+    }
+
+    .tech-list span{
+        padding:9px 16px;
+
+        font-size:13px;
+    }
+
+
+    /* =========================
+       Developers
+    ========================= */
+
+    .contact-section{
+        margin:50px auto;
+    }
+
+    .contact-section h2{
+        font-size:28px;
+
+        margin-bottom:28px;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+
+        gap:18px;
+    }
+
+    .contact-card{
+        padding:30px 20px;
+    }
+
+    .contact-card img{
+        width:125px;
+        height:125px;
+    }
+
+    .contact-card h3{
+        font-size:18px;
+    }
+
+    .contact-card p{
+        font-size:14px;
+    }
+
+
+    /* =========================
+       Chatbot
+    ========================= */
 
     .chat-btn{
+        width:60px;
+        height:60px;
+
         right:20px;
-        bottom:20px;
-        width:65px;
-        height:65px;
-        font-size:30px;
+        bottom:105px;
+
+        font-size:28px;
+
         z-index:99999;
     }
 
     .chatbot-popup{
+        display:block;
 
-        display:block;          /* ใช้ transform ซ่อนแทน */
         position:fixed;
 
         left:0;
@@ -1331,7 +1581,9 @@ body.no-scroll{
         border-radius:25px 25px 0 0;
 
         transform:translateY(100%);
-        transition:.35s ease;
+
+        transition:
+            transform .35s ease;
 
         z-index:100000;
     }
@@ -1341,37 +1593,28 @@ body.no-scroll{
     }
 
     .chat-header{
-
         height:65px;
 
-        border-radius:25px 25px 0 0;
+        border-radius:
+            25px 25px 0 0;
+
+        padding:15px 20px;
     }
 
     .chatbot-popup iframe{
         width:100%;
-        height:calc(100dvh - 65px);
+
+        height:
+            calc(100dvh - 65px);
+
+        border:none;
     }
 
-}
-/* =========================
-   Mobile Floating Buttons
-========================= */
-@media (max-width: 768px){
 
-    /* ปุ่ม Chatbot */
-    .chat-btn{
-        width:60px;
-        height:60px;
+    /* =========================
+       Plus
+    ========================= */
 
-        right:20px;
-        bottom:105px;
-
-        font-size:28px;
-
-        z-index:9999;
-    }
-
-    /* ปุ่ม + */
     .floating-btn{
         width:60px;
         height:60px;
@@ -1384,57 +1627,55 @@ body.no-scroll{
         z-index:9998;
     }
 
+
     /* =========================
-       Chatbot แบบมือถือ
-       เลื่อนขึ้นจากด้านล่าง
+       Notification
     ========================= */
 
-    .chatbot-popup{
+    .notify-box{
+        top:20px;
 
-        display:block;
+        right:15px;
+        left:15px;
 
-        position:fixed;
+        text-align:center;
 
-        left:0;
-        right:0;
-        bottom:0;
+        padding:14px 18px;
 
-        width:100%;
-        height:100dvh;
-
-        border-radius:25px 25px 0 0;
-
-        transform:translateY(100%);
-
-        transition:transform .35s ease;
-
-        z-index:100000;
+        font-size:14px;
     }
 
-    /* ตอนเปิด Chat */
-    .chatbot-popup.show{
-        transform:translateY(0);
-    }
-
-    .chat-header{
-
-        height:65px;
-
-        border-radius:25px 25px 0 0;
-
-        padding:15px 20px;
-    }
-
-    .chatbot-popup iframe{
-
-        width:100%;
-
-        height:calc(100dvh - 65px);
-
-        border:none;
-    }
 }
-</style>
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media(max-width:400px){
+
+    .about-section h2{
+        font-size:26px;
+    }
+
+    .about-section{
+        padding:30px 18px;
+    }
+
+    .mission{
+        padding:25px 18px;
+    }
+
+    .contact-card{
+        padding:25px 16px;
+    }
+
+    .email-btn{
+        padding:10px 20px;
+    }
+
+}
+</style> 
 </head>
 
 <body>
@@ -1568,86 +1809,139 @@ body.no-scroll{
 <!-- =========================
      About Us
 ========================= -->
+
 <section class="about-section">
 
     <h2>เกี่ยวกับเว็บไซต์</h2>
 
-    <p>
-        เว็บไซต์ <strong>PetPaw</strong> เป็นส่วนหนึ่งของรายวิชา
-        <strong>โครงงานด้านเทคโนโลยีธุรกิจดิจิทัล</strong>
-        ครูผู้สอน
-        <strong>นายฐานันดร์ สุทธิศักดา</strong>
-    </p>
 
-    <p>
-        โครงงานนี้จัดทำขึ้นจากปัญหาสัตว์เลี้ยงจรจัดในประเทศไทย
-        โดยเฉพาะสุนัขและแมว ซึ่งมีสาเหตุจากการทอดทิ้ง
-        การขาดความรับผิดชอบของผู้เลี้ยง
-        ส่งผลให้เกิดปัญหาทั้งด้านสวัสดิภาพสัตว์
-        สุขอนามัยของชุมชน
-        และความเสี่ยงในการเกิดโรคต่าง ๆ
-    </p>
+    <!-- เนื้อหาเกี่ยวกับเว็บไซต์ -->
 
-    <p>
-        สำหรับจังหวัดพัทลุง ยังคงพบปัญหาสัตว์หลงทาง
-        สัตว์บาดเจ็บ และสัตว์ถูกทอดทิ้งอยู่เป็นจำนวนมาก
-        แม้ว่าจะมีหน่วยงานและอาสาสมัครคอยช่วยเหลือ
-        แต่การแจ้งข้อมูลและการประสานงานยังไม่สะดวก
-        ทำให้การช่วยเหลือบางกรณีเกิดความล่าช้า
-    </p>
+    <div class="about-content">
 
-    <p>
-        คณะผู้จัดทำจึงได้พัฒนาเว็บไซต์
-        <strong>"เว็บไซต์ช่วยเหลือสุนัขและแมวจรจัด
-        ในพื้นที่จังหวัดพัทลุง ด้วย AI"</strong>
-        เพื่อเป็นศูนย์กลางในการรวบรวมข้อมูลสัตว์จรจัด
-        สัตว์สูญหาย และสัตว์ที่ต้องการบ้านใหม่
-        พร้อมทั้งนำเทคโนโลยี AI มาช่วยอำนวยความสะดวกแก่ผู้ใช้งาน
-        ให้สามารถค้นหาข้อมูล แจ้งเหตุ และประสานงานการช่วยเหลือได้อย่างรวดเร็ว
-        มีประสิทธิภาพ และเข้าถึงได้ง่าย
-    </p>
+        <p>
+            เว็บไซต์ <strong>PetPaw</strong> เป็นส่วนหนึ่งของรายวิชา
+            <strong>โครงงานด้านเทคโนโลยีธุรกิจดิจิทัล</strong>
+            ครูผู้สอน
+            <strong>นายฐานันดร์ สุทธิศักดา</strong>
+        </p>
 
-</section>
 
-    <div class="about-grid">
+        <p>
+            โครงงานนี้จัดทำขึ้นจากปัญหาสัตว์เลี้ยงจรจัดในประเทศไทย
+            โดยเฉพาะสุนัขและแมว ซึ่งมีสาเหตุจากการทอดทิ้ง
+            การขาดความรับผิดชอบของผู้เลี้ยง
+            ส่งผลให้เกิดปัญหาทั้งด้านสวัสดิภาพสัตว์
+            สุขอนามัยของชุมชน
+            และความเสี่ยงในการเกิดโรคต่าง ๆ
+        </p>
 
-        <div class="about-card">
-            <div class="icon">🐾</div>
-            <h3>ตามหาสัตว์เลี้ยง</h3>
-            <p>
-                ช่วยประกาศและติดตามสัตว์เลี้ยงที่สูญหาย
-                เพื่อเพิ่มโอกาสในการกลับคืนสู่เจ้าของ
-            </p>
-        </div>
 
-        <div class="about-card">
-            <div class="icon">🏠</div>
-            <h3>หาบ้านสัตว์จรจัด</h3>
-            <p>
-                เปิดพื้นที่สำหรับผู้ที่ต้องการหาผู้รับเลี้ยง
-                เพื่อให้ได้รับการดูแลอย่างเหมาะสม
-            </p>
-        </div>
+        <p>
+            สำหรับจังหวัดพัทลุง ยังคงพบปัญหาสัตว์หลงทาง
+            สัตว์บาดเจ็บ และสัตว์ถูกทอดทิ้งอยู่เป็นจำนวนมาก
+            แม้ว่าจะมีหน่วยงานและอาสาสมัครคอยช่วยเหลือ
+            แต่การแจ้งข้อมูลและการประสานงานยังไม่สะดวก
+            ทำให้การช่วยเหลือบางกรณีเกิดความล่าช้า
+        </p>
 
-        <div class="about-card">
-            <div class="icon">🩺</div>
-            <h3>แนะนำคลินิก</h3>
-            <p>
-                รวบรวมข้อมูลคลินิกและโรงพยาบาลสัตว์
-                พร้อมแผนที่และช่องทางติดต่อ
-            </p>
-        </div>
 
-        <div class="about-card">
-            <div class="icon">📢</div>
-            <h3>ข่าวประชาสัมพันธ์</h3>
-            <p>
-                อัปเดตข่าวสาร กิจกรรม และความรู้
-                ที่เกี่ยวข้องกับสุนัขและแมว
-            </p>
+        <p>
+            คณะผู้จัดทำจึงได้พัฒนาเว็บไซต์
+            <strong>
+                "เว็บไซต์ช่วยเหลือสุนัขและแมวจรจัด
+                ในพื้นที่จังหวัดพัทลุง ด้วย AI"
+            </strong>
+            เพื่อเป็นศูนย์กลางในการรวบรวมข้อมูลสัตว์จรจัด
+            สัตว์สูญหาย และสัตว์ที่ต้องการบ้านใหม่
+            พร้อมทั้งนำเทคโนโลยี AI มาช่วยอำนวยความสะดวกแก่ผู้ใช้งาน
+            ให้สามารถค้นหาข้อมูล แจ้งเหตุ และประสานงานการช่วยเหลือได้อย่างรวดเร็ว
+            มีประสิทธิภาพ และเข้าถึงได้ง่าย
+        </p>
+
+
+        <!-- จุดเด่นของ PetPaw -->
+
+        <div class="about-highlight">
+
+
+            <div class="about-highlight-card">
+
+                <div class="about-icon">
+                    🐾
+                </div>
+
+                <h3>
+                    ช่วยเหลือสัตว์
+                </h3>
+
+                <p>
+                    PetPaw ช่วยเหลือสุนัขและแมวจรจัด
+                    รวมถึงสัตว์เลี้ยงที่สูญหายหรือกำลังต้องการบ้านใหม่
+                </p>
+
+            </div>
+
+
+            <div class="about-highlight-card">
+
+                <div class="about-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    เทคโนโลยี AI
+                </h3>
+
+                <p>
+                    นำเทคโนโลยี AI มาช่วยอำนวยความสะดวก
+                    ในการค้นหาข้อมูลและให้คำแนะนำแก่ผู้ใช้งาน
+                </p>
+
+            </div>
+
+
+            <div class="about-highlight-card">
+
+                <div class="about-icon">
+                    📍
+                </div>
+
+                <h3>
+                    พื้นที่จังหวัดพัทลุง
+                </h3>
+
+                <p>
+                    เป็นศูนย์กลางในการรวบรวมข้อมูล
+                    การช่วยเหลือสัตว์ในพื้นที่จังหวัดพัทลุง
+                </p>
+
+            </div>
+
+
+            <div class="about-highlight-card">
+
+                <div class="about-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    สร้างโอกาสให้สัตว์
+                </h3>
+
+                <p>
+                    ช่วยเพิ่มโอกาสให้สัตว์ที่ไม่มีเจ้าของ
+                    ได้รับการดูแลและมีบ้านที่เหมาะสม
+                </p>
+
+            </div>
+
+
         </div>
 
     </div>
+
+</section>
 
     <div class="mission">
 

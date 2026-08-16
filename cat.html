@@ -3467,29 +3467,26 @@ function escapeJSString(value){
 async function renderCats(data){
 
     catContainer.innerHTML = "";
-
-
-    if(!data.length){
+if(data.length === 0){
 
         catContainer.innerHTML = `
 
-            <div class="empty-state">
+            <h2 style="
+                text-align:center;
+                color:#777;
+                grid-column:1/-1;
+                padding:40px 0;
+            ">
 
-                <h2>
-                    ยังไม่มีข้อมูลแมว
-                </h2>
+                ยังไม่มีข้อมูลแมว
 
-                <p>
-                    ลองเปลี่ยนอำเภอที่เลือก
-                </p>
-
-            </div>
+            </h2>
 
         `;
 
         return;
 
-    }
+}
 
 
     /* =====================================================
