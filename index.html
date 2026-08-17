@@ -26,7 +26,6 @@ a{
 }   
 
 *{
-	*
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -153,6 +152,15 @@ body.no-scroll{
 
     line-height:1.2;
 
+}
+/* =========================
+   ช่วงเวลาผู้เข้าชม
+========================= */
+
+#peakHour{
+    font-size:24px;
+    line-height:1.4;
+    white-space:nowrap;
 }
 
 
@@ -1554,7 +1562,6 @@ body.no-scroll{
 
 </div>
 
-</div>
  <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
 
@@ -2714,59 +2721,7 @@ closeChat.onclick = () => {
 
     chatBtn.style.display = "flex";
 };
-// =========================
-// Full Image Viewer
-// =========================
 
-const imageViewer = document.getElementById("imageViewer");
-const fullImage = document.getElementById("fullImage");
-const imageViewerClose = document.getElementById("imageViewerClose");
-
-window.openImageViewer = function(imageUrl){
-
-    fullImage.src = imageUrl;
-
-    imageViewer.classList.add("show");
-
-    // ป้องกันหน้าเว็บด้านหลังเลื่อน
-    document.body.classList.add("no-scroll");
-};
-
-
-// =========================
-// ปิดรูป
-// =========================
-
-function closeImageViewer(){
-
-    imageViewer.classList.remove("show");
-
-    document.body.classList.remove("no-scroll");
-
-    setTimeout(() => {
-        fullImage.src = "";
-    }, 300);
-}
-
-
-// ปุ่ม X
-imageViewerClose.addEventListener("click", function(){
-
-    closeImageViewer();
-
-});
-
-
-// คลิกพื้นหลัง
-imageViewer.addEventListener("click", function(e){
-
-    if(e.target === imageViewer){
-
-        closeImageViewer();
-
-    }
-
-});
 
 
 // กด ESC
@@ -2787,25 +2742,11 @@ async function countWebsiteVisit(){
 
     try{
 
-        // นับ 1 ครั้งต่อการเปิดเว็บไซต์ใน Session
-        // ป้องกันการ Refresh แล้วเพิ่มทุกครั้ง
-        if(sessionStorage.getItem("petpawVisited")){
-
-            return;
-
-        }
-
-        sessionStorage.setItem("petpawVisited","true");
-
-
         const now = new Date();
-
         const hour = now.getHours();
-
 
         const statsRef =
             doc(db,"siteStats","summary");
-
 
         await setDoc(
             statsRef,
@@ -2822,12 +2763,10 @@ async function countWebsiteVisit(){
             }
         );
 
-
         console.log(
             "บันทึกผู้เข้าชมแล้ว เวลา:",
             hour
         );
-
 
     }catch(error){
 
@@ -2839,6 +2778,13 @@ async function countWebsiteVisit(){
     }
 
 }
+
+
+    
+// =========================
+// โหลดสถิติผู้เข้าชม
+// =========================
+
 // =========================
 // โหลดสถิติผู้เข้าชม
 // =========================
@@ -2847,12 +2793,11 @@ async function loadVisitorStatistics(){
 
     try{
 
-        const snap =
-            await getDoc(
-                doc(db,"siteStats","summary")
-            );
+        const snap = await getDoc(
+            doc(db, "siteStats", "summary")
+        );
 
-
+        // ถ้ายังไม่มีข้อมูล
         if(!snap.exists()){
 
             document.getElementById(
@@ -2868,37 +2813,66 @@ async function loadVisitorStatistics(){
             ).textContent = "-";
 
             return;
-
         }
 
 
         const data = snap.data();
 
 
-        // จำนวนผู้เข้าชม
+        // =========================
+        // จำนวนผู้เข้าชมทั้งหมด
+        // =========================
+
         document.getElementById(
             "visitorCount"
         ).textContent =
             data.totalViews || 0;
 
 
-        // =====================
-        // หาเวลาที่เข้ามากที่สุด
-        // =====================
-
-        const hours =
-            data.hours || {};
-
+        // =========================
+        // หาเวลาที่มีผู้เข้าชมมากที่สุด
+        // =========================
 
         let maxHour = null;
-
         let maxCount = 0;
 
 
         for(let hour = 0; hour < 24; hour++){
 
-            const count =
-                Number(hours[hour] || 0);
+            let count = 0;
+
+
+            // แบบที่ 1
+            // hours เป็น object/map
+            if(
+                data.hours &&
+                data.hours[hour] !== undefined
+            ){
+
+                count =
+                    Number(data.hours[hour] || 0);
+
+            }
+
+
+            // แบบที่ 2
+            // Firestore มี field เช่น hours.15
+            else if(
+                data[`hours.${hour}`] !== undefined
+            ){
+
+                count =
+                    Number(
+                        data[`hours.${hour}`] || 0
+                    );
+
+            }
+
+
+            console.log(
+                `ชั่วโมง ${hour}:`,
+                count
+            );
 
 
             if(count > maxCount){
@@ -2912,15 +2886,18 @@ async function loadVisitorStatistics(){
         }
 
 
+        // =========================
+        // แสดงผล
+        // =========================
+
         if(maxHour !== null){
 
             const nextHour =
                 (maxHour + 1) % 24;
 
 
-            const formatHour =
-                hour =>
-                    String(hour).padStart(2,"0");
+            const formatHour = hour =>
+                String(hour).padStart(2, "0");
 
 
             document.getElementById(
@@ -2934,7 +2911,18 @@ async function loadVisitorStatistics(){
             ).textContent =
                 `มีผู้เข้าชมประมาณ ${maxCount} ครั้ง`;
 
+        }else{
+
+            document.getElementById(
+                "peakHour"
+            ).textContent = "-";
+
+            document.getElementById(
+                "peakPeriod"
+            ).textContent = "-";
+
         }
+
 
     }catch(error){
 
