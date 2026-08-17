@@ -65,6 +65,191 @@ body.no-scroll{
 
 }
 /* =========================
+   WEBSITE SUMMARY
+========================= */
+
+.summary-section{
+
+    max-width:1200px;
+
+    margin:50px auto 70px;
+
+    padding:0 20px;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(210px,1fr));
+
+    gap:22px;
+
+}
+
+
+.summary-card{
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.08);
+
+    border:1px solid #eee;
+
+    transition:.3s;
+
+}
+
+
+.summary-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,.12);
+
+}
+
+
+.summary-icon{
+
+    width:65px;
+
+    height:65px;
+
+    margin:0 auto 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#f8f3ed;
+
+    border-radius:50%;
+
+    font-size:32px;
+
+}
+
+
+.summary-number{
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:#8a6847;
+
+    line-height:1.2;
+
+}
+
+
+.summary-title{
+
+    margin-top:10px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#555;
+
+}
+
+
+.summary-detail{
+
+    margin-top:5px;
+
+    color:#999;
+
+    font-size:14px;
+
+}
+
+
+/* =========================
+   SUMMARY MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .summary-section{
+
+        margin:40px auto 50px;
+
+        padding:0 15px;
+
+    }
+
+
+    .summary-grid{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:15px;
+
+    }
+
+
+    .summary-card{
+
+        padding:22px 12px;
+
+        border-radius:20px;
+
+    }
+
+
+    .summary-icon{
+
+        width:55px;
+
+        height:55px;
+
+        font-size:27px;
+
+    }
+
+
+    .summary-number{
+
+        font-size:30px;
+
+    }
+
+
+    .summary-title{
+
+        font-size:14px;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .summary-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+/* =========================
    ABOUT PETPAWTH
 ========================= */
 
@@ -1585,30 +1770,6 @@ body.no-scroll{
 	<div id="map"></div>
 
 </section>
-
-<section class="map-section">
-
-	<h2 class="map-title">
-        สถิติข้อมูลภายในเว็บไซต์ </h2>
-
-<section class="stats-section">
-
-    <div class="stat-card">
-        <div class="stat-number" id="dogCount">0</div>
-        <div class="stat-text">สุนัข</div>
-    </div>
-
-    <div class="stat-card">
-        <div class="stat-number" id="catCount">0</div>
-        <div class="stat-text">แมว</div>
-    </div>
-
-    <div class="stat-card">
-        <div class="stat-number" id="missingCount">0</div>
-        <div class="stat-text">สัตว์เลี้ยงหาย</div>
-    </div>
-
-</section>
 <section class="map-section">
 
 	<h2 class="map-title">
@@ -1659,6 +1820,242 @@ body.no-scroll{
         </div>
 
     </div>
+
+</section>
+<section class="map-section"> 
+ 
+    <h2 class="map-title"> 
+        สถิติข้อมูลภายในเว็บไซต์
+    </h2> 
+ 
+    <section class="stats-section"> 
+ 
+        <!-- สุนัข -->
+        <div class="stat-card"> 
+            <div class="stat-number" id="dogCount">
+                0
+            </div> 
+            <div class="stat-text">
+                สุนัข
+            </div> 
+        </div> 
+ 
+        <!-- แมว -->
+        <div class="stat-card"> 
+            <div class="stat-number" id="catCount">
+                0
+            </div> 
+            <div class="stat-text">
+                แมว
+            </div> 
+        </div> 
+
+        <!-- รวมสุนัข + แมว -->
+        <div class="stat-card"> 
+            <div class="stat-number" id="totalPetCount">
+                0
+            </div> 
+            <div class="stat-text">
+                รวมสัตว์จรทั้งหมด
+            </div> 
+        </div>
+ 
+        <!-- สัตว์เลี้ยงหาย -->
+        <div class="stat-card"> 
+            <div class="stat-number" id="missingCount">
+                0
+            </div> 
+            <div class="stat-text">
+                สัตว์เลี้ยงหาย
+            </div> 
+        </div> 
+ 
+    </section>
+
+</section>
+
+
+
+<!-- =========================
+     สรุปข้อมูลเว็บไซต์
+========================= -->
+
+<section class="map-section">
+
+	<h2 class="map-title">
+        สรุปข้อมูลภายในเว็บไซต์ </h2>
+
+    <div class="summary-grid">
+
+        <!-- ผู้เข้าชม -->
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                👥
+            </div>
+
+            <div class="summary-number" id="visitorCount">
+                0
+            </div>
+
+            <div class="summary-title">
+                ผู้เข้าชมเว็บไซต์
+            </div>
+
+            <div class="summary-detail">
+                ครั้ง
+            </div>
+
+        </div>
+
+
+        <!-- ช่วงเวลาที่เข้ามากที่สุด -->
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🕐
+            </div>
+
+            <div class="summary-number" id="peakHour">
+                -
+            </div>
+
+            <div class="summary-title">
+                ช่วงเวลาที่มีผู้เข้าชมมากที่สุด
+            </div>
+
+            <div class="summary-detail" id="peakPeriod">
+                -
+            </div>
+
+        </div>
+
+
+        <!-- สุนัขได้บ้าน -->
+<div class="summary-card">
+
+    <div class="summary-icon">
+        🐶
+    </div>
+
+    <div class="summary-number" id="dogAdoptedCount">
+        0 / 0
+    </div>
+
+    <div class="summary-title">
+        สุนัขได้บ้านแล้ว
+    </div>
+
+    <div class="summary-detail">
+        ตัว
+    </div>
+
+</div>
+
+
+<!-- แมวได้บ้าน -->
+<div class="summary-card">
+
+    <div class="summary-icon">
+        🐱
+    </div>
+
+    <div class="summary-number" id="catAdoptedCount">
+        0 / 0
+    </div>
+
+    <div class="summary-title">
+        แมวได้บ้านแล้ว
+    </div>
+
+    <div class="summary-detail">
+        ตัว
+    </div>
+
+</div>
+
+
+<!-- เจ้าของพบสัตว์ -->
+<div class="summary-card">
+
+    <div class="summary-icon">
+        🏠
+    </div>
+
+    <div class="summary-number" id="foundPetCount">
+        0 / 0
+    </div>
+
+    <div class="summary-title">
+        เจ้าของพบสัตว์เลี้ยงแล้ว
+    </div>
+
+    <div class="summary-detail">
+        ตัว
+    </div>
+
+</div>
+
+</div>
+<!-- =========================
+     อัตราความสำเร็จ
+========================= -->
+
+<section class="map-section">
+
+    <h2 class="map-title">
+        อัตราความสำเร็จ
+    </h2>
+
+    <div class="summary-grid">
+
+        <!-- อัตราการได้บ้าน -->
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🏠
+            </div>
+
+            <div class="summary-number" id="adoptionRate">
+                0%
+            </div>
+
+            <div class="summary-title">
+                อัตราการได้บ้าน
+            </div>
+
+            <div class="summary-detail" id="adoptionDetail">
+                ได้บ้านแล้ว 0 จาก 0 ตัว
+            </div>
+
+        </div>
+
+
+        <!-- อัตราพบเจอสัตว์เลี้ยงหาย -->
+        <div class="summary-card">
+
+            <div class="summary-icon">
+                🔎
+            </div>
+
+            <div class="summary-number" id="foundRate">
+                0%
+            </div>
+
+            <div class="summary-title">
+                อัตราพบเจอสัตว์เลี้ยงหาย
+            </div>
+
+            <div class="summary-detail" id="foundDetail">
+                พบแล้ว 0 จาก 0 ตัว
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </section>
 
@@ -1830,7 +2227,9 @@ import {
     doc,
     getDoc,
     collection,
-    getDocs
+    getDocs,
+    setDoc,
+    increment
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 async function loadPets() {
@@ -1918,17 +2317,228 @@ async function loadPets() {
 
 async function loadStatistics(){
 
+
+    // =========================
     // สุนัข
-    const dogSnap = await getDocs(collection(db,"dogs"));
-    document.getElementById("dogCount").textContent = dogSnap.size;
+    // =========================
 
+    const dogSnap =
+        await getDocs(
+            collection(db,"dogs")
+        );
+
+
+    document.getElementById(
+        "dogCount"
+    ).textContent =
+        dogSnap.size;
+
+
+    // จำนวนสุนัขได้บ้านแล้ว
+
+    let dogAdopted = 0;
+
+
+    dogSnap.forEach(docSnap => {
+
+        const dog =
+            docSnap.data();
+
+
+        if(
+            dog.adoptionStatus ===
+            "ได้บ้านแล้ว"
+        ){
+
+            dogAdopted++;
+
+        }
+
+    });
+
+
+    document.getElementById(
+    "dogAdoptedCount"
+).textContent =
+    `${dogAdopted} / ${dogSnap.size}`;
+
+
+
+    // =========================
     // แมว
-    const catSnap = await getDocs(collection(db,"cats"));
-    document.getElementById("catCount").textContent = catSnap.size;
+    // =========================
 
-    // สัตว์ที่หาย
-    const missingSnap = await getDocs(collection(db,"missingPets"));
-    document.getElementById("missingCount").textContent = missingSnap.size;
+    const catSnap =
+        await getDocs(
+            collection(db,"cats")
+        );
+
+
+    document.getElementById(
+        "catCount"
+    ).textContent =
+        catSnap.size;
+
+        // =========================
+// รวมสุนัข + แมว
+// =========================
+
+const totalPetCount =
+    dogSnap.size + catSnap.size;
+
+document.getElementById(
+    "totalPetCount"
+).textContent =
+    totalPetCount;
+
+
+    // จำนวนแมวได้บ้านแล้ว
+
+    let catAdopted = 0;
+
+
+    catSnap.forEach(docSnap => {
+
+        const cat =
+            docSnap.data();
+
+
+        if(
+            cat.adoptionStatus ===
+            "ได้บ้านแล้ว"
+        ){
+
+            catAdopted++;
+
+        }
+
+    });
+    
+
+
+document.getElementById(
+    "catAdoptedCount"
+).textContent =
+    `${catAdopted} / ${catSnap.size}`;
+
+
+
+    // =========================
+    // สัตว์เลี้ยงหาย
+    // =========================
+
+    const missingSnap =
+        await getDocs(
+            collection(db,"missingPets")
+        );
+
+
+    document.getElementById(
+        "missingCount"
+    ).textContent =
+        missingSnap.size;
+
+
+
+    // =========================
+    // เจ้าของพบสัตว์เลี้ยงแล้ว
+    // =========================
+
+    let foundPetCount = 0;
+
+
+    missingSnap.forEach(docSnap => {
+
+        const pet =
+            docSnap.data();
+
+
+        /*
+         รองรับหลายชื่อ field
+         เผื่อในระบบเดิมใช้ชื่อไม่เหมือนกัน
+        */
+
+        if(
+            pet.status === "พบแล้ว" ||
+            pet.status === "เจอแล้ว" ||
+            pet.foundStatus === "พบแล้ว" ||
+            pet.foundStatus === "เจอแล้ว"
+        ){
+
+            foundPetCount++;
+
+        }
+
+    });
+
+
+    document.getElementById(
+    "foundPetCount"
+).textContent =
+    `${foundPetCount} / ${missingSnap.size}`;
+// =========================
+// อัตราความสำเร็จ
+// =========================
+
+// จำนวนสัตว์ทั้งหมด
+const totalPets =
+    dogSnap.size + catSnap.size;
+
+// จำนวนสัตว์ที่ได้บ้านแล้ว
+const totalAdopted =
+    dogAdopted + catAdopted;
+
+
+// =========================
+// อัตราการได้บ้าน
+// =========================
+
+let adoptionRate = 0;
+
+if(totalPets > 0){
+
+    adoptionRate =
+        Math.round(
+            (totalAdopted / totalPets) * 100
+        );
+
+}
+
+document.getElementById(
+    "adoptionRate"
+).textContent =
+    `${adoptionRate}%`;
+
+document.getElementById(
+    "adoptionDetail"
+).textContent =
+    `ได้บ้านแล้ว ${totalAdopted} จาก ${totalPets} ตัว`;
+
+
+// =========================
+// อัตราพบเจอสัตว์เลี้ยงหาย
+// =========================
+
+let foundRate = 0;
+
+if(missingSnap.size > 0){
+
+    foundRate =
+        Math.round(
+            (foundPetCount / missingSnap.size) * 100
+        );
+
+}
+
+document.getElementById(
+    "foundRate"
+).textContent =
+    `${foundRate}%`;
+
+document.getElementById(
+    "foundDetail"
+).textContent =
+    `พบแล้ว ${foundPetCount} จาก ${missingSnap.size} ตัว`;
 
 }
 
@@ -2056,9 +2666,14 @@ sidebarUserMenu.innerHTML = `
     }
 
     await loadPets();
-    await loadStatistics();
 
-    finishPageLoading();
+await loadStatistics();
+
+await countWebsiteVisit();
+
+await loadVisitorStatistics();
+
+finishPageLoading();
 
 
 });
@@ -2164,6 +2779,173 @@ document.addEventListener("keydown", function(e){
     }
 
 });
+// =========================
+// นับผู้เข้าชมเว็บไซต์
+// =========================
+
+async function countWebsiteVisit(){
+
+    try{
+
+        // นับ 1 ครั้งต่อการเปิดเว็บไซต์ใน Session
+        // ป้องกันการ Refresh แล้วเพิ่มทุกครั้ง
+        if(sessionStorage.getItem("petpawVisited")){
+
+            return;
+
+        }
+
+        sessionStorage.setItem("petpawVisited","true");
+
+
+        const now = new Date();
+
+        const hour = now.getHours();
+
+
+        const statsRef =
+            doc(db,"siteStats","summary");
+
+
+        await setDoc(
+            statsRef,
+            {
+
+                totalViews: increment(1),
+
+                [`hours.${hour}`]:
+                    increment(1)
+
+            },
+            {
+                merge:true
+            }
+        );
+
+
+        console.log(
+            "บันทึกผู้เข้าชมแล้ว เวลา:",
+            hour
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "ไม่สามารถบันทึกผู้เข้าชม:",
+            error
+        );
+
+    }
+
+}
+// =========================
+// โหลดสถิติผู้เข้าชม
+// =========================
+
+async function loadVisitorStatistics(){
+
+    try{
+
+        const snap =
+            await getDoc(
+                doc(db,"siteStats","summary")
+            );
+
+
+        if(!snap.exists()){
+
+            document.getElementById(
+                "visitorCount"
+            ).textContent = "0";
+
+            document.getElementById(
+                "peakHour"
+            ).textContent = "-";
+
+            document.getElementById(
+                "peakPeriod"
+            ).textContent = "-";
+
+            return;
+
+        }
+
+
+        const data = snap.data();
+
+
+        // จำนวนผู้เข้าชม
+        document.getElementById(
+            "visitorCount"
+        ).textContent =
+            data.totalViews || 0;
+
+
+        // =====================
+        // หาเวลาที่เข้ามากที่สุด
+        // =====================
+
+        const hours =
+            data.hours || {};
+
+
+        let maxHour = null;
+
+        let maxCount = 0;
+
+
+        for(let hour = 0; hour < 24; hour++){
+
+            const count =
+                Number(hours[hour] || 0);
+
+
+            if(count > maxCount){
+
+                maxCount = count;
+
+                maxHour = hour;
+
+            }
+
+        }
+
+
+        if(maxHour !== null){
+
+            const nextHour =
+                (maxHour + 1) % 24;
+
+
+            const formatHour =
+                hour =>
+                    String(hour).padStart(2,"0");
+
+
+            document.getElementById(
+                "peakHour"
+            ).textContent =
+                `${formatHour(maxHour)}:00 - ${formatHour(nextHour)}:00`;
+
+
+            document.getElementById(
+                "peakPeriod"
+            ).textContent =
+                `มีผู้เข้าชมประมาณ ${maxCount} ครั้ง`;
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "โหลดสถิติผู้เข้าชมไม่สำเร็จ:",
+            error
+        );
+
+    }
+
+}
 </script>
 </body>
 
